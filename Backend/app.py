@@ -1,11 +1,16 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 from database import SessionLocal
 from models import Article
 import requests
 
+# Initialize Flask app
+print("Flask app is starting...")
 app = Flask(__name__)
+CORS(app)  # ✅ Allow all origins to access the API
 
-# Your existing routes (e.g., "/search") here
+print("Flask module imported successfully!")
+print("App initialized!")
 
 @app.route("/ai-search", methods=["GET"])
 def ai_search():
@@ -23,7 +28,7 @@ def ai_search():
         # Select the first article
         selected_article = results[0]
         article_text = selected_article.abstract
-        print(f"Selected article text: {article_text}")  # Debugging
+        print(f"✅ Selected article text: {article_text}")  # Debugging
 
         # Send the article text to Ollama for AI generation
         ollama_response = requests.post(
@@ -31,23 +36,19 @@ def ai_search():
             json={"model": "mistral", "prompt": f"Summarize this article: {article_text}"},
         )
 
-        # Handle the response from Ollama
-        try:
-            ollama_result = ollama_response.json()  # Try to parse the response as JSON
-        except ValueError as e:
-            print(f"Error parsing Ollama response: {e}")
-            print(f"Raw Response: {ollama_response.text}")  # Log the raw response
-            return jsonify({
-                "article": {
-                    "title": selected_article.title,
-                    "abstract": selected_article.abstract,
-                    "author": selected_article.author,
-                    "publication_date": selected_article.publication_date,
-                },
-                "ai_summary": "Failed to generate AI summary due to unexpected response format.",
-            })
+        # ✅ NEW: Print Raw Ollama Response for Debugging
+        print(f"✅ Ollama Raw Response: {ollama_response.text}")
 
-        # Return the parsed result
+        # ✅ Handle Ollama's Response Format
+        try:
+            ollama_result = ollama_response.json()  # Try to parse JSON
+            ai_summary = ollama_result.get("response", "No summary generated.")
+        except ValueError as e:
+            print(f"⚠️ Error parsing Ollama response: {e}")
+            print(f"⚠️ Raw Response: {ollama_response.text}")  # Debugging
+            ai_summary = "⚠️ Failed to generate AI summary due to unexpected response format."
+
+        # ✅ Return the final response
         return jsonify({
             "article": {
                 "title": selected_article.title,
@@ -55,11 +56,15 @@ def ai_search():
                 "author": selected_article.author,
                 "publication_date": selected_article.publication_date
             },
-            "ai_summary": ollama_result.get("text", "No summary generated.")
+            "ai_summary": ai_summary
         })
     except Exception as e:
-        print(f"Error: {e}")  # Debugging
-        return jsonify({"error": "Failed to generate AI summary"}), 500
+        print(f"❌ Error: {e}")  # Debugging
+        return jsonify({"error": "❌ Failed to generate AI summary"}), 500
     finally:
         session.close()
 
+# ✅ Run Flask on port 5001
+if __name__ == "__main__":
+    print("🚀 Running Flask server on port 5001...")
+    app.run(debug=True, host="0.0.0.0", port=5001)
