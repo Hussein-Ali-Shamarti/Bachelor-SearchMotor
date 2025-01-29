@@ -1,34 +1,65 @@
 from flask import Flask, request, jsonify
-from flask_cors import CORS
-from sqlalchemy.orm import Session
-from models import Base, Item
-from database import engine, SessionLocal
+from database import SessionLocal
+from models import Article
+import requests
 
-# Initialize Flask app
 app = Flask(__name__)
-CORS(app)  # Enable CORS for communication with React frontend
 
-# Create tables in the database (if not already created)
-Base.metadata.create_all(bind=engine)
+# Your existing routes (e.g., "/search") here
 
-@app.route("/search", methods=["GET"])
-def search():
+@app.route("/ai-search", methods=["GET"])
+def ai_search():
     query = request.args.get("query", "").strip()
     if not query:
         return jsonify({"error": "Please provide a search query"}), 400
 
-    # Open a database session
     session = SessionLocal()
     try:
-        # Search for items in the database
-        results = session.query(Item).filter(
-            (Item.name.ilike(f"%{query}%")) | (Item.description.ilike(f"%{query}%"))
-        ).all()
+        # Fetch articles matching the query
+        results = session.query(Article).filter(Article.title.ilike(f"%{query}%")).all()
+        if not results:
+            return jsonify({"error": "No articles found"}), 404
 
-        # Return results as JSON
-        return jsonify([{"id": item.id, "name": item.name, "description": item.description} for item in results])
+        # Select the first article
+        selected_article = results[0]
+        article_text = selected_article.abstract
+        print(f"Selected article text: {article_text}")  # Debugging
+
+        # Send the article text to Ollama for AI generation
+        ollama_response = requests.post(
+            "http://127.0.0.1:11434/api/generate",
+            json={"model": "mistral", "prompt": f"Summarize this article: {article_text}"},
+        )
+
+        # Handle the response from Ollama
+        try:
+            ollama_result = ollama_response.json()  # Try to parse the response as JSON
+        except ValueError as e:
+            print(f"Error parsing Ollama response: {e}")
+            print(f"Raw Response: {ollama_response.text}")  # Log the raw response
+            return jsonify({
+                "article": {
+                    "title": selected_article.title,
+                    "abstract": selected_article.abstract,
+                    "author": selected_article.author,
+                    "publication_date": selected_article.publication_date,
+                },
+                "ai_summary": "Failed to generate AI summary due to unexpected response format.",
+            })
+
+        # Return the parsed result
+        return jsonify({
+            "article": {
+                "title": selected_article.title,
+                "abstract": selected_article.abstract,
+                "author": selected_article.author,
+                "publication_date": selected_article.publication_date
+            },
+            "ai_summary": ollama_result.get("text", "No summary generated.")
+        })
+    except Exception as e:
+        print(f"Error: {e}")  # Debugging
+        return jsonify({"error": "Failed to generate AI summary"}), 500
     finally:
         session.close()
 
-if __name__ == "__main__":
-    app.run(debug=True)
