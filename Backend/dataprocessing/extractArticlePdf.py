@@ -1,60 +1,154 @@
-"""
-  This code extracts the text contents from the pdf files
-  in the source folder and writes the extracted information to a text file in the destination folder.
-"""
-
 import os
-from pdfminer.high_level import extract_text
 import pdfplumber
-from bs4 import BeautifulSoup
+import pytesseract
+from PIL import Image
 from concurrent.futures import ThreadPoolExecutor
-from tqdm import tqdm  # For progress bar
+from pdf2image import convert_from_path
+import re
 
-# Define directories for files.
-input_dir = r"C:\My Web Sites\dataset\www.thinkmind.org\articles"
-output_dir = r"C:\My Web Sites\data\pdftexts"
+# Define directories
+input_dir = r"C:\My Web Sites\dataset\www.thinkmind.org\articles"  # Folder containing PDFs
+output_dir = r"C:\My Web Sites\data\pdftexts"  # Folder containing extracted .txt files
 
-# Create the output directory if it doesn't exist already.
+# Create output directory if it doesn't exist
 os.makedirs(output_dir, exist_ok=True)
 
-def process_pdf(pdf_path, txt_path):
-    """Extract text from PDF and save to a text file."""
+# Define size limits
+max_txt_size = 20 * 1024  # 20 KB (for processing PDFs)
+large_txt_size = 140 * 1024  # 140 KB (for reprocessing if CID found)
+
+# Error log file
+error_log_path = os.path.join(output_dir, "error_log.txt")
+
+# Function to log errors
+def log_error(pdf_name, error_msg):
+    with open(error_log_path, "a", encoding="utf-8") as log_file:
+        log_file.write(f"{pdf_name}: {error_msg}\n")
+
+# Function to check if a text file exists and meets size conditions
+def should_process_pdf(pdf_filename):
+    """Returns True if the PDF should be processed (based on .txt size and CID content)."""
+    txt_path = os.path.join(output_dir, os.path.splitext(pdf_filename)[0] + ".txt")
+
+    if not os.path.exists(txt_path):
+        return False  # No matching .txt file
+
+    txt_size = os.path.getsize(txt_path)
+
+    if txt_size < max_txt_size:
+        return True  # Process if .txt file is small (<20KB)
+
+    if txt_size > large_txt_size and contains_cid_values(txt_path):
+        return True  # Reprocess large files (>140KB) with CID
+
+    return False  # Otherwise, skip
+
+# Function to check if a text file contains CID values
+def contains_cid_values(txt_path):
+    """Returns True if the text file contains CID values, indicating possible missing text."""
+    try:
+        with open(txt_path, "r", encoding="utf-8") as f:
+            text = f.read()
+        return bool(re.search(r'\(CID:\s?\d+\)', text))  # Detect CID patterns
+    except Exception as e:
+        log_error(os.path.basename(txt_path), f"Failed to read TXT: {e}")
+        return False
+
+# Function to convert PDF to images (for OCR)
+def convert_pdf_to_images(pdf_path):
+    """Converts a PDF to images (one per page) for OCR."""
+    return convert_from_path(pdf_path)
+
+# Function to extract text using pdfplumber
+def extract_text_from_pdf(pdf_path):
+    """Extracts text using pdfplumber; returns None if extraction fails."""
     try:
         with pdfplumber.open(pdf_path) as pdf:
             text = ""
             for page in pdf.pages:
-                text += page.extract_text() or ""  # Ensure we don't get None
-        with open(txt_path, "w", encoding='utf-8') as text_file:
-            text_file.write(text)
+                text += page.extract_text() or ""  # Ensure no None values
+        return text
     except Exception as e:
-        logging.error(f"Error processing PDF {os.path.basename(pdf_path)}: {e}")
+        log_error(os.path.basename(pdf_path), f"pdfplumber failed: {e}")
+        return None
 
-def process_html(html_path, txt_path):
-    """Extract text from HTML and save to a text file."""
+# Function to extract text using OCR
+def ocr_pdf(pdf_path, txt_path):
+    """Uses OCR to extract text from a PDF and saves it to a text file."""
     try:
-        with open(html_path, "r", encoding='utf-8') as html_file:
-            soup = BeautifulSoup(html_file, "html.parser")
-            text = soup.get_text()
-        with open(txt_path, "w", encoding='utf-8') as text_file:
+        images = convert_pdf_to_images(pdf_path)
+        text = ""
+        for image in images:
+            text += pytesseract.image_to_string(image)
+
+        with open(txt_path, "w", encoding="utf-8") as text_file:
             text_file.write(text)
     except Exception as e:
-        print(f"Error processing HTML {os.path.basename(html_path)}: {e}")
+        log_error(os.path.basename(pdf_path), f"OCR failed: {e}")
 
-# Gather files to process
-files = [f for f in os.listdir(input_dir) if f.lower().endswith((".pdf", ".html"))]
+def is_metadata_only(text):
+    """Detects if text is mostly conference metadata instead of real content."""
+    metadata_patterns = [
+        r"Copyright \(c\) IARIA, \d{4}",
+        r"Original source: ThinkMind Digital Library",
+        r"ISBN: \d{3}-\d{1,5}-\d{1,7}-\d{1,7}-\d{1}",
+        r"International Conference on [\w\s,-]+"
+    ]
+    matches = sum(bool(re.search(pattern, text)) for pattern in metadata_patterns)
+    return matches >= 2  # If at least two patterns are found, it's likely metadata
 
-# Use ThreadPoolExecutor for parallel processing
-with tqdm(total=len(files), desc="Processing files") as pbar:
+def needs_ocr(pdf_path):
+    """Determines if a PDF requires OCR by checking extracted text."""
+    text = extract_text_from_pdf(pdf_path)
+
+    if text is None or len(text.strip()) == 0:
+        return True  # No text at all, needs OCR
+
+    if re.search(r'\(CID:\s?\d+\)', text):  # Detect CID issues
+        return True  
+
+    if len(text) < 500 or is_metadata_only(text):  # Too short or mostly metadata
+        return True  
+
+    return False
+
+# Function to process PDFs
+def process_pdf(pdf_path, txt_path):
+    """Extracts text from a PDF normally; falls back to OCR if needed."""
+    try:
+        print(f"Processing: {os.path.basename(pdf_path)}")  # Log processing file
+        text = extract_text_from_pdf(pdf_path)
+        if text is None or len(text.strip()) == 0:
+            print(f"Using OCR for: {os.path.basename(pdf_path)} (No text found)")
+            ocr_pdf(pdf_path, txt_path)  # Fallback to OCR
+        else:
+            with open(txt_path, "w", encoding="utf-8") as text_file:
+                text_file.write(text)
+    except Exception as e:
+        log_error(os.path.basename(pdf_path), f"PDF processing failed: {e}")
+
+# Function to process PDFs with matching small text files
+def process_selected_pdfs():
+    """Processes only PDFs that have a matching .txt file < 20KB or >140KB with CID."""
+    files = [f for f in os.listdir(input_dir) if f.lower().endswith(".pdf")]
+
+    # Filter PDFs based on matching .txt conditions
+    files_to_process = [f for f in files if should_process_pdf(f)]
+
     with ThreadPoolExecutor() as executor:
         future_to_file = {
-            executor.submit(process_pdf if filename.lower().endswith(".pdf") else process_html, 
-                            os.path.join(input_dir, filename), 
-                            os.path.join(output_dir, os.path.splitext(filename)[0] + ".txt")): filename
-            for filename in files
-            if not os.path.exists(os.path.join(output_dir, os.path.splitext(filename)[0] + ".txt")) or os.path.getsize(os.path.join(output_dir, os.path.splitext(filename)[0] + ".txt")) == 0
+            executor.submit(
+                ocr_pdf if needs_ocr(os.path.join(input_dir, filename)) else process_pdf,
+                os.path.join(input_dir, filename),
+                os.path.join(output_dir, os.path.splitext(filename)[0] + ".txt")
+            ): filename
+            for filename in files_to_process
         }
 
-        for future in tqdm(future_to_file, desc="Processing files", total=len(future_to_file)):
-            future.result()  # Wait for task completion
+        for future in future_to_file:
+            future.result()  # Ensure each task completes
 
-print("Text extraction complete!")
+    print("Text extraction complete!")
+
+# Run processing
+process_selected_pdfs()
