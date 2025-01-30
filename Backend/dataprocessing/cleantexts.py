@@ -5,6 +5,7 @@ import nltk
 from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import stopwords
+import wordninja  # External library for word segmentation
 
 # Ensure required NLTK resources are downloaded
 nltk.download('punkt')
@@ -25,29 +26,36 @@ if not txt_files:
 
 for txt_file in txt_files:
     try:
-        # Read file with UTF-8 and error handling
+        print(f"Processing file: {txt_file}")
+
+        # Read file line by line to handle large files efficiently
+        cleaned_tokens = []
         with open(txt_file, 'r', encoding='utf-8', errors='replace') as f:
-            content = f.read()
+            for line in f:
+                # Clean the line by removing unwanted punctuation but keeping spaces
+                line = line.lower()  # Convert to lowercase
+                line = re.sub(r'\s+', ' ', line)  # Normalize all whitespaces (single space)
+                line = re.sub(r'[^\w\s]', '', line)  # Remove punctuation, keep words and spaces
 
-        # Debug: Check if content is read properly
-        if not content.strip():
-            print(f"Skipping empty file: {txt_file}")
-            continue  # Skip empty files
+                # If the line has concatenated words (CamelCase), break them
+                line = wordninja.split(line)  # This will split CamelCase text
+                line = ' '.join(line)  # Join back into a sentence
 
-        print(f"Processing file: {txt_file} (Original length: {len(content)} chars)")
+                tokens = word_tokenize(line)  # Tokenize words
+                
+                # Remove stopwords and lemmatize the words
+                tokens = [lemmatizer.lemmatize(word) for word in tokens if word not in stop_words]
+                
+                # Add cleaned tokens to list
+                cleaned_tokens.extend(tokens)
 
-        # Text cleaning steps
-        content = content.lower()  # Convert to lowercase
-        content = re.sub(r'\s+', ' ', content)  # Remove extra whitespaces
-        content = re.sub(r'[^\w\s]', '', content)  # Remove punctuation
-        tokens = word_tokenize(content)  # Tokenize words
-        tokens = [lemmatizer.lemmatize(word) for word in tokens if word not in stop_words]  # Lemmatize & remove stopwords
-        cleaned_content = ' '.join(tokens)  # Convert back to string
-
-        # Debug: Check if cleaning removed all text
+        # Join the tokens back with a single space
+        cleaned_content = ' '.join(cleaned_tokens)
+        
+        # Check if the content is empty after cleaning
         if not cleaned_content.strip():
-            print(f"Warning: Cleaning removed all text from {txt_file}. Skipping write to avoid data loss.")
-            continue  # Don't overwrite file with empty content
+            print(f"Warning: No meaningful content left in {txt_file} after cleaning. Skipping write operation.")
+            continue  # Don't overwrite with empty content
 
         # Write cleaned content back to the file
         with open(txt_file, 'w', encoding='utf-8', errors='replace') as f:
