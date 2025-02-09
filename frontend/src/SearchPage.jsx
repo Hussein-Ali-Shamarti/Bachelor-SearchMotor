@@ -80,6 +80,20 @@ const SearchPage = () => {
 
           <h3>AI Summary:</h3>
           <p>{result.ai_summary}</p>
+
+          {/* Check if pdf_url exists and show it */}
+          {result.article.pdf_url && (
+            <div>
+              <h3>Download PDF:</h3>
+              <a
+                href={result.article.pdf_url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Click here to download the PDF
+              </a>
+            </div>
+          )}
         </div>
       )}
     </div>
