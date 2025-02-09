@@ -44,6 +44,7 @@ def ai_search():
         pdf_url = selected_article.pdf_url  # Correct field name
 
         print(f"✅ Selected article text: {article_text}")  # Debugging
+        print(f"✅ PDF URL: {pdf_url}")  # Debugging PDF URL
 
         # Send the article text to Ollama for AI generation (streaming response)
         ollama_response = requests.post(
@@ -85,6 +86,7 @@ def ai_search():
             ai_summary = "⚠️ Failed to generate AI summary due to an error with Ollama."
 
         # ✅ Return the final response
+        print(f"✅ Returning response with PDF URL: {pdf_url}")  # Log to confirm PDF URL
         return jsonify({
             "article": {
                 "title": selected_article.title,
