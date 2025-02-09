@@ -1,14 +1,18 @@
-""" 
-This script is used to upload the extracted data from the .txt files into the SQLite database.
-"""
-
 import os
 import sys
 import io
 import time
+import logging
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from models import Base, Conference, Article
+
+# Set up logging configuration to log errors to a file
+logging.basicConfig(
+    filename='error_log.log',  # Log file where errors will be stored
+    level=logging.ERROR,  # Log only errors and above
+    format='%(asctime)s - %(levelname)s - %(message)s'
+)
 
 # Function to connect to the existing SQLite database (Items.db)
 def connect_to_existing_database():
@@ -86,8 +90,7 @@ def insert_article_info(article_data, session):
 
     except Exception as e:
         print(f"[ERROR] Failed to insert article '{article_data['title']}': {e}")
-        import traceback
-        traceback.print_exc()  # Logs the stack trace for debugging
+        logging.error(f"Failed to insert article '{article_data['title']}': {e}", exc_info=True)  # Log the error
         session.rollback()
 
 # Function to extract conference data from the .txt file
@@ -191,6 +194,7 @@ def get_article_data_from_txt(file_path):
             print(f"Successfully found and added PDF text for article: {article_data['title']}")
         except Exception as e:
             print(f"Error reading PDF text file for article '{article_data['title']}': {e}")
+            logging.error(f"Error reading PDF text file for article '{article_data['title']}': {e}", exc_info=True)
     else:
         article_data["pdf_texts"] = ""  # No PDF text found
         print(f"No PDF text found for article: {article_data['title']} at path: {pdf_file_path}")
@@ -203,113 +207,39 @@ def process_article_files(articles_folder, session):
     print(f"Scanning articles directory: {articles_folder}")  # Debugging
     for root_article, dirs_article, files_article in os.walk(articles_folder):
         for file_article in files_article:
-            if file_article.endswith(".txt"):
-                file_path = os.path.join(root_article, file_article)
-                print(f"Processing article file: {file_article}")
-                article_data = get_article_data_from_txt(file_path)
+            file_path = os.path.join(root_article, file_article)
+            if file_path.endswith(".txt"):  # Only process .txt files
+                try:
+                    print(f"Processing article file: {file_path}")
+                    article_data = get_article_data_from_txt(file_path)
+                    insert_article_info(article_data, session)  # Insert each article into the database
+                except Exception as e:
+                    print(f"[ERROR] Failed to process article file {file_path}: {e}")
+                    logging.error(f"Failed to process article file {file_path}: {e}", exc_info=True)
 
-                if article_data:
-                    print(f"Extracted article data: {article_data}")  # Debugging
-
-                    # Check if the article already exists in the database
-                    existing_article = session.query(Article).filter_by(title=article_data["title"]).first()
-                    if existing_article:
-                        print(f"Article '{article_data['title']}' already exists in the database with ID: {existing_article.id}.")
-                    else:
-                        try:
-                            insert_article_info(article_data, session)
-                            session.commit()  # Commit after inserting each article
-                        except Exception as e:
-                            print(f"Error inserting article '{article_data['title']}': {e}")
-                            session.rollback()  # Rollback in case of error
-
-# Function to process conference files
-def process_conference_files(conference_folder, session):
-    print(f"Scanning conference directory: {conference_folder}")  # Debugging
-    for root, dirs, files in os.walk(conference_folder):
-        for file_name in files:
-            if file_name.endswith(".txt"):
-                file_path = os.path.join(root, file_name)
-                print(f"Processing conference file: {file_name}")
-                conference_data = get_conference_data_from_txt(file_path)
-
-                if conference_data:
-                    conference_title = conference_data["Conference Name"]
-                    print(f"Processing conference: {conference_title}")
-
-                    # Check if the conference already exists in the database by title
-                    existing_conference = session.query(Conference).filter_by(name=conference_title).first()
-                    if existing_conference:
-                        print(f"Conference '{conference_title}' already exists in the database.")
-                    else:
-                        try:
-                            # Insert the conference
-                            new_conference = insert_conference_info(conference_data, session)
-                            session.commit()  # Commit after inserting each conference
-                            print(f"Conference '{conference_title}' inserted with ID: {new_conference.id}")
-                        except Exception as e:
-                            print(f"Error inserting conference '{conference_title}': {e}")
-
-# Function to process all files and trigger the processing sequence
-def process_files(source_folder):
-    conference_folder = os.path.join(source_folder, "conference")
-    articles_folder = os.path.join(source_folder, "articles")
-
-    if not os.path.exists(conference_folder):
-        print(f"Conference folder '{conference_folder}' not found.")
-        return
-    if not os.path.exists(articles_folder):
-        print(f"Articles folder '{articles_folder}' not found.")
-        return
-
-    # Use a single session for both conferences and articles
+# Main function to handle the conference and article data
+def main():
+    start_time = time.time()
     session = connect_to_existing_database()
 
-    # Process conference files
-    process_conference_files(conference_folder, session)
+    try:
+        conference_file_path = "path_to_conference_file.txt"  # Specify the actual conference data file
+        conference_data = get_conference_data_from_txt(conference_file_path)
+        conference = insert_conference_info(conference_data, session)
 
-    # Process article files
-    process_article_files(articles_folder, session)
+        articles_folder = "path_to_articles_folder"  # Specify the actual articles folder
+        process_article_files(articles_folder, session)  # Process article files
 
-    session.close()  # Close the session after all processing is done
+        print("Process completed successfully!")
 
-    # Set the default output encoding to utf-8
-sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+    except Exception as e:
+        print(f"[ERROR] Unexpected error occurred: {e}")
+        logging.error(f"Unexpected error occurred: {e}", exc_info=True)
+    
+    finally:
+        session.close()
 
-def main():
-    # Define source folder containing the extracted .txt files
-    source_folder = r"C:\My Web Sites\data"
-
-    # Define conference and articles folder paths
-    conference_folder = os.path.join(source_folder, "conference")
-    articles_folder = os.path.join(source_folder, "articles")
-
-    # Ensure the folders exist
-    if not os.path.exists(conference_folder):
-        print(f"Conference folder '{conference_folder}' not found.")
-        return
-    if not os.path.exists(articles_folder):
-        print(f"Articles folder '{articles_folder}' not found.")
-        return
-
-    # Step 1: Process conference files
-    print("Starting conference file processing...")
-    conference_session = connect_to_existing_database()
-    process_conference_files(conference_folder, conference_session)
-    conference_session.close()  # Close the session after processing conferences
-
-    # Step 2: Wait for 15 seconds before starting the article process
-    print("Waiting for 15 seconds before starting article processing...")
-    time.sleep(15)
-
-    # Step 3: Process article files
-    print("Starting article file processing...")
-    article_session = connect_to_existing_database()
-    process_article_files(articles_folder, article_session)
-    article_session.close()  # Close the session after processing articles
-
-    print("All data processed and inserted into the database!")
-
+    print(f"Time taken: {time.time() - start_time} seconds")
 
 if __name__ == "__main__":
     main()

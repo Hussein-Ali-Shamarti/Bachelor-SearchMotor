@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { ClipLoader } from "react-spinners"; // Import spinner component
 
 const SearchPage = () => {
   const [query, setQuery] = useState("");
@@ -16,6 +17,9 @@ const SearchPage = () => {
       const response = await axios.get(`http://127.0.0.1:5001/ai-search`, {
         params: { query }
       });
+
+      console.log("Backend Response:", response.data); // Log the raw response
+
       setResult(response.data);
     } catch (err) {
       setError(
@@ -44,7 +48,11 @@ const SearchPage = () => {
         Search
       </button>
 
-      {loading && <p>Loading...</p>}
+      {loading && (
+        <div style={{ marginTop: "20px" }}>
+          <ClipLoader size={50} color={"#123abc"} loading={loading} />
+        </div>
+      )}
       {error && <p style={{ color: "red" }}>{error}</p>}
 
       {result && (

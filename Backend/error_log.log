@@ -1,0 +1,239 @@
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 113-794-529
+INFO:werkzeug:127.0.0.1 - - [09/Feb/2025 20:55:21] "GET /ai-search?query=health HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in '/Users/husseinshamarti/Desktop/Skole/Bachelor-SearchMotor/Backend/app.py', reloading
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 113-794-529
+ERROR:app:Unexpected error: 'Article' object has no attribute 'pdf_link'
+INFO:werkzeug:127.0.0.1 - - [09/Feb/2025 20:57:06] "[35m[1mGET /ai-search?query=health HTTP/1.1[0m" 500 -
+INFO:werkzeug: * Detected change in '/Users/husseinshamarti/Desktop/Skole/Bachelor-SearchMotor/Backend/app.py', reloading
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 113-794-529
+INFO:werkzeug:127.0.0.1 - - [09/Feb/2025 20:59:17] "GET /ai-search?query=health HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in '/Users/husseinshamarti/Desktop/Skole/Bachelor-SearchMotor/Backend/app.py', reloading
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 113-794-529
+ERROR:app:Unexpected error: Extra data: line 2 column 1 (char 94)
+INFO:werkzeug:127.0.0.1 - - [09/Feb/2025 21:01:24] "[35m[1mGET /ai-search?query=health HTTP/1.1[0m" 500 -
+INFO:werkzeug: * Detected change in '/Users/husseinshamarti/Desktop/Skole/Bachelor-SearchMotor/Backend/app.py', reloading
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 113-794-529
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 113-794-529
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 113-794-529
+ERROR:app:Unexpected error: Extra data: line 2 column 1 (char 95)
+INFO:werkzeug:127.0.0.1 - - [09/Feb/2025 21:12:36] "[35m[1mGET /ai-search?query=health HTTP/1.1[0m" 500 -
+INFO:werkzeug: * Detected change in '/Users/husseinshamarti/Desktop/Skole/Bachelor-SearchMotor/Backend/query_optimizer.py', reloading
+INFO:werkzeug: * Detected change in '/Users/husseinshamarti/Desktop/Skole/Bachelor-SearchMotor/Backend/query_optimizer.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 113-794-529
+INFO:werkzeug: * Debugger PIN: 113-794-529
+INFO:werkzeug: * Detected change in '/Users/husseinshamarti/Desktop/Skole/Bachelor-SearchMotor/Backend/query_optimizer.py', reloading
+INFO:werkzeug: * Detected change in '/Users/husseinshamarti/Desktop/Skole/Bachelor-SearchMotor/Backend/query_optimizer.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 113-794-529
+INFO:werkzeug: * Debugger PIN: 113-794-529
+INFO:werkzeug: * Detected change in '/Users/husseinshamarti/Desktop/Skole/Bachelor-SearchMotor/Backend/query_optimizer.py', reloading
+INFO:werkzeug: * Detected change in '/Users/husseinshamarti/Desktop/Skole/Bachelor-SearchMotor/Backend/query_optimizer.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 113-794-529
+INFO:werkzeug: * Debugger PIN: 113-794-529
+INFO:werkzeug: * Detected change in '/Users/husseinshamarti/Desktop/Skole/Bachelor-SearchMotor/Backend/query_optimizer.py', reloading
+INFO:werkzeug: * Detected change in '/Users/husseinshamarti/Desktop/Skole/Bachelor-SearchMotor/Backend/query_optimizer.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 113-794-529
+INFO:werkzeug: * Debugger PIN: 113-794-529
+INFO:werkzeug: * Detected change in '/Users/husseinshamarti/Desktop/Skole/Bachelor-SearchMotor/Backend/query_optimizer.py', reloading
+INFO:werkzeug: * Detected change in '/Users/husseinshamarti/Desktop/Skole/Bachelor-SearchMotor/Backend/query_optimizer.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 113-794-529
+INFO:werkzeug: * Debugger PIN: 113-794-529
+INFO:werkzeug: * Detected change in '/Users/husseinshamarti/Desktop/Skole/Bachelor-SearchMotor/Backend/query_optimizer.py', reloading
+INFO:werkzeug: * Detected change in '/Users/husseinshamarti/Desktop/Skole/Bachelor-SearchMotor/Backend/query_optimizer.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 113-794-529
+INFO:werkzeug: * Debugger PIN: 113-794-529
+INFO:werkzeug: * Detected change in '/Users/husseinshamarti/Desktop/Skole/Bachelor-SearchMotor/Backend/query_optimizer.py', reloading
+INFO:werkzeug: * Detected change in '/Users/husseinshamarti/Desktop/Skole/Bachelor-SearchMotor/Backend/query_optimizer.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 113-794-529
+INFO:werkzeug: * Debugger PIN: 113-794-529
+INFO:werkzeug: * Detected change in '/Users/husseinshamarti/Desktop/Skole/Bachelor-SearchMotor/Backend/query_optimizer.py', reloading
+INFO:werkzeug: * Detected change in '/Users/husseinshamarti/Desktop/Skole/Bachelor-SearchMotor/Backend/query_optimizer.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 113-794-529
+INFO:werkzeug: * Debugger PIN: 113-794-529
+ERROR:app:Unexpected error: Extra data: line 2 column 1 (char 95)
+INFO:werkzeug:127.0.0.1 - - [09/Feb/2025 21:15:33] "[35m[1mGET /ai-search?query=health HTTP/1.1[0m" 500 -
+INFO:werkzeug: * Detected change in '/Users/husseinshamarti/Desktop/Skole/Bachelor-SearchMotor/Backend/app.py', reloading
+INFO:werkzeug: * Detected change in '/Users/husseinshamarti/Desktop/Skole/Bachelor-SearchMotor/Backend/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 113-794-529
+INFO:werkzeug: * Debugger PIN: 113-794-529
+ERROR:app:Failed to parse Ollama response: {"model":"mistral","created_at":"2025-02-09T20:19:37.912086Z","response":" This","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:38.018014Z","response":" article","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:38.242125Z","response":" discuss","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:38.476911Z","response":"es","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:38.591568Z","response":" a","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:38.644168Z","response":" novel","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:38.702984Z","response":" statistical","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:38.756243Z","response":" process","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:38.810937Z","response":" control","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:38.864183Z","response":" method","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:38.916329Z","response":" designed","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:38.968652Z","response":" for","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:39.020964Z","response":" monitoring","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:39.073123Z","response":" non","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:39.130909Z","response":"-","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:39.188269Z","response":"station","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:39.240524Z","response":"ary","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:39.291167Z","response":" short","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:39.342587Z","response":" time","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:39.398321Z","response":" series","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:39.452084Z","response":" related","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:39.502321Z","response":" to","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:39.553278Z","response":" health","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:39.603942Z","response":"-","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:39.654343Z","response":"re","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:39.709087Z","response":"covery","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:39.769104Z","response":" processes","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:39.83091Z","response":".","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:39.894944Z","response":" The","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:39.962889Z","response":" method","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:40.038263Z","response":" uses","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:40.100021Z","response":" the","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:40.156602Z","response":" She","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:40.212083Z","response":"wh","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:40.269496Z","response":"art","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:40.333918Z","response":" control","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:40.394334Z","response":" chart","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:40.452987Z","response":" for","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:40.509219Z","response":" resid","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:40.562287Z","response":"uals","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:40.614135Z","response":",","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:40.667298Z","response":" which","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:40.718698Z","response":" is","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:40.77475Z","response":" constructed","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:40.82747Z","response":" based","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:40.883516Z","response":" on","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:40.940767Z","response":" a","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:40.996801Z","response":" model","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:41.052243Z","response":" aver","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:41.105644Z","response":"aging","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:41.161701Z","response":" approach","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:41.217944Z","response":",","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:41.274416Z","response":" focusing","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:41.332819Z","response":" on","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:41.386981Z","response":" the","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:41.44054Z","response":" differences","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:41.493632Z","response":" between","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:41.545433Z","response":" consecutive","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:41.595506Z","response":" observation","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:41.646573Z","response":" values","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:41.699221Z","response":".","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:41.7527Z","response":" The","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:41.807766Z","response":" effectiveness","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:41.865075Z","response":" of","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:41.917894Z","response":" this","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:41.971102Z","response":" new","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:42.023648Z","response":" approach","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:42.076214Z","response":" is","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:42.129519Z","response":" demonstrated","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:42.183898Z","response":" using","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:42.248752Z","response":" a","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:42.313169Z","response":" real","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:42.372119Z","response":"-","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:42.42977Z","response":"life","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:42.482982Z","response":" example","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:42.534862Z","response":":","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:42.585915Z","response":" monitoring","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:42.639533Z","response":" recovery","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:42.69348Z","response":" from","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:42.747745Z","response":" a","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:42.801413Z","response":" mild","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:42.854206Z","response":" hy","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:42.905886Z","response":"pert","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:42.95724Z","response":"ension","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:43.009869Z","response":" episode","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:43.06371Z","response":".","done":false}
+{"model":"mistral","created_at":"2025-02-09T20:19:43.118958Z","response":"","done":true,"done_reason":"stop","context":[3,29473,7695,4247,1421,1224,6215,29515,1183,4598,16658,1032,22024,2527,3370,2806,1122,17650,3296,29501,1035,9609,10305,6165,1254,3253,2611,29501,20617,1396,1495,4286,29491,1183,1753,2224,1212,3370,11736,1122,13667,13841,29493,3586,1124,2997,14131,4822,5199,29493,1117,5197,1122,11858,2212,3837,1070,22930,14643,29491,1183,11886,5366,3205,1070,1224,1401,5199,1427,1518,18561,2181,1032,2121,29501,11155,3525,1070,1032,12874,1245,1032,17351,7289,3250,3353,10328,29491,4,1027,1619,6215,4110,1042,1032,7860,22024,2527,3370,2806,6450,1122,17650,2611,29501,20617,1396,3253,1495,4286,5970,1066,3296,29501,1035,9609,10305,29491,1183,2806,6866,1040,1753,2224,1212,3370,11736,1122,13667,13841,29493,1458,1117,14147,3586,1124,1032,2997,14131,4822,5199,29493,19087,1124,1040,11858,2212,22930,16147,3837,29491,1183,24566,1070,1224,1401,5199,1117,18561,2181,1032,2121,29501,11155,3525,29515,17650,12874,1245,1032,17351,7289,3250,3353,10328,29491],"total_duration":12655261542,"load_duration":24203292,"prompt_eval_count":91,"prompt_eval_duration":7174000000,"eval_count":87,"eval_duration":5450000000}
+
+INFO:werkzeug:127.0.0.1 - - [09/Feb/2025 21:19:43] "GET /ai-search?query=health HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in '/Users/husseinshamarti/Desktop/Skole/Bachelor-SearchMotor/Backend/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 113-794-529
+INFO:werkzeug:127.0.0.1 - - [09/Feb/2025 21:21:00] "GET /ai-search?query=health HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in '/Users/husseinshamarti/Desktop/Skole/Bachelor-SearchMotor/Backend/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 113-794-529
+INFO:werkzeug:127.0.0.1 - - [09/Feb/2025 21:22:46] "GET /ai-search?query=health HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in '/Users/husseinshamarti/Desktop/Skole/Bachelor-SearchMotor/Backend/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 113-794-529
+INFO:werkzeug:127.0.0.1 - - [09/Feb/2025 21:24:32] "GET /ai-search?query=health HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in '/Users/husseinshamarti/Desktop/Skole/Bachelor-SearchMotor/Backend/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 113-794-529
+INFO:werkzeug:127.0.0.1 - - [09/Feb/2025 21:25:32] "GET /ai-search?query=health HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in '/Users/husseinshamarti/Desktop/Skole/Bachelor-SearchMotor/Backend/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 113-794-529
+ERROR:app:Unexpected error: Extra data: line 2 column 1 (char 93)
+INFO:werkzeug:127.0.0.1 - - [09/Feb/2025 21:26:57] "[35m[1mGET /ai-search?query=health HTTP/1.1[0m" 500 -
+INFO:werkzeug: * Detected change in '/Users/husseinshamarti/Desktop/Skole/Bachelor-SearchMotor/Backend/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 113-794-529
+INFO:werkzeug:127.0.0.1 - - [09/Feb/2025 21:28:29] "GET /ai-search?query=health HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in '/Users/husseinshamarti/Desktop/Skole/Bachelor-SearchMotor/Backend/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 113-794-529
+INFO:werkzeug:127.0.0.1 - - [09/Feb/2025 21:29:40] "GET /ai-search?query=health HTTP/1.1" 200 -
