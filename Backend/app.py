@@ -41,16 +41,24 @@ def ai_search():
 
         # Select the first article
         selected_article = results[0]
-        article_text = selected_article.abstract  # Context of the article
+        article_text = selected_article.pdf_texts # Full text of the article
+        article_abstract = selected_article.abstract  # Context of the article
         pdf_url = selected_article.pdf_url  # Correct field name
 
-        print(f"✅ Selected article text: {article_text}")  # Debugging
+        print(f"✅ Selected article text: {article_abstract}")  # Debugging
         print(f"✅ PDF URL: {pdf_url}")  # Debugging PDF URL
 
         # Send the article text to Ollama for AI generation (streaming response)
         ollama_response = requests.post(
             "http://127.0.0.1:11434/api/generate",
-            json={"model": "mistral", "prompt": f"Summarize this article: {article_text}"},
+            json={"model": "mistral", "prompt": (
+                    f"Summarize the following article in a strict and clear, structured format with the following sections: \n"
+                    f"1. Objective: What is the main purpose or goal of the article? \n"
+                    f"2. Key Findings: What are the important findings, contributions, or insights? \n"
+                    f"3. Conclusion: What conclusions are drawn, and what are the implications of the findings? \n"
+                    f"Article Text: {article_text}"
+                    ),
+            },
             stream=True  # Enable streaming
         )
 
@@ -62,7 +70,7 @@ def ai_search():
                     try:
                         chunk_data = line.decode('utf-8')
                         response_data = json.loads(chunk_data)
-                        ai_summary += response_data.get("response", "")
+                        ai_summary += response_data.get("response", "").replace("\n", "<br>")
                         if response_data.get("done", False):
                             break
                     except Exception as e:
@@ -82,7 +90,7 @@ def ai_search():
                 "pdf_url": pdf_url  # Add the pdf_url field to the response
             },
             "ai_summary": ai_summary,
-            "context": article_text  # Pass article context (abstract) to be used in chat
+            "context": article_text
         })
     except Exception as e:
         app.logger.error(f"Unexpected error: {str(e)}")  # Log the error
@@ -112,6 +120,9 @@ def chat():
         prompt += f"{entry['role']}: {entry['content']}\n"
 
     prompt += f"user: {user_message}\nassistant:"
+
+    # Add a restriction to the assistant's responses to ensure it's focused on the article context only
+    prompt += "\nImportant: Please only refer to the provided article text in your response. Do not discuss anything unrelated to the article."
 
     try:
         # Send the prompt to Ollama for a conversational response
@@ -147,7 +158,7 @@ def chat():
     except Exception as e:
         app.logger.error(f"Unexpected error during chat: {str(e)}")
         return jsonify({"error": "❌ Failed to process chat request"}), 500
-
+    
 # ✅ Run Flask on port 5001
 if __name__ == "__main__":
     print("🚀 Running Flask server on port 5001...")
