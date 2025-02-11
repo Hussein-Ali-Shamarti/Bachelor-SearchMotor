@@ -105,41 +105,26 @@ const SearchPage = () => {
         {error && <p className="error-message">{error}</p>}
 
         {result && (
-          <div className="result-container">
-            <h3>Selected Article:</h3>
-            <p>
-              <strong>Title:</strong> {result.article.title}
-            </p>
-            <p>
-              <strong>Abstract:</strong> {result.article.abstract}
-            </p>
-            <p>
-              <strong>Author(s):</strong> {result.article.author}
-            </p>
-            <p>
-              <strong>Publication Date:</strong>{" "}
-              {result.article.publication_date}
-            </p>
+    <div className="result-container">
+        <h3>Selected Article:</h3>
+        <p><strong>Title:</strong> {result.article.title}</p>
+        <p><strong>Abstract:</strong> {result.article.abstract}</p>
+        <p><strong>Author(s):</strong> {result.article.author}</p>
+        <p><strong>Publication Date:</strong> {result.article.publication_date}</p>
 
-            <h3>AI Summary:</h3>
-            <p>{result.ai_summary}</p>
+        <h3>AI Summary:</h3>
+        <div className="ai-summary" dangerouslySetInnerHTML={{ __html: result.ai_summary }} />
 
-            {/* Check if pdf_url exists and show it */}
-            {result.article.pdf_url && (
-              <div className="pdf-link-container">
+        {result.article.pdf_url && (
+            <div className="pdf-link-container">
                 <h3>Download PDF:</h3>
-                <a
-                  href={result.article.pdf_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Click here to download the PDF
+                <a href={result.article.pdf_url} target="_blank" rel="noopener noreferrer">
+                    Click here to download the PDF
                 </a>
-              </div>
-            )}
-          </div>
+            </div>
         )}
-      </div>
+    </div>
+)}
 
       {/* Chat Section - Only visible when result is available */}
       {result && (
@@ -177,6 +162,7 @@ const SearchPage = () => {
           </div>
         </div>
       )}
+        </div>
     </div>
   );
 };

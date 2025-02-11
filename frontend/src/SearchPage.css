@@ -41,6 +41,14 @@
   .pdf-link-container {
     margin-top: 20px;
   }
+  .ai-summary h3 {
+    margin-top: 10px;
+    color: #123abc;
+}
+.ai-summary p {
+    margin: 5px 0;
+}
+
   
   .chat-section {
     border: 1px solid #ddd;
