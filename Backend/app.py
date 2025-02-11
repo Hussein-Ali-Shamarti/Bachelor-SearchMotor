@@ -18,6 +18,7 @@ logging.basicConfig(filename='error_log.log', level=logging.ERROR)
 print("Flask module imported successfully!")
 print("App initialized!")
 
+
 @app.route("/ai-search", methods=["GET"])
 def ai_search():
     query = request.args.get("query", "").strip()
@@ -40,7 +41,7 @@ def ai_search():
 
         # Select the first article
         selected_article = results[0]
-        article_text = selected_article.abstract
+        article_text = selected_article.abstract  # Context of the article
         pdf_url = selected_article.pdf_url  # Correct field name
 
         print(f"✅ Selected article text: {article_text}")  # Debugging
@@ -53,40 +54,25 @@ def ai_search():
             stream=True  # Enable streaming
         )
 
-        # Log the response status code, headers, and raw content for better insight
-        print(f"✅ Ollama Response Status Code: {ollama_response.status_code}")
-        print(f"✅ Ollama Response Headers: {ollama_response.headers}")
-        
         ai_summary = ""
         if ollama_response.status_code == 200:
             # Iterate over each chunk of the response
             for line in ollama_response.iter_lines():
                 if line:
-                    # Decode the chunk and parse it using the json module
                     try:
                         chunk_data = line.decode('utf-8')
-                        print(f"✅ Chunk Data: {chunk_data}")
-                        
-                        # Parse the chunk (it's a JSON object, so we need to load it)
                         response_data = json.loads(chunk_data)
-                        
-                        # Append the response part to the summary
                         ai_summary += response_data.get("response", "")
-                        
-                        # If the response is complete, break the loop
                         if response_data.get("done", False):
                             break
-
                     except Exception as e:
-                        print(f"⚠️ Error processing chunk: {e}")
                         ai_summary = "⚠️ Failed to parse Ollama response."
                         break
 
         else:
             ai_summary = "⚠️ Failed to generate AI summary due to an error with Ollama."
 
-        # ✅ Return the final response
-        print(f"✅ Returning response with PDF URL: {pdf_url}")  # Log to confirm PDF URL
+        # ✅ Return the final response with the article's context (abstract)
         return jsonify({
             "article": {
                 "title": selected_article.title,
@@ -95,15 +81,72 @@ def ai_search():
                 "publication_date": selected_article.publication_date,
                 "pdf_url": pdf_url  # Add the pdf_url field to the response
             },
-            "ai_summary": ai_summary
+            "ai_summary": ai_summary,
+            "context": article_text  # Pass article context (abstract) to be used in chat
         })
     except Exception as e:
-        # Log unexpected errors
         app.logger.error(f"Unexpected error: {str(e)}")  # Log the error
-        print(f"❌ Error: {e}")  # Debugging
         return jsonify({"error": "❌ Failed to generate AI summary"}), 500
     finally:
         session.close()
+
+@app.route("/chat", methods=["POST"])
+def chat():
+    # Extract user message, conversation history, and context
+    data = request.get_json()
+    user_message = data.get("message", "").strip()
+    conversation_history = data.get("history", [])
+    context = data.get("context", "")  # Context should be passed here from the frontend
+
+    # Validate user message
+    if not user_message:
+        return jsonify({"error": "Message cannot be empty"}), 400
+
+    # Build the prompt, including the context if provided
+    prompt = ""
+    if context:  # Prepend context to the conversation
+        prompt += f"Context: {context}\n\n"
+
+    # Append the previous conversation history to the prompt
+    for entry in conversation_history:
+        prompt += f"{entry['role']}: {entry['content']}\n"
+
+    prompt += f"user: {user_message}\nassistant:"
+
+    try:
+        # Send the prompt to Ollama for a conversational response
+        response = requests.post(
+            "http://127.0.0.1:11434/api/generate",
+            json={"model": "mistral", "prompt": prompt},
+            stream=True  # Enable streaming for real-time responses
+        )
+
+        ai_response = ""
+        if response.status_code == 200:
+            for line in response.iter_lines():
+                if line:
+                    chunk_data = line.decode('utf-8')
+                    response_data = json.loads(chunk_data)
+                    ai_response += response_data.get("response", "")
+                    if response_data.get("done", False):
+                        break
+
+        else:
+            ai_response = "⚠️ Failed to generate response from Ollama."
+
+        # Append the AI's response to the conversation history
+        conversation_history.append({"role": "user", "content": user_message})
+        conversation_history.append({"role": "assistant", "content": ai_response})
+
+        # Return the AI's response and updated conversation history
+        return jsonify({
+            "response": ai_response,
+            "history": conversation_history
+        })
+
+    except Exception as e:
+        app.logger.error(f"Unexpected error during chat: {str(e)}")
+        return jsonify({"error": "❌ Failed to process chat request"}), 500
 
 # ✅ Run Flask on port 5001
 if __name__ == "__main__":
