@@ -258,3 +258,378 @@ INFO:werkzeug: * Restarting with stat
 WARNING:werkzeug: * Debugger is active!
 INFO:werkzeug: * Debugger PIN: 113-794-529
 INFO:werkzeug:127.0.0.1 - - [09/Feb/2025 21:40:55] "GET /ai-search?query=health HTTP/1.1" 200 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.11.150:5001
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 175-696-932
+INFO:werkzeug: * Detected change in 'C:\\Program Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.12_3.12.2544.0_x64__qbz5n2kfra8p0\\Lib\\netrc.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 175-696-932
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 00:19:24] "GET /ai-search?query=test HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python312\\site-packages\\werkzeug\\_internal.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 175-696-932
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 175-696-932
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 00:21:10] "GET /ai-search?query=test HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 00:22:39] "OPTIONS /chat HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 00:22:39] "POST /chat HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 00:22:46] "GET /ai-search?query=test HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 00:22:52] "OPTIONS /chat HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 00:22:52] "POST /chat HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 175-696-932
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 00:24:44] "OPTIONS /chat HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 00:24:44] "POST /chat HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 175-696-932
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 175-696-932
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 00:25:07] "OPTIONS /chat HTTP/1.1" 200 -
+INFO:app:Prompt sent to Ollama: user: test
+assistant:
+ERROR:app:Ollama error: {"error":"model 'chatgpt' not found"}
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 00:25:07] "[35m[1mPOST /chat HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 00:27:55] "OPTIONS /chat HTTP/1.1" 200 -
+INFO:app:Prompt sent to Ollama: user: adapt
+assistant:
+ERROR:app:Ollama error: {"error":"model 'chatgpt' not found"}
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 00:27:55] "[35m[1mPOST /chat HTTP/1.1[0m" 500 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 175-696-932
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 175-696-932
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 00:28:06] "OPTIONS /chat HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 00:28:06] "POST /chat HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 175-696-932
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 00:34:13] "OPTIONS /chat HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 00:34:18] "POST /chat HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 175-696-932
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 175-696-932
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 00:36:56] "OPTIONS /chat HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 00:36:56] "[31m[1mPOST /chat HTTP/1.1[0m" 400 -
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 00:37:09] "GET /ai-search?query=adapt HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 00:37:18] "OPTIONS /chat HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 00:37:18] "[31m[1mPOST /chat HTTP/1.1[0m" 400 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 175-696-932
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 00:38:04] "OPTIONS /chat HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 00:38:04] "[31m[1mPOST /chat HTTP/1.1[0m" 400 -
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 00:40:48] "GET /ai-search?query=adapt HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 00:40:57] "OPTIONS /chat HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 00:40:57] "[31m[1mPOST /chat HTTP/1.1[0m" 400 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python312\\site-packages\\_pytest\\junitxml.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 175-696-932
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 175-696-932
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 00:42:30] "GET /ai-search?query=test HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 00:42:37] "OPTIONS /chat HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 00:42:37] "[31m[1mPOST /chat HTTP/1.1[0m" 400 -
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 00:43:00] "OPTIONS /chat HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 00:43:00] "[31m[1mPOST /chat HTTP/1.1[0m" 400 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 175-696-932
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 175-696-932
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 00:47:08] "OPTIONS /chat HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 00:47:08] "[31m[1mPOST /chat HTTP/1.1[0m" 400 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 175-696-932
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 175-696-932
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 00:47:52] "OPTIONS /chat HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 00:47:52] "POST /chat HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 175-696-932
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 00:48:07] "OPTIONS /chat HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 00:48:12] "POST /chat HTTP/1.1" 200 -
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 175-696-932
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 00:48:27] "GET /ai-search?query=Adapt HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 00:48:38] "OPTIONS /chat HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 00:48:39] "POST /chat HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 175-696-932
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 175-696-932
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 00:51:13] "GET /ai-search?query=test HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 00:51:21] "OPTIONS /chat HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 00:51:25] "POST /chat HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 00:52:00] "OPTIONS /chat HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 00:52:03] "POST /chat HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 00:52:17] "OPTIONS /chat HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 00:52:19] "POST /chat HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 00:53:24] "GET /ai-search?query=adapt HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 00:53:36] "OPTIONS /chat HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 00:53:40] "POST /chat HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 175-696-932
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 175-696-932
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 00:54:21] "OPTIONS /chat HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 00:54:22] "POST /chat HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 00:54:35] "OPTIONS /chat HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 00:54:39] "POST /chat HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 00:54:56] "[33mGET /ai-search?query=Algorithmic+LIfe HTTP/1.1[0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 00:55:06] "GET /ai-search?query=Algorithmic HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.11.150:5001
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 175-696-932
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 01:01:44] "GET /ai-search?query=test HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 01:02:01] "OPTIONS /chat HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 01:02:08] "POST /chat HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python312\\site-packages\\pytest_asyncio\\_version.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 175-696-932
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 175-696-932
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 175-696-932
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 01:06:22] "GET /ai-search?query=adapt HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 01:06:32] "OPTIONS /chat HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 01:06:35] "POST /chat HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 175-696-932
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 175-696-932
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 175-696-932
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 175-696-932
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 01:08:46] "GET /ai-search?query=adapt HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 01:08:59] "OPTIONS /chat HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 01:09:00] "POST /chat HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 175-696-932
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 175-696-932
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 175-696-932
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 175-696-932
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 175-696-932
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 175-696-932
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 175-696-932
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 01:11:25] "GET /ai-search?query=adapt HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 01:11:40] "OPTIONS /chat HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 01:11:45] "POST /chat HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 175-696-932
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 01:12:09] "OPTIONS /chat HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 01:12:14] "POST /chat HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 175-696-932
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 175-696-932
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 175-696-932
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 175-696-932
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 175-696-932
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 01:14:42] "GET /ai-search?query=adapt HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 01:14:52] "OPTIONS /chat HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 01:14:56] "POST /chat HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 01:15:14] "OPTIONS /chat HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 01:15:17] "POST /chat HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 175-696-932
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 01:15:42] "OPTIONS /chat HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 01:15:50] "POST /chat HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 175-696-932
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 175-696-932
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 01:16:20] "GET /ai-search?query=health HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\query_optimizer.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\uploadToDatabase.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 175-696-932
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 01:17:34] "GET /ai-search?query=health HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 01:17:49] "OPTIONS /chat HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 01:17:52] "POST /chat HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 01:18:03] "GET /ai-search?query=adapt HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 01:18:13] "OPTIONS /chat HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 01:18:16] "POST /chat HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 01:23:52] "GET /ai-search?query=adapt HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 01:24:09] "OPTIONS /chat HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 01:24:13] "POST /chat HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 01:26:54] "GET /ai-search?query=adapt HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 01:27:16] "OPTIONS /chat HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 01:27:24] "POST /chat HTTP/1.1" 200 -
