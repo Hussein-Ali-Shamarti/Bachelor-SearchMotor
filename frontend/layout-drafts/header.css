@@ -1,0 +1,43 @@
+/* Styling for header */
+
+.site-logo, .site-slogan {
+  margin: 0; /* Fjerner standardmarg */
+}
+
+/* Tillegg: Sørger for at hele headeren er venstrejustert */
+.site-header {
+  background-color: var(--color-background-light);
+  color: var(--color-font);
+  padding: 1rem;
+  margin-bottom: 0;
+
+
+  text-align: left; /* Venstrejusterer innholdet i headeren */
+}
+/* wrapper endret til inside?? */
+.wrapper {
+  display: flex; /* Fortsetter med Flexbox for layouten */
+  align-items: center; /* Sørger for at elementene er sentrert vertikalt i forhold til hverandre */
+  padding: 1rem; /* Gir litt plass rundt innholdet */
+}
+
+.logo-container {
+  flex-grow: 0; /* Hindrer logo-containeren i å vokse */
+  flex-shrink: 0; /* Hindrer logo-containeren i å krympe */
+  display: flex; /* Gjør også logo-containeren til en flex-container */
+  align-items: center; /* Sentrerer logoen vertikalt */
+}
+
+.logo-container img {
+  height: 2.5rem; /* Setter høyden på logoen for å matche høyden på overskriften */
+  width: auto; /* Beholder aspektforholdet til logoen */
+}
+
+.text-container {
+  display: flex; /* Gjør tekst-containeren til en flex-container */
+  flex-direction: column; /* Arrangerer overskriften og slogan vertikalt */
+  align-items: flex-start; /* Venstrejusterer tekstinnholdet */
+  padding-left: 1rem; /* Gir litt plass mellom logoen og tekstinnholdet */
+}
+
+
