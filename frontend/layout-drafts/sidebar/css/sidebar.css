@@ -1,0 +1,166 @@
+/* =========================================
+   ✅ 1. GRID LAYOUT - STRUKTUR FOR SIDEN
+=========================================== */
+.container {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    grid-template-rows: auto 1fr;
+    grid-template-areas: 
+        "sidebar header"
+        "sidebar content";
+    height: 100vh;
+}
+
+.sidebar { grid-area: sidebar; transition: 0.3s ease; }
+.top-bar { grid-area: header; }
+.content { grid-area: content; }
+
+/* 📌 RESPONSIVT DESIGN - JUSTER LAYOUT FOR SMÅ SKJERMER */
+@media screen and (max-width: 768px) {
+    .container {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto 1fr;
+        grid-template-areas: 
+            "header"
+            "content"
+            "sidebar";
+    }
+    .sidebar {
+        width: 0;
+        overflow: hidden;
+    }
+    .sidebar.open {
+        width: 250px;
+    }
+}
+
+
+/* =========================================
+   ✅ 2. SIDE NAVIGATION (SIDEBAR)
+=========================================== */
+.sidenav {
+    height: 100%;  /* Full høyde */
+    width: 0;  /* Standard lukket */
+    position: fixed; 
+    z-index: 1;  
+    top: 0;  
+    left: 0;
+    background-color: #f3f3f3;  
+    color:#404040;  
+    overflow-x: hidden;  
+    transition: 0.5s;
+}
+
+/* 📌 Åpne sidebar på desktop */
+@media screen and (min-width: 1024px) {
+    .sidenav {
+        width: 250px;
+    }
+}
+
+/* =========================================
+   ✅ 3. HEADER I SIDEBAR (TOPPEN MED IKONER OG X-KNAPP)
+=========================================== */
+
+.sidebar-header {
+    display: flex;
+    justify-content: space-between; /* Plasserer ikonene til venstre og "X" til høyre */
+    align-items: center;
+    padding: 12px 15px;
+    border-bottom: 1px solid #d9d9d9; /* Skillelinje */
+    position: relative;
+    height: 50px; /* Sørger for at høyden på headeren er fast */
+}
+
+
+/* 🔹 Left icons (Chat + Search) */
+.left-icons {
+    display: flex;
+    gap: 12px; /* Avstand mellom ikonene */
+}
+
+/* 🔹 Style for icons */
+.left-icons i, .closebtn i {
+    font-size: 22px; /* Lik størrelse */
+    color: #404040; /* Mørk grå farge */
+    cursor: pointer;
+    padding: 8px; /* Litt luft rundt */
+    transition: 0.3s ease-in-out;
+}
+
+.left-icons i:hover, .closebtn i:hover {
+    color: #222; /* Litt mørkere ved hover */
+}
+
+/* 📌 Lukk-knapp (X) - Flytter den **helt opp i høyre hjørne** */
+.closebtn {
+    font-size: 24px;
+    text-decoration: none;
+    color: #404040;
+    position: absolute;
+    right: 15px;
+    top: 10px;  /* Flytter X **opp** */
+}
+
+/* .closebtn {
+    font-size: 24px;
+    text-decoration: none;
+    color: #404040;
+    cursor: pointer;
+} */
+
+/* =========================================
+   ✅ 4. NAVIGASJONSLENKER (I DAG / I GÅR)
+=========================================== */
+.sidenav a {
+    padding: 10px 15px;
+    text-decoration: none;
+    font-size: 20px;
+    color: #595959;
+    display: block;
+    transition: 0.3s;
+}
+
+/* 📌 Hover-effekt */
+.sidenav a:hover {
+    color: #d9d9d9;
+}
+
+/* =========================================
+   ✅ 5. SCROLLBAR FOR CHAT-HISTORIKK
+=========================================== */
+.scrollmenu {
+    max-height: calc(100vh - 60px); /* Tar hele høyden minus topplinjen */
+    overflow-y: auto; /* Aktiverer scrolling */
+    display: flex;
+    flex-direction: column;
+    padding-top: 5px; /* Justerer plassering så den starter rett under topplinjen */
+}
+
+/* 📌 Styling for lenker i menyen */
+.scrollmenu a {
+    display: block;
+    color: #595959;
+    text-align: left;
+    padding: 14px;
+    text-decoration: none;
+}
+
+/* 📌 Hover-effekt for meny */
+.scrollmenu a:hover {
+    background-color: #d9d9d9;
+}
+
+/* =========================================
+   ✅ 6. MAIN CONTENT - HOVEDINNHOLD
+=========================================== */
+#main {
+    transition: margin-left 0.5s;
+    padding: 20px;
+}
+
+/* 📌 Justering for små skjermer */
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+}
