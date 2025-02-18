@@ -1,0 +1,124 @@
+/* Stylesheet for basic design:
+1. Define global custom properties
+2. Global settings for the entire website
+3. Basic styling for typography and text
+4. Useful, general classes */
+
+/* Define global custom properties */
+
+html {
+ 
+    --color-background-light: #f9f9f9; 
+    --color-background-dark: #e9e9e9; 
+    --color-font: #120800; 
+    --color-shadow: 4px 8px  8px rgba(0, 0, 0, 0.2);  
+    --color-grey-border:#818889; 
+    --color-grey-border-light: #8e9495; 
+}
+   
+/**  
+* 2. Global settings for the entire website 
+*/
+
+/* Enable border-box */ 
+*, *::before, *::after { box-sizing: border-box; }
+
+/* Enable smooth scrolling */ 
+html { scroll-behavior: smooth; }
+
+/* Avoid collapsing margins */
+h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote { margin-top: 0; }
+
+
+/* Make images and videos flexible */
+img, video { max-width: 100%; height: auto; }
+
+/* Remove horizontal margins from figure elements */
+figure { margin-left: 0; margin-right: 0; } 
+
+
+/**  
+* 3. Basic styling for typography and text 
+*/
+
+body {
+/* System font on the user's device; 'Best practice' may change */
+font-family: system-ui, -apple-system, "Segoe UI", Roboto, 
+           "Helvetica Neue", Arial, sans-serif; 
+
+/* Define default font size (optional) */
+font-size: 1rem; 
+max-width: 600px;
+line-height: 1.5; 
+padding:1rem; 
+margin: 0 auto; 
+color:var(--color-font,   #120800 ); 
+}  
+@media screen and (min-width: 768px) {
+    html{ font-size: 1.125rem;}
+}
+@media screen and (min-width: 1280px) {
+  html{ font-size: 1.25rem;}
+}
+
+
+/* Headings - font size and weight */ 
+h1 { font-size: 2.5rem; font-weight: 500;
+ } 
+h2 { font-size: 2rem; font-weight: 500; } 
+h3 { font-size: 1.75rem; font-weight: 500; } 
+h4 { font-size: 1.5rem; font-weight: 500; }
+h5 { font-size: 1.25rem; }
+h6 { font-size: 1rem; } 
+
+/* Thin underline for hyperlinks and slightly offset from text */
+a { text-decoration-thickness: 1px; text-underline-offset: 0.1875em;
+  text-decoration: none; }
+
+
+/**  
+* 4. Useful, general classes 
+*/ 
+
+
+/* Hide elements visually but keep them accessible */
+.visually-hidden {
+  position: absolute !important;
+  clip: rect(0, 0, 0, 0) !important; 
+  overflow: hidden !important;
+  white-space: nowrap !important;
+
+  width: 1px !important; 
+  height: 1px !important; 
+  padding: 0 !important; 
+  border: 0 !important; 
+  margin: -1px !important; 
+}
+
+/* Floating and clearing classes */
+.float-links { float: left; margin: 0 1rem 1rem 0; }
+.float-rechts { float: right; margin: 0 0 1rem 1rem; }
+
+.float-stoppen { clear: both; }
+
+/* Center captions for floated images */
+figure[class~="float-rechts"], 
+figure[class~="float-links"] {
+  text-align: center;
+}
+
+/* Contain floats */
+.float-container { overflow: hidden; }
+
+@supports (display:flow-root) {
+
+  .float-container {
+    display: flow-root; 
+    overflow: initial;       
+  }
+
+}
+
+/** 
+* End of basis.css 
+*/ 
