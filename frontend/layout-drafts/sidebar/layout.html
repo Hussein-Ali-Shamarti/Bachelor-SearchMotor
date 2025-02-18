@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>layout</title>
+    <link rel="stylesheet" href="/css/layout.css"> <!-- Kobler til CSS -->
+    <link rel="stylesheet" href="/css/sidebar.css"> <!-- Kobler til CSS -->
+    <!-- 📌 Font Awesome for ikoner -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script defer src="scipts.js"></script> <!-- Koble til JavaScript -->
+   
+</head>
+
+<body>
+
+<div class="layout-container">
+    <div class="sidebar">
+            <!-- Sidenav push the content to the right.  -->
+        <div id="mySidenav" class="sidenav">
+        
+        <div class="sidebar-header">
+            <div class="left-icons">
+                <i class="fa fa-comments"></i> <!-- Chat -->
+                <i class="fa fa-search"></i> <!-- Search -->
+            </div>
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">
+                <i class="fa fa-times"></i> <!-- X -->
+            </a>
+        </div>
+        
+        <!-- Høyre: Lukkeknapp
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a> -->
+
+        <!-- Scrollbar-meny under -->
+    <div class="scrollmenu">
+        <h3>I dag</h3>
+        <a href="#">chat chat </a>
+        <a href="#">PC</a>
+        <a href="#">datb2 deu</a>
+        <a href="#">chat chat</a>
+        <a href="#">PC</a>
+        <a href="#">datb2 deu</a>
+        <a href="#">dkfjdsjfkaødl</a>
+        <a href="#">PC</a>
+        <a href="#">datb2 deu</a>
+        
+        <h3>I går</h3>
+        <a href="#">dfadsg</a>
+        <a href="#">fdsaf</a>
+        <a href="#">dfadsf</a>
+        <a href="#">PC</a>
+        <a href="#">datb2 deu</a>
+    </div>
+        </div>
+
+        <!-- Use any element to open the sidenav -->
+        <span onclick="openNav()">open</span>
+        
+
+    </div>
+    <div class="site-content">
+        
+<!-- !!!!Add all page content inside this div
+  if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page) -->
+
+<div id="main">
+    <header class="site-header">
+        <div class="inside">
+            <div class="top-bar">
+                <div class="logo-container">
+                    <a href="index.html">
+                    <img src="bilder/logo.svg" alt="Logo">
+                    </a>
+                </div>
+    
+                <div class="auth-container">
+                    <a href="login.html" class="auth-link">Login</a>
+                    <a href="register.html" class="auth-link">Register</a>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    
+    <!-- Search area -->
+    <section class="search-area">
+        <div class="inside">
+            <form>
+                <label for="search">What can I help you with?</label>
+                <input type="text" id="search" placeholder="Type your query...">
+                <button type="submit">🔍</button>
+            </form>        
+        </div>
+    </section>
+    
+    
+    <section class="update-area">
+        <div class="inside">
+            <p>her kommer evt. en pop up håndbok e.l. </p>        
+        </div>
+    </section>
+</div>
+
+    
+    </div>   
+</div>
+</body>

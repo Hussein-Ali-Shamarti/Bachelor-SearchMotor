@@ -1,0 +1,52 @@
+/* er body riktig her med breddene? */
+body {
+    min-width: 320px; /* Hindrer at nettsiden blir for smal på små skjermer */
+    max-width: 1200px; /* Hindrer at innholdet sprer seg for mye på store skjermer */
+    padding: 0;
+    margin: 0; 
+}
+
+
+
+/* 📌 Hovedcontainer: Bruker GRID for å organisere hele layouten */
+.layout-container {
+    display: grid;
+    background-color: #98a229;
+    border: 1px solid red; 
+    grid-template-columns: 250px 1fr; /* Sidebar 250px, resten fyller */
+    grid-template-rows: 60px 1fr 50px; /* Topbar 60px, innhold tar resten, footer 50px */
+    grid-template-areas: "sidebar" "site-content";
+    height: 100vh; /* Sørger for at grid fyller hele siden */
+    max-width: 100vw; Hindrer at det blir bredere enn skjermen
+    /* overflow-x: hidden; Skjuler horisontal scrolling */
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar {
+    grid-area: 1/ 1 / 4 /2; /*likt som under*/
+    grid-row-start:1;
+    grid-column-start: 1;
+    grid-row-end:4; 
+    grid-column-end: 2;
+
+    background-color: gray; /* Bare for å se at den vises */
+    padding: 0;
+    margin: 0;
+
+    
+}
+
+.site-content {
+
+    grid-area: 1 / 2/ 4/ 3;
+    grid-row-start:1;
+    grid-column-start: 2;
+    grid-row-end:4; 
+    grid-column-end: 3;
+    background-color:aqua; /* Bare for å se at den vises */
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+   
+}
