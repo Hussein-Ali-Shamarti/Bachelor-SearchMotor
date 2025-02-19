@@ -6,17 +6,16 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from models import Base
 from config import DATABASE_URL
-import psycopg2
-
-# Establish connection using the connection string from config.py
-conn = psycopg2.connect(DATABASE_URL)
 
 # Create database engine
-engine = create_engine(DATABASE_URL)
+engine = create_engine(DATABASE_URL, pool_pre_ping=True)  # Ensure stable connection
 
-# Create tables
-Base.metadata.create_all(engine)
-
+# Create a session factory
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
-print("Tables created successfully!")
+# Function to initialize database (only run manually, not on every import)
+def init_db():
+    Base.metadata.create_all(engine)
+    print("✅ Tables created successfully!")
+
+print("✅ Database engine connected!")
