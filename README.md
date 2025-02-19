@@ -1,7 +1,7 @@
 # Bachelor-SearchMotor
 
 This project is a search engine that uses AI to generate summaries of articles. It consists of a Flask backend, an Ollama AI model, and a React frontend.
-
+This assumes you have a Neon PostgreSQL database with pgvector setup with correct data.
 ## Getting Started
 
 ### Prerequisites
@@ -9,7 +9,7 @@ This project is a search engine that uses AI to generate summaries of articles. 
 - Python 3.x
 - Node.js
 - Homebrew (for macOS users)
-
+- Create a .env file with DATABASE_URL=     <-Add the Neon database connection string here.
 ### Installation
 
 1. **Clone the repository**
