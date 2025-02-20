@@ -5,14 +5,17 @@ This file is used to create a database engine and session configuration for the 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from models import Base
-# SQLite database URL
-DATABASE_URL = "sqlite:///./Items.db"
+from config import DATABASE_URL
 
-# Create a database engine
-engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
+# Create database engine
+engine = create_engine(DATABASE_URL, pool_pre_ping=True)  # Ensure stable connection
 
-# Session configuration
+# Create a session factory
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
-# Create tables in the database
-Base.metadata.create_all(bind=engine)
+# Function to initialize database (only run manually, not on every import)
+def init_db():
+    Base.metadata.create_all(engine)
+    print("✅ Tables created successfully!")
+
+print("✅ Database engine connected!")

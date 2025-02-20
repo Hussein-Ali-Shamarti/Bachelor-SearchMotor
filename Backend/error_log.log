@@ -1160,3 +1160,20 @@ INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 08:54:42] "GET /ai-search?query=ai HTTP
 INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 08:54:53] "OPTIONS /chat HTTP/1.1" 200 -
 INFO:werkzeug:127.0.0.1 - - [11/Feb/2025 08:54:58] "POST /chat HTTP/1.1" 200 -
 INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://172.20.10.14:5001
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 171-693-118
+INFO:werkzeug:127.0.0.1 - - [19/Feb/2025 15:09:28] "GET /ai-search?query=health+and+life HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Feb/2025 15:09:40] "OPTIONS /chat HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Feb/2025 15:09:50] "POST /chat HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Feb/2025 15:10:04] "OPTIONS /chat HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Feb/2025 15:10:11] "POST /chat HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Feb/2025 15:11:40] "GET /ai-search?query=Adapt HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Feb/2025 15:18:20] "[33mGET /ai-search?query=do+you+have+any+articles+about+sport? HTTP/1.1[0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [19/Feb/2025 15:18:30] "[33mGET /ai-search?query=do+you+have+any+articles+about+health? HTTP/1.1[0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [19/Feb/2025 15:19:21] "GET /ai-search?query=sport HTTP/1.1" 200 -
