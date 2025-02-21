@@ -1,0 +1,185 @@
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.11.150:5001
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 966-123-136
+INFO:werkzeug:127.0.0.1 - - [21/Feb/2025 05:10:40] "[31m[1mGET /ai-search?query=adapt HTTP/1.1[0m" 405 -
+INFO:werkzeug: * Detected change in 'c:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\Backend\\database.py', reloading
+INFO:werkzeug: * Detected change in 'c:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\Backend\\database.py', reloading
+INFO:werkzeug: * Detected change in 'c:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\Backend\\database.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.11.150:5001
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 966-123-136
+INFO:werkzeug:127.0.0.1 - - [21/Feb/2025 05:13:40] "[31m[1mGET /ai-search?query=adapt HTTP/1.1[0m" 405 -
+INFO:werkzeug: * Detected change in 'c:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\Backend\\database.py', reloading
+INFO:werkzeug: * Detected change in 'c:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\Backend\\database.py', reloading
+INFO:werkzeug: * Detected change in 'c:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\Backend\\database.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 966-123-136
+INFO:werkzeug: * Detected change in 'C:\\Program Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.12_3.12.2544.0_x64__qbz5n2kfra8p0\\Lib\\encodings\\utf_16_le.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 966-123-136
+INFO:werkzeug: * Detected change in 'c:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\Backend\\database.py', reloading
+INFO:werkzeug: * Detected change in 'c:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\Backend\\database.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 966-123-136
+INFO:werkzeug:127.0.0.1 - - [21/Feb/2025 05:36:57] "[31m[1mGET /ai-search?query=adapt HTTP/1.1[0m" 405 -
+INFO:werkzeug: * Detected change in 'c:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\Backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'c:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\Backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'c:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\Backend\\app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 966-123-136
+INFO:werkzeug: * Detected change in 'c:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\Backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'c:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\Backend\\app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 966-123-136
+INFO:werkzeug:127.0.0.1 - - [21/Feb/2025 05:41:09] "[33mOPTIONS /generate-embedding HTTP/1.1[0m" 404 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python312\\site-packages\\sentence_transformers\\__init__.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python312\\site-packages\\sentence_transformers\\SentenceTransformer.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python312\\site-packages\\torch\\__init__.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python312\\site-packages\\torch\\functional.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python312\\site-packages\\torch\\nn\\__init__.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python312\\site-packages\\torch\\nn\\modules\\__init__.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python312\\site-packages\\torch\\nn\\modules\\container.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python312\\site-packages\\torch\\nn\\modules\\module.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python312\\site-packages\\sentence_transformers\\fit_mixin.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python312\\site-packages\\sentence_transformers\\peft_mixin.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python312\\site-packages\\sentence_transformers\\similarity_functions.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python312\\site-packages\\sentence_transformers\\model_card.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python312\\site-packages\\huggingface_hub\\__init__.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 966-123-136
+INFO:werkzeug: * Detected change in 'c:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\Backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'c:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\Backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'c:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\Backend\\app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 966-123-136
+INFO:werkzeug:127.0.0.1 - - [21/Feb/2025 05:45:04] "[33mOPTIONS /generate-embedding HTTP/1.1[0m" 404 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python312\\site-packages\\flask_cors\\decorator.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python312\\site-packages\\_pytest\\cacheprovider.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python312\\site-packages\\_pytest\\fixtures.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python312\\site-packages\\_pytest\\config\\__init__.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python312\\site-packages\\_pytest\\capture.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python312\\site-packages\\_pytest\\doctest.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python312\\site-packages\\_pytest\\junitxml.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python312\\site-packages\\_pytest\\legacypath.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python312\\site-packages\\_pytest\\logging.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python312\\site-packages\\_pytest\\monkeypatch.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python312\\site-packages\\_pytest\\recwarn.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python312\\site-packages\\_pytest\\tmpdir.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python312\\site-packages\\pytest_asyncio\\plugin.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 966-123-136
+INFO:werkzeug: * Detected change in 'c:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\Backend\\app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 966-123-136
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python312\\site-packages\\flask_cors\\extension.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 966-123-136
+INFO:werkzeug: * Detected change in 'c:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\Backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'c:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\Backend\\app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 966-123-136
+INFO:werkzeug:127.0.0.1 - - [21/Feb/2025 05:48:02] "OPTIONS /generate-embedding HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Feb/2025 05:48:02] "POST /generate-embedding HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Feb/2025 05:48:02] "OPTIONS /ai-search HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Feb/2025 05:48:02] "[35m[1mPOST /ai-search HTTP/1.1[0m" 500 -
+INFO:werkzeug: * Detected change in 'c:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\Backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'c:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\Backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'c:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\Backend\\app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 966-123-136
+INFO:werkzeug: * Detected change in 'c:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\Backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'c:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\Backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'c:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\Backend\\app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 966-123-136
+INFO:werkzeug:127.0.0.1 - - [21/Feb/2025 05:50:31] "OPTIONS /ai-search HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Feb/2025 05:50:39] "OPTIONS /generate-embedding HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Feb/2025 05:50:39] "POST /generate-embedding HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Feb/2025 05:50:39] "OPTIONS /ai-search HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Feb/2025 05:50:39] "[35m[1mPOST /ai-search HTTP/1.1[0m" 500 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python312\\site-packages\\flask\\json\\provider.py', reloading
+INFO:werkzeug:127.0.0.1 - - [21/Feb/2025 05:50:51] "[35m[1mPOST /ai-search HTTP/1.1[0m" 500 -
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 966-123-136
+INFO:werkzeug: * Detected change in 'C:\\Program Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.12_3.12.2544.0_x64__qbz5n2kfra8p0\\Lib\\io.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 966-123-136
+INFO:werkzeug: * Detected change in 'c:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\Backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'c:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\Backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'c:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\Backend\\app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 966-123-136
+INFO:werkzeug:127.0.0.1 - - [21/Feb/2025 05:53:30] "[31m[1mPOST /ai-search HTTP/1.1[0m" 400 -
+INFO:werkzeug: * Detected change in 'c:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\Backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'c:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\Backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'c:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\Backend\\app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 966-123-136
+INFO:werkzeug:127.0.0.1 - - [21/Feb/2025 05:56:12] "[31m[1mPOST /ai-search HTTP/1.1[0m" 400 -
+INFO:werkzeug: * Detected change in 'c:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\Backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'c:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\Backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'c:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\Backend\\app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 966-123-136
+INFO:werkzeug: * Detected change in 'C:\\Program Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.12_3.12.2544.0_x64__qbz5n2kfra8p0\\Lib\\logging\\__init__.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 966-123-136
+INFO:werkzeug:127.0.0.1 - - [21/Feb/2025 05:58:25] "OPTIONS /generate-embedding HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Feb/2025 05:58:25] "POST /generate-embedding HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Feb/2025 05:58:25] "OPTIONS /ai-search HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Feb/2025 05:58:25] "[35m[1mPOST /ai-search HTTP/1.1[0m" 500 -
+INFO:werkzeug: * Detected change in 'c:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\Backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'c:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\Backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'c:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\Backend\\app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:werkzeug: * Restarting with watchdog (windowsapi)

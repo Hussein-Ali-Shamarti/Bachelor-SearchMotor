@@ -1177,3 +1177,134 @@ INFO:werkzeug:127.0.0.1 - - [19/Feb/2025 15:11:40] "GET /ai-search?query=Adapt H
 INFO:werkzeug:127.0.0.1 - - [19/Feb/2025 15:18:20] "[33mGET /ai-search?query=do+you+have+any+articles+about+sport? HTTP/1.1[0m" 404 -
 INFO:werkzeug:127.0.0.1 - - [19/Feb/2025 15:18:30] "[33mGET /ai-search?query=do+you+have+any+articles+about+health? HTTP/1.1[0m" 404 -
 INFO:werkzeug:127.0.0.1 - - [19/Feb/2025 15:19:21] "GET /ai-search?query=sport HTTP/1.1" 200 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.11.150:5001
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 966-123-136
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\database.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\database.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 966-123-136
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 966-123-136
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python312\\site-packages\\sentence_transformers\\__init__.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python312\\site-packages\\sentence_transformers\\SentenceTransformer.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python312\\site-packages\\torch\\__init__.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python312\\site-packages\\torch\\functional.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python312\\site-packages\\torch\\nn\\__init__.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python312\\site-packages\\torch\\nn\\modules\\__init__.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python312\\site-packages\\torch\\nn\\modules\\container.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python312\\site-packages\\torch\\nn\\modules\\module.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python312\\site-packages\\sentence_transformers\\fit_mixin.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python312\\site-packages\\sentence_transformers\\peft_mixin.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python312\\site-packages\\sentence_transformers\\similarity_functions.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 966-123-136
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 966-123-136
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python312\\site-packages\\flask_cors\\decorator.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python312\\site-packages\\_pytest\\cacheprovider.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python312\\site-packages\\_pytest\\fixtures.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python312\\site-packages\\_pytest\\config\\__init__.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python312\\site-packages\\_pytest\\capture.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python312\\site-packages\\_pytest\\doctest.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python312\\site-packages\\_pytest\\junitxml.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python312\\site-packages\\_pytest\\legacypath.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python312\\site-packages\\_pytest\\logging.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python312\\site-packages\\_pytest\\monkeypatch.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python312\\site-packages\\_pytest\\recwarn.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python312\\site-packages\\_pytest\\tmpdir.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python312\\site-packages\\pytest_asyncio\\plugin.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 966-123-136
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 966-123-136
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python312\\site-packages\\flask_cors\\extension.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.11.150:5001
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 966-123-136
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 966-123-136
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.11.150:5001
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 966-123-136
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python312\\site-packages\\flask\\json\\provider.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 966-123-136
+INFO:werkzeug: * Detected change in 'C:\\Program Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.12_3.12.2544.0_x64__qbz5n2kfra8p0\\Lib\\io.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 966-123-136
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 966-123-136
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 966-123-136
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 966-123-136
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.11.150:5001
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 966-123-136
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\henri\\OneDrive\\Dokumenter\\GitHub\\Bachelor-SearchMotor\\Bachelor-SearchMotor\\backend\\app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:werkzeug: * Restarting with watchdog (windowsapi)

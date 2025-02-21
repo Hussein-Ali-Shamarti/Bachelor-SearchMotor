@@ -1,1 +1,2 @@
 Items.db filter=lfs diff=lfs merge=lfs -text
+HybridSearch.db filter=lfs diff=lfs merge=lfs -text
