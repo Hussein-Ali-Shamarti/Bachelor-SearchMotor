@@ -1,21 +1,17 @@
-"""
-This file is used to create a database engine and session configuration for the database.
-"""
-
+import os
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import sessionmaker, scoped_session
 from models import Base
-from config import DATABASE_URL
+
+# Get absolute path to ensure correct database location
+BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+DATABASE_PATH = os.path.join(BASE_DIR, "HybridSearch.db")
+DATABASE_URL = f"sqlite:///{DATABASE_PATH}"  # Triple slashes are needed for SQLite
 
 # Create database engine
-engine = create_engine(DATABASE_URL, pool_pre_ping=True)  # Ensure stable connection
+engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
 
 # Create a session factory
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+SessionLocal = scoped_session(sessionmaker(autocommit=False, autoflush=False, bind=engine))
 
-# Function to initialize database (only run manually, not on every import)
-def init_db():
-    Base.metadata.create_all(engine)
-    print("✅ Tables created successfully!")
-
-print("✅ Database engine connected!")
+Base.metadata.create_all(bind=engine)

@@ -4,22 +4,20 @@ import os
 import ast
 import re
 import sys
-from sqlalchemy import create_engine, String
+from sqlalchemy import cast, create_engine, String, or_, func
 from sqlalchemy.orm import sessionmaker
-from sqlalchemy import or_, func
-from sqlalchemy.sql.expression import cast
-from sqlalchemy.dialects.postgresql import ARRAY
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 from models import Article, Conference
 from tqdm import tqdm
 
 sys.stdout.reconfigure(encoding='utf-8')
 
-# Replace with your actual Neon.tech credentials
-DATABASE_URL = "INSERT NEON DATABASE URL HERE"
+# Set the DATABASE_URL to point to your SQLite DB in the Backend folder
+DATABASE_URL = "sqlite:///./Backend/HybridSearch.db"
 
-# Connect to PostgreSQL
-def connect_to_postgres():
-    engine = create_engine(DATABASE_URL)
+# Connect to SQLite
+def connect_to_sqlite():
+    engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
     Session = sessionmaker(autocommit=False, autoflush=False, bind=engine)
     return Session()
 
@@ -52,7 +50,6 @@ def get_article_data_from_txt(file_path):
         "Abstract": "",
         "Location": "",
         "isbn": "None",
-        "Authors": []
     }
 
     with open(file_path, 'r', encoding='utf-8', errors='replace') as f:
@@ -80,8 +77,6 @@ def get_article_data_from_txt(file_path):
             if pdf_url.startswith("http://www.thinkmind.org"):
                 pdf_url = pdf_url.replace("http://www.thinkmind.org", "", 1)
             article_data["pdf_url"] = pdf_url
-        elif line.startswith("Authors:"):
-            article_data["Authors"] = [author.strip() for author in line.split(":", 1)[1].split(",")]
         elif line.startswith("Keywords:"):
             article_data["Keywords"] = [kw.strip() for kw in line.split(":", 1)[1].split(";")]
         elif line.startswith("Abstract:"):
@@ -111,8 +106,8 @@ def get_article_data_from_txt(file_path):
     npy_file_path = os.path.join(EMBEDDED_FOLDER, f"{article_base_name}.npy")
     if os.path.exists(npy_file_path):
         try:
-            embedding = np.load(npy_file_path).tolist()
-            article_data["embeddings"] = embedding  # Store as list for pgvector
+            embedding = np.load(npy_file_path)
+            article_data["embeddings"] = embedding.tobytes()  # Store as list for pgvector
         except Exception as e:
             print(f"Error loading embedding for {article_data['title']}: {e}")
             article_data["embeddings"] = None
@@ -134,9 +129,9 @@ def insert_article_info(article_data, session):
             session.query(Conference)
             .filter(
                 or_(
-                    Conference.name.ilike(f"{conference_acronym},%"),  # Match primary name
-                    cast(Conference.articles, ARRAY(String)).any(full_conference_title),  # Exact match in list
-                    func.array_to_string(Conference.articles, ',').ilike(f"%{conference_acronym}%")  # Partial match
+                    Conference.name.ilike(f"{conference_acronym},%"),
+                    cast(Conference.articles, String).ilike(f"%{full_conference_title}%"),
+                    cast(Conference.articles, String).ilike(f"%{conference_acronym}%")
                 )
             )
             .first()
@@ -155,7 +150,6 @@ def insert_article_info(article_data, session):
             publication_date=article_data.get("publication_date", ""),
             pdf_url=article_data.get("pdf_url", ""),
             pdf_texts=article_data.get("pdf_texts", ""),
-            authors=", ".join(article_data.get("Authors", [])),
             keywords=article_data.get("Keywords", []),
             abstract=article_data.get("Abstract", ""),
             location=article_data.get("Location", ""),
@@ -261,14 +255,12 @@ def process_conference_files(conferences_folder, session):
 
 def main():
     start_time = time.time()
-    session = connect_to_postgres()
+    session = connect_to_sqlite()
 
     try:
-        # Process Conferences First
         conferences_folder = "C:/My Web Sites/data/conferences"
         process_conference_files(conferences_folder, session)
 
-        # Process Articles
         articles_folder = "C:/My Web Sites/data/articles"
         process_article_files(articles_folder, session)
 
