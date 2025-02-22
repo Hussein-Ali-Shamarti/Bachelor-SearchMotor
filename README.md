@@ -9,7 +9,7 @@ This assumes you have a Neon PostgreSQL database with pgvector setup with correc
 - Python 3.x
 - Node.js
 - Homebrew (for macOS users)
-- Create a .env file with DATABASE_URL=     <-Add the Neon database connection string here.
+
 ### Installation
 
 1. **Clone the repository**

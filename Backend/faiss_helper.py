@@ -5,7 +5,7 @@ from database import SessionLocal
 from models import Article
 
 FAISS_INDEX_PATH = "faiss.index"
-D = 768 # Number of dimensions in the embeddings
+D = 384 # Number of dimensions in the embeddings
 
 def rebuild_faiss_index():
     print("🔄 Rebuilding FAISS index...")
@@ -25,7 +25,7 @@ def rebuild_faiss_index():
                 continue  # Skip if embedding is missing
 
             embedding = np.frombuffer(embedding_blob, dtype='float32')
-            if embedding.shape[0] == 768:  # ✅ Ensure correct dimension
+            if embedding.shape[0] == 384:  # ✅ Ensure correct dimension
                 ids.append(article_id)
                 embeddings.append(embedding)
             else:
@@ -36,7 +36,7 @@ def rebuild_faiss_index():
             return None, None
 
         embeddings = np.array(embeddings, dtype='float32')
-        index = faiss_cpu.IndexFlatL2(768)  # Ensure dimensions match
+        index = faiss_cpu.IndexFlatL2(384)  # Ensure dimensions match
         index.add(embeddings)
 
         print(f"✅ FAISS index rebuilt with {len(embeddings)} articles.")

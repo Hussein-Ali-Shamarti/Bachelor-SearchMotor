@@ -9,11 +9,12 @@ from sqlalchemy.orm import sessionmaker
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 from models import Article, Conference
 from tqdm import tqdm
+import gzip
 
 sys.stdout.reconfigure(encoding='utf-8')
 
 # Set the DATABASE_URL to point to your SQLite DB in the Backend folder
-DATABASE_URL = "sqlite:///./Backend/HybridSearch.db"
+DATABASE_URL = "sqlite:///./Backend/database.db"
 
 # Connect to SQLite
 def connect_to_sqlite():
@@ -22,8 +23,8 @@ def connect_to_sqlite():
     return Session()
 
 # Base path to the embedded folder
-EMBEDDED_FOLDER = r"C:/My Web Sites/data/embedded"
-PDFTEXTS_FOLDER = r"C:/My Web Sites/data/pdftexts"
+EMBEDDED_FOLDER = r"C:\My Web Sites\data\embedded"
+PDFTEXTS_FOLDER = r"C:\My Web Sites\data\pdftexts"
 
 def extract_dates(dates_text):
     # Use regex to extract two dates from the format: "from June 19, 2011 to June 24, 2011"
@@ -35,13 +36,13 @@ def extract_dates(dates_text):
         return "Unknown", "Unknown"
 
 def get_article_data_from_txt(file_path):
-    """Extracts article metadata from a .txt file"""
+    """Extracts article metadata from a .txt file and loads the compressed pdf text as binary data"""
     article_data = {
         "title": "",
         "author": [],
         "publication_date": "",
         "pdf_url": "",
-        "pdf_texts": "",
+        "pdf_texts": None,  # Will hold binary (compressed) data
         "embeddings": None,
         "start_date": "Unknown",
         "end_date": "Unknown",
@@ -67,13 +68,7 @@ def get_article_data_from_txt(file_path):
         elif line.startswith("conference_title:"):
             article_data["conference_title"] = line.split(":", 1)[1].strip()
         elif line.startswith("pdf_url:"):
-            # Extract the pdf_url from the file
             pdf_url = line.split(":", 1)[1].strip()
-            # If the url starts with the duplicated prefix, remove it.
-            # For example, this converts:
-            # "http://www.thinkmind.orghttps://www.thinkmind.org/articles/access_2011_1_10_40018.pdf"
-            # into:
-            # "https://www.thinkmind.org/articles/access_2011_1_10_40018.pdf"
             if pdf_url.startswith("http://www.thinkmind.org"):
                 pdf_url = pdf_url.replace("http://www.thinkmind.org", "", 1)
             article_data["pdf_url"] = pdf_url
@@ -87,33 +82,37 @@ def get_article_data_from_txt(file_path):
             dates_text = line.split(":", 1)[1].strip()
             article_data["start_date"], article_data["end_date"] = extract_dates(dates_text)
 
-    # Extract base filename
+    # Extract base filename (without extension) from the metadata file
     article_base_name = os.path.splitext(os.path.basename(file_path))[0]
 
-    # Load full text
-    pdf_text_path = os.path.join(PDFTEXTS_FOLDER, f"{article_base_name}.txt")
+    # Build the expected file name in the pdftexts folder (now expecting '.txt.gz')
+    pdf_text_path = os.path.join(PDFTEXTS_FOLDER, f"{article_base_name}.txt.gz")
     if os.path.exists(pdf_text_path):
         try:
-            with open(pdf_text_path, 'r', encoding='utf-8', errors='replace') as pdf_file:
+            with open(pdf_text_path, 'rb') as pdf_file:
+                # Read the compressed binary data to store in the BLOB column
                 article_data["pdf_texts"] = pdf_file.read()
         except Exception as e:
-            print(f"Error reading full text for {article_data['title']}: {e}")
-            article_data["pdf_texts"] = ""
+            print(f"Error reading compressed full text for {article_data['title']}: {e}")
+            article_data["pdf_texts"] = None
     else:
-        print(f"No full text found for {article_data['title']}")
+        print(f"No compressed full text found for {article_data['title']} (expected at {pdf_text_path})")
 
-    # Load embedding
+    # Load embedding data
     npy_file_path = os.path.join(EMBEDDED_FOLDER, f"{article_base_name}.npy")
     if os.path.exists(npy_file_path):
         try:
             embedding = np.load(npy_file_path)
-            article_data["embeddings"] = embedding.tobytes()  # Store as list for pgvector
+            article_data["embeddings"] = embedding.tobytes()  # Storing as binary for pgvector
         except Exception as e:
             print(f"Error loading embedding for {article_data['title']}: {e}")
             article_data["embeddings"] = None
     else:
         print(f"No embedding found for {article_data['title']}")
+        
     return article_data
+
+
 
 def insert_article_info(article_data, session):
     try:

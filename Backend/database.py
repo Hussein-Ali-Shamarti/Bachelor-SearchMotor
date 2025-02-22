@@ -5,7 +5,7 @@ from models import Base
 
 # Get absolute path to ensure correct database location
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
-DATABASE_PATH = os.path.join(BASE_DIR, "HybridSearch.db")
+DATABASE_PATH = os.path.join(BASE_DIR, "database.db")
 DATABASE_URL = f"sqlite:///{DATABASE_PATH}"  # Triple slashes are needed for SQLite
 
 # Create database engine
