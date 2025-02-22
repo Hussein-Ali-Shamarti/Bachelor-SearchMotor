@@ -12,6 +12,7 @@ import os
 import io
 import sys
 import traceback
+import gzip
 
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
 sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding="utf-8")
@@ -21,7 +22,7 @@ app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}}, supports_credentials=True)
 
 # Load embedding model once
-model = SentenceTransformer("sentence-transformers/all-mpnet-base-v2")  # ✅ Now generates 768D embeddings
+model = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")  # ✅ Now generates 768D embeddings
 
 # Load or rebuild FAISS index when the app starts
 index, ids = rebuild_faiss_index()
@@ -52,7 +53,7 @@ def ai_search():
         query_embedding = np.array(data["embedding"], dtype='float32').reshape(1, -1)
         print("✅ Embedding Shape:", query_embedding.shape)
 
-        if query_embedding.shape[1] != 768:
+        if query_embedding.shape[1] != 384:
             print(f"❌ Error: Invalid embedding dimension {query_embedding.shape[1]}")
             return jsonify({"error": f"Invalid embedding dimension: {query_embedding.shape[1]}"}), 400
 
@@ -97,7 +98,63 @@ def ai_search():
         traceback.print_exc()  # Logs full error traceback
         return jsonify({"error": "Internal server error", "details": str(e)}), 500
 
+@app.route("/article-text/<int:article_id>", methods=["GET"])
+def get_article_text(article_id):
+    try:
+        with SessionLocal() as session:
+            article = session.query(Article).filter_by(id=article_id).first()
+            if article is None:
+                return jsonify({"error": "Article not found"}), 404
+            if not article.pdf_texts:
+                return jsonify({"error": "No PDF text available"}), 404
 
+            # Decompress the stored gzip binary data
+            import gzip
+            decompressed_text = gzip.decompress(article.pdf_texts).decode("utf-8")
+            return jsonify({"text": decompressed_text})
+    except Exception as e:
+        print("Error retrieving article text:", e)
+        return jsonify({"error": "Internal server error"}), 500
+    
+@app.route("/article-summary/<int:article_id>", methods=["GET"])
+def get_article_summary(article_id):
+    try:
+        with SessionLocal() as session:
+            article = session.query(Article).filter_by(id=article_id).first()
+            if article is None:
+                return jsonify({"error": "Article not found"}), 404
+            if not article.pdf_texts:
+                return jsonify({"error": "No PDF text available"}), 404
+
+            # Decompress the stored gzip binary data
+            full_text = gzip.decompress(article.pdf_texts).decode("utf-8")
+
+            # Create a prompt for summarization
+            prompt = f"Summarize the following text:\n\n{full_text}"
+
+            # Call Ollama's summarization API (adjust URL/model as needed)
+            response = requests.post(
+                "http://127.0.0.1:11434/api/generate",
+                json={"model": "mistral", "prompt": prompt},
+                stream=True,
+            )
+            summary = ""
+            if response.status_code == 200:
+                for line in response.iter_lines():
+                    if line:
+                        response_data = json.loads(line.decode("utf-8"))
+                        summary += response_data.get("response", "")
+                        if response_data.get("done", False):
+                            break
+            else:
+                summary = "Failed to generate summary."
+
+            return jsonify({"summary": summary})
+    except Exception as e:
+        print("Error generating article summary:", e)
+        traceback.print_exc()
+        return jsonify({"error": "Internal server error", "details": str(e)}), 500
+    
 # Chatbot
 @app.route("/chat", methods=["POST"])
 def chat():

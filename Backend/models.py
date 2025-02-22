@@ -27,7 +27,7 @@ class Article(Base):
     author = Column(String, nullable=True)
     publication_date = Column(String, nullable=True)
     pdf_url = Column(String, nullable=True)
-    pdf_texts = Column(TEXT, nullable=True) 
+    pdf_texts = Column(BLOB, nullable=True) 
     keywords = Column(JSON, nullable=True)  # Changed from ARRAY to JSON
     abstract = Column(String, nullable=True)
     location = Column(String, nullable=True)
