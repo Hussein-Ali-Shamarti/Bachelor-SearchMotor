@@ -22,12 +22,12 @@ app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}}, supports_credentials=True)
 
 # Load embedding model once
-model = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")  # ✅ Now generates 768D embeddings
+model = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")  # Generates 384 dimension embeddings
 
 # Load or rebuild FAISS index when the app starts
 index, ids = rebuild_faiss_index()
 if index is None:
-    print("⚠️ FAISS index is empty! No embeddings found in the database.")
+    print("FAISS index is empty! No embeddings found in the database.")
 
 # Generate embedding
 @app.route("/generate-embedding", methods=["POST"])
@@ -44,17 +44,17 @@ def generate_embedding():
 def ai_search():
     try:
         data = request.get_json()
-        print("🔍 Received JSON:", data)
+        print("Received JSON:", data)
 
         if "embedding" not in data:
-            print("❌ Error: Missing 'embedding' key")
+            print("Error: Missing 'embedding' key")
             return jsonify({"error": "Missing 'embedding' key"}), 400
 
         query_embedding = np.array(data["embedding"], dtype='float32').reshape(1, -1)
-        print("✅ Embedding Shape:", query_embedding.shape)
+        print("Embedding Shape:", query_embedding.shape)
 
         if query_embedding.shape[1] != 384:
-            print(f"❌ Error: Invalid embedding dimension {query_embedding.shape[1]}")
+            print(f"Error: Invalid embedding dimension {query_embedding.shape[1]}")
             return jsonify({"error": f"Invalid embedding dimension: {query_embedding.shape[1]}"}), 400
 
         k = data.get("k", 5)
@@ -62,8 +62,8 @@ def ai_search():
             return jsonify({"error": "No articles found in FAISS index"}), 404
 
         distances, indices = index.search(query_embedding, k)
-        print(f"📌 FAISS Search Indices: {indices}")
-        print(f"🔢 Corresponding Article IDs: {[ids[idx] for idx in indices[0] if idx < len(ids)]}")
+        print(f"FAISS Search Indices: {indices}")
+        print(f"Corresponding Article IDs: {[ids[idx] for idx in indices[0] if idx < len(ids)]}")
 
         with SessionLocal() as session:
             results = []
@@ -71,7 +71,7 @@ def ai_search():
                 if idx < len(ids):
                     article = session.query(Article).filter_by(id=ids[idx]).first()
                     if article is None:
-                        print(f"⚠️ No article found for FAISS ID: {ids[idx]}")
+                        print(f"No article found for FAISS ID: {ids[idx]}")
                         continue
 
                     results.append({
@@ -83,17 +83,17 @@ def ai_search():
                         "pdf_url": article.pdf_url,
                         "keywords": article.keywords,
                         "isbn": article.isbn,
-                        "distance": float(distances[0][i])  # ✅ Use `i` instead of `idx`
+                        "distance": float(distances[0][i])
                     })
 
         if not results:
-            print("⚠️ No valid articles found in database!")
+            print("No valid articles found in database!")
             return jsonify({"error": "No articles found for search results"}), 404
 
         return jsonify(results)
 
     except Exception as e:
-        print("❌ Exception in ai_search:", str(e))
+        print("Exception in ai_search:", str(e))
         import traceback
         traceback.print_exc()  # Logs full error traceback
         return jsonify({"error": "Internal server error", "details": str(e)}), 500
@@ -196,13 +196,13 @@ def chat():
         return jsonify({"response": ai_response, "history": conversation_history})
 
     except Exception as e:
-        print("❌ Error in /chat:", str(e))
+        print("Error in /chat:", str(e))
         traceback.print_exc()  # Logs full error details
         return jsonify({"error": "Failed to process chat request"}), 500
 
 
 # Run Flask
 if __name__ == "__main__":
-    print("🚀 Running Flask server on port 5001...")
+    print("Running Flask server on port 5001...")
     print(app.url_map)
     app.run(debug=True, host="0.0.0.0", port=5001)

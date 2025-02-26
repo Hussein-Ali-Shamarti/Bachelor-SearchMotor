@@ -1,7 +1,6 @@
 # Bachelor-SearchMotor
 
 This project is a search engine that uses AI to generate summaries of articles. It consists of a Flask backend, an Ollama AI model, and a React frontend.
-This assumes you have a Neon PostgreSQL database with pgvector setup with correct data.
 ## Getting Started
 
 ### Prerequisites
@@ -17,10 +16,11 @@ This assumes you have a Neon PostgreSQL database with pgvector setup with correc
    ```bash
    git clone https://github.com/yourusername/Bachelor-SearchMotor.git
    cd Bachelor-SearchMotor
+  
 
 **open terminal 1**
    cd backend
-pip install flask flask-cors sqlalchemy requests
+   pip install flask flask-cors sqlalchemy requests
 python app.py
 
 **open terminal 2**
@@ -36,5 +36,5 @@ npm start
 Bachelor-SearchMotor/
 │── backend/        # Flask API & database
 │── frontend/       # React app
-│── Items.db        # SQLite database
+│── database.db        # SQLite database
 │── README.md       # This guide
