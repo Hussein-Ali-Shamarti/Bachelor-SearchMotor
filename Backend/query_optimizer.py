@@ -21,10 +21,10 @@ def rewrite_query(user_query):
             return optimized_query
         else:
             print("Error: Unexpected response format:", response)
-            return "⚠️ Failed to generate optimized query."
+            return "Failed to generate optimized query."
     except Exception as e:
         print(f"Error in query rewriting: {e}")
-        return "⚠️ An error occurred while rewriting the query."
+        return "An error occurred while rewriting the query."
 
 # Test it
 if __name__ == "__main__":
