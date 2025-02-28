@@ -1,32 +1,30 @@
-import ollama
+import openai
+
+# Initialize the OpenAI client with your API key
+openai.api_key = 'your_openai_api_key_here'
 
 def rewrite_query(user_query):
     """
-    Uses a local AI model (Mistral) to rewrite search queries for better accuracy.
+    Uses OpenAI's GPT model to rewrite search queries for better accuracy.
     """
     try:
-        # Call Ollama's chat model for query optimization
-        response = ollama.chat(
-            model="mistral", 
-            messages=[
-                {"role": "system", "content": "You are an AI that rewrites search queries to improve database search accuracy. Only return ONE optimized query without numbering."},
-                {"role": "user", "content": f"Rewrite the search query: {user_query}"}
-            ]
+        # Call OpenAI's GPT model for query optimization
+        response = openai.Completion.create(
+            model="gpt-4",  # Choose the model based on availability or preferences
+            prompt=f"Rewrite the following search query for better accuracy: {user_query}",
+            max_tokens=100,  # Limit the output size to a reasonable length
+            temperature=0.7  # Controls randomness; you can adjust this based on your needs
         )
 
-        # Ensure the response contains the expected data
-        if 'message' in response and 'content' in response['message']:
-            # Extract the optimized query (first line of content)
-            optimized_query = response['message']['content'].strip().split("\n")[0]
-            return optimized_query
-        else:
-            print("Error: Unexpected response format:", response)
-            return "Failed to generate optimized query."
+        # Extract the optimized query from the response
+        optimized_query = response.choices[0].text.strip()
+        return optimized_query
+
     except Exception as e:
         print(f"Error in query rewriting: {e}")
         return "An error occurred while rewriting the query."
 
-# Test it
+# Test the function
 if __name__ == "__main__":
     test_query = "AI in healthcare"
     optimized_query = rewrite_query(test_query)

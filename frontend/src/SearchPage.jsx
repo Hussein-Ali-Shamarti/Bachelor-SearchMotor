@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { ClipLoader } from "react-spinners";
-import './SearchPage.css'; 
+import "./SearchPage.css";
 
 const SearchPage = () => {
   const [query, setQuery] = useState("");
@@ -10,75 +10,102 @@ const SearchPage = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [selectedArticle, setSelectedArticle] = useState(null);
-  const [articleSummary, setArticleSummary] = useState(""); // Holds the summary text
+  const [articleSummary, setArticleSummary] = useState("");
   const [summaryLoading, setSummaryLoading] = useState(false);
 
+  // Generate embedding for the search query
   const generateEmbedding = async (query) => {
     try {
-      const response = await axios.post("http://127.0.0.1:5001/generate-embedding", { text: query });
+      const response = await axios.post(
+        "http://127.0.0.1:5001/generate-embedding", // Corrected URL
+        { text: query }
+      );
       return response.data.embedding;
     } catch (error) {
       console.error("Embedding API Error:", error);
-      return [];
+      setError("Failed to generate embedding. Please try again.");
+      return null;
     }
   };
 
-  // New function to fetch article summary from our backend endpoint
+  // Fetch the summary of the selected article
   const fetchArticleSummary = async (articleId) => {
     try {
       setSummaryLoading(true);
-      const response = await axios.get(`http://127.0.0.1:5001/article-summary/${articleId}`);
-      if (response.data.summary) {
+      console.log(`Fetching summary for article ID: ${articleId}`);
+
+      const response = await axios.get(
+        `http://127.0.0.1:5001/article-summary/${articleId}` // Correct URL here
+      );
+
+      // Debugging: Log the response from the server
+      console.log("Summary Response:", response.data);
+
+      if (
+        response.data.summary &&
+        response.data.summary !== "Failed to generate summary."
+      ) {
         setArticleSummary(response.data.summary);
+      } else {
+        setArticleSummary("Failed to generate summary.");
       }
     } catch (err) {
-      console.error("Failed to fetch article summary", err);
+      console.error("Failed to fetch article summary:", err);
+      setArticleSummary("Error fetching summary.");
     } finally {
       setSummaryLoading(false);
     }
   };
 
+  // Handle the search functionality
   const handleSearch = async () => {
+    if (!query.trim()) {
+      setError("Please enter a search query.");
+      return;
+    }
+
     setLoading(true);
     setError("");
     setResults([]);
     setVisibleResults(5);
     setSelectedArticle(null);
     setArticleSummary("");
-    
+
     const embedding = await generateEmbedding(query);
+    if (!embedding) {
+      setLoading(false);
+      return;
+    }
 
     try {
       const response = await axios.post("http://127.0.0.1:5001/ai-search", {
-        embedding: embedding,
-        k: 50, 
+        // Corrected URL
+        embedding,
+        k: 50
       });
 
       if (response.data.error) {
         setError(response.data.error);
-        return;
-      }
-
-      if (Array.isArray(response.data) && response.data.length > 0) {
+      } else if (Array.isArray(response.data) && response.data.length > 0) {
         setResults(response.data);
       } else {
         setError("No relevant articles found.");
       }
     } catch (err) {
-      setError("Failed to fetch results. Make sure Flask is running.");
-      console.error(err);
+      setError("Failed to fetch results. Ensure Flask server is running.");
+      console.error("Search API Error:", err);
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
-  const loadMoreResults = () => {
-    setVisibleResults((prev) => prev + 10);
-  };
+  // Load more results on button click
+  const loadMoreResults = () => setVisibleResults((prev) => prev + 10);
 
   return (
     <div className="search-page-container">
       <h1>AI-Powered Search</h1>
-  
+
       {/* Search Input */}
       <div className="search-section">
         <input
@@ -92,77 +119,120 @@ const SearchPage = () => {
           Search
         </button>
       </div>
-  
+
       {/* Loading Spinner */}
       {loading && (
         <div className="loading-spinner">
           <ClipLoader size={50} color={"#123abc"} loading={loading} />
         </div>
       )}
-  
+
       {/* Error Message */}
       {error && <p className="error-message">{error}</p>}
-  
+
       {/* Results & Selected Article Side by Side */}
       <div className="results-container">
         {/* Scrollable Results List */}
         <div className="results-list">
-          {results.length === 0 ? (
+          {results.length === 0 && !loading ? (
             <p>No results found.</p>
           ) : (
             <ul>
-              {results.map((article, index) => (
+              {results.slice(0, visibleResults).map((article) => (
                 <li
-                  key={index}
-                  className="result-item"
+                  key={article.id}
+                  className={`result-item ${
+                    selectedArticle?.id === article.id ? "selected" : ""
+                  }`}
                   onClick={() => {
-                    setSelectedArticle(article);
-                    setArticleSummary(""); // Clear any previous summary
-                    // Immediately fetch the summary when the article is selected
-                    fetchArticleSummary(article.id);
+                    if (selectedArticle?.id !== article.id) {
+                      setSelectedArticle(article);
+                      setArticleSummary(""); // Clear previous summary
+                      fetchArticleSummary(article.id);
+                    }
                   }}
                 >
                   <h4>{article.title || "No Title Available"}</h4>
-                  <p><strong>Author(s):</strong> {article.author || "Unknown"}</p>
-                  <p><strong>Abstract:</strong> {article.abstract.substring(0, 100)}...</p>
+                  <p>
+                    <strong>Author(s):</strong> {article.author || "Unknown"}
+                  </p>
+                  <p>
+                    <strong>Abstract:</strong>{" "}
+                    {article.abstract
+                      ? article.abstract.substring(0, 100) + "..."
+                      : "No abstract available."}
+                  </p>
                 </li>
               ))}
             </ul>
           )}
+
+          {/* Load More Button */}
+          {results.length > visibleResults && (
+            <button onClick={loadMoreResults} className="load-more-button">
+              Load More
+            </button>
+          )}
         </div>
-  
-        {/* Article Details (Shown when selected) */}
+
+        {/* Article Details */}
         {selectedArticle && (
           <div className="selected-article-container">
             <h2>Article Details</h2>
-            <p><strong>Title:</strong> {selectedArticle.title || "N/A"}</p>
-            <p><strong>ISBN:</strong> {selectedArticle.isbn || "N/A"}</p>
-            <p><strong>Author(s):</strong> {selectedArticle.author || "Unknown"}</p>
-            <p><strong>Publication Date:</strong> {selectedArticle.publication_date || "N/A"}</p>
+            <p>
+              <strong>Title:</strong> {selectedArticle.title || "N/A"}
+            </p>
+            <p>
+              <strong>ISBN:</strong> {selectedArticle.isbn || "N/A"}
+            </p>
+            <p>
+              <strong>Author(s):</strong> {selectedArticle.author || "Unknown"}
+            </p>
+            <p>
+              <strong>Publication Date:</strong>{" "}
+              {selectedArticle.publication_date || "N/A"}
+            </p>
             {selectedArticle.pdf_url && (
               <p>
                 <strong>PDF URL:</strong>{" "}
-                <a href={selectedArticle.pdf_url} target="_blank" rel="noopener noreferrer">
+                <a
+                  href={selectedArticle.pdf_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   View PDF
                 </a>
               </p>
             )}
-            <p><strong>Keywords:</strong> {selectedArticle.keywords ? selectedArticle.keywords.join(", ") : "None"}</p>
-            <p><strong>Abstract:</strong> {selectedArticle.abstract}</p>
-  
-            {/* Display the summary area */}
+            <p>
+              <strong>Keywords:</strong>{" "}
+              {selectedArticle.keywords
+                ? selectedArticle.keywords.join(", ")
+                : "None"}
+            </p>
+            <p>
+              <strong>Abstract:</strong>{" "}
+              {selectedArticle.abstract || "No abstract available."}
+            </p>
+
+            {/* Article Summary */}
             <div className="article-summary">
               <h3>Summary</h3>
               {summaryLoading ? (
-                <ClipLoader size={30} color={"#123abc"} loading={summaryLoading} />
-              ) : articleSummary ? (
-                <p>{articleSummary}</p>
+                <ClipLoader
+                  size={30}
+                  color={"#123abc"}
+                  loading={summaryLoading}
+                />
               ) : (
-                <p>No summary available.</p>
+                <p>{articleSummary || "No summary available."}</p>
               )}
             </div>
-  
-            <button onClick={() => setSelectedArticle(null)} className="back-button">
+
+            <button
+              onClick={() => setSelectedArticle(null)}
+              className="back-button"
+            >
               Back to Results
             </button>
           </div>
