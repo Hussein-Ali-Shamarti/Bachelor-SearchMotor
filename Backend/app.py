@@ -242,6 +242,9 @@ def get_article_summary(article_id):
     try:
         print(f"Fetching summary for article ID: {article_id}")
 
+        # Check if the summary should be generated
+        generate_summary = request.args.get("generate", "").lower() == "true"
+
         # Fetch the article from the database
         with SessionLocal() as session:
             article = session.query(Article).filter_by(id=article_id).first()
@@ -271,12 +274,14 @@ def get_article_summary(article_id):
                 print(f"Article {article_id} text is empty")
                 return jsonify({"error": "Article text is empty"}), 400
 
-            # Generate the summary using OpenAI
-            summary = summarize_with_openai(full_text, abstract_length)
+            # Generate the summary using OpenAI only if requested
+            summary = ""
+            if generate_summary:
+                summary = summarize_with_openai(full_text, abstract_length)
 
-            if not summary or summary.strip() == "":
-                print(f"Empty summary returned for article {article_id}")
-                return jsonify({"error": "Failed to generate summary"}), 500
+                if not summary or summary.strip() == "":
+                    print(f"Empty summary returned for article {article_id}")
+                    return jsonify({"error": "Failed to generate summary"}), 500
 
             print(f"Generated summary for article {article_id}, length: {len(summary)} characters")
             return jsonify({"summary": summary})

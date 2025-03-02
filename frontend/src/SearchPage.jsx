@@ -40,7 +40,7 @@ const SearchPage = () => {
       console.log(`Fetching summary for article ID: ${articleId}`);
 
       const response = await axios.get(
-        `${backendUrl}/article-summary/${articleId}`
+        `${backendUrl}/article-summary/${articleId}?generate=true`
       );
 
       console.log("Summary Response:", response.data);
@@ -153,7 +153,6 @@ const SearchPage = () => {
                     if (selectedArticle?.id !== article.id) {
                       setSelectedArticle(article);
                       setArticleSummary(""); // Clear previous summary
-                      fetchArticleSummary(article.id);
                     }
                   }}
                 >
@@ -231,6 +230,15 @@ const SearchPage = () => {
                 />
               ) : (
                 <p>{articleSummary || "No summary available."}</p>
+              )}
+              {/* Show the "Generate Summary" button only if no summary has been generated */}
+              {!articleSummary && !summaryLoading && (
+                <button
+                  onClick={() => fetchArticleSummary(selectedArticle.id)}
+                  className="generate-summary-button"
+                >
+                  Generate Summary
+                </button>
               )}
             </div>
 
