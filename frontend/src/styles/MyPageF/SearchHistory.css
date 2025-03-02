@@ -1,0 +1,35 @@
+.sidebar {
+    position: relative;
+    height: 100vh;      /* Eller en fast høyde du ønsker */
+    background-color: #fff; /* midlertidig bakgrunn */
+    border-right: 1px solid #ccc;
+    padding-top: 0px;
+    padding-bottom: 20px;
+  }
+
+  .Nychat{
+    
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .LeftPil{position: absolute;
+    top: 10px;
+    left: 200px;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .search{
+    position: absolute;
+    top: 15px;
+    left: 50px;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
