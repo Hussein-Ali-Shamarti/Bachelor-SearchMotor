@@ -1,10 +1,3 @@
-import os
-import sys
-import io
-import gzip
-import traceback
-import numpy as np
-import openai
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from dotenv import load_dotenv
@@ -12,8 +5,13 @@ from sentence_transformers import SentenceTransformer
 from database import SessionLocal
 from models import Article
 from faiss_helper import rebuild_faiss_index
-
-os.environ["TOKENIZERS_PARALLELISM"] = "false"
+import os
+import sys
+import io
+import gzip
+import traceback
+import numpy as np
+import openai
 
 # Ensure correct encoding for logs
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
@@ -22,13 +20,14 @@ sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding="utf-8")
 # Load environment variables
 load_dotenv()
 
-# Ensure OPENAI_API_KEY is correctly retrieved
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-if not OPENAI_API_KEY:
-    raise ValueError("OpenAI API key is missing! Check your .env file.")
+# Validate required environment variables
+REQUIRED_ENV_VARS = ["OPENAI_API_KEY"]
+for var in REQUIRED_ENV_VARS:
+    if not os.getenv(var):
+        raise ValueError(f"Missing required environment variable: {var}")
 
 # Set the OpenAI API key
-openai.api_key = OPENAI_API_KEY
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
 # Initialize Flask app
 app = Flask(__name__)
@@ -43,66 +42,85 @@ if INDEX is None:
     print("FAISS index is empty! No embeddings found in the database.")
 
 # Utility Functions
-def split_text_into_chunks(text, max_tokens=3000):
-    "Split text into smaller chunks to fit OpenAI's token limit."
-    words = text.split()
+def split_text_into_chunks(text, max_completion_tokens=3000):
+    """Split text into smaller chunks based on sentences to avoid cutting off mid-sentence."""
+    sentences = text.split('. ')  # Split by sentences
     chunks = []
     current_chunk = []
 
-    for word in words:
-        current_chunk.append(word)
-        if len(current_chunk) * 2 > max_tokens:  # Rough estimate for tokens
-            chunks.append(' '.join(current_chunk))
+    for sentence in sentences:
+        current_chunk.append(sentence)
+        # Rough estimate of tokens (1 token ≈ 4 characters)
+        if len(' '.join(current_chunk)) * 4 > max_completion_tokens:
+            chunks.append('. '.join(current_chunk) + '.')
             current_chunk = []
 
     if current_chunk:
-        chunks.append(' '.join(current_chunk))
+        chunks.append('. '.join(current_chunk) + '.')
 
     return chunks
 
-def summarize_with_openai(text):
-    "Summarize a large text using OpenAI's API."
+def summarize_with_openai(text, abstract_length):
+    """Summarize a large text using OpenAI's API with strict length and sentence control."""
     try:
         print("Starting summarization process...")
+
+        # Set the maximum number of sentences for the summary
+        max_sentences_summary = min(3, abstract_length)  # Ensure summary has <= 3 sentences
+
+        # Split text into chunks (if necessary)
         chunks = split_text_into_chunks(text)
         summary_parts = []
 
         for chunk in chunks:
             try:
-                # Shorten max_tokens even more for minimal token usage
-                response = openai.ChatCompletion.create(
-                    model="gpt-4",  # Using the chat model
+                # Calculate max_tokens dynamically (e.g., 20% of the abstract length)
+                max_completion_tokens = max(50, int(abstract_length * 0.2))  # Ensure a minimum of 50 tokens
+
+                # Use the synchronous `create` method
+                response = openai.chat.completions.create(
+                    model="gpt-4",  # Using GPT-4 for better quality
                     messages=[
-                        {"role": "system", "content": "You are a concise assistant."},
-                        {"role": "user", "content": 
-                            "Provide a very brief summary of the following text, highlighting only key points and maintaining brevity:\n\n" + chunk}
+                        {
+                            "role": "system",
+                            "content": "You are a highly skilled assistant that summarizes academic and technical content concisely and accurately."
+                        },
+                        {
+                            "role": "user",
+                            "content": f"""
+                                Summarize the following text in {max_sentences_summary} sentences or fewer. Focus on the main ideas, key concepts, and conclusions. 
+                                Ensure the summary is clear, concise, and free of irrelevant details. Here is the text:
+                                {chunk}
+                            """
+                        }
                     ],
-                    max_tokens=50,  # Further reduced for a more concise summary
-                    temperature=0.3  # Keep it focused and concise
+                    max_tokens=max_completion_tokens,  # Dynamically set max_tokens
+                    temperature=0.2,  # Keep it focused and deterministic
+                    stop=["\n"]  # Stop at the end of a sentence
                 )
 
                 print(f"OpenAI Response for chunk (length {len(chunk)}): {response}")
 
                 # Check if the response is valid
-                if 'choices' not in response or len(response.choices) == 0:
+                if not response.choices or len(response.choices) == 0:
                     print(f"OpenAI response is missing choices: {response}")
                     raise ValueError("No summary generated by OpenAI.")
 
-                summary_parts.append(response.choices[0].message['content'].strip())
+                summary = response.choices[0].message.content.strip()
+                if not summary.endswith('.'):  # Ensure the summary ends with a full stop
+                    summary += '.'
 
-            except openai.error.RateLimitError as e:
+                summary_parts.append(summary)
+
+            except openai.RateLimitError as e:
                 print(f"Rate limit error: {e}")
                 return "Rate limit exceeded. Please try again later."
 
-            except openai.error.AuthenticationError as e:
+            except openai.AuthenticationError as e:
                 print(f"Authentication error: {e}")
                 return "Authentication failed. Please check your API key."
 
-            except openai.error.InvalidRequestError as e:
-                print(f"Invalid request error: {e}")
-                return "Invalid request. Please check the input text and parameters."
-
-            except openai.error.OpenAIError as e:
+            except openai.OpenAIError as e:
                 print(f"OpenAI API error: {str(e)}")
                 return "Failed to generate summary due to an API error."
 
@@ -110,19 +128,35 @@ def summarize_with_openai(text):
                 print(f"Error processing chunk: {e}")
                 return "Failed to generate summary due to an error."
 
+        # Combine and refine the summary parts
         final_summary = " ".join(summary_parts)
+
+        # Ensure the summary doesn't exceed the abstract length
+        summary_words = final_summary.split()
+        if len(summary_words) > abstract_length:
+            # Truncate at the last complete sentence
+            truncated_summary = []
+            word_count = 0
+            for sentence in final_summary.split('. '):  # Split by sentences
+                sentence_words = sentence.split()
+                if word_count + len(sentence_words) <= abstract_length:
+                    truncated_summary.append(sentence)
+                    word_count += len(sentence_words)
+                else:
+                    break
+            final_summary = ". ".join(truncated_summary) + "."  # Rejoin sentences
+
         print(f"Summary generated successfully. Length: {len(final_summary)} characters.")
         return final_summary
 
     except Exception as e:
         print(f"Unexpected error in summarize_with_openai: {str(e)}")
         return "Failed to generate summary."
-
-
+    
 # Routes
 @app.route("/generate-embedding", methods=["POST"])
 def generate_embedding():
-    "Generate text embedding using the SentenceTransformer model."
+    """Generate text embedding using the SentenceTransformer model."""
     data = request.get_json()
     text = data.get("text", "").strip()
     if not text:
@@ -134,10 +168,9 @@ def generate_embedding():
         print(f"Error generating embedding: {str(e)}")
         return jsonify({"error": "Failed to generate embedding", "details": str(e)}), 500
 
-
 @app.route("/ai-search", methods=["POST"])
 def ai_search():
-    "Search articles based on the provided embedding."
+    """Search articles based on the provided embedding."""
     try:
         data = request.get_json()
         print("Received search query:", data)
@@ -185,10 +218,9 @@ def ai_search():
         traceback.print_exc()
         return jsonify({"error": "Internal server error", "details": str(e)}), 500
 
-
 @app.route("/article-text/<int:article_id>", methods=["GET"])
 def get_article_text(article_id):
-    "Retrieve the full text of an article by its ID."
+    """Retrieve the full text of an article by its ID."""
     try:
         with SessionLocal() as session:
             article = session.query(Article).filter_by(id=article_id).first()
@@ -204,12 +236,14 @@ def get_article_text(article_id):
         traceback.print_exc()
         return jsonify({"error": "Internal server error"}), 500
 
-
 @app.route("/article-summary/<int:article_id>", methods=["GET"])
 def get_article_summary(article_id):
-    "Generate and return a summary of an article's text."
+    """Generate and return a summary of an article's text."""
     try:
         print(f"Fetching summary for article ID: {article_id}")
+
+        # Check if the summary should be generated
+        generate_summary = request.args.get("generate", "").lower() == "true"
 
         # Fetch the article from the database
         with SessionLocal() as session:
@@ -222,6 +256,16 @@ def get_article_summary(article_id):
                 print(f"No PDF text available for article {article_id}")
                 return jsonify({"error": "No PDF text available"}), 404
 
+            # Fetch the abstract from the database
+            abstract = article.abstract
+            if not abstract:
+                print(f"No abstract available for article {article_id}")
+                return jsonify({"error": "No abstract available"}), 404
+
+            # Calculate the length of the abstract (in words)
+            abstract_length = len(abstract.split())
+
+            # Fetch the full text of the article
             full_text = gzip.decompress(article.pdf_texts).decode("utf-8")
             print(f"Fetched article text for ID {article_id}, length: {len(full_text)} characters")
 
@@ -230,12 +274,14 @@ def get_article_summary(article_id):
                 print(f"Article {article_id} text is empty")
                 return jsonify({"error": "Article text is empty"}), 400
 
-            # Generate the summary using OpenAI
-            summary = summarize_with_openai(full_text)
+            # Generate the summary using OpenAI only if requested
+            summary = ""
+            if generate_summary:
+                summary = summarize_with_openai(full_text, abstract_length)
 
-            if not summary or summary.strip() == "":
-                print(f"Empty summary returned for article {article_id}")
-                return jsonify({"error": "Failed to generate summary"}), 500
+                if not summary or summary.strip() == "":
+                    print(f"Empty summary returned for article {article_id}")
+                    return jsonify({"error": "Failed to generate summary"}), 500
 
             print(f"Generated summary for article {article_id}, length: {len(summary)} characters")
             return jsonify({"summary": summary})
@@ -247,7 +293,6 @@ def get_article_summary(article_id):
         print("Error generating article summary:", str(e))
         traceback.print_exc()
         return jsonify({"error": "Internal server error", "details": str(e)}), 500
-
 
 # Run Flask
 if __name__ == "__main__":
