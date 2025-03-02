@@ -13,17 +13,22 @@ const SearchPage = () => {
   const [articleSummary, setArticleSummary] = useState("");
   const [summaryLoading, setSummaryLoading] = useState(false);
 
+  // Backend URL from environment variable
+  const backendUrl =
+    process.env.REACT_APP_BACKEND_URL || "http://127.0.0.1:5001";
+
   // Generate embedding for the search query
   const generateEmbedding = async (query) => {
     try {
-      const response = await axios.post(
-        "http://127.0.0.1:5001/generate-embedding", // Corrected URL
-        { text: query }
-      );
+      const response = await axios.post(`${backendUrl}/generate-embedding`, {
+        text: query
+      });
       return response.data.embedding;
     } catch (error) {
       console.error("Embedding API Error:", error);
-      setError("Failed to generate embedding. Please try again.");
+      setError(
+        "Failed to generate embedding. Please check your connection or try again later."
+      );
       return null;
     }
   };
@@ -35,10 +40,9 @@ const SearchPage = () => {
       console.log(`Fetching summary for article ID: ${articleId}`);
 
       const response = await axios.get(
-        `http://127.0.0.1:5001/article-summary/${articleId}` // Correct URL here
+        `${backendUrl}/article-summary/${articleId}`
       );
 
-      // Debugging: Log the response from the server
       console.log("Summary Response:", response.data);
 
       if (
@@ -51,7 +55,7 @@ const SearchPage = () => {
       }
     } catch (err) {
       console.error("Failed to fetch article summary:", err);
-      setArticleSummary("Error fetching summary.");
+      setArticleSummary("Error fetching summary. Please try again.");
     } finally {
       setSummaryLoading(false);
     }
@@ -78,8 +82,7 @@ const SearchPage = () => {
     }
 
     try {
-      const response = await axios.post("http://127.0.0.1:5001/ai-search", {
-        // Corrected URL
+      const response = await axios.post(`${backendUrl}/ai-search`, {
         embedding,
         k: 50
       });
@@ -92,7 +95,9 @@ const SearchPage = () => {
         setError("No relevant articles found.");
       }
     } catch (err) {
-      setError("Failed to fetch results. Ensure Flask server is running.");
+      setError(
+        "Failed to fetch results. Ensure the backend server is running."
+      );
       console.error("Search API Error:", err);
     } finally {
       setLoading(false);
