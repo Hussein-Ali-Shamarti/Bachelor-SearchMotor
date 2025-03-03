@@ -4,8 +4,11 @@ import { ClipLoader } from "react-spinners";
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 import "./SearchPage.css";
 =======
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 =======
@@ -212,8 +215,16 @@ const fetchArticleSummary = async (articleId) => {
     }
   };
 
+  // Function to handle pressing Enter key
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      handleSearch();
+    }
+  };
+
   return (
     <div className="search-page-container">
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
@@ -221,6 +232,8 @@ const fetchArticleSummary = async (articleId) => {
 
       {/* Single Search Input */}
 =======
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 =======
