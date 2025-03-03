@@ -2,8 +2,11 @@ import React, { useState } from "react";
 import axios from "axios";
 import { ClipLoader } from "react-spinners";
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 import "./SearchPage.css";
 =======
+=======
+>>>>>>> Stashed changes
 import Enter from "./Pictures-icones/Eenter.svg";
 import './SearchPage.css'; 
 >>>>>>> Stashed changes
@@ -192,13 +195,23 @@ const fetchArticleSummary = async (articleId) => {
     }
   };
 
+  // Function to handle pressing Enter key
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      handleSearch();
+    }
+  };
+
   return (
     <div className="search-page-container">
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
       <h1>AI-Powered Search</h1>
 
       {/* Single Search Input */}
 =======
+=======
+>>>>>>> Stashed changes
       
   
       {/* Search Input */}
