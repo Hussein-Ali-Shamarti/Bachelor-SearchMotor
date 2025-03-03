@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { ClipLoader } from "react-spinners";
+<<<<<<< Updated upstream
 import "./SearchPage.css";
+=======
+import Enter from "./Pictures-icones/Eenter.svg";
+import './SearchPage.css'; 
+>>>>>>> Stashed changes
 
 const SearchPage = () => {
   const [query, setQuery] = useState("");
@@ -180,22 +185,40 @@ const fetchArticleSummary = async (articleId) => {
     }
   };
 
+  // Function to handle pressing Enter key
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      handleSearch();
+    }
+  };
+
   return (
     <div className="search-page-container">
+<<<<<<< Updated upstream
       <h1>AI-Powered Search</h1>
 
       {/* Single Search Input */}
+=======
+      
+  
+      {/* Search Input */}
+>>>>>>> Stashed changes
       <div className="search-section">
-        <input
-          type="text"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          placeholder="Enter search query..."
-          className="search-input"
-        />
-        <button onClick={handleSearch} className="search-button">
-          Search
-        </button>
+        <h1 style={{ fontSize: "120%" }}> What can I help you with?</h1>
+        <div className="search-box">
+           <input
+            type="text"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            onKeyDown={handleKeyDown}
+            placeholder="Enter search query..."
+            className="search-input"
+          />
+          <button type="button" onClick={handleSearch} className="Enter-icon">
+            <img src={Enter} alt="Enter Icon"/>
+          </button>
+        </div>
+        
       </div>
 
       {/* Loading Spinner */}
