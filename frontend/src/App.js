@@ -11,6 +11,7 @@ import HomePage from "./pages/HomePage";
 
 
 
+
 const Home = () => <h1>Welcome to the Home Page</h1>;
 
 function App() {
