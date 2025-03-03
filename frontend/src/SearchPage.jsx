@@ -39,36 +39,46 @@ const SearchPage = () => {
       return null;
     }
   };
+  
+// Fetch the summary of the selected article
+const fetchArticleSummary = async (articleId) => {
+  try {
+    setSummaryLoading(true);
+    console.log(`Fetching summary for article ID: ${articleId}`);
 
-  // Fetch the summary of the selected article
-  const fetchArticleSummary = async (articleId) => {
-    try {
-      setSummaryLoading(true);
-      console.log(`Fetching summary for article ID: ${articleId}`);
+    const response = await axios.get(
+      `${backendUrl}/article-summary/${articleId}?generate=true`
+    );
 
-      const response = await axios.get(
-        `${backendUrl}/article-summary/${articleId}?generate=true`
-      );
+    console.log("Summary Response:", response.data);
 
-      console.log("Summary Response:", response.data);
-
-      if (
-        response.data.summary &&
-        response.data.summary !== "Failed to generate summary."
-      ) {
-        setArticleSummary(response.data.summary);
-      } else {
-        setArticleSummary("Failed to generate summary.");
-      }
-    } catch (err) {
-      console.error("Failed to fetch article summary:", err);
-      setArticleSummary("Error fetching summary. Please try again.");
-    } finally {
-      setSummaryLoading(false);
+    if (
+      response.data.summary &&
+      response.data.summary !== "Failed to generate summary."
+    ) {
+      setArticleSummary(response.data.summary);
+    } else {
+      setArticleSummary("Failed to generate summary.");
     }
+  } catch (err) {
+    console.error("Failed to fetch article summary:", err);
+    setArticleSummary("Error fetching summary. Please try again.");
+  } finally {
+    setSummaryLoading(false);
+  }
+};
+
+  // Extract location filter from the query using regex.
+  // This regex looks for "from <location>" (location can include letters, spaces, commas)
+  const extractLocationFilter = (text) => {
+    const match = text.toLowerCase().match(/from\s+([a-z\s,]+)/);
+    if (match && match[1]) {
+      return match[1].trim();
+    }
+    return "";
   };
 
-  // Handle the search functionality
+  // Handle search functionality using a single searchbar.
   const handleSearch = async () => {
     if (!query.trim()) {
       setError("Please enter a search query.");
@@ -85,6 +95,7 @@ const SearchPage = () => {
     setChatHistory([]);
     setEmbedding(null);
 
+    // Generate the embedding
     const emb = await generateEmbedding(query);
     if (!emb) {
       setLoading(false);
@@ -92,11 +103,21 @@ const SearchPage = () => {
     }
     setEmbedding(emb);
 
+    // Extract location filter from the query (if any)
+    const locationFilter = extractLocationFilter(query);
+
     try {
-      const response = await axios.post(`${backendUrl}/ai-search`, {
+      const payload = {
+        query, // the original query text
         embedding: emb,
         k: 50,
-      });
+      };
+      // Pass the location filter if one was extracted.
+      if (locationFilter) {
+        payload.location = locationFilter;
+      }
+
+      const response = await axios.post(`${backendUrl}/ai-search`, payload);
 
       if (response.data.error) {
         setError(response.data.error);
@@ -106,9 +127,7 @@ const SearchPage = () => {
         setError("No relevant articles found.");
       }
     } catch (err) {
-      setError(
-        "Failed to fetch results. Ensure the backend server is running."
-      );
+      setError("Failed to fetch results. Ensure the backend server is running.");
       console.error("Search API Error:", err);
     } finally {
       setLoading(false);
@@ -165,7 +184,7 @@ const SearchPage = () => {
     <div className="search-page-container">
       <h1>AI-Powered Search</h1>
 
-      {/* Search Input */}
+      {/* Single Search Input */}
       <div className="search-section">
         <input
           type="text"
@@ -238,75 +257,102 @@ const SearchPage = () => {
 
         {/* Article Details */}
         {selectedArticle && (
-          <div className="selected-article-container">
-            <h2>Article Details</h2>
-            <p>
-              <strong>Title:</strong> {selectedArticle.title || "N/A"}
-            </p>
-            <p>
-              <strong>ISBN:</strong> {selectedArticle.isbn || "N/A"}
-            </p>
-            <p>
-              <strong>Author(s):</strong>{" "}
-              {selectedArticle.author || "Unknown"}
-            </p>
-            <p>
-              <strong>Publication Date:</strong>{" "}
-              {selectedArticle.publication_date || "N/A"}
-            </p>
-            {selectedArticle.pdf_url && (
-              <p>
-                <strong>PDF URL:</strong>{" "}
-                <a
-                  href={selectedArticle.pdf_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  View PDF
-                </a>
-              </p>
-            )}
-            <p>
-              <strong>Keywords:</strong>{" "}
-              {selectedArticle.keywords
-                ? selectedArticle.keywords.join(", ")
-                : "None"}
-            </p>
-            <p>
-              <strong>Abstract:</strong>{" "}
-              {selectedArticle.abstract || "No abstract available."}
-            </p>
+  <div className="selected-article-container">
+    <h2>Article Details</h2>
+    <p>
+      <strong>Title:</strong> {selectedArticle.title || "N/A"}
+    </p>
+    <p>
+      <strong>ISBN:</strong> {selectedArticle.isbn || "N/A"}
+    </p>
+    <p>
+      <strong>Author(s):</strong>{" "}
+      {selectedArticle.author || "Unknown"}
+    </p>
+    <p>
+      <strong>Publication Date:</strong>{" "}
+      {selectedArticle.publication_date || "N/A"}
+    </p>
 
-            {/* Article Summary */}
-            <div className="article-summary">
-              <h3>Summary</h3>
-              {summaryLoading ? (
-                <ClipLoader
-                  size={30}
-                  color={"#123abc"}
-                  loading={summaryLoading}
-                />
-              ) : (
-                <p>{articleSummary || "No summary available."}</p>
-              )}
-              {!articleSummary && !summaryLoading && (
-                <button
-                  onClick={() => fetchArticleSummary(selectedArticle.id)}
-                  className="generate-summary-button"
-                >
-                  Generate Summary
-                </button>
-              )}
-            </div>
+    {/* Display Conference Information if available */}
+    {selectedArticle.conference_name && (
+      <p>
+        <strong>Conference:</strong> {selectedArticle.conference_name}
+      </p>
+    )}
+    {selectedArticle.conference_location && (
+      <p>
+        <strong>Conference Location:</strong>{" "}
+        {selectedArticle.conference_location}
+      </p>
+    )}
+    {selectedArticle.conference_articles &&
+      selectedArticle.conference_articles.length > 0 && (
+        <div>
+          <strong>Conference Version:</strong>
+          <ul>
+            {selectedArticle.conference_articles.map((version, idx) => (
+              <li key={idx}>{version}</li>
+            ))}
+          </ul>
+        </div>
+      )}
 
-            <button
-              onClick={() => setSelectedArticle(null)}
-              className="back-button"
-            >
-              Back to Results
-            </button>
-          </div>
-        )}
+    {/* PDF URL */}
+    {selectedArticle.pdf_url && (
+      <p>
+        <strong>PDF URL:</strong>{" "}
+        <a
+          href={selectedArticle.pdf_url}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          View PDF
+        </a>
+      </p>
+    )}
+
+    <p>
+      <strong>Keywords:</strong>{" "}
+      {selectedArticle.keywords
+        ? selectedArticle.keywords.join(", ")
+        : "None"}
+    </p>
+    <p>
+      <strong>Abstract:</strong>{" "}
+      {selectedArticle.abstract || "No abstract available."}
+    </p>
+
+    {/* Article Summary */}
+    <div className="article-summary">
+      <h3>Summary</h3>
+      {summaryLoading ? (
+        <ClipLoader
+          size={30}
+          color={"#123abc"}
+          loading={summaryLoading}
+        />
+      ) : (
+        <p>{articleSummary || "No summary available."}</p>
+      )}
+      {!articleSummary && !summaryLoading && (
+        <button
+          onClick={() => fetchArticleSummary(selectedArticle.id)}
+          className="generate-summary-button"
+        >
+          Generate Summary
+        </button>
+      )}
+    </div>
+
+    <button
+      onClick={() => setSelectedArticle(null)}
+      className="back-button"
+    >
+      Back to Results
+    </button>
+  </div>
+)}
 
         {/* Chat Section */}
         {selectedArticle && (
@@ -328,10 +374,14 @@ const SearchPage = () => {
                     <div
                       key={index}
                       className={`chat-message ${
-                        entry.sender === "user" ? "user-message" : "bot-message"
+                        entry.sender === "user"
+                          ? "user-message"
+                          : "bot-message"
                       }`}
                     >
-                      <strong>{entry.sender === "user" ? "You:" : "Bot:"}</strong>{" "}
+                      <strong>
+                        {entry.sender === "user" ? "You:" : "Bot:"}
+                      </strong>{" "}
                       {entry.message}
                     </div>
                   ))}
@@ -350,7 +400,11 @@ const SearchPage = () => {
                     disabled={chatLoading}
                   >
                     {chatLoading ? (
-                      <ClipLoader size={15} color={"#fff"} loading={chatLoading} />
+                      <ClipLoader
+                        size={15}
+                        color={"#fff"}
+                        loading={chatLoading}
+                      />
                     ) : (
                       "Send"
                     )}
