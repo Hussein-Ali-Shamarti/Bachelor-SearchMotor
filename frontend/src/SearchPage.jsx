@@ -12,6 +12,13 @@ const SearchPage = () => {
   const [selectedArticle, setSelectedArticle] = useState(null);
   const [articleSummary, setArticleSummary] = useState("");
   const [summaryLoading, setSummaryLoading] = useState(false);
+  const [embedding, setEmbedding] = useState(null);
+
+  // Chat state
+  const [showChat, setShowChat] = useState(false);
+  const [chatMessage, setChatMessage] = useState("");
+  const [chatHistory, setChatHistory] = useState([]);
+  const [chatLoading, setChatLoading] = useState(false);
 
   // Backend URL from environment variable
   const backendUrl =
@@ -21,7 +28,7 @@ const SearchPage = () => {
   const generateEmbedding = async (query) => {
     try {
       const response = await axios.post(`${backendUrl}/generate-embedding`, {
-        text: query
+        text: query,
       });
       return response.data.embedding;
     } catch (error) {
@@ -74,17 +81,21 @@ const SearchPage = () => {
     setVisibleResults(5);
     setSelectedArticle(null);
     setArticleSummary("");
+    setShowChat(false);
+    setChatHistory([]);
+    setEmbedding(null);
 
-    const embedding = await generateEmbedding(query);
-    if (!embedding) {
+    const emb = await generateEmbedding(query);
+    if (!emb) {
       setLoading(false);
       return;
     }
+    setEmbedding(emb);
 
     try {
       const response = await axios.post(`${backendUrl}/ai-search`, {
-        embedding,
-        k: 50
+        embedding: emb,
+        k: 50,
       });
 
       if (response.data.error) {
@@ -106,6 +117,49 @@ const SearchPage = () => {
 
   // Load more results on button click
   const loadMoreResults = () => setVisibleResults((prev) => prev + 10);
+
+  // Handle sending a chat message
+  const sendChatMessage = async () => {
+    if (!chatMessage.trim() || !selectedArticle || !embedding) return;
+
+    // Append user message to chat history
+    const newHistory = [
+      ...chatHistory,
+      { sender: "user", message: chatMessage },
+    ];
+    setChatHistory(newHistory);
+    setChatMessage("");
+    setChatLoading(true);
+
+    try {
+      const response = await axios.post(`${backendUrl}/chat`, {
+        embedding: embedding,
+        article_id: selectedArticle.id,
+        message: chatMessage,
+        k: 50,
+      });
+
+      if (response.data.error) {
+        setChatHistory((prev) => [
+          ...prev,
+          { sender: "bot", message: "Error: " + response.data.error },
+        ]);
+      } else {
+        setChatHistory((prev) => [
+          ...prev,
+          { sender: "bot", message: response.data.answer },
+        ]);
+      }
+    } catch (err) {
+      console.error("Chat API Error:", err);
+      setChatHistory((prev) => [
+        ...prev,
+        { sender: "bot", message: "Failed to send message. Please try again." },
+      ]);
+    } finally {
+      setChatLoading(false);
+    }
+  };
 
   return (
     <div className="search-page-container">
@@ -135,14 +189,14 @@ const SearchPage = () => {
       {/* Error Message */}
       {error && <p className="error-message">{error}</p>}
 
-      {/* Results & Selected Article Side by Side */}
-      <div className="results-container">
-        {/* Scrollable Results List */}
-        <div className="results-list">
+      {/* Main Content Area */}
+      <div className="content-container">
+        {/* Results List */}
+        <div className="results-container">
           {results.length === 0 && !loading ? (
             <p>No results found.</p>
           ) : (
-            <ul>
+            <ul className="results-list">
               {results.slice(0, visibleResults).map((article) => (
                 <li
                   key={article.id}
@@ -152,13 +206,16 @@ const SearchPage = () => {
                   onClick={() => {
                     if (selectedArticle?.id !== article.id) {
                       setSelectedArticle(article);
-                      setArticleSummary(""); // Clear previous summary
+                      setArticleSummary("");
+                      setShowChat(false);
+                      setChatHistory([]);
                     }
                   }}
                 >
                   <h4>{article.title || "No Title Available"}</h4>
                   <p>
-                    <strong>Author(s):</strong> {article.author || "Unknown"}
+                    <strong>Author(s):</strong>{" "}
+                    {article.author || "Unknown"}
                   </p>
                   <p>
                     <strong>Abstract:</strong>{" "}
@@ -190,7 +247,8 @@ const SearchPage = () => {
               <strong>ISBN:</strong> {selectedArticle.isbn || "N/A"}
             </p>
             <p>
-              <strong>Author(s):</strong> {selectedArticle.author || "Unknown"}
+              <strong>Author(s):</strong>{" "}
+              {selectedArticle.author || "Unknown"}
             </p>
             <p>
               <strong>Publication Date:</strong>{" "}
@@ -231,7 +289,6 @@ const SearchPage = () => {
               ) : (
                 <p>{articleSummary || "No summary available."}</p>
               )}
-              {/* Show the "Generate Summary" button only if no summary has been generated */}
               {!articleSummary && !summaryLoading && (
                 <button
                   onClick={() => fetchArticleSummary(selectedArticle.id)}
@@ -248,6 +305,59 @@ const SearchPage = () => {
             >
               Back to Results
             </button>
+          </div>
+        )}
+
+        {/* Chat Section */}
+        {selectedArticle && (
+          <div className="chat-section">
+            <button
+              onClick={() => setShowChat((prev) => !prev)}
+              className="chat-toggle-button"
+            >
+              {showChat ? "Back to article" : "Chat with AI"}
+            </button>
+            {showChat && (
+              <div className="chat-container">
+                <h3>Chat about this article</h3>
+                <div className="chat-history">
+                  {chatHistory.length === 0 && (
+                    <p>No messages yet. Start the conversation!</p>
+                  )}
+                  {chatHistory.map((entry, index) => (
+                    <div
+                      key={index}
+                      className={`chat-message ${
+                        entry.sender === "user" ? "user-message" : "bot-message"
+                      }`}
+                    >
+                      <strong>{entry.sender === "user" ? "You:" : "Bot:"}</strong>{" "}
+                      {entry.message}
+                    </div>
+                  ))}
+                </div>
+                <div className="chat-input-container">
+                  <input
+                    type="text"
+                    value={chatMessage}
+                    onChange={(e) => setChatMessage(e.target.value)}
+                    placeholder="Type your message..."
+                    className="chat-input"
+                  />
+                  <button
+                    onClick={sendChatMessage}
+                    className="send-chat-button"
+                    disabled={chatLoading}
+                  >
+                    {chatLoading ? (
+                      <ClipLoader size={15} color={"#fff"} loading={chatLoading} />
+                    ) : (
+                      "Send"
+                    )}
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
         )}
       </div>
