@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 from sentence_transformers import SentenceTransformer
 from database import SessionLocal
 from models import Article
-from faiss_helper import rebuild_faiss_index
+from faiss_helper import load_or_rebuild_faiss_index
 import os
 import sys
 import io
@@ -12,6 +12,7 @@ import gzip
 import traceback
 import numpy as np
 import openai
+import tiktoken
 
 # Ensure correct encoding for logs
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
@@ -37,7 +38,7 @@ CORS(app, resources={r"/*": {"origins": "*", "methods": ["GET", "POST", "OPTIONS
 MODEL = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
 
 # Load or rebuild FAISS index on startup
-INDEX, IDS = rebuild_faiss_index()
+INDEX, IDS = load_or_rebuild_faiss_index()
 if INDEX is None:
     print("FAISS index is empty! No embeddings found in the database.")
 
@@ -293,6 +294,87 @@ def get_article_summary(article_id):
         print("Error generating article summary:", str(e))
         traceback.print_exc()
         return jsonify({"error": "Internal server error", "details": str(e)}), 500
+    
+def truncate_text(text, max_tokens, encoding):
+    """
+    Truncates the given text to at most max_tokens tokens using the provided tiktoken encoding.
+    """
+    tokens = encoding.encode(text)
+    if len(tokens) <= max_tokens:
+        return text
+    truncated_tokens = tokens[:max_tokens]
+    return encoding.decode(truncated_tokens)
+
+@app.route("/chat", methods=["POST"])
+def chat():
+    """
+    Chat with a chatbot using only the full text of the selected article.
+    The context is tokenized and truncated to ensure it does not exceed
+    the maximum token limit.
+    
+    Expects JSON with keys:
+      - article_id: the ID of the article whose full text will be fetched
+      - message: the user's chat message
+    """
+    try:
+        data = request.get_json()
+        selected_article_id = data.get("article_id")
+        user_message = data.get("message", "").strip()
+        
+        # Validate required fields
+        if not selected_article_id or not user_message:
+            return jsonify({"error": "Missing required 'article_id' or 'message'"}), 400
+        
+        # Fetch the full text for the selected article
+        with SessionLocal() as session:
+            article = session.query(Article).filter_by(id=selected_article_id).first()
+            if article is None:
+                return jsonify({"error": "Selected article not found"}), 404
+            if not article.pdf_texts:
+                return jsonify({"error": "No PDF text available for the selected article"}), 404
+
+            selected_article_text = gzip.decompress(article.pdf_texts).decode("utf-8")
+        
+        # Build the overall context from only the selected article's full text
+        context = f"Selected Article Full Text:\n{selected_article_text}"
+        
+        # Use tiktoken to truncate the context if needed.
+        max_context_tokens = 3000  # Adjust this value if needed
+        encoding = tiktoken.encoding_for_model("gpt-4")
+        truncated_context = truncate_text(context, max_context_tokens, encoding)
+        
+        # Create the conversation messages
+        messages = [
+            {
+                "role": "system",
+                "content": "You are a helpful assistant. Only use the provided article context when answering. Do not reference any external information."
+            },
+            {
+                "role": "system",
+                "content": f"Context:\n{truncated_context}"
+            },
+            {
+                "role": "user",
+                "content": user_message
+            }
+        ]
+        
+        # Query the OpenAI API using GPT-4
+        response = openai.chat.completions.create(
+            model="gpt-4",
+            messages=messages,
+            temperature=0.2,
+            max_tokens=300
+        )
+        
+        # Extract and return the chatbot's response
+        answer = response.choices[0].message.content.strip()
+        return jsonify({"answer": answer})
+    
+    except Exception as e:
+        traceback.print_exc()
+        return jsonify({"error": "Internal server error", "details": str(e)}), 500
+
 
 # Run Flask
 if __name__ == "__main__":
