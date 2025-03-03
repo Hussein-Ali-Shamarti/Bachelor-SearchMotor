@@ -1,0 +1,80 @@
+
+
+
+
+  /** 
+  * studentFeedback 
+  */
+  
+.studentFeedback {
+  background-color: #ffffff; 
+ 
+  padding: 2rem; 
+  margin-bottom: 1 rem; 
+} 
+
+  @media screen and (min-width: 600px) {
+  
+    .studentFeedback > .inside {
+      display: grid; 
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-gap: 1rem; 
+    }
+
+    /* gleich  Selektor .studentFeedback h2:first-child.  */
+
+    .studentFeedback > .inside > h2 {
+      grid-column: 1/-1;
+     
+    }
+   
+
+  } /* Ende @media */
+
+  .studentFeedbackItem {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Plasser innholdet nederst */
+    text-align: center; 
+    background-color: #f5f5f5;
+    color: #7e2f95;
+    background-image: linear-gradient(to right, var(--color-grey-border), var(color-grey-border-light));
+    box-shadow: 0 1px 3px var(--color-shadow); 
+    padding: 1rem;
+    /* border-left: 5px solid #7e2f95; */
+    margin: 0; 
+    margin-bottom: 1rem;
+  }
+  
+  /* Endrer fontvekten på p i blockquote */
+  .studentFeedbackItem blockquote p {
+  font-weight: normal; /* Endre til ønsket font-vekt, f.eks. 400 eller 300 */
+}
+
+  
+  .studentFeedbackItem blockquote { 
+    margin: 0; 
+    
+  } 
+  
+  .studentFeedbackItem p:first-child { 
+    font-size: 1rem; 
+    font-weight: bold; 
+  }
+
+  /* Endrer fontvekten på p i blockquote i studentFeedbackItem */
+.studentFeedbackItem blockquote p {
+  font-weight: normal !important; /* Bruker !important for å sikre at stilen blir brukt */
+  font-size: 1.2rem !important; /* Endrer fontstørrelsen til 1.2rem (kan justeres til ønsket størrelse) */
+}
+
+  
+
+
+  figcaption {
+    font-size: 0.9rem; /* Gjør teksten litt mindre */
+    color:var(--color-font);
+  }
+  
+
+

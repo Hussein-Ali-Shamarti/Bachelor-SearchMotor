@@ -2,6 +2,12 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import SearchPage from "./SearchPage";
 import MyPage from "./pages/MyPageF/MyPage";
+import HomePage from "./pages/HomePage";
+
+
+
+
+
 
 const Home = () => <h1>Welcome to the Home Page</h1>;
 
@@ -16,7 +22,7 @@ function App() {
         <Link to="/mypage">My Page</Link>
       </nav>
       <Routes>
-        <Route path="/" element={<Home />} />
+      <Route path="/" element={<HomePage />} />
         <Route path="/search" element={<SearchPage />} />
         <Route path="/mypage" element={<MyPage />} />
       </Routes>

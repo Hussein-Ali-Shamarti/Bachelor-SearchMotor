@@ -1,0 +1,136 @@
+
+
+/* - Hyperlinks im Inhaltsbereich 
+- Infoboxen 
+- Upadateboxen/Dashboard 
+
+/* hvor hører icon til  */
+
+.icon img[src$="svg"] {
+  width: 4rem;
+  height: auto; 
+}
+
+
+
+/* Linkzustände für den Inhaltsbereich */
+/* .site-content a:link { color: var(--color-nav,#00a3d2); } 
+.site-content a:visited { color: var(--color-nav,#00a3d2); } 
+.site-content a:hover, .site-content a:focus { color: var(--color-nav-darker,#007293); } 
+.site-content a:active { color: var(--color-nav-darker,#007293); } */
+
+
+.content-intro{
+  padding: 4rem; 
+  
+  margin-bottom: 1 rem; 
+  /* background-color: #f5f5f5; */
+  background: linear-gradient(45deg, #7e2f95 30%, #2e5278 60%, #f5f5f5 100%); 
+
+}
+.content-intro .inside {
+
+  /* background: linear-gradient(45deg, #7e2f95, #2e5278); /* Gradient mellom lilla og blå * */
+   
+    color: white;
+   
+  
+}
+
+.content-intro h2 {
+  font-size: 2rem; /* Øk størrelsen på h2 (kan justeres etter ønske) */
+  margin-bottom: 1rem; /* Gir litt plass under h2 */
+}
+
+           
+
+
+.infobox .button {
+  display: inline-block;
+  padding: 8px 18px;
+  background-color: #2e5278; /* Standard farge */
+  color: white !important; /* Sørger for at teksten ALLTID er hvit *
+  text-decoration: none;
+  border-radius: 5px;
+  /* font-weight: bold; */
+  text-align: center;
+  border: none; /* Fjern standard kantlinje */
+  cursor: pointer; /* Gir musepekeren en "klikkbar" effekt */
+  border-radius: 0.5rem;
+}
+
+.infobox .button:hover,
+.infobox .button:focus {
+  background-color: #11bfe6; /* Farge når man holder over */
+}
+
+
+
+/* Styling for infoboxes */
+.infoboxen {
+  background-color: var(--color-background-dark,#e9e9e9 ); 
+ 
+  padding: 2rem; 
+  margin-bottom: 1 rem; 
+}
+
+.infobox {
+display: flex;
+flex-flow: column;
+justify-content: center;
+align-items: center;
+text-align: center;
+background-color: var(--color-background-light);
+
+color: var(--color-font);  
+padding: 1rem; 
+margin: 1rem; 
+box-shadow: var(--color-shadow); 
+border-radius: 0.5rem;
+}
+
+.infobox > *:nth-child(3) {
+  margin-top: auto;
+}
+
+
+/* das letzte Element in jeder Infobox: */
+.infobox :last-child {
+margin-top: auto;
+}
+
+
+
+/* ab 600 pixel: */
+@media screen and (min-width: 600px) {
+
+.infoboxen > .inside {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 1rem;
+}
+
+
+
+}
+
+
+.infobox h3 {
+color:#2e5278; 
+}
+
+.icon img[src$="svg"] {
+  width: 4rem;
+  height: auto; 
+  }
+
+
+
+
+
+
+
+
+
+
+
