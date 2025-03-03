@@ -43,6 +43,17 @@ const HomePage = () => {
             </p>
           </div>
         </section>
+              {/* Placeholder for searchbar (using Reviews section) */}
+      <section className="studentFeedback">
+        <div className="inside">
+          <h2>Search Placeholder</h2>
+          <h2>Search Placeholder</h2>
+          <h2>Search Placeholder</h2>
+          <h2>Search Placeholder</h2>
+        </div>
+      </section>
+
+        
 
         {/* Features Section */}
         <section className="infoboxen">
@@ -66,7 +77,7 @@ const HomePage = () => {
               <h3>Efficient Search</h3>
               <p>
                 Our intelligent algorithms provide you with the most relevant
-                information quickly, saving you time and enhancing productivity.
+                information quickly.
               </p>
               <p>
                 <a href="..." className="button">

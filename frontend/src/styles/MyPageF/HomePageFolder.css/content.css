@@ -23,7 +23,7 @@
 .content-intro{
   padding: 4rem; 
   
-  margin-bottom: 1 rem; 
+  margin-bottom: 1rem; 
   /* background-color: #f5f5f5; */
   background: linear-gradient(45deg, #7e2f95 30%, #2e5278 60%, #f5f5f5 100%); 
 
@@ -71,7 +71,7 @@
   background-color: var(--color-background-dark,#e9e9e9 ); 
  
   padding: 2rem; 
-  margin-bottom: 1 rem; 
+  margin-bottom: 1rem; 
 }
 
 .infobox {
@@ -87,7 +87,10 @@ padding: 1rem;
 margin: 1rem; 
 box-shadow: var(--color-shadow); 
 border-radius: 0.5rem;
+
 }
+
+
 
 .infobox > *:nth-child(3) {
   margin-top: auto;
@@ -126,9 +129,20 @@ color:#2e5278;
 
 
 
+/* Tilpasninger for React-applikasjonen */
+/* Justerer spacing mellom elementer for at boksene skal få jevn høyde */
 
+.infobox h3 {
+  margin-bottom: 10px; /* Avstand mellom overskrift og paragraf */
+}
 
+.infobox p {
+  margin-bottom: 15px; /* Avstand mellom avsnittene */
+}
 
+.infobox .button {
+  margin-top: 20px; /* Holder knappen nede */
+}
 
 
 

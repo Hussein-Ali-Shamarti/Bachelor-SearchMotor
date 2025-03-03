@@ -143,3 +143,18 @@ body {
 /** 
   * Ende layout.css 
   */ 
+
+/* Tilpaning: I React må man bruke display: flex; på den ytterste containeren for at footeren skal fungere riktig. */
+
+  /* Ensure footer stays at the bottom */
+ /* Sørger for at footeren alltid er nederst */
+.home {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Sørger for at siden alltid fyller skjermen */
+}
+
+/* Gjør at main tar opp all ledig plass og dytter footeren ned */
+.site-content {
+  flex: 1;
+}
