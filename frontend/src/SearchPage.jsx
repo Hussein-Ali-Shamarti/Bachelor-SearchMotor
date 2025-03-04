@@ -1,21 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { ClipLoader } from "react-spinners";
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
 import "./SearchPage.css";
-=======
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 import Enter from "./Pictures-icones/Eenter.svg";
 import './SearchPage.css'; 
->>>>>>> Stashed changes
+
 
 const SearchPage = () => {
   const [query, setQuery] = useState("");
@@ -201,47 +190,24 @@ const fetchArticleSummary = async (articleId) => {
     }
   };
 
-  // Function to handle pressing Enter key
-  const handleKeyDown = (event) => {
-    if (event.key === 'Enter') {
-      handleSearch();
-    }
-  };
+ 
+ 
 
-  // Function to handle pressing Enter key
-  const handleKeyDown = (event) => {
-    if (event.key === 'Enter') {
-      handleSearch();
-    }
-  };
+  
 
-  // Function to handle pressing Enter key
-  const handleKeyDown = (event) => {
-    if (event.key === 'Enter') {
-      handleSearch();
-    }
-  };
+  
 
   return (
     <div className="search-page-container">
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
+
       <h1>AI-Powered Search</h1>
 
       {/* Single Search Input */}
-=======
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
+
       
   
       {/* Search Input */}
->>>>>>> Stashed changes
+
       <div className="search-section">
         <h1 style={{ fontSize: "120%" }}> What can I help you with?</h1>
         <div className="search-box">
