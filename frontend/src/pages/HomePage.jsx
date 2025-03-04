@@ -1,12 +1,16 @@
 import React from "react";
-import "../styles/MyPageF/HomePageFolder.css/basis.css";
-import "../styles/MyPageF/HomePageFolder.css/content.css";
-import "../styles/MyPageF/HomePageFolder.css/feedback.css";
-import "../styles/MyPageF/HomePageFolder.css/header.css";
-import "../styles/MyPageF/HomePageFolder.css/layout.css";
-import "../styles/MyPageF/HomePageFolder.css/layout-modern.css";
-import "../styles/MyPageF/HomePageFolder.css/navi-responsive.css";
+import "../styles/MyPageF/global-styles-folder/basis.css";
+import "../styles/MyPageF/global-styles-folder/content.css";
+import "../styles/MyPageF/global-styles-folder/feedback.css";
+import "../styles/MyPageF/global-styles-folder/header.css";
+import "../styles/MyPageF/global-styles-folder/layout.css";
+import "../styles/MyPageF/global-styles-folder/layout-modern.css";
+import "../styles/MyPageF/global-styles-folder/navi-responsive.css";
+import "../styles/MyPageF/global-styles-folder/smart-search.css";
 
+const handleSearch = () => {
+  console.log("Search button clicked"); // Kan byttes ut med søkelogikk senere
+};
 
 
 const HomePage = () => {
@@ -43,15 +47,26 @@ const HomePage = () => {
             </p>
           </div>
         </section>
-              {/* Placeholder for searchbar (using Reviews section) */}
-      <section className="studentFeedback">
-        <div className="inside">
-          <h2>Search Placeholder</h2>
-          <h2>Search Placeholder</h2>
-          <h2>Search Placeholder</h2>
-          <h2>Search Placeholder</h2>
-        </div>
-      </section>
+
+        <section className="smart-search">
+          <div className="inside">
+            <h1>What can I help you with?</h1>
+
+             <div className="search-wrapper">
+                <input 
+                type="text" 
+                id="search-input" 
+                placeholder="Enter search query..." 
+                className="search-input"
+                />
+                 <button type="button" onClick={handleSearch} className="Enter-icon">
+                <img src="/Pictures-icones/Eenter.svg" alt="Enter Icon" />
+                </button>
+              </div>
+         </div>
+
+        </section>
+
 
         
 
