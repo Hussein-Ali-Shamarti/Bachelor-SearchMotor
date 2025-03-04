@@ -25,11 +25,12 @@
     cursor: pointer;
   }
 
-  .search{
+  /* denne overstyrer smart-search boksen?? */
+  /* .search{
     position: absolute;
     top: 15px;
     left: 50px;
     background: none;
     border: none;
     cursor: pointer;
-  }
+  } */
