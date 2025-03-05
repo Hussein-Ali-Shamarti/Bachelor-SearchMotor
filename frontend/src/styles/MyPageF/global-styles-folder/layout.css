@@ -141,10 +141,13 @@ body {
   color:white; 
 }
 /** 
-  * Ende layout.css 
+  * End layout.css 
   */ 
+  /* ------------------------------------------------------------------ */
+  /* Tilpasning: I React må man bruke display: flex; på den ytterste containeren for at footeren skal fungere riktig. */
+/* --------------------------------------------------------------------- */
 
-/* Tilpaning: I React må man bruke display: flex; på den ytterste containeren for at footeren skal fungere riktig. */
+  /*  */
 
   /* Ensure footer stays at the bottom */
  /* Sørger for at footeren alltid er nederst */

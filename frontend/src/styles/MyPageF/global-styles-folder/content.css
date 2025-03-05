@@ -1,8 +1,10 @@
 
 
-/* - Hyperlinks im Inhaltsbereich 
+/* site-content: 
+- Content-Intro
+- Search section se i search-section.css
 - Infoboxen 
-- Upadateboxen/Dashboard 
+- Reviews
 
 /* hvor hører icon til  */
 
@@ -42,8 +44,16 @@
   margin-bottom: 1rem; /* Gir litt plass under h2 */
 }
 
-           
-
+  /* --------------------- */
+/* Infoboxen Section Styling */
+/* --------------------- */
+         
+/*1.  Hele seksjonen */
+.infoboxen {
+  background-color: var(--color-background-dark,#e9e9e9 ); 
+  padding: 2rem; 
+  margin-bottom: 1rem; 
+}
 
 .infobox .button {
   display: inline-block;
@@ -65,58 +75,31 @@
 }
 
 
-
-/* Styling for infoboxes */
-.infoboxen {
-  background-color: var(--color-background-dark,#e9e9e9 ); 
- 
-  padding: 2rem; 
-  margin-bottom: 1rem; 
-}
-
+/* 2. Flex oppsett for infobox */
 .infobox {
 display: flex;
 flex-flow: column;
 justify-content: center;
 align-items: center;
 text-align: center;
-background-color: var(--color-background-light);
 
+background-color: var(--color-background-light);
 color: var(--color-font);  
+
 padding: 1rem; 
 margin: 1rem; 
 box-shadow: var(--color-shadow); 
 border-radius: 0.5rem;
-
 }
-
-
 
 .infobox > *:nth-child(3) {
   margin-top: auto;
 }
 
-
 /* das letzte Element in jeder Infobox: */
 .infobox :last-child {
 margin-top: auto;
 }
-
-
-
-/* ab 600 pixel: */
-@media screen and (min-width: 600px) {
-
-.infoboxen > .inside {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 1rem;
-}
-
-
-
-}
-
 
 .infobox h3 {
 color:#2e5278; 
@@ -126,11 +109,28 @@ color:#2e5278;
   width: 4rem;
   height: auto; 
   }
+/* 5. Grid-oppsett for infoboxen - inside*/
+
+/* 6. Responsiv tilpasning */
+ /* ab 600 pixel: */
+@media screen and (min-width: 600px) {
+
+  .infoboxen > .inside {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 1rem;
+  }
+  }
 
 
+/* _End content.css */
 
-/* Tilpasninger for React-applikasjonen */
-/* Justerer spacing mellom elementer for at boksene skal få jevn høyde */
+  /* ------------------------------------------------------------------ */
+/* Tilpasninger for React-applikasjonen
+
+Justerer spacing mellom elementer for at boksene skal få jevn høyde*/
+/* --------------------------------------------------------------------- */
+
 
 .infobox h3 {
   margin-bottom: 10px; /* Avstand mellom overskrift og paragraf */
@@ -143,6 +143,12 @@ color:#2e5278;
 .infobox .button {
   margin-top: 20px; /* Holder knappen nede */
 }
+
+ 
+
+
+
+
 
 
 
