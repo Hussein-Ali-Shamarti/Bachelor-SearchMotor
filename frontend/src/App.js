@@ -9,28 +9,32 @@ import "./assets/styles/global/layout-modern.css";
 import "./assets/styles/global/navi-responsive.css";
 import "./assets/styles/global/smart-search.css";
 
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link, useLocation } from "react-router-dom";
 import SearchPage from "./pages/SearchPage";
 import HomePage from "./pages/HomePage";
 import MyPage from "./pages/MyPage";
+import Sidebar from "./components/Sidebar";
 
 const Home = () => <h1>Welcome to the Home Page</h1>;
 
 function App() {
   return (
     <Router>
-      <nav style={{ padding: "10px", borderBottom: "1px solid #ddd" }}>
-        <Link to="/" style={{ marginRight: "10px" }}>
-          Home
-        </Link>
-        <Link to="/search" style={{ marginRight: "10px" }}>Search</Link>
-        <Link to="/mypage">My Page</Link>
-      </nav>
-      <Routes>
-      <Route path="/" element={<HomePage />} />
-        <Route path="/search" element={<SearchPage />} />
-        <Route path="/mypage" element={<MyPage />} />
-      </Routes>
+      <div id="app">
+        <Sidebar />
+        <nav style={{ padding: "10px", borderBottom: "1px solid #ddd" }}>
+          <Link to="/" style={{ marginRight: "10px" }}>
+            Home
+          </Link>
+          <Link to="/search" style={{ marginRight: "10px" }}>Search</Link>
+          <Link to="/mypage">My Page</Link>
+        </nav>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/search" element={<SearchPage />} />
+          <Route path="/mypage" element={<MyPage />} />
+        </Routes>
+      </div>
     </Router>
   );
 }

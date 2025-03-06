@@ -94,6 +94,14 @@
 
 
 
+/* Hamburger icon */
+.js .menubutton::before {
+  content: url("../../images/hamburger.svg"); 
+  width: 1rem; 
+  height: 1rem; 
+  margin: 0.25rem; 
+}
+
 
 /**
   * 3. Hide the menu button with CSS
@@ -115,6 +123,11 @@
   max-height: 100rem; 
   overflow: auto; 
   transition: max-height 0.5s ease;
+}
+/* tatt ut denne i react:  */
+/* Change Hamburger to X when menu is shown */
+.js .menubutton.showmenu::before {
+  content: url("../../images/menuclose.svg");
 }
 
 
@@ -138,7 +151,7 @@
 
   .site-nav ul { 
     max-height: none !important; 
-    flex-flow: row; 
+    /* flex-flow: row;  */
     padding: 0; 
   }
 
