@@ -1,5 +1,5 @@
 import react from react;
-import SearchBar from "./SearchBar";
+import SearchBar from "../../components/SearchBar";
 import SearchHistory from "./SearchHistory";
 import user1 from "../../assets/images/user1.svg";
 import question from "../../assets/images/question.svg";

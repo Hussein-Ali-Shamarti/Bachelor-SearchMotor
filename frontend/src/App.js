@@ -1,4 +1,14 @@
 import React from "react";
+
+import "./assets/styles/global/basis.css";
+import "./assets/styles/global/content.css";
+import "./assets/styles/global/feedback.css";
+import "./assets/styles/global/header.css";
+import "./assets/styles/global/layout.css";
+import "./assets/styles/global/layout-modern.css";
+import "./assets/styles/global/navi-responsive.css";
+import "./assets/styles/global/smart-search.css";
+
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import SearchPage from "./pages/SearchPage";
 import MyPage from "./pages/MyPageF/MyPage";

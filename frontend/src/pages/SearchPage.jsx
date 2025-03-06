@@ -3,6 +3,7 @@ import axios from "axios";
 import { ClipLoader } from "react-spinners";
 import Enter from "../assets/images/Eenter.svg";
 import "../assets/styles/SearchPage.css";
+import SearchBar from "../components/SearchBar";
 
 const SearchPage = () => {
   const [query, setQuery] = useState("");
@@ -193,6 +194,8 @@ const SearchPage = () => {
   return (
     <div className="search-page-container">
       <h1>AI-Powered Search</h1>
+
+      <SearchBar />
 
       {/* Search Input */}
       <div className="search-section">

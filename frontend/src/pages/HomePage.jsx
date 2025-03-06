@@ -1,19 +1,15 @@
 import React from "react";
-import "../assets/styles/MyPageF/global-styles-folder/basis.css";
-import "../assets/styles/MyPageF/global-styles-folder/content.css";
-import "../assets/styles/MyPageF/global-styles-folder/feedback.css";
-import "../assets/styles/MyPageF/global-styles-folder/header.css";
-import "../assets/styles/MyPageF/global-styles-folder/layout.css";
-import "../assets/styles/MyPageF/global-styles-folder/layout-modern.css";
-import "../assets/styles/MyPageF/global-styles-folder/navi-responsive.css";
-import "../assets/styles/MyPageF/global-styles-folder/smart-search.css";
-
-const handleSearch = () => {
-  console.log("Search button clicked"); // Kan byttes ut med søkelogikk senere
-};
-
+import SearchBar from "../components/SearchBar";
+import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
+  const navigate = useNavigate();
+
+  const handleSearch = (query) => {
+    navigate(`/mypage?query=${encodeURIComponent(query)}`);
+    console.log("Search button clicked. query" + query); // Kan byttes ut med søkelogikk senere
+  };
+
   return (
     <div className="home">
       {/* Header */}
@@ -48,27 +44,7 @@ const HomePage = () => {
           </div>
         </section>
 
-        <section className="smart-search">
-          <div className="inside">
-            <h1>What can I help you with?</h1>
-
-             <div className="search-wrapper">
-                <input 
-                type="text" 
-                id="search-input" 
-                placeholder="Enter search query..." 
-                className="search-input"
-                />
-                 <button type="button" onClick={handleSearch} className="Enter-icon">
-                <img src="../assets/images/Eenter.svg" alt="Enter Icon" />
-                </button>
-              </div>
-         </div>
-
-        </section>
-
-
-        
+        <SearchBar onSearch={handleSearch}/>
 
         {/* Features Section */}
         <section className="infoboxen">
