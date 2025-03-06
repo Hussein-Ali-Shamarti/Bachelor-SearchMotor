@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { ClipLoader } from "react-spinners";
-import Enter from "../../Pictures-icones/Enter.svg";
-import "../../styles/MyPageF/SearchBar.css"; 
+import Enter from "../../assets/images/Enter.svg";
+import "../../assets/styles/MyPageF/SearchBar.css"; 
 
 const SearchPage = () => {
   const [query, setQuery] = useState("");

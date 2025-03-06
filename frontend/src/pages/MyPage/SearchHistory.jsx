@@ -1,7 +1,7 @@
 import react from "react";
-import LeftPil from "../../Pictures-icones/LeftPil.svg";
-import search from "../../Pictures-icones/search.svg";
-import Nychat from "../../Pictures-icones/Nychat.svg";
+import LeftPil from "../../assets/images/LeftPil.svg";
+import search from "../../assets/images/search.svg";
+import Nychat from "../../assets/images/Nychat.svg";
 
 
 const SearchHistory = () => {

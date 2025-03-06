@@ -1,8 +1,8 @@
 import react from react;
 import SearchBar from "./SearchBar";
 import SearchHistory from "./SearchHistory";
-import user1 from "../../Pictures-icones/user1.svg";
-import question from "../../Pictures-icones/question.svg";
+import user1 from "../../assets/images/user1.svg";
+import question from "../../assets/images/question.svg";
 
 
 const MyPage =() =>{

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { ClipLoader } from "react-spinners";
-import Enter from "../../Pictures-icones/Eenter.svg";
+import Enter from "../../assets/images/Eenter.svg";
 import "../../styles/MyPage/SearchBar.css"; 
 
 const SearchPage = () => {

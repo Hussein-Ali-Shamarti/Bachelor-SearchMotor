@@ -1,12 +1,12 @@
 import React from "react";
-import "../styles/MyPageF/global-styles-folder/basis.css";
-import "../styles/MyPageF/global-styles-folder/content.css";
-import "../styles/MyPageF/global-styles-folder/feedback.css";
-import "../styles/MyPageF/global-styles-folder/header.css";
-import "../styles/MyPageF/global-styles-folder/layout.css";
-import "../styles/MyPageF/global-styles-folder/layout-modern.css";
-import "../styles/MyPageF/global-styles-folder/navi-responsive.css";
-import "../styles/MyPageF/global-styles-folder/smart-search.css";
+import "../assets/styles/MyPageF/global-styles-folder/basis.css";
+import "../assets/styles/MyPageF/global-styles-folder/content.css";
+import "../assets/styles/MyPageF/global-styles-folder/feedback.css";
+import "../assets/styles/MyPageF/global-styles-folder/header.css";
+import "../assets/styles/MyPageF/global-styles-folder/layout.css";
+import "../assets/styles/MyPageF/global-styles-folder/layout-modern.css";
+import "../assets/styles/MyPageF/global-styles-folder/navi-responsive.css";
+import "../assets/styles/MyPageF/global-styles-folder/smart-search.css";
 
 const handleSearch = () => {
   console.log("Search button clicked"); // Kan byttes ut med søkelogikk senere
@@ -60,7 +60,7 @@ const HomePage = () => {
                 className="search-input"
                 />
                  <button type="button" onClick={handleSearch} className="Enter-icon">
-                <img src="/Pictures-icones/Eenter.svg" alt="Enter Icon" />
+                <img src="../assets/images/Eenter.svg" alt="Enter Icon" />
                 </button>
               </div>
          </div>

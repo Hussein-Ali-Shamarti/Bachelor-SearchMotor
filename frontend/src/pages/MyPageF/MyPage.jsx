@@ -1,9 +1,9 @@
 import react from "react";
 import SearchBar from "./SearchBar";
 import SearchHistory from "./SearchHistory";
-import user from "../../Pictures-icones/user.svg";
-import question from "../../Pictures-icones/question.svg";
-import "../../styles/MyPageF/MyPage.css";
+import user from "../../assets/images/user.svg";
+import question from "../../assets/images/question.svg";
+import "../../assets/styles/MyPageF/MyPage.css";
 
 
 const MyPage =() =>{
