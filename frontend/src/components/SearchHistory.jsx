@@ -1,7 +1,6 @@
-import react from "react";
-import LeftPil from "../../assets/images/LeftPil.svg";
-import search from "../../assets/images/search.svg";
-import Nychat from "../../assets/images/Nychat.svg";
+import LeftPil from "../assets/images/LeftPil.svg";
+import search from "../assets/images/search.svg";
+import Nychat from "../assets/images/Nychat.svg";
 
 
 const SearchHistory = () => {
@@ -25,4 +24,4 @@ const SearchHistory = () => {
   );
 
 };
-export default Sidebar;
+export default SearchHistory;

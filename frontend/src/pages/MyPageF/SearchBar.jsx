@@ -4,7 +4,7 @@ import { ClipLoader } from "react-spinners";
 import Enter from "../../assets/images/Enter.svg";
 import "../../assets/styles/MyPageF/SearchBar.css"; 
 
-const SearchPage = () => {
+const SearchBar = () => {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
   const [visibleResults, setVisibleResults] = useState(5);
@@ -186,4 +186,4 @@ const SearchPage = () => {
   );
 };
 
-export default SearchPage;
+export default SearchBar;

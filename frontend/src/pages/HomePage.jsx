@@ -1,39 +1,30 @@
 import React from "react";
 import SearchBar from "../components/SearchBar";
 import { useNavigate } from "react-router-dom";
+import Header from "../components/Header";
 
 const HomePage = () => {
   const navigate = useNavigate();
 
+  // TODO: handle user login status
+  const userisloggedIn = false;
+
   const handleSearch = (query) => {
-    navigate(`/mypage?query=${encodeURIComponent(query)}`);
-    console.log("Search button clicked. query" + query); // Kan byttes ut med søkelogikk senere
+
+    if(userisloggedIn){
+      navigate(`/mypage?query=${encodeURIComponent(query)}`);
+      console.log("Navigating to my page. query=" + query);
+    }else{
+      navigate(`/search?query=${encodeURIComponent(query)}`);
+      console.log("Navigating to search page. query=" + query);
+    }
   };
 
   return (
     <div className="home">
-      {/* Header */}
-      <header className="site-header">
-        <div className="inside">
-          <div className="wrapper">
-            <div className="logo-container">
-              <a href="/">
-              <img src="/images/logo.HybridSearch.svg" 
-                    srcSet="/images/logo.HybridSearch.svg 2x" 
-                    alt="Logo" 
-                    width="222" 
-                    height="36" 
-                />
-              </a>
-              <h1>HybridSearch.ai</h1>
-            </div>
-          </div>
-        </div>
-      </header>
+      <Header />
 
-      {/* Main Content */}
       <main className="site-content" id="content">
-        {/* Hero Section */}
         <section className="content-intro">
           <div className="inside">
             <h2>AI-powered search engine</h2>

@@ -1,8 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import EnterIcon from "../assets/images/Eenter.svg";
 
-const SearchBar = ({ onSearch }) => {
-  const [query, setQuery] = useState("");
+const SearchBar = ({ initialQuery, onSearch }) => {
+  const [query, setQuery] = useState(initialQuery || "");
+
+  useEffect(() => {
+    if (initialQuery) {
+      handleSearch();
+    }
+  }, [initialQuery]);
 
   const handleSearch = async () => {
     if(onSearch && query)
@@ -21,13 +27,13 @@ const SearchBar = ({ onSearch }) => {
       <div className="inside">
         <h1>What can I help you with?</h1>
         <div className="search-wrapper">
-          <input 
-            type="text" 
-            id="search-input" 
+          <input
+            type="text"
+            id="search-input"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder="Enter search query..." 
+            placeholder="Enter search query..."
             className="search-input"
           />
           <button type="button" onClick={handleSearch} className="Enter-icon">

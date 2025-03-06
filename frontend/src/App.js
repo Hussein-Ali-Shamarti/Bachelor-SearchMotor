@@ -11,11 +11,8 @@ import "./assets/styles/global/smart-search.css";
 
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import SearchPage from "./pages/SearchPage";
-import MyPage from "./pages/MyPageF/MyPage";
 import HomePage from "./pages/HomePage";
-
-
-
+import MyPage from "./pages/MyPage";
 
 const Home = () => <h1>Welcome to the Home Page</h1>;
 
