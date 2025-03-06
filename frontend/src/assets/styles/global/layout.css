@@ -46,18 +46,22 @@ body {
 
 } /* Ende @supports */ 
 
-#app {
+.mypage {
   display: flex; 
   flex-flow: row; 
   height: 100vh; 
   width: 100vw;
 }
 
-#app .site-bar {
+
+/* TODO: make mobile-friendly*/
+.mypage:first-child {
   flex-grow: 0;
+  flex-basis: 200px;
+  width: 20%;
 }
 
-#app .router-view {
+.mypage:last-child {
   flex-grow: 1;
 }
 

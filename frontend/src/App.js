@@ -13,28 +13,24 @@ import { BrowserRouter as Router, Routes, Route, Link, useLocation } from "react
 import SearchPage from "./pages/SearchPage";
 import HomePage from "./pages/HomePage";
 import MyPage from "./pages/MyPage";
-import Sidebar from "./components/Sidebar";
 
 const Home = () => <h1>Welcome to the Home Page</h1>;
 
 function App() {
   return (
     <Router>
-      <div id="app">
-        <Sidebar />
-        <nav style={{ padding: "10px", borderBottom: "1px solid #ddd" }}>
-          <Link to="/" style={{ marginRight: "10px" }}>
-            Home
-          </Link>
-          <Link to="/search" style={{ marginRight: "10px" }}>Search</Link>
-          <Link to="/mypage">My Page</Link>
-        </nav>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/search" element={<SearchPage />} />
-          <Route path="/mypage" element={<MyPage />} />
-        </Routes>
-      </div>
+      <nav style={{ padding: "10px", borderBottom: "1px solid #ddd" }}>
+        <Link to="/" style={{ marginRight: "10px" }}>
+          Home
+        </Link>
+        <Link to="/search" style={{ marginRight: "10px" }}>Search</Link>
+        <Link to="/mypage">My Page</Link>
+      </nav>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/search" element={<SearchPage />} />
+        <Route path="/mypage" element={<MyPage />} />
+      </Routes>
     </Router>
   );
 }

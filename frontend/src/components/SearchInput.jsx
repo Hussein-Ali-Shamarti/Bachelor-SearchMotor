@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import EnterIcon from "../assets/images/Eenter.svg";
 
-const SearchBar = ({ initialQuery, onSearch }) => {
+const SearchInput = ({ initialQuery, onSearch }) => {
   const [query, setQuery] = useState(initialQuery || "");
 
   useEffect(() => {
@@ -45,4 +45,4 @@ const SearchBar = ({ initialQuery, onSearch }) => {
   );
 };
 
-export default SearchBar;
+export default SearchInput;

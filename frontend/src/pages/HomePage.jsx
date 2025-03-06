@@ -1,5 +1,5 @@
 import React from "react";
-import SearchBar from "../components/SearchBar";
+import SearchInput from "../components/SearchInput";
 import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 
@@ -35,7 +35,7 @@ const HomePage = () => {
           </div>
         </section>
 
-        <SearchBar onSearch={handleSearch}/>
+        <SearchInput onSearch={handleSearch}/>
 
         {/* Features Section */}
         <section className="infoboxen">

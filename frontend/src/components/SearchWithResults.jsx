@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import SearchBar from "./SearchBar";
+import SearchInput from "./SearchInput";
 import axios from "axios";
 import { ClipLoader } from "react-spinners";
 
-const Search = ({ initialQuery }) => {
+const SearchWithResults = ({ initialQuery, addToSearchHistory }) => {
   const [query, setQuery] = useState(initialQuery || "");
   const [results, setResults] = useState([]);
   const [visibleResults, setVisibleResults] = useState(5);
@@ -16,8 +16,8 @@ const Search = ({ initialQuery }) => {
 
   // Chat state
   const [showChat, setShowChat] = useState(false);
-  const [chatMessage, setChatMessage] = useState("");
   const [chatHistory, setChatHistory] = useState([]);
+  const [chatMessage, setChatMessage] = useState("");
   const [chatLoading, setChatLoading] = useState(false);
 
   // Backend URL from environment variable
@@ -84,7 +84,7 @@ const Search = ({ initialQuery }) => {
     return "";
   };
 
-  // Handle search functionality using a single searchbar.
+  // Handle search functionality using a single SearchInput.
   const handleSearch = async (query) => {
     if (!query.trim()) {
       setError("Please enter a search query.");
@@ -154,7 +154,7 @@ const Search = ({ initialQuery }) => {
       ...chatHistory,
       { sender: "user", message: chatMessage }
     ];
-    setChatHistory(newHistory);
+    //setChatHistory(newHistory);
     setChatMessage("");
     setChatLoading(true);
 
@@ -190,12 +190,15 @@ const Search = ({ initialQuery }) => {
 
   const newQuery = (input) => {
     setQuery(input)
+    if(addToSearchHistory){
+      addToSearchHistory(input)
+    }
     handleSearch(input)
   }
 
   return(
     <section className="">
-      <SearchBar initialQuery={initialQuery} onSearch={newQuery} />
+      <SearchInput initialQuery={initialQuery} onSearch={newQuery} />
 
       {/* Loading Spinner */}
       {loading && (
@@ -414,4 +417,4 @@ const Search = ({ initialQuery }) => {
   );
 
 };
-export default Search;
+export default SearchWithResults;

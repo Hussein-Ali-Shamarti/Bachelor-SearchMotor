@@ -1,29 +1,36 @@
 import { useLocation } from "react-router-dom";
+import LeftPil from "../assets/images/LeftPil.svg";
+import Nychat from "../assets/images/Nychat.svg";
+import search from "../assets/images/search.svg";
 
-const Sidebar = () => {
-    let location = useLocation();
-    const show = location.pathname == "/mypage";
-    //TODO: get chat history from service / shared state
+const Sidebar = ({ sidebarVisible, searchHistory, handleSelectSearchQuery }) => {
 
-    // TODO: populate with chats-list (history)
-    // TODO: add click handlers. Clicking a list item -> open chat
 
     return (
-        (show &&
-        <div class="site-nav"> 
-            <div class="inside">
-            <span class="hamburger"></span>
-            <button class="menubutton" onclick="this.classList.toggle('showmenu')">Menu</button>
-            <ul>
-                <li><a href="template_default.html">Template-default</a></li>
-                <li><a href="welcome.html">Welcome</a></li>
-                <li class="current"><a href="">"?"</a></li>
-                <li><a href="get_started.html">Get started /Oversikt</a></li>
-                <li><a href="result_list.html">Search knapp - result_list</a></li>
-                <li><a href="kontakt.html">Kontakt</a></li>
-            </ul>
+        sidebarVisible && (
+            <div className="site-nav">
+                
+                <button onClick={() => alert('Left-pil clicked!')} className="LeftPil">
+                    <img src={LeftPil} alt="LeftPil Icon" width="35px" height="35px" />
+                </button>
+                <button onClick={() => alert('Search in history clicked!')} className="search-icon">
+                    <img src={search} alt="search Icon" width="25px" height="25px" />
+                </button>
+                <button onClick={() => alert('Ny chat clicked!')} className="Nychat-icon">
+                    <img src={Nychat} alt="Nychat Icon" width="25px" height="25px" />
+                </button>
+
+                <div>
+                    <u>SearchHistory:</u>
+                    {/*TODO: group by day, and limit*/} 
+                    {searchHistory.map((historyItem, index) => (
+                        <div key={index} className="chat-item" onClick={() => handleSelectSearchQuery(historyItem.searchQuery)} >
+                            {historyItem.timestamp} - {historyItem.searchQuery}
+                        </div>
+                    ))}
+                </div>
             </div>
-        </div> )
+        )
     );
 }
 

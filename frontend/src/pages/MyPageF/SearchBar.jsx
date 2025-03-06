@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import axios from "axios";
 import { ClipLoader } from "react-spinners";
 import Enter from "../../assets/images/Enter.svg";
-import "../../assets/styles/MyPageF/SearchBar.css"; 
+import "../../assets/styles/MyPageF/SearchInput.css"; 
 
-const SearchBar = () => {
+const SearchInput = () => {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
   const [visibleResults, setVisibleResults] = useState(5);
@@ -186,4 +186,4 @@ const SearchBar = () => {
   );
 };
 
-export default SearchBar;
+export default SearchInput;

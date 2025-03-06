@@ -1,5 +1,5 @@
 import React from "react";
-import SearchBar from "./SearchBar";
+import SearchInput from "./SearchInput";
 import SearchHistory from "./SearchHistory";
 import user from "../../assets/images/user.svg";
 import question from "../../assets/images/question.svg";
@@ -15,7 +15,7 @@ const MyPage =() =>{
 
         <div className="main-content">
           <h2>Logo</h2>
-          <SearchBar/>
+          <SearchInput/>
           <button onclick="alert('Person clicked!')" className="user-icon">
             <img src={user} alt="user Icon" width="30px" height="30px"/>
           </button>
