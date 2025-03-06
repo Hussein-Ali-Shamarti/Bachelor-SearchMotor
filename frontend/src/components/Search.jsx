@@ -26,7 +26,7 @@ const Search = ({ initialQuery }) => {
 
   useEffect(() => {
     if (initialQuery) {
-      handleSearch();
+      handleSearch(initialQuery);
     }
   }, [initialQuery]);
 
@@ -85,7 +85,7 @@ const Search = ({ initialQuery }) => {
   };
 
   // Handle search functionality using a single searchbar.
-  const handleSearch = async () => {
+  const handleSearch = async (query) => {
     if (!query.trim()) {
       setError("Please enter a search query.");
       return;
@@ -189,8 +189,8 @@ const Search = ({ initialQuery }) => {
   };
 
   const newQuery = (input) => {
-    setQuery(input);
-    handleSearch();
+    setQuery(input)
+    handleSearch(input)
   }
 
   return(
