@@ -2,19 +2,18 @@ import React from "react";
 import SearchInput from "../components/SearchInput";
 import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
+import "../assets/styles/HomePage.css";
+
 
 const HomePage = () => {
   const navigate = useNavigate();
-
-  // TODO: handle user login status
-  const userisloggedIn = false;
+  const userisloggedIn = false; // TODO: Oppdater denne logikken
 
   const handleSearch = (query) => {
-
-    if(userisloggedIn){
+    if (userisloggedIn) {
       navigate(`/mypage?query=${encodeURIComponent(query)}`);
       console.log("Navigating to my page. query=" + query);
-    }else{
+    } else {
       navigate(`/search?query=${encodeURIComponent(query)}`);
       console.log("Navigating to search page. query=" + query);
     }
@@ -23,6 +22,16 @@ const HomePage = () => {
   return (
     <div className="home">
       <Header />
+
+      {/* Bruker eksisterende stil for knapper */}
+      <div className="auth-buttons" style={{ textAlign: "right", padding: "10px" }}>
+        <button onClick={() => navigate("/login")} className="button">
+          Login
+        </button>
+        <button onClick={() => navigate("/register")} className="button">
+          Registration
+        </button>
+      </div>
 
       <main className="site-content" id="content">
         <section className="content-intro">
@@ -35,7 +44,7 @@ const HomePage = () => {
           </div>
         </section>
 
-        <SearchInput onSearch={handleSearch}/>
+        <SearchInput onSearch={handleSearch} />
 
         {/* Features Section */}
         <section className="infoboxen">
@@ -114,13 +123,6 @@ const HomePage = () => {
                 <p>User-Friendly</p>
               </blockquote>
               <figcaption>— Sofia, PhD Student</figcaption>
-            </figure>
-
-            <figure className="studentFeedbackItem">
-              <blockquote>
-                <p>Accurate summaries!</p>
-              </blockquote>
-              <figcaption>— Peter, PhD Student</figcaption>
             </figure>
 
             <figure className="studentFeedbackItem">
