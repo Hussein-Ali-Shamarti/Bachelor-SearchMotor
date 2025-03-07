@@ -3,6 +3,10 @@ import { useLocation } from "react-router-dom";
 import Header from "../components/Header";
 import SearchWithResults from "../components/SearchWithResults";
 import Sidebar from "../components/Sidebar";
+import user from "../assets/images/user.svg";
+import question from "../assets/images/question.svg";
+import   "../assets/styles/MyPage.css";
+import Popup from "../components/Popup";
 
 const MyPage = () => {
   const location = useLocation();
@@ -34,10 +38,16 @@ const MyPage = () => {
 
   return (
     <div className="mypage">
+      <Header />
       <Sidebar sidebarVisible="true" searchHistory={searchHistory} handleSelectSearchQuery={handleSelectSearchQuery} />
       <main className="site-content">
-        <Header />
+        
         <SearchWithResults initialQuery={searchQuery} addToSearchHistory={addToSearchHistory} />
+        <button onclick="alert('Person clicked!')" className="user-icon">
+            <img src={user} alt="user Icon" width="30px" height="30px"/>
+          </button>
+          
+          <Popup/>
       </main>
     </div>
   );

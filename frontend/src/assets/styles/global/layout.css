@@ -46,7 +46,7 @@ body {
 
 } /* Ende @supports */ 
 
-.mypage {
+/*.mypage {
   display: flex; 
   flex-flow: row; 
   height: 100vh; 
@@ -55,7 +55,7 @@ body {
 
 
 /* TODO: make mobile-friendly*/
-.mypage:first-child {
+/*.mypage:first-child {
   flex-grow: 0;
   flex-basis: 200px;
   width: 20%;
