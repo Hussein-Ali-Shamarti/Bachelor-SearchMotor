@@ -16,6 +16,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);          
 const db = getFirestore(app);       
-const analytics = getAnalytics(app);
+const analytics = getAnalytics(app); // Initialiser Analytics
 
-export { app, auth, db };
+export { app, auth, db }; // Eksporter Auth slik at vi kan bruke den i andre filer
