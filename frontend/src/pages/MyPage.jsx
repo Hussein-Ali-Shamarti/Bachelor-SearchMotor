@@ -3,34 +3,78 @@ import { useLocation } from "react-router-dom";
 import Header from "../components/Header";
 import SearchWithResults from "../components/SearchWithResults";
 import Sidebar from "../components/Sidebar";
+import { db, auth } from "../FirebaseConfig";
+import { collection, query, where, getDocs, orderBy, addDoc, serverTimestamp } from "firebase/firestore";
+
 
 const MyPage = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const [searchQuery, setSearchQuery] = useState(queryParams.get("query") || "");
+  const [searchHistory, setSearchHistory] = useState([]);
+  const [user, setUser] = useState(null);
 
-
-  //TODO: we should probably base this list on a list from the server instead of local changes
-  // Initialize searchHistory from sessionStorage or as an empty array, store to sessionStorage
-  const [searchHistory, setSearchHistory] = useState(() => {
-    const savedHistory = sessionStorage.getItem("searchHistory");
-    return savedHistory ? JSON.parse(savedHistory) : [];
-  });
-
-  // Update sessionStorage whenever searchHistory changes
+  // Sjekk om bruker er logget inn
   useEffect(() => {
-    sessionStorage.setItem("searchHistory", JSON.stringify(searchHistory));
-  }, [searchHistory]);
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        setUser(user);
+      } else {
+        setUser(null);
+      }
+    });
+    return () => unsubscribe();
+  }, []);
 
-  // Function given to SearchWithResults-component to add a search-query to searchHistory
-  const addToSearchHistory = (query) => {
-    const timestamp = new Date().toISOString().split('T')[0];
-    setSearchHistory((prevSearchHistory) => [...prevSearchHistory, { searchQuery: query, timestamp: timestamp }]);
-  }
+  // Hent søkehistorikk fra Firestore når brukeren er logget inn
+  useEffect(() => {
+    const fetchSearchHistory = async () => {
+      if (user) {
+        try {
+          const searchRef = collection(db, "searchHistory");
+          const q = query(
+            searchRef,
+            where("userId", "==", user.uid),
+            orderBy("timestamp", "desc")
+          );
+          const querySnapshot = await getDocs(q);
+          const searches = querySnapshot.docs.map((doc) => ({
+            searchQuery: doc.data().searchQuery,
+            timestamp: new Date(doc.data().timestamp?.seconds * 1000).toLocaleString()
+          }));
+          setSearchHistory(searches);
+        } catch (error) {
+          console.error("Feil ved henting av søkehistorikk:", error);
+        }
+      }
+    };
+
+    fetchSearchHistory();
+  }, [user]);
+
+  // Legg til søk i Firestore og oppdater lokalt
+  const addToSearchHistory = async (query) => {
+    if (user) {
+      try {
+        const searchRef = collection(db, "searchHistory");
+        await addDoc(searchRef, {
+          userId: user.uid,
+          searchQuery: query,
+          timestamp: serverTimestamp()
+        });
+        setSearchHistory((prevSearchHistory) => [
+          { searchQuery: query, timestamp: new Date().toLocaleString() },
+          ...prevSearchHistory
+        ]);
+      } catch (error) {
+        console.error("Feil ved lagring av søk:", error);
+      }
+    }
+  };
 
   const handleSelectSearchQuery = (query) => {
     setSearchQuery(query);
-  }
+  };
 
   return (
     <div className="mypage">

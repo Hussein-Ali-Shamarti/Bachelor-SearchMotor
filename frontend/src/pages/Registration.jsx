@@ -1,35 +1,68 @@
-//KODE MAL FRONTEND
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import "../FirebaseConfig";
+import "../assets/styles/Registration.css"; // Importerer stil
 
-
-// Importerer nødvendige React-funksjoner og andre verktøy
-import React, { useState, useEffect } from 'react'; 
-import './YourStylesheet.css'; // Importer din egen stilarkfil her (hvis aktuelt)
-
-// Hovedkomponenten
 const Registration = () => {
-  // Bruker state for å lagre og oppdatere data
-  const [stateVariable, setStateVariable] = useState("Initial Value");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const navigate = useNavigate();
+  const auth = getAuth();
 
-  // Bruker useEffect for å kjøre kode ved spesifikke hendelser
-  useEffect(() => {
-    console.log("Komponenten er montert eller oppdatert!");
-    // Legg til eventuelle logikker her
-  }, [stateVariable]); // Kjør når stateVariable oppdateres
-
-  // En funksjon som kan brukes for spesifikke interaksjoner
-  const handleButtonClick = () => {
-    setStateVariable("Ny verdi");
+  const handleSignUp = async (event) => {
+    event.preventDefault();
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+      alert("Registration successful!");
+      navigate("/login");
+    } catch (error) {
+      console.error("Error during registration:", error);
+      alert("Registration failed: " + error.message);
+    }
   };
 
-  // Returnerer HTML-lignende JSX som definerer hvordan komponenten ser ut
   return (
-    <div className="my-component-container">
-      <h1>Min React-komponent</h1>
-      <p>Verdien av stateVariable er: {stateVariable}</p>
-      <button onClick={handleButtonClick}>Trykk på meg</button>
+    <div className="registration-container">
+      <h2>Sign Up</h2>
+      <form onSubmit={handleSignUp}>
+        <input
+          type="text"
+          placeholder="Firstname"
+          value={firstName}
+          onChange={(e) => setFirstName(e.target.value)}
+          required
+        />
+        <input
+          type="text"
+          placeholder="Lastname"
+          value={lastName}
+          onChange={(e) => setLastName(e.target.value)}
+          required
+        />
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+        <button type="submit">Sign Up</button>
+        <p>
+          Already have an account? <a href="/login">Sign in</a>
+        </p>
+      </form>
     </div>
   );
 };
 
-// Eksporterer komponenten for bruk i andre filer
 export default Registration;
