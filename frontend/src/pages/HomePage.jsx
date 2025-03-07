@@ -4,10 +4,9 @@ import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import "../assets/styles/HomePage.css";
 
-
 const HomePage = () => {
   const navigate = useNavigate();
-  const userisloggedIn = false; // TODO: Oppdater denne logikken
+  const userisloggedIn = false; // TODO: Update this logic
 
   const handleSearch = (query) => {
     if (userisloggedIn) {
@@ -23,12 +22,12 @@ const HomePage = () => {
     <div className="home">
       <Header />
 
-      {/* Bruker eksisterende stil for knapper */}
-      <div className="auth-buttons" style={{ textAlign: "right", padding: "10px" }}>
-        <button onClick={() => navigate("/login")} className="button">
+      {/* Auth Buttons Section */}
+      <div className="auth-buttons">
+        <button onClick={() => navigate("/login")} className="auth-button">
           Login
         </button>
-        <button onClick={() => navigate("/register")} className="button">
+        <button onClick={() => navigate("/register")} className="auth-button">
           Registration
         </button>
       </div>
@@ -58,7 +57,7 @@ const HomePage = () => {
                 your journey with HybridSearch.ai.
               </p>
               <p>
-                <a href="..." className="button">
+                <a href="#" className="infobox-button">
                   Discover more
                 </a>
               </p>
@@ -71,7 +70,7 @@ const HomePage = () => {
                 information quickly.
               </p>
               <p>
-                <a href="..." className="button">
+                <a href="#" className="infobox-button">
                   Discover more
                 </a>
               </p>
@@ -84,7 +83,7 @@ const HomePage = () => {
                 right at your fingertips.
               </p>
               <p>
-                <a href="..." className="button">
+                <a href="#" className="infobox-button">
                   Discover more
                 </a>
               </p>

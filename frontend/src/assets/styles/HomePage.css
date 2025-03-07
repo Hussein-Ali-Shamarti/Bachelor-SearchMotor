@@ -1,16 +1,71 @@
-/**
- * ================================================
- * HomePageFolder.css
- * ================================================
- * This stylesheet contains styles specifically for the HomePage component.
- *
- * To maintain better structure and control during development, 
- * I have created a dedicated folder `MyPageF/HomePageFolder.css` under `styles/`.
- * 
- * Once the development is complete, all relevant styles will be 
- * moved to their appropriate global stylesheets for better maintainability.
- *
- * Current location: `/src/assets/styles/MyPageF/HomePageFolder.css`
- *
- 
- */
+/* HomePage.css */
+
+/* Main container styling */
+.home {
+  text-align: center;
+  background-color: var(--color-background-light);
+  padding: 20px;
+}
+
+/* Auth buttons (login and registration) */
+.auth-buttons {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+}
+
+.auth-button {
+  margin: 0 5px;
+  padding: 8px 20px;
+  border-radius: 20px;
+  background-color: var(--color-nav);
+  border: none;
+  cursor: pointer;
+  color: #fff;
+  font-size: 0.9rem;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.auth-button:hover {
+  background-color: var(--color-nav-darker);
+  transform: scale(1.05);
+}
+
+.auth-button:active {
+  transform: scale(0.95);
+}
+
+/* Search input styling */
+.search-input {
+  padding: 10px;
+  border: var(--color-grey-border-light-thin);
+  border-radius: 10px;
+  box-shadow: var(--color-shadow-light);
+}
+
+/* Infobox styles */
+.infobox {
+  background-color: var(--color-background-light);
+  border-radius: 10px;
+  padding: 20px;
+  margin: 10px;
+  box-shadow: var(--color-shadow);
+}
+
+.infobox h3 {
+  color: var(--color-nav);
+}
+
+.infobox .button {
+  background-color: var(--color-nav);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 15px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.infobox .button:hover {
+  background-color: var(--color-nav-darker);
+}
