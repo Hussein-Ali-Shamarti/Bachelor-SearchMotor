@@ -53,3 +53,18 @@
 .forgot-password:hover {
   text-decoration: underline;
 }
+
+.register-link {
+  margin-top: 10px;
+  color: var(--color-font);
+}
+
+.register-link a {
+  color: var(--color-nav);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.register-link a:hover {
+  text-decoration: underline;
+}
