@@ -1,38 +1,54 @@
-
 /* Styling for header */
 .site-header {
-  background-color: var(--color-background-light); /* Fyll bakgrunnsfargen på headeren */
-  color: #2e5278; /* Fargen på teksten */
+  background-color: var(--color-background-light);
+  color: #2e5278;
   padding: 1rem;
   margin-bottom: 0;
 }
 
-/* Wrapper for å plassere logo og tekst på samme linje */
+/* Wrapper for logo and buttons */
 .wrapper {
-  display: flex; /* Bruker flexbox for å plassere elementene på samme linje */
-  justify-content: flex-start; /* Justerer innholdet til venstre */
-  align-items: center; /* Sørger for at elementene er vertikalt sentrert */
-  width: 100%; /* Fyller hele bredden */
+  display: flex;
+  justify-content: space-between; /* Space between logo and buttons */
+  align-items: center;
+  width: 100%;
 }
 
-/* Styling for logo-containeren */
+/* Styling for logo-container */
 .logo-container {
-  display: flex; /* Gjør logo-containeren til en flex-container */
-  align-items: center; /* Sørger for at både logoen og teksten er vertikalt sentrert */
-
+  display: flex;
+  align-items: center;
 }
 
-/* Juster størrelsen på logoen */
 .logo-container img {
-  height: 2rem; /* Sett høyden på logoen */
-  width: auto; /* Beholder aspektforholdet til logoen */
+  height: 2rem;
+  width: auto;
 }
 
-/* Styling for tekst */
 .logo-container h1 {
-  margin: 0; /* Fjern eventuelle standardmargins */
-  font-size: 1.4rem; /* Juster størrelsen på teksten */
-  font-weight: 600; /* Velg ønsket fethet på teksten */
-  color: #2e5278; /* Farge på teksten */
-  line-height: 1; /* Sørger for at teksten ikke har for mye plass over eller under */
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #2e5278;
+  line-height: 1;
+}
+
+/* Auth buttons styling */
+.auth-buttons {
+  display: flex;
+  gap: 10px; /* Space between buttons */
+}
+
+.auth-button {
+  padding: 5px 15px;
+  border-radius: 20px;
+  background-color: var(--color-nav);
+  border: none;
+  cursor: pointer;
+  color: #fff;
+  transition: background-color 0.3s;
+}
+
+.auth-button:hover {
+  background-color: var(--color-nav-darker);
 }

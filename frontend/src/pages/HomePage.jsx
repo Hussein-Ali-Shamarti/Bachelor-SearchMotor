@@ -22,16 +22,6 @@ const HomePage = () => {
     <div className="home">
       <Header />
 
-      {/* Auth Buttons Section */}
-      <div className="auth-buttons">
-        <button onClick={() => navigate("/login")} className="auth-button">
-          Login
-        </button>
-        <button onClick={() => navigate("/register")} className="auth-button">
-          Registration
-        </button>
-      </div>
-
       <main className="site-content" id="content">
         <section className="content-intro">
           <div className="inside">
