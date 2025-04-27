@@ -1,16 +1,15 @@
 from flask import Blueprint, request, jsonify, current_app
 import numpy as np
 from database import SessionLocal
-from models import Article, Conference  # Ensure Conference model is imported
+from models import Article, Conference
 import gzip
 import re
 import string
-import ast  # For safely parsing the author string into a list
+import ast
 
 ai_search_bp = Blueprint('ai_search', __name__)
 
 def normalize(text):
-    """Lowercase text, remove punctuation and extra whitespace."""
     if not text:
         return ""
     translator = str.maketrans("", "", string.punctuation)
@@ -19,7 +18,6 @@ def normalize(text):
 def author_matches(stored_author, filter_author):
     if not stored_author or stored_author == "None":
         return False
-
     try:
         authors_list = ast.literal_eval(stored_author)
         if authors_list is None:
@@ -50,19 +48,6 @@ def author_matches(stored_author, filter_author):
 
 @ai_search_bp.route("/ai-search", methods=["POST"])
 def ai_search():
-    """
-    Perform semantic search using FAISS and then apply detailed filters:
-      - Author (article.author)
-      - Location (dedicated location field, normalized)
-      - Conference name (from the Conference table)
-
-    The FAISS search runs first. Then, if an author or location filter is provided,
-    a fallback query is run to supplement the results (to catch articles that might not be in
-    the FAISS candidate set).
-
-    To filter by author, supply the "author" field in the payload or include the keyword "by" in your query
-    (e.g., "Give me articles by Lasse Berntzen"). The keyword "from" is reserved for location filtering.
-    """
     try:
         data = request.get_json()
         if "embedding" not in data:
@@ -81,34 +66,58 @@ def ai_search():
         if index is None:
             return jsonify({"error": "No articles found in FAISS index"}), 404
 
-        # Extract filters from payload.
         filter_author = data.get("author", "").lower().strip()
         filter_location = data.get("location", "").lower().strip()
         filter_conf_name = data.get("conference_name", "").lower().strip()
 
-        # Extract additional filters from the raw query string.
         raw_query = data.get("query", "").lower().strip()
-        if not filter_author and raw_query:
-            m_author = re.search(r'by\s+([a-z\s,]+)', raw_query)
-            if m_author:
-                filter_author = m_author.group(1).strip()
-            elif len(raw_query.split()) == 2:
-                filter_author = raw_query
+        filter_year = None
 
-        if not filter_location and raw_query:
-            m_location = re.search(r'from\s+([a-z\s,]+)', raw_query)
-            if m_location:
-                candidate = m_location.group(1).strip()
-                if len(candidate.split()) > 2 or candidate.split()[0] in {"new", "san", "los", "las"}:
-                    filter_location = candidate
+        if raw_query:
+            # Extract year first
+            m_year = re.search(r'\b(19|20)\d{2}\b', raw_query)
+            if m_year:
+                filter_year = m_year.group(0)
+                raw_query = raw_query.replace(filter_year, '').strip()
 
-        current_app.logger.info("Filters extracted - author: '%s', location: '%s', conference: '%s'",
-                                  filter_author, filter_location, filter_conf_name)
+            # Find all 'from' segments
+            from_segments = re.split(r'\bfrom\b', raw_query)
+
+            for segment in from_segments[1:]:
+                segment = segment.strip()
+                if not segment:
+                    continue
+                if segment.isdigit() and len(segment) == 4:
+                    filter_year = segment
+                elif len(segment.split()) <= 3:
+                    if not filter_author:
+                        filter_author = segment
+                else:
+                    if not filter_location:
+                        filter_location = segment
+
+            # Still fallback for 'by' keyword if not caught
+            if not filter_author:
+                m_author = re.search(r'by\s+([a-z\s,]+)', raw_query)
+                if m_author:
+                    filter_author = m_author.group(1).strip()
+                elif len(raw_query.split()) == 2:
+                    filter_author = raw_query
+
+            # Location fallback if not found
+            if not filter_location:
+                m_location = re.search(r'from\s+([a-z\s,]+)', raw_query)
+                if m_location:
+                    candidate = m_location.group(1).strip()
+                    if len(candidate.split()) > 2 or candidate.split()[0] in {"new", "san", "los", "las"}:
+                        filter_location = candidate
+
+        current_app.logger.info("Filters extracted - author: '%s', location: '%s', conference: '%s', year: '%s'",
+                                  filter_author, filter_location, filter_conf_name, filter_year)
 
         filtered_results = []
         seen_ids = set()
 
-        # --- Main FAISS-based search loop ---
         while k <= max_k:
             distances, indices = index.search(query_embedding, k)
             current_app.logger.info("FAISS search with k=%d returned %d candidate(s)", k, len(indices[0]))
@@ -127,18 +136,18 @@ def ai_search():
 
                     match = True
 
-                    if filter_author:
-                        if not author_matches(article.author, filter_author):
-                            match = False
-
+                    if filter_author and not author_matches(article.author, filter_author):
+                        match = False
                     if filter_location:
                         normalized_filter = normalize(filter_location)
                         normalized_article_location = normalize(article.location)
                         if not normalized_article_location or normalized_filter not in normalized_article_location:
                             match = False
-
                     if filter_conf_name:
                         if not conference or not conference.name or filter_conf_name not in conference.name.lower():
+                            match = False
+                    if filter_year:
+                        if not article.publication_date or not article.publication_date.startswith(filter_year):
                             match = False
 
                     if not match:
@@ -172,21 +181,20 @@ def ai_search():
                     filtered_results.append(result_item)
             k += 50
 
-        # --- Supplement with fallback query results ---
-        if filter_location or filter_author:
+        if filter_location or filter_author or filter_year:
             current_app.logger.info("Running fallback query to supplement FAISS results.")
             with SessionLocal() as session:
                 fallback_query = session.query(Article)
                 if filter_location:
                     fallback_query = fallback_query.filter(Article.location.ilike(f"%{filter_location}%"))
+                if filter_year:
+                    fallback_query = fallback_query.filter(Article.publication_date.like(f"{filter_year}%"))
                 fallback_articles = fallback_query.all()
                 current_app.logger.info("Fallback query returned %d article(s).", len(fallback_articles))
                 for article in fallback_articles:
-                    # Apply author filter if provided.
                     if filter_author and not author_matches(article.author, filter_author):
                         continue
 
-                    # Check conference name filter.
                     match = True
                     if filter_conf_name:
                         conference = None
@@ -198,7 +206,7 @@ def ai_search():
                         continue
 
                     if article.id in seen_ids:
-                        continue  # Skip articles already added.
+                        continue
 
                     conference = None
                     if article.conference_id:
