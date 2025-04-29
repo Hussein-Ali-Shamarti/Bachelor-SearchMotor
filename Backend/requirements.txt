@@ -1,0 +1,13 @@
+flask
+flask-cors
+sqlalchemy
+sentence-transformers
+numpy
+beautifulsoup4
+tqdm
+pdf2image
+pytesseract
+openai
+tiktoken
+python-dotenv
+faiss-cpu
