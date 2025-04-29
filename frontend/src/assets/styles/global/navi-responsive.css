@@ -19,6 +19,7 @@
     
 /* Style the navigation area */
 .site-nav { 
+  
   background-color: var(--color-nav,#00a3d2);
   color: white; 
 

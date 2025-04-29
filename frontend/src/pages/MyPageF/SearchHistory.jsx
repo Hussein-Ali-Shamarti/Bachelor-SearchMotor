@@ -1,30 +1,44 @@
-import react from "react";
-import LeftPil from "../../assets/images/LeftPil.svg";
-import search from "../../assets/images/search.svg";
-import Nychat from "../../assets/images/Nychat.svg";
-import "../../assets/styles/MyPageF/SearchHistory.css"
+import React from "react";
+import "../assets/styles/Dashboard.css"; // Styling ligger fortsatt her
 
+// Importer ikonene (husk at du må ha riktige paths)
+import searchIcon from "../assets/images/search.svg"; 
+import nyChatIcon from "../assets/images/Nychat.svg"; 
 
-const SearchHistory = () => {
+function SidebarMain() {
+  return (
+    <aside className="nav-sidebar">
 
-  return(
+      {/* Handling-knapper med ikoner */}
+      <div className="sidebar-actions">
+        <button className="icon-button" onClick={() => alert('New Search clicked!')}>
+          <img src={searchIcon} alt="Search Icon" width="25px" height="25px" />
+        </button>
+        <button className="icon-button" onClick={() => alert('Search History clicked!')}>
+          <img src={nyChatIcon} alt="Chat Icon" width="25px" height="25px" />
+        </button>
+      </div>
 
-    <div className="sidebar">
-      
-      <button onclick="alert('Left-pil clicked!')" className="LeftPil">
-        <img src={LeftPil} alt="LeftPil Icon" width="35px" height="35px"/>
-      </button>
-      <button onclick="alert('Search in history clicked!')" className="search">
-        <img src={search} alt="search Icon" width="25px" height="25px"/>
-      </button>
-      <button onclick="alert('Ny chat clicked!')" className="Nychat">
-        <img src={Nychat} alt="Nychat Icon" width="25px" height="25px"/>
-      </button>
-      
-      
-    </div>
+      {/* Meny under */}
+      <div className="sidebar-top">
+        <h3>Explore:</h3>
+        <nav className="example-menu">
+          <ul>
+            <li><a href="#">Search History 1</a></li>
+            <li><a href="#">Search History 2</a></li>
+            <li><a href="#">Search History 3</a></li>
+          </ul>
+        </nav>
+      </div>
 
+      {/* Footer med login/registration */}
+      <div className="sidebar-footer">
+        <button className="auth-button">Login</button>
+        <button className="auth-button">Register</button>
+      </div>
+
+    </aside>
   );
+}
 
-};
-export default SearchHistory;
+export default SidebarMain;

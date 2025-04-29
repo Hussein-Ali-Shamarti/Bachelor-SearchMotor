@@ -1,0 +1,124 @@
+/* Sidebar og icons (bra) */
+
+
+  
+  .sidebar-icons {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .sidebar-item {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: flex-start;
+  }
+  
+  .icon {
+    flex: 0 0 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .button-text {
+    font-size: 1rem;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .button-text span:first-child {
+    font-size: 1rem;
+    font-weight: bold;
+  }
+  
+  .button-text span:last-child {
+    font-size: 0.5rem;
+    font-weight: lighter;
+    font-style: italic;
+    opacity: 0.8;
+  }
+  
+  /* Responsive for sidebar icons */
+  @media screen and (min-width: 30em) {
+    .sidebar-icons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  
+    .sidebar-item {
+      flex: 1 0 12rem;
+      display: flex;
+    }
+  }
+  
+  /* Results list styles - Ryddet */
+  
+  .results-container {
+    width: 100%;
+    padding: 10px;
+    border-right: 1px solid #ccc;
+  }
+  
+  
+  .results-list {
+    list-style: none;
+    padding: 0;
+    width: 350px;
+    height: 500px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: var(--color-background-dark); /* Bruk global bakgrunn */
+  }
+  
+  .result-item {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  
+/*   styres globalt??  */
+  .result-item.selected {
+    background: #007bff;
+    color: white;
+  }
+
+
+  /* Artikkel-header med pil */
+
+  .article-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem; /* Avstand mellom pil og overskrift */
+    margin-bottom: 1rem;
+  }
+  
+  /* Knappen for å toggle sidebar */
+  .sidebar-toggle-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .sidebar-toggle-button img {
+    width: 30px;
+    height: 30px;
+  }
+  
+  .toggle-text {
+    font-weight: bold;
+    font-size: 1rem;
+    color: inherit;
+  }
+  
+
+  

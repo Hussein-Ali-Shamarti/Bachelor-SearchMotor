@@ -1,0 +1,61 @@
+/* Hele headeren */
+.site-header {
+    width: 100%;
+    padding: 10px 20px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+  }
+  
+  /* Flex container for pil og logo */
+  .header-content {
+    display: flex;
+    align-items: center;
+  }
+  
+  /* Container for kun PIL */
+  .sidebar-toggle-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 30px; /* Økt fra 20px til 30px */
+  }
+  
+  /* PIL-knapp */
+  .sidebar-toggle-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    transition: transform 0.3s ease;
+  }
+  
+  /* PIL-rotasjon */
+  .sidebar-toggle-button.rotated {
+    transform: rotate(180deg);
+  }
+  
+  /* Container for LOGO */
+  .logo-container {
+    display: flex;
+    align-items: center;
+    margin-left: 5px; /* Liten ekstra dytt fra venstre */
+  }
+  
+  .logo-container a {
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo-container img {
+    height: 36px;
+  }
+  
+  .logo-container h1 {
+    margin-left: 10px;
+    font-size: 1.5rem;
+    color: #2c5282;
+  }
+  

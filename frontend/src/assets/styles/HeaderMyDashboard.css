@@ -1,0 +1,89 @@
+/* Hovedheader */
+.site-header {
+  position: relative;
+  height: 70px; /* Høyde på header */
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+}
+
+/* Pilknapp alene */
+.sidebar-back-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Stil på pilknappen */
+.sidebar-back-button button {
+  background: none;
+  border: none;
+  font-size: 1.7rem;
+  color: inherit;
+  cursor: pointer;
+  padding: 0.4rem;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.sidebar-back-button button:hover {
+  color: #0070f3;
+  transform: scale(1.1);
+}
+
+/* Gruppe: Lupe + Chat + Logo */
+.sidebar-main-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-left: 2rem; /* Avstand fra pilen */
+}
+
+/* Stil på søk og chat-knapper */
+.sidebar-main-controls button {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: inherit;
+  cursor: pointer;
+  padding: 0.4rem;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.sidebar-main-controls button:hover {
+  color: #0070f3;
+  transform: scale(1.1);
+}
+
+/* Logo-container */
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Sidebar switcher for AI */
+.sidebar-switcher-ai {
+  position: absolute;
+  right: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  height: 100%;
+  z-index: 1000;
+}
+
+/* Stil på AI-knappen */
+.sidebar-switcher-ai button {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: inherit;
+  cursor: pointer;
+  padding: 0.4rem;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.sidebar-switcher-ai button:hover {
+  color: #0070f3;
+  transform: scale(1.1);
+}

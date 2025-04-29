@@ -8,6 +8,7 @@ import "./assets/styles/global/layout.css";
 import "./assets/styles/global/layout-modern.css";
 import "./assets/styles/global/navi-responsive.css";
 import "./assets/styles/global/smart-search.css";
+import "./assets/styles/global/menu.css";
 
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import SearchPage from "./pages/SearchPage";
@@ -15,6 +16,8 @@ import HomePage from "./pages/HomePage";
 import MyPage from "./pages/MyPage";
 import Login from "./pages/Login";
 import Registration from "./pages/Registration";
+import Dashboard from "./pages/Dashboard"; // første Dashboard
+import MyDashboard from "./pages/MyDashboard"; // Ny MyDashboard second 
 
 function App() {
   return (
@@ -25,11 +28,16 @@ function App() {
         <Link to="/mypage" className="nav-link">My Page</Link>
         <Link to="/login" className="nav-link">Login</Link>
         <Link to="/register" className="nav-link">Register</Link>
+        <Link to="/dashboard" className="nav-link">Dashboard</Link> 
+        <Link to="/mydashboard" className="nav-link">MyDashboard</Link> {/* Riktig path */}
       </nav>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/search" element={<SearchPage />} />
         <Route path="/mypage" element={<MyPage />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/mydashboard" element={<MyDashboard />} /> {/* Ny rute */}
+
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Registration />} />
       </Routes>

@@ -1,0 +1,202 @@
+/* =============================================================
+   Dashboard.css
+
+   Bruksområde:
+   - Overordnet layout for dashboardet
+   - Grid-oppsett og plassering av hovedområder
+
+   Inneholder styling for:
+   - .dashboard-layout     → Hoved-grid med kolonner
+   - .main-column          → Midtkolonnen (hovedinnhold)
+   - .ai-sidebar           → Høyre side med AI-assistent
+   - .article-section      → Artikkeldel med sidebar og innhold
+   - .sidebar-toggle-button → Knapp for å vise/skjule sidebar
+
+   NB: Ikke legg inn komponentspesifikk stil her (bruk komponentens CSS)
+================================================================ */
+
+
+/* ====================================== */
+/* 1. DASHBOARD-GRID LAYOUT               */
+/* ====================================== */
+
+/* Grid-layout: Standard med sidebar */
+.dashboard-layout {
+  display: grid;
+  grid-template-columns: auto 1fr; /* nav-sidebar + main */
+  min-height: 100vh;
+}
+
+/* Når sidebar er skjult */
+.dashboard-layout.no-nav {
+  grid-template-columns: 1fr;
+}
+
+
+.main-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.ai-sidebar {
+  background: hsl(0, 0%, 90%);
+  padding: 1rem;
+}
+
+/* ====================================== */
+/* 2. ARTICLE SECTION                     */
+/* ====================================== */
+
+.article-section {
+  display: flex;
+  height: 100%;
+  min-height: 100vh;
+}
+
+.article-sidebar {
+  width: 280px; /* NYTT: fast bredde */
+  max-width: 300px;
+  flex-shrink: 0;
+  background-color: var(--color-background-dark);
+}
+
+.article-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1; /* Tar resten av plassen */
+  padding: 20px;
+  background-color: var(--color-background-light);
+}
+
+.close-article-sidebar-mobile {
+  display: none; /* skjult som standard */
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  color: var(--color-font, #fff); /* eller annen passende farge */
+}
+
+@media screen and (max-width: 768px) {
+  .close-article-sidebar-mobile {
+    display: block;
+  }
+}
+
+
+/* ====================================== */
+/* 3. TOGGLE-KNAPP FOR SIDEBAR            */
+/* ====================================== */
+
+.sidebar-toggle-button {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 1000;
+  transition: transform 0.3s ease;
+}
+
+.sidebar-toggle-button.rotated {
+  transform: rotate(180deg);
+}
+
+/* ====================================== */
+/* 4. SKJUL-KLASSE                        */
+/* ====================================== */
+
+.hidden {
+  display: none !important;
+}
+
+/* ====================================== */
+/* 5. RESPONSIVT: SIDEBAR PÅ MOBIL        */
+/* ====================================== */
+@media screen and (max-width: 768px) {
+  .dashboard-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .nav-sidebar,
+  .ai-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: var(--color-background-light);
+    z-index: 2000;
+    overflow-y: auto;
+    padding: 2rem;
+    display: none;
+  }
+
+  .nav-sidebar.active,
+  .ai-sidebar.active {
+    display: block;
+  }
+
+  .main-column {
+    width: 100%;
+    padding: 1rem;
+  }
+}
+
+
+.ai-close-button-mobile {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  color: var(--color-font, #333);
+}
+
+@media screen and (max-width: 768px) {
+  .ai-close-button-mobile {
+    display: block;
+  }
+}
+
+
+.sidebar-header-switch {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.sidebar-header-switch button {
+  flex: 1;
+  padding: 0.5rem;
+  background: hsl(0, 0%, 95%);
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.sidebar-header-switch button.active {
+  background: hsl(0, 0%, 85%);
+  font-weight: bold;
+}
+
+
+.article-topbar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid #ccc;
+  background: hsl(0, 0%, 98%);
+}
+
+.article-topbar button {
+  background: none;
+  border: 1px solid #ccc;
+  padding: 0.4rem 0.8rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
