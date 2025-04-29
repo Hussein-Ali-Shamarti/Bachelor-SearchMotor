@@ -22,13 +22,13 @@ Open a terminal and navigate into the backend folder:
 cd backend
 
 ### Create and activate a virtual environment:
-# Create a virtual environment
+**Create a virtual environment**
 python -m venv venv
 
-# Activate the environment
-# For Windows
+## Activate the environment
+**For Windows**
 venv\Scripts\activate
-# For macOS/Linux
+**For macOS/Linux**
 source venv/bin/activate
 
 You should now see a (venv) at the start of your terminal prompt.
