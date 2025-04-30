@@ -1,146 +1,129 @@
-/* Base styles */
+/* -------------------------------------------------------------
+  HEADER & SØKEFELT
+--------------------------------------------------------------*/
 
-.site-title {
-  margin-bottom: 0;
+.search-bar-wrapper {
+  text-align: center;
+  margin: 1.5rem auto;
 }
 
-/* Fjernet .main-menu fordi den ikke lenger brukes */
-
-.post-content {
-  padding: 0 1.4em 1.4em;
+.search-input {
+  width: 50%;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
 }
 
-/* Sidebars */
-.nav-sidebar, .ai-sidebar {
-  /* padding: 0.5em 1.4em 1em; */
-  background: hsl(0, 0%, 90%);
-  position: relative; /* riktig! */
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between; /* gjør at innhold og knapper presses mot hver sin kant */
+/* -------------------------------------------------------------
+  GRID-LAYOUT: SIDEBAR – MAIN – AI
+--------------------------------------------------------------*/
+
+.dashboard {
+  display: grid;
+  grid-template-columns: 260px 1fr 300px;
+  min-height: 80vh;
 }
 
-/* Meny inne i sidebars */
+/* -------------------------------------------------------------
+  VENSTRE SIDEBAR – ARTIKKELLISTE
+--------------------------------------------------------------*/
+
+.nav-sidebar {
+  background: white;
+  padding: 1rem;
+  border-right: 1px solid #ccc;
+}
+
+.nav-squish-container h3 {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
 .example-menu ul {
-  list-style-type: none;
-  margin: 0;
+  list-style: none;
   padding: 0;
+  margin: 0;
+  background: hsl(0, 0%, 15%);
 }
 
-.example-menu a {
+.example-menu li a {
   display: block;
-  padding: 0.4em 0;
-  color: inherit;
   text-decoration: none;
-  transition: all 0.5s ease;
-}
-
-.example-menu a:hover,
-.example-menu a:focus {
-  padding: 0.4em 1em;
-  background: hsl(0, 0%, 20%);
   color: white;
+  padding: 0.6em 1em;
 }
 
-/* Auth buttons nederst */
-.auth-buttons-sidebar {
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
-  margin-top: 1rem;
-  padding-bottom: 1rem;
+.example-menu li a:hover {
+  background: hsl(0, 0%, 25%);
 }
 
-.auth-buttons-sidebar .auth-button {
-  background-color: #333;
+/* -------------------------------------------------------------
+  HOVEDOMRÅDE – SELECTED ARTICLE & KNAPPER
+--------------------------------------------------------------*/
+
+.main-area {
+  padding: 2rem;
+}
+
+.selected-article {
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  padding: 1.5rem;
+  border-radius: 6px;
+  margin-bottom: 1.5rem;
+}
+
+.summary-action {
+  margin-bottom: 2rem;
+}
+
+.summarize-button {
+  background: hsl(0, 0%, 15%);
   color: white;
   border: none;
-  padding: 0.6em 1.2em;
-  border-radius: 1rem;
+  border-radius: 5px;
+  padding: 0.6rem 1.2rem;
   font-size: 1rem;
   cursor: pointer;
-  text-align: center;
+  transition: background 0.2s ease;
 }
 
-.auth-buttons-sidebar .auth-button:hover {
-  background-color: #555;
+.summarize-button:hover {
+  background: hsl(0, 0%, 25%);
 }
 
-/* Footer */
-.footer-area {
-  padding: 0.4em 1em;
-  text-align: center;
-  background: hsl(0, 0%, 75%);
+/* -------------------------------------------------------------
+  AI NAVIGASJONSKNAPPER
+--------------------------------------------------------------*/
+
+.menu-section {
+  padding-bottom: 2em;
+  margin-bottom: 2em;
 }
 
-/* Flexbox Layout for hele siden */
-@media screen and (min-width: 40em) {
-  .outer-wrap {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-  }
-
-  .dashboard {
-    display: flex;
-    flex: 1 1 auto;
-  }
-
-  .nav-sidebar {
-    flex: 0 0 12em; /* Venstre sidebar */
-  }
-
-  .main-area {
-    flex: 1 1 auto;
-    padding: 2em 1em;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .ai-sidebar {
-    flex: 0 0 12em; /* Høyre sidebar */
-  }
-
-  .post-content {
-    max-width: 40em;
-    margin: 0 auto;
-  }
-}
-
-/* Hidden sidebar class for toggling */
-.hidden {
-  display: none !important;
-}
-
-
-/* =============================================================
-   SidebarAI.css
-
-   Bruksområde:
-   - Styling av AI-sidebaren (SidebarAI.jsx)
-   - Kun synlig i responsivt panel (mobil-visning)
-
-================================================================ */
-
-/* Wrapper for innholdet i AI-sidebaren */
-.ai-sidebar-panel {
-  padding: 1rem;
-  color: #333;
-}
-
-/* Lukkeknapp kun synlig på mobil */
-.ai-close-button-mobile {
-  display: none;
-  background: none;
-  border: none;
+.menu-heading {
   font-size: 1.2rem;
   margin-bottom: 1rem;
-  cursor: pointer;
-  color: var(--color-font, #333);
 }
 
-@media screen and (max-width: 768px) {
-  .ai-close-button-mobile {
-    display: block;
-  }
+.advanced-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.advanced-nav li {
+  flex: 1 0 12em;
+}
+
+.advanced-nav li a {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  background: hsl(0, 0%, 15%);
+  
 }

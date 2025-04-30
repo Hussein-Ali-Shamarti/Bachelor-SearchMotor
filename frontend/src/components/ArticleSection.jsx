@@ -61,7 +61,7 @@ function ArticleSection() {
             <FiMessageCircle /> Ask AI
           </button>
           <button>
-            <FiSearch /> New Search
+            <FiSearch /> Article summary
           </button>
         </div>
 
