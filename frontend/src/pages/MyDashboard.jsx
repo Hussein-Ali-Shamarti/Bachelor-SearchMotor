@@ -73,23 +73,21 @@ function MyDashboard() {
       </div>
 
       <div className="dashboard">
-        {!articleSidebarHidden && (
-          <aside className="article-sidebar">
-            <div className="nav-squish-container">
-              <h3>Article list</h3>
-              <nav className="example-menu">
-                <ul>
-                  <li><a href="#">article list</a></li>
-                  <li><a href="#">article list</a></li>
-                  <li><a href="#">article list</a></li>
-                  <li><a href="#">article list</a></li>
-                </ul>
-              </nav>
-            </div>
-          </aside>
-        )}
+        <aside className={`article-sidebar ${articleSidebarHidden ? "hidden" : ""}`}>
+          <div className="nav-squish-container">
+            <h3>Article list</h3>
+            <nav className="example-menu">
+              <ul>
+                <li><a href="#">article list</a></li>
+                <li><a href="#">article list</a></li>
+                <li><a href="#">article list</a></li>
+                <li><a href="#">article list</a></li>
+              </ul>
+            </nav>
+          </div>
+        </aside>
 
-        <main className={`main-area ${articleSidebarHidden ? "expand" : ""}`}>
+        <main className="main-area">
           <section className="dashboard-cards">
             <div className={`selected-article-card ${showSummary ? "half-width" : "full-width"}`}>
               <div className="card-content">
@@ -152,14 +150,12 @@ function MyDashboard() {
           </section>
         </main>
 
-        {!aiSidebarHidden && (
-          <aside className="ai-sidebar">
-            <div className="ai-squish-container">
-              <h3>AI Tools:</h3>
-              <p>Chat or summary output comes here...</p>
-            </div>
-          </aside>
-        )}
+        <aside className={`ai-sidebar ${aiSidebarHidden ? "hidden" : ""}`}>
+          <div className="ai-squish-container">
+            <h3>AI Tools:</h3>
+            <p>Chat or summary output comes here...</p>
+          </div>
+        </aside>
       </div>
 
       <footer className="footer-area">
@@ -170,4 +166,3 @@ function MyDashboard() {
 }
 
 export default MyDashboard;
-
