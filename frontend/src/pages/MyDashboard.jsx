@@ -1,28 +1,26 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "../assets/styles/MyDashboard.css";
-import { FiList, FiFileText, FiMessageCircle, FiArrowLeftCircle, FiArrowRightCircle } from "react-icons/fi";
+import {
+  FiList,
+  FiFileText,
+  FiMessageCircle,
+  FiArrowLeftCircle,
+  FiArrowRightCircle,
+} from "react-icons/fi";
 import HeaderMyDashboard from "../components/HeaderMyDashboard";
 
 function MyDashboard() {
   const [selectedArticle, setSelectedArticle] = useState(null);
   const [showSummary, setShowSummary] = useState(false);
-  const [navSidebarHidden, setNavSidebarHidden] = useState(false);
+  const [articleSidebarHidden, setArticleSidebarHidden] = useState(false);
   const [aiSidebarHidden, setAiSidebarHidden] = useState(false);
 
-  const toggleNavSidebar = () => {
-    const navSidebar = document.querySelector(".nav-sidebar");
-    if (navSidebar) {
-      navSidebar.classList.toggle("hidden");
-      setNavSidebarHidden(!navSidebarHidden);
-    }
+  const toggleArticleSidebar = () => {
+    setArticleSidebarHidden((prev) => !prev);
   };
 
   const toggleAiSidebar = () => {
-    const aiSidebar = document.querySelector(".ai-sidebar");
-    if (aiSidebar) {
-      aiSidebar.classList.toggle("hidden");
-      setAiSidebarHidden(!aiSidebarHidden);
-    }
+    setAiSidebarHidden((prev) => !prev);
   };
 
   const handleSummarize = () => {
@@ -35,12 +33,12 @@ function MyDashboard() {
 
       {/* Kontrollpanel for navigasjon mellom sidebars */}
       <div className="control-panel-nav">
-        <div className="sidebar-back-button">
+        <div className="sidebar-switcher-article">
           <button
             className="sidebar-hide-toggle"
-            onClick={toggleNavSidebar}
+            onClick={toggleArticleSidebar}
             style={{
-              transform: navSidebarHidden ? "rotate(180deg)" : "rotate(0deg)",
+              transform: articleSidebarHidden ? "rotate(180deg)" : "rotate(0deg)",
               transition: "transform 0.3s ease",
               fontSize: "1.4rem",
               background: "none",
@@ -75,21 +73,23 @@ function MyDashboard() {
       </div>
 
       <div className="dashboard">
-        <aside className="nav-sidebar">
-          <div className="nav-squish-container">
-            <h3>Article list</h3>
-            <nav className="example-menu">
-              <ul>
-                <li><a href="#">article list</a></li>
-                <li><a href="#">article list</a></li>
-                <li><a href="#">article list</a></li>
-                <li><a href="#">article list</a></li>
-              </ul>
-            </nav>
-          </div>
-        </aside>
+        {!articleSidebarHidden && (
+          <aside className="article-sidebar">
+            <div className="nav-squish-container">
+              <h3>Article list</h3>
+              <nav className="example-menu">
+                <ul>
+                  <li><a href="#">article list</a></li>
+                  <li><a href="#">article list</a></li>
+                  <li><a href="#">article list</a></li>
+                  <li><a href="#">article list</a></li>
+                </ul>
+              </nav>
+            </div>
+          </aside>
+        )}
 
-        <main className="main-area">
+        <main className={`main-area ${articleSidebarHidden ? "expand" : ""}`}>
           <section className="dashboard-cards">
             <div className={`selected-article-card ${showSummary ? "half-width" : "full-width"}`}>
               <div className="card-content">
@@ -152,12 +152,14 @@ function MyDashboard() {
           </section>
         </main>
 
-        <aside className="ai-sidebar">
-          <div className="ai-squish-container">
-            <h3>AI Tools:</h3>
-            <p>Chat or summary output comes here...</p>
-          </div>
-        </aside>
+        {!aiSidebarHidden && (
+          <aside className="ai-sidebar">
+            <div className="ai-squish-container">
+              <h3>AI Tools:</h3>
+              <p>Chat or summary output comes here...</p>
+            </div>
+          </aside>
+        )}
       </div>
 
       <footer className="footer-area">
@@ -168,3 +170,4 @@ function MyDashboard() {
 }
 
 export default MyDashboard;
+

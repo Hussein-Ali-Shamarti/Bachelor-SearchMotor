@@ -237,3 +237,37 @@
   position: relative;
 }
 
+/* -------------------------------------------------------------
+  VENSTRE SIDEBAR – ARTIKKELLISTE
+--------------------------------------------------------------*/
+
+.article-sidebar {
+  background: white;
+  padding: 1rem;
+  border-right: 1px solid #ccc;
+  display: block;
+}
+
+/* HØYRE SIDEBAR – AI TOOLS */
+.ai-sidebar {
+  background: white;
+  padding: 1rem;
+  border-left: 1px solid #ccc;
+  display: block;
+}
+
+/* Skjul elementer eksplisitt via JS */
+.hidden {
+  display: none !important;
+}
+
+.article-sidebar.hidden {
+  display: none;
+}
+
+
+
+.main-area {
+  grid-column: 2;
+}
+
