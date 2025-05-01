@@ -5,6 +5,7 @@ import HeaderMyDashboard from "../components/HeaderMyDashboard";
 
 function MyDashboard() {
   const [selectedArticle, setSelectedArticle] = useState(null);
+  const [showSummary, setShowSummary] = useState(false);
 
   useEffect(() => {
     const leftButton = document.querySelector(".sidebar-left-toggle");
@@ -28,26 +29,24 @@ function MyDashboard() {
   }, []);
 
   const handleSummarize = () => {
-    console.log("Summarizing article...");
-    // implementer faktisk AI-kall her senere
+    setShowSummary(true);
   };
 
   return (
     <div className="outer-wrap">
-      {/* Logo/Header */}
       <HeaderMyDashboard />
 
-      {/* Søkefelt */}
-      <div className="search-bar-wrapper">
-        <input
-          type="text"
-          placeholder="Search for articles..."
-          className="search-input"
-        />
+      <div className="inside">
+        <div className="search-bar-wrapper">
+          <input
+            type="text"
+            placeholder="Search for articles..."
+            className="search-input"
+          />
+        </div>
       </div>
 
       <div className="dashboard">
-        {/* Venstre side - artikkelliste */}
         <aside className="nav-sidebar">
           <div className="nav-squish-container">
             <h3>Article list</h3>
@@ -62,22 +61,33 @@ function MyDashboard() {
           </div>
         </aside>
 
-        {/* Midten - Hovedinnhold */}
         <main className="main-area">
-          {/* Valgt artikkel */}
-          <section className="selected-article">
-            <h2>Selected Article</h2>
-            <p>Article details shown here...</p>
+          <section className="dashboard-cards">
+            <div className={`selected-article-card ${showSummary ? "half-width" : "full-width"}`}>
+              <div className="card-content">
+                <h2>Selected Article</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer metus mi, porttitor id mollis auctor.</p>
+                <div className="button-wrapper">
+                  <button className="summarize-button" onClick={handleSummarize}>
+                    Summarize
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {showSummary && (
+  <div className="summary-article-card half-width">
+    <button className="close-summary" onClick={() => setShowSummary(false)}>
+      &times;
+    </button>
+    <div className="card-content">
+      <h2>AI Summary</h2>
+      <p>Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.</p>
+    </div>
+  </div>
+)}
           </section>
 
-          {/* Summarize-knapp */}
-          <div className="summary-action">
-            <button className="summarize-button" onClick={handleSummarize}>
-              Summarize
-            </button>
-          </div>
-
-          {/* AI-navigasjonsknapper */}
           <section className="menu-section">
             <h2 className="menu-heading">AI Navigation</h2>
             <nav id="advanced-nav" className="advanced-nav menu" role="navigation">
@@ -116,7 +126,6 @@ function MyDashboard() {
           </section>
         </main>
 
-        {/* Høyre side - AI chat */}
         <aside className="ai-sidebar">
           <div className="ai-squish-container">
             <h3>AI Tools:</h3>
@@ -131,8 +140,5 @@ function MyDashboard() {
     </div>
   );
 }
-
-
-
 
 export default MyDashboard;

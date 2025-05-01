@@ -3,16 +3,26 @@
 --------------------------------------------------------------*/
 
 .search-bar-wrapper {
-  text-align: center;
-  margin: 1.5rem auto;
+  display: flex;
+  justify-content: center;
+  margin: 1.5rem 0;
+  padding: 0 1rem;
 }
 
 .search-input {
-  width: 50%;
-  padding: 0.75rem 1rem;
+  width: 100%;
+  max-width: 600px;
+  padding: 0.8rem 1.2rem;
   font-size: 1rem;
-  border-radius: 6px;
+  border-radius: 2rem;
   border: 1px solid #ccc;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.2s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 /* -------------------------------------------------------------
@@ -59,38 +69,72 @@
 }
 
 /* -------------------------------------------------------------
-  HOVEDOMRÅDE – SELECTED ARTICLE & KNAPPER
+  HOVEDOMRÅDE – SELECTED ARTICLE OG SUMMARY
 --------------------------------------------------------------*/
 
 .main-area {
   padding: 2rem;
 }
 
-.selected-article {
-  background: #f9f9f9;
-  border: 1px solid #ddd;
-  padding: 1.5rem;
-  border-radius: 6px;
-  margin-bottom: 1.5rem;
+.dashboard-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-top: 2rem;
 }
 
-.summary-action {
-  margin-bottom: 2rem;
+.selected-article-card,
+.summary-article-card {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 0.5rem;
+  padding: 1.4rem;
+  color: black;
+  box-shadow: none;
+}
+
+.card-content h2 {
+  margin-top: 0;
+  margin-bottom: 0.5em;
+  font-weight: normal;
+  color: black;
+  font-size: 1.8em;
+}
+
+.card-content p {
+  font-size: 1rem;
+  color: black;
+}
+
+.button-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
 }
 
 .summarize-button {
-  background: hsl(0, 0%, 15%);
-  color: white;
+  padding: 0.6em 1.2em;
   border: none;
-  border-radius: 5px;
-  padding: 0.6rem 1.2rem;
+  border-radius: 0.5rem;
+  background-color: hsl(0, 0%, 15%);
+  color: white;
   font-size: 1rem;
   cursor: pointer;
-  transition: background 0.2s ease;
+  font-weight: 600;
+  transition: background 0.3s ease;
 }
 
 .summarize-button:hover {
-  background: hsl(0, 0%, 25%);
+  background-color: hsl(0, 0%, 25%);
+}
+
+/* Tilpass bredde basert på visning */
+.full-width {
+  flex: 1 1 100%;
+}
+
+.half-width {
+  flex: 1 1 48%;
 }
 
 /* -------------------------------------------------------------
@@ -125,5 +169,52 @@
   gap: 1rem;
   align-items: center;
   background: hsl(0, 0%, 15%);
-  
+  padding: 1rem;
+  border-radius: 8px;
+  color: white;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.advanced-nav li a:hover {
+  background: hsl(0, 0%, 25%);
+}
+
+.advanced-nav .icon {
+  font-size: 1.8rem;
+  flex: 0 0 1.5em;
+}
+
+.advanced-nav .button-text {
+  font-size: 1.8em;
+}
+
+.advanced-nav .button-text span {
+  display: block;
+  font-size: 40%;
+  font-weight: lighter;
+  font-style: italic;
+}
+
+/* -------------------------------------------------------------
+  LUKKEKNAPP FOR SUMMARY-KORT
+--------------------------------------------------------------*/
+
+.close-summary {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #888;
+  cursor: pointer;
+}
+
+.close-summary:hover {
+  color: #000;
+}
+
+.summary-article-card {
+  position: relative;
 }
