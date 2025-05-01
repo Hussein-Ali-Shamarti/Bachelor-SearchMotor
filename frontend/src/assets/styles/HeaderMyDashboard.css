@@ -1,86 +1,65 @@
-/* ---------- HEADER STRUKTUR ---------- */
+/* -------------------------------------------------------------
+  HEADER FOR DASHBOARD: LOGO + SØKEFELT (CENTRERT)
+--------------------------------------------------------------*/
+
 .site-header {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  align-items: center;
-  height: 70px;
-  padding: 0 1rem;
   background-color: #fff;
   width: 100%;
+  padding: 3rem 1rem 2.5rem;
 }
 
-/* ---------- MIDTEN: LOGO ---------- */
-.wrapper {
+.inside {
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  height: 100%;
-  padding: 1rem;
-  margin: 1rem;
 }
 
 .logo-container {
   display: flex;
   align-items: center;
-  gap: 0.3rem; /* mindre mellomrom mellom bilde og tekst */
+  gap: 0.4rem;
   flex-direction: row;
-  padding-top: 0.5rem;
+  width: 100%;
+  justify-content: center;
+  margin-bottom: 1.2rem;
 }
 
 .logo-container img {
-  height: 45px;
+  height: 75px; /* større for å matche Google-look */
 }
 
 .logo-container h1 {
-  font-size: 1.4rem;
+  font-size: 2rem;
   color: #2c5282;
   margin: 0;
 }
 
-/* ---------- VENSTRE: PIL OG TEKST ---------- */
-.sidebar-back-button {
+/* -------------------------------------------------------------
+  SØKEFELT UNDER LOGO – FULL BREDDE
+--------------------------------------------------------------*/
+
+.search-bar-wrapper {
   display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  color: #111;
+  justify-content: center;
+  margin-top: 0;
+  width: 100%;
 }
 
-.sidebar-back-button button {
-  background: none;
-  border: none;
-  font-size: 1.7rem;
-  color: #111;
-  cursor: pointer;
-  padding: 0.4rem;
-  transition: color 0.3s ease, transform 0.2s ease;
+.search-input {
+  width: 100%;
+  max-width: 600px;
+  padding: 1.1rem 1.6rem;
+  font-size: 1rem;
+  border-radius: 2rem;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.2s ease;
 }
 
-.sidebar-back-button button:hover {
-  color: #444;
-  transform: scale(1.1);
-}
-
-/* ---------- HØYRE: AI-KNAPP ---------- */
-.sidebar-switcher-ai {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  color: #111;
-  height: 100%;
-  justify-content: flex-end;
-}
-
-.sidebar-switcher-ai button {
-  background: none;
-  border: none;
-  font-size: 1.7rem;
-  color: #111;
-  cursor: pointer;
-  padding: 0.4rem;
-  transition: color 0.3s ease, transform 0.2s ease;
-}
-
-.sidebar-switcher-ai button:hover {
-  color: #444;
-  transform: scale(1.1);
+.search-input:focus {
+  outline: none;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
 }

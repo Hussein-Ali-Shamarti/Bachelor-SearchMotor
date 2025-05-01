@@ -1,29 +1,6 @@
 /* -------------------------------------------------------------
-  HEADER & SØKEFELT
+  HEADER & SØKEFELT – FJERNET HERFRA, LIGGER NÅ I HEADER-KOMPONENTEN
 --------------------------------------------------------------*/
-
-.search-bar-wrapper {
-  display: flex;
-  justify-content: center;
-  margin: 1.5rem 0;
-  padding: 0 1rem;
-}
-
-.search-input {
-  width: 100%;
-  max-width: 600px;
-  padding: 0.8rem 1.2rem;
-  font-size: 1rem;
-  border-radius: 2rem;
-  border: 1px solid #ccc;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-  transition: box-shadow 0.2s ease;
-}
-
-.search-input:focus {
-  outline: none;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-}
 
 /* -------------------------------------------------------------
   GRID-LAYOUT: SIDEBAR – MAIN – AI
@@ -33,6 +10,48 @@
   display: grid;
   grid-template-columns: 260px 1fr 300px;
   min-height: 80vh;
+}
+
+/* -------------------------------------------------------------
+  KONTROLLPANEL FOR KNAPPER MELLOM HEADER OG DASHBOARD
+--------------------------------------------------------------*/
+
+.control-panel-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem 2rem;
+  border-bottom: 1px solid #ddd;
+  gap: 1rem;
+}
+
+/* -------------------------------------------------------------
+  KNAPPER VENSTRE OG HØYRE (REBRUKT)
+--------------------------------------------------------------*/
+
+.sidebar-back-button,
+.sidebar-switcher-ai {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #111;
+}
+
+.sidebar-back-button button,
+.sidebar-switcher-ai button {
+  background: none;
+  border: none;
+  font-size: 1.7rem;
+  color: #111;
+  cursor: pointer;
+  padding: 0.4rem;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.sidebar-back-button button:hover,
+.sidebar-switcher-ai button:hover {
+  color: #444;
+  transform: scale(1.1);
 }
 
 /* -------------------------------------------------------------
@@ -128,7 +147,6 @@
   background-color: hsl(0, 0%, 25%);
 }
 
-/* Tilpass bredde basert på visning */
 .full-width {
   flex: 1 1 100%;
 }
@@ -218,3 +236,4 @@
 .summary-article-card {
   position: relative;
 }
+

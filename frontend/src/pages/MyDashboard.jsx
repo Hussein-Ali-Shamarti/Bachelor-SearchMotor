@@ -1,32 +1,29 @@
 import React, { useEffect, useState } from "react";
 import "../assets/styles/MyDashboard.css";
-import { FiList, FiFileText, FiMessageCircle } from "react-icons/fi";
+import { FiList, FiFileText, FiMessageCircle, FiArrowLeftCircle, FiArrowRightCircle } from "react-icons/fi";
 import HeaderMyDashboard from "../components/HeaderMyDashboard";
 
 function MyDashboard() {
   const [selectedArticle, setSelectedArticle] = useState(null);
   const [showSummary, setShowSummary] = useState(false);
+  const [navSidebarHidden, setNavSidebarHidden] = useState(false);
+  const [aiSidebarHidden, setAiSidebarHidden] = useState(false);
 
-  useEffect(() => {
-    const leftButton = document.querySelector(".sidebar-left-toggle");
-    const rightButton = document.querySelector(".sidebar-right-toggle");
+  const toggleNavSidebar = () => {
+    const navSidebar = document.querySelector(".nav-sidebar");
+    if (navSidebar) {
+      navSidebar.classList.toggle("hidden");
+      setNavSidebarHidden(!navSidebarHidden);
+    }
+  };
 
-    const toggleLeft = () => {
-      document.querySelector(".nav-sidebar").classList.toggle("hidden");
-    };
-
-    const toggleRight = () => {
-      document.querySelector(".ai-sidebar").classList.toggle("hidden");
-    };
-
-    if (leftButton) leftButton.addEventListener("click", toggleLeft);
-    if (rightButton) rightButton.addEventListener("click", toggleRight);
-
-    return () => {
-      if (leftButton) leftButton.removeEventListener("click", toggleLeft);
-      if (rightButton) rightButton.removeEventListener("click", toggleRight);
-    };
-  }, []);
+  const toggleAiSidebar = () => {
+    const aiSidebar = document.querySelector(".ai-sidebar");
+    if (aiSidebar) {
+      aiSidebar.classList.toggle("hidden");
+      setAiSidebarHidden(!aiSidebarHidden);
+    }
+  };
 
   const handleSummarize = () => {
     setShowSummary(true);
@@ -36,13 +33,44 @@ function MyDashboard() {
     <div className="outer-wrap">
       <HeaderMyDashboard />
 
-      <div className="inside">
-        <div className="search-bar-wrapper">
-          <input
-            type="text"
-            placeholder="Search for articles..."
-            className="search-input"
-          />
+      {/* Kontrollpanel for navigasjon mellom sidebars */}
+      <div className="control-panel-nav">
+        <div className="sidebar-back-button">
+          <button
+            className="sidebar-hide-toggle"
+            onClick={toggleNavSidebar}
+            style={{
+              transform: navSidebarHidden ? "rotate(180deg)" : "rotate(0deg)",
+              transition: "transform 0.3s ease",
+              fontSize: "1.4rem",
+              background: "none",
+              border: "none",
+              color: "inherit",
+              cursor: "pointer",
+            }}
+          >
+            <FiArrowLeftCircle />
+          </button>
+          <span style={{ fontSize: "1rem", fontWeight: "500" }}>Article List</span>
+        </div>
+
+        <div className="sidebar-switcher-ai">
+          <span style={{ fontSize: "1rem", fontWeight: "500" }}>AI Assistent</span>
+          <button
+            className="sidebar-ai-toggle"
+            onClick={toggleAiSidebar}
+            style={{
+              transform: aiSidebarHidden ? "rotate(180deg)" : "rotate(0deg)",
+              transition: "transform 0.3s ease",
+              fontSize: "1.4rem",
+              background: "none",
+              border: "none",
+              color: "inherit",
+              cursor: "pointer",
+            }}
+          >
+            <FiArrowRightCircle />
+          </button>
         </div>
       </div>
 
@@ -76,16 +104,16 @@ function MyDashboard() {
             </div>
 
             {showSummary && (
-  <div className="summary-article-card half-width">
-    <button className="close-summary" onClick={() => setShowSummary(false)}>
-      &times;
-    </button>
-    <div className="card-content">
-      <h2>AI Summary</h2>
-      <p>Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.</p>
-    </div>
-  </div>
-)}
+              <div className="summary-article-card half-width">
+                <button className="close-summary" onClick={() => setShowSummary(false)}>
+                  &times;
+                </button>
+                <div className="card-content">
+                  <h2>AI Summary</h2>
+                  <p>Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.</p>
+                </div>
+              </div>
+            )}
           </section>
 
           <section className="menu-section">
@@ -111,9 +139,7 @@ function MyDashboard() {
                   </a>
                 </li>
                 <li>
-                  <a href="#" onClick={() =>
-                    document.querySelector(".ai-sidebar").classList.toggle("hidden")
-                  }>
+                  <a href="#" onClick={toggleAiSidebar}>
                     <div className="icon"><FiMessageCircle /></div>
                     <div className="button-text">
                       Ask AI
