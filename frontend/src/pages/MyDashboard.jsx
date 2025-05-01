@@ -122,13 +122,38 @@ function MyDashboard() {
         <aside className={`article-sidebar ${articleSidebarHidden ? "hidden" : ""}`}>
           <div className="nav-squish-container">
             <h3>Article list</h3>
-            <nav className="example-menu">
-              <ul>
-                <li><a href="#">article list</a></li>
-                <li><a href="#">article list</a></li>
-                <li><a href="#">article list</a></li>
-                <li><a href="#">article list</a></li>
-              </ul>
+            <nav className="article-list-menu">
+            <ul>
+  <li>
+    <a href="#">
+      <h3>Measuring the Impact of eGovernment Services</h3>
+      <p><strong>Author(s):</strong> ['Berntzen, Lasse']</p>
+      <p><strong>Abstract:</strong> Impact of eGovernment services is about measurable effects as experienced by stakeholders. Automatic...</p>
+    </a>
+  </li>
+  <li>
+    <a href="#">
+      <h3>Measuring the Impact of eGovernment Services</h3>
+      <p><strong>Author(s):</strong> ['Berntzen, Lasse']</p>
+      <p><strong>Abstract:</strong> Impact of eGovernment services is about measurable effects as experienced by stakeholders. Automatic...</p>
+    </a>
+  </li>
+  <li>
+    <a href="#">
+      <h3>Measuring the Impact of eGovernment Services</h3>
+      <p><strong>Author(s):</strong> ['Berntzen, Lasse']</p>
+      <p><strong>Abstract:</strong> Impact of eGovernment services is about measurable effects as experienced by stakeholders. Automatic...</p>
+    </a>
+  </li>
+  <li>
+    <a href="#">
+      <h3>Measuring the Impact of eGovernment Services</h3>
+      <p><strong>Author(s):</strong> ['Berntzen, Lasse']</p>
+      <p><strong>Abstract:</strong> Impact of eGovernment services is about measurable effects as experienced by stakeholders. Automatic...</p>
+    </a>
+  </li>
+</ul>
+
             </nav>
           </div>
         </aside>
