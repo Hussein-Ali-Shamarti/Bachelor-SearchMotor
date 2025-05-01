@@ -11,24 +11,28 @@ import HeaderMyDashboard from "../components/HeaderMyDashboard";
 function MyDashboard() {
   const [selectedArticle, setSelectedArticle] = useState(null);
   const [showSummary, setShowSummary] = useState(false);
-
-  const [articleSidebarHidden, setArticleSidebarHidden] = useState(true); // Skjult som standard
-  const [aiSidebarHidden, setAiSidebarHidden] = useState(true); // Skjult som standard
-
+  const [articleSidebarHidden, setArticleSidebarHidden] = useState(true);
+  const [aiSidebarHidden, setAiSidebarHidden] = useState(true);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 600);
+  const [isTablet, setIsTablet] = useState(
+    window.innerWidth > 600 && window.innerWidth <= 1024
+  );
 
-  // Oppdater mobilstatus når vinduet endres
   useEffect(() => {
     const handleResize = () => {
-      const mobile = window.innerWidth <= 600;
-      setIsMobile(mobile);
+      const width = window.innerWidth;
+      const mobile = width <= 600;
+      const tablet = width > 600 && width <= 1024;
 
-      if (!mobile) {
+      setIsMobile(mobile);
+      setIsTablet(tablet);
+
+      if (!mobile && !tablet) {
         // Desktop: vis alt
         setArticleSidebarHidden(false);
         setAiSidebarHidden(false);
       } else {
-        // Mobil: start med begge skjult
+        // Mobil og nettbrett: start med alt skjult
         setArticleSidebarHidden(true);
         setAiSidebarHidden(true);
       }
@@ -42,6 +46,12 @@ function MyDashboard() {
     if (isMobile) {
       setArticleSidebarHidden((prev) => !prev);
       setAiSidebarHidden(true);
+    } else if (isTablet) {
+      if (!aiSidebarHidden) {
+        alert("Please close the AI Assistant before opening the Article List.");
+        return;
+      }
+      setArticleSidebarHidden((prev) => !prev);
     } else {
       setArticleSidebarHidden((prev) => !prev);
     }
@@ -51,6 +61,12 @@ function MyDashboard() {
     if (isMobile) {
       setAiSidebarHidden((prev) => !prev);
       setArticleSidebarHidden(true);
+    } else if (isTablet) {
+      if (!articleSidebarHidden) {
+        alert("Please close the Article List before opening the AI Assistant.");
+        return;
+      }
+      setAiSidebarHidden((prev) => !prev);
     } else {
       setAiSidebarHidden((prev) => !prev);
     }

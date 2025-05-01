@@ -310,5 +310,22 @@
   }
 }
 
-/* searchbar og controll panel er sticky ved mobilview */
+/* tablett view  */
 
+@media screen and (min-width: 601px) and (max-width: 1024px) {
+  .article-sidebar,
+  .ai-sidebar,
+  .main-area {
+    width: 100%;
+    padding: 1rem;
+    background: white;
+    display: block;
+  }
+
+  .article-sidebar.hidden,
+  .ai-sidebar.hidden {
+    display: none !important;
+  }
+
+  /* Vi skjuler ikke main-area på tablet, fordi begge sidebars er default skjult */
+}
