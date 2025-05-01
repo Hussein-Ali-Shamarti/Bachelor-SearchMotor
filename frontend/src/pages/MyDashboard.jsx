@@ -1,26 +1,59 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../assets/styles/MyDashboard.css";
 import {
   FiList,
   FiFileText,
   FiMessageCircle,
   FiArrowLeftCircle,
-  FiArrowRightCircle,
 } from "react-icons/fi";
 import HeaderMyDashboard from "../components/HeaderMyDashboard";
 
 function MyDashboard() {
   const [selectedArticle, setSelectedArticle] = useState(null);
   const [showSummary, setShowSummary] = useState(false);
-  const [articleSidebarHidden, setArticleSidebarHidden] = useState(false);
-  const [aiSidebarHidden, setAiSidebarHidden] = useState(false);
+
+  const [articleSidebarHidden, setArticleSidebarHidden] = useState(true); // Skjult som standard
+  const [aiSidebarHidden, setAiSidebarHidden] = useState(true); // Skjult som standard
+
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 600);
+
+  // Oppdater mobilstatus når vinduet endres
+  useEffect(() => {
+    const handleResize = () => {
+      const mobile = window.innerWidth <= 600;
+      setIsMobile(mobile);
+
+      if (!mobile) {
+        // Desktop: vis alt
+        setArticleSidebarHidden(false);
+        setAiSidebarHidden(false);
+      } else {
+        // Mobil: start med begge skjult
+        setArticleSidebarHidden(true);
+        setAiSidebarHidden(true);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const toggleArticleSidebar = () => {
-    setArticleSidebarHidden((prev) => !prev);
+    if (isMobile) {
+      setArticleSidebarHidden((prev) => !prev);
+      setAiSidebarHidden(true);
+    } else {
+      setArticleSidebarHidden((prev) => !prev);
+    }
   };
 
   const toggleAiSidebar = () => {
-    setAiSidebarHidden((prev) => !prev);
+    if (isMobile) {
+      setAiSidebarHidden((prev) => !prev);
+      setArticleSidebarHidden(true);
+    } else {
+      setAiSidebarHidden((prev) => !prev);
+    }
   };
 
   const handleSummarize = () => {
@@ -31,7 +64,6 @@ function MyDashboard() {
     <div className="outer-wrap">
       <HeaderMyDashboard />
 
-      {/* Kontrollpanel for navigasjon mellom sidebars */}
       <div className="control-panel-nav">
         <div className="sidebar-switcher-article">
           <button
@@ -58,8 +90,6 @@ function MyDashboard() {
             className="sidebar-ai-toggle"
             onClick={toggleAiSidebar}
             style={{
-              transform: aiSidebarHidden ? "rotate(180deg)" : "rotate(0deg)",
-              transition: "transform 0.3s ease",
               fontSize: "1.4rem",
               background: "none",
               border: "none",
@@ -67,7 +97,7 @@ function MyDashboard() {
               cursor: "pointer",
             }}
           >
-            <FiArrowRightCircle />
+            <FiMessageCircle />
           </button>
         </div>
       </div>
@@ -87,7 +117,7 @@ function MyDashboard() {
           </div>
         </aside>
 
-        <main className="main-area">
+        <main className={`main-area ${(isMobile && (!articleSidebarHidden || !aiSidebarHidden)) ? 'hidden' : ''}`}>
           <section className="dashboard-cards">
             <div className={`selected-article-card ${showSummary ? "half-width" : "full-width"}`}>
               <div className="card-content">

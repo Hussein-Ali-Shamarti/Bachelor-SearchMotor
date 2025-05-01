@@ -236,10 +236,7 @@
     padding: 1rem;
   }
 
-  .article-sidebar:not(.hidden),
-  .ai-sidebar:not(.hidden) {
-    display: none !important;
-  }
+ 
 
   .dashboard-cards {
     flex-direction: column;
@@ -262,3 +259,54 @@
   grid-area: ai;
   border-left: 1px solid #ccc;
 }
+
+
+/* fra 1024 pixel legger ai-sidebar seg i main-area  */
+
+@media screen and (max-width: 1024px) {
+  .dashboard-layout {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .ai-sidebar {
+    order: 3; /* Kommer etter main-column */
+    margin-top: 1rem;
+    background: #f0f0f0; /* Valgfritt: tydeligere skille */
+    padding: 1rem;
+  }
+
+  .main-column {
+    order: 2;
+  }
+
+  .nav-sidebar {
+    order: 1;
+  }
+}
+
+
+/* mobilview - sidebar vises over hele siden  */
+
+@media screen and (max-width: 600px) {
+  .dashboard {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .article-sidebar,
+  .ai-sidebar,
+  .main-area {
+    width: 100%;
+    padding: 1rem;
+    background: white;
+    display: block;
+  }
+
+  .article-sidebar.hidden,
+  .ai-sidebar.hidden,
+  .main-area.hidden {
+    display: none !important;
+  }
+}
+
