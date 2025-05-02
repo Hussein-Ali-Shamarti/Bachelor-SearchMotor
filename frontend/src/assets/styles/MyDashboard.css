@@ -4,7 +4,7 @@
 
 .dashboard {
   display: grid;
-  grid-template-columns: 450px 1fr 350px;
+  grid-template-columns: 260px 1fr 300px;
   grid-template-areas: "article main ai";
   min-height: 80vh;
 }
@@ -361,4 +361,32 @@
   font-size: 1.17em;
   
   margin-block: 1em;
+}
+
+/* -------------------------------------------------------------
+  RESPONSIVE LAYOUT – SIDEBAR WIDTHS BASED ON SCREEN SIZE
+  This section adjusts the left (article) and right (AI) sidebars
+  by changing the dashboard grid column sizes at different breakpoints.
+-------------------------------------------------------------- */
+@media (min-width: 1024px) {
+  .dashboard {
+    grid-template-columns: 300px 1fr 340px; /* +40px på hver sidebar */
+  }
+}
+
+
+
+
+@media (min-width: 1300px) {
+  .dashboard {
+    grid-template-columns: 320px 1fr 360px;
+    /* 260 + 60px og 300 + 60px */
+  }
+}
+
+@media (min-width: 1500px) {
+  .dashboard {
+    grid-template-columns: 360px 1fr 420px;
+    /* Ekstra +40px per sidebar sammenlignet med 1300px */
+  }
 }
