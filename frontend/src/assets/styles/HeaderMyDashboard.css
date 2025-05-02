@@ -7,6 +7,10 @@
   width: 100%;
   padding: 1.5rem 1rem; /* redusert fra 3rem og 2.5rem */
   margin-top: 1rem; /* redusert fra 1rem */
+
+  position: sticky;
+  top: 0;
+  z-index: 999;
 }
 
 .inside {
@@ -70,9 +74,7 @@
 
 @media screen and (max-width: 600px) {
   .site-header {
-    position: sticky;
-    top: 0;
-    z-index: 999;
+  
     background: white;
     padding: 1rem 0.5rem;
    

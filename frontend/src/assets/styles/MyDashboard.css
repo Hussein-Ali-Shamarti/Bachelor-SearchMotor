@@ -1,3 +1,4 @@
+
 /* -------------------------------------------------------------
   GRID-LAYOUT: SIDEBAR – MAIN – AI
 --------------------------------------------------------------*/
@@ -6,8 +7,13 @@
   display: grid;
   grid-template-columns: 260px 1fr 300px;
   grid-template-areas: "article main ai";
-  min-height: 80vh;
+  /* min-height: 80vh; */
+  height: calc(100vh - 80px - 50px); /* full høyde minus header og footer */
+  overflow: hidden; /* for at bare barna skroller */
 }
+
+
+
 
 /* -------------------------------------------------------------
   KONTROLLPANEL FOR KNAPPER MELLOM HEADER OG DASHBOARD
@@ -234,12 +240,17 @@ padding-left: 1.4rem;
 
 @media screen and (max-width: 1024px) {
   .dashboard {
-    grid-template-columns: 1fr;
+    grid-template-columns: 260px 1fr;
+    grid-template-areas: "article main";
   }
 
-  /* .main-area {
-    padding: 1rem;
-  } */
+  .ai-sidebar {
+    display: none;
+  }
+
+  .article-sidebar {
+    grid-area: article;
+  }
 
  
 
@@ -265,6 +276,7 @@ padding-left: 1.4rem;
   grid-area: ai;
   border-left: 1px solid #ccc;
 }
+
 
 
 /* fra 1024 pixel legger ai-sidebar seg i main-area  */
@@ -339,6 +351,27 @@ padding-left: 1.4rem;
     display: none !important;
   }
 
+  .ai-sidebar.overlay {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90vw;
+    max-width: 700px;
+    height: 80vh;
+    background: hsl(0, 0%, 90%);
+    z-index: 1000;
+    overflow-y: auto;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  }
+
+   /* Når article-sidebar er skjult, endre grid til én kolonne */
+ .article-sidebar.hidden + .main-area {
+  grid-column: 1 / -1;
+}
+
   /* Vi skjuler ikke main-area på tablet, fordi begge sidebars er default skjult */
 }
 
@@ -401,4 +434,67 @@ padding-left: 1.4rem;
     grid-template-columns: 360px 1fr 420px;
     /* Ekstra +40px per sidebar sammenlignet med 1300px */
   }
+}
+
+
+/* scrollbar article-sidebar  */
+
+.article-sidebar {
+  grid-area: article;
+  max-height: calc(100vh - 80px - 50px);
+  overflow-y: auto;
+}
+
+
+.ai-sidebar {
+  grid-area: ai;
+  max-height: calc(100vh - 80px - 50px); /* juster hvis header/footer har annen høyde */
+  overflow-y: auto;
+}
+
+.main-area {
+  grid-area: main;
+  overflow-y: auto;
+  padding: 0.5rem 2rem 2rem;
+}
+
+
+.close-ai-button {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #666;
+  box-shadow: none;
+}
+.close-ai-button:hover {
+  color: #000;
+}
+
+
+/* ai-squish container styling */
+.ai-squish-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;       /* sentrerer horisontalt */
+  justify-content: flex-start;
+  max-width: 600px;          /* begrenser innholdets bredde */
+  margin: 0 auto;            /* sentrerer blokken i boksen */
+  
+  width: 100%;
+}
+
+.ai-input {
+  width: 100%;
+  max-width: 100%;
+  padding: 1rem;
+  font-size: 1rem;
+  
+  border: 1px solid #ccc;
+  border-radius: 1.5rem;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1.5rem;
 }

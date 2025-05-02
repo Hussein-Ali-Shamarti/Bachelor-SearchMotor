@@ -41,36 +41,24 @@ function MyDashboard() {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-
   const toggleArticleSidebar = () => {
     if (isMobile) {
       setArticleSidebarHidden((prev) => !prev);
-      setAiSidebarHidden(true);
-    } else if (isTablet) {
-      if (!aiSidebarHidden) {
-        alert("Please close the AI Assistant before opening the Article List.");
-        return;
-      }
-      setArticleSidebarHidden((prev) => !prev);
+      setAiSidebarHidden(true); // På mobil: fortsatt én åpen om gangen
     } else {
       setArticleSidebarHidden((prev) => !prev);
     }
   };
-
+  
   const toggleAiSidebar = () => {
     if (isMobile) {
       setAiSidebarHidden((prev) => !prev);
-      setArticleSidebarHidden(true);
-    } else if (isTablet) {
-      if (!articleSidebarHidden) {
-        alert("Please close the Article List before opening the AI Assistant.");
-        return;
-      }
-      setAiSidebarHidden((prev) => !prev);
+      setArticleSidebarHidden(true); // På mobil: fortsatt én åpen om gangen
     } else {
       setAiSidebarHidden((prev) => !prev);
     }
   };
+  
 
   const handleSummarize = () => {
     setShowSummary(true);
@@ -128,28 +116,56 @@ function MyDashboard() {
     <a href="#">
       <h3>Measuring the Impact of eGovernment Services</h3>
       <p><strong>Author(s):</strong> ['Berntzen, Lasse']</p>
-      <p><strong>Abstract:</strong> Impact of eGovernment services is about measurable effects as experienced by stakeholders. Automatic...</p>
+      
     </a>
   </li>
   <li>
     <a href="#">
       <h3>Measuring the Impact of eGovernment Services</h3>
       <p><strong>Author(s):</strong> ['Berntzen, Lasse']</p>
-      <p><strong>Abstract:</strong> Impact of eGovernment services is about measurable effects as experienced by stakeholders. Automatic...</p>
+    
     </a>
   </li>
   <li>
     <a href="#">
       <h3>Measuring the Impact of eGovernment Services</h3>
       <p><strong>Author(s):</strong> ['Berntzen, Lasse']</p>
-      <p><strong>Abstract:</strong> Impact of eGovernment services is about measurable effects as experienced by stakeholders. Automatic...</p>
+     
     </a>
   </li>
   <li>
     <a href="#">
       <h3>Measuring the Impact of eGovernment Services</h3>
       <p><strong>Author(s):</strong> ['Berntzen, Lasse']</p>
-      <p><strong>Abstract:</strong> Impact of eGovernment services is about measurable effects as experienced by stakeholders. Automatic...</p>
+      
+    </a>
+  </li>
+  <li>
+    <a href="#">
+      <h3>Measuring the Impact of eGovernment Services</h3>
+      <p><strong>Author(s):</strong> ['Berntzen, Lasse']</p>
+      
+    </a>
+  </li>
+  <li>
+    <a href="#">
+      <h3>Measuring the Impact of eGovernment Services</h3>
+      <p><strong>Author(s):</strong> ['Berntzen, Lasse']</p>
+      
+    </a>
+  </li>
+  <li>
+    <a href="#">
+      <h3>Measuring the Impact of eGovernment Services</h3>
+      <p><strong>Author(s):</strong> ['Berntzen, Lasse']</p>
+      
+    </a>
+  </li>
+  <li>
+    <a href="#">
+      <h3>Measuring the Impact of eGovernment Services</h3>
+      <p><strong>Author(s):</strong> ['Berntzen, Lasse']</p>
+      
     </a>
   </li>
 </ul>
@@ -183,6 +199,14 @@ function MyDashboard() {
                 <div className="card-content">
                   <h2>AI Summary</h2>
                   <p>Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.</p>
+                  <p>Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.</p>
+                  <p>Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.</p>
+                  <p>Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.</p>
+                  <p>Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.</p>
+                  <p>Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.</p>
+                  <p>Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.</p>
+
+
                 </div>
               </div>
             )}
@@ -190,13 +214,32 @@ function MyDashboard() {
 
         
         </main>
+{/* ai-sidebar for en overlay klasse for tablet view */}
 
-        <aside className={`ai-sidebar ${aiSidebarHidden ? "hidden" : ""}`}>
-          <div className="ai-squish-container">
-            <h3>AI Tools:</h3>
-            <p>Chat or summary output comes here...</p>
-          </div>
-        </aside>
+<aside
+  className={`ai-sidebar ${aiSidebarHidden ? "hidden" : ""} ${isTablet && !aiSidebarHidden ? "overlay" : ""}`}
+>
+  <button
+    className="close-ai-button"
+    onClick={() => setAiSidebarHidden(true)}
+  >
+    &times;
+  </button>
+
+  <div className="ai-squish-container">
+    <h3>AI Tools:</h3>
+    
+
+    <input
+      type="text"
+      placeholder="Search in AI Assistant..."
+      className="ai-input"
+    />
+    <p>Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi</p>
+  </div>
+</aside>
+
+
       </div>
 
       <footer className="footer-area">
