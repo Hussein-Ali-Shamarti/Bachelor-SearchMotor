@@ -5,8 +5,8 @@
 .site-header {
   background-color: #fff;
   width: 100%;
-  padding: 3rem 1rem 2.5rem;
-  margin-top: 1rem;
+  padding: 1.5rem 1rem; /* redusert fra 3rem og 2.5rem */
+  margin-top: 1rem; /* redusert fra 1rem */
 }
 
 .inside {
@@ -101,5 +101,14 @@
   .search-input {
     padding: 0.6rem 1rem;
        border-radius: 1.5rem;
+  }
+}
+
+/* search bar endres responsiv */
+
+@media screen and (max-width: 1024px) {
+  .search-input {
+    width: 80%;
+    max-width: none; /* fjern maksbregrensning så 80% fungerer */
   }
 }
