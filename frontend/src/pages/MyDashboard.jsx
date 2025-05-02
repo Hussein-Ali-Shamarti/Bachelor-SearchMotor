@@ -164,6 +164,9 @@ function MyDashboard() {
               <div className="card-content">
                 <h2>Selected Article</h2>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer metus mi, porttitor id mollis auctor.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer metus mi, porttitor id mollis auctor.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer metus mi, porttitor id mollis auctor.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer metus mi, porttitor id mollis auctor.</p>
                 <div className="button-wrapper">
                   <button className="summarize-button" onClick={handleSummarize}>
                     Summarize
@@ -179,46 +182,13 @@ function MyDashboard() {
                 </button>
                 <div className="card-content">
                   <h2>AI Summary</h2>
-                  <p>Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.</p>
+                  <p>Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.</p>
                 </div>
               </div>
             )}
           </section>
 
-          <section className="menu-section">
-            <h2 className="menu-heading">AI Navigation</h2>
-            <nav id="advanced-nav" className="advanced-nav menu" role="navigation">
-              <ul>
-                <li>
-                  <a href="#">
-                    <div className="icon"><FiList /></div>
-                    <div className="button-text">
-                      Article List
-                      <span>View all saved articles</span>
-                    </div>
-                  </a>
-                </li>
-                <li>
-                  <a href="#" onClick={handleSummarize}>
-                    <div className="icon"><FiFileText /></div>
-                    <div className="button-text">
-                      Summary
-                      <span>AI-generated article summary</span>
-                    </div>
-                  </a>
-                </li>
-                <li>
-                  <a href="#" onClick={toggleAiSidebar}>
-                    <div className="icon"><FiMessageCircle /></div>
-                    <div className="button-text">
-                      Ask AI
-                      <span>Chat about your article</span>
-                    </div>
-                  </a>
-                </li>
-              </ul>
-            </nav>
-          </section>
+        
         </main>
 
         <aside className={`ai-sidebar ${aiSidebarHidden ? "hidden" : ""}`}>
