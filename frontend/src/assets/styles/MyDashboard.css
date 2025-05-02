@@ -61,7 +61,12 @@
 .article-sidebar,
 .ai-sidebar {
   background: hsl(0, 0%, 90%);
-  padding: 1rem 1.4rem;
+  padding-top: 2rem;
+ 
+padding-right: 1.4rem;
+padding-bottom: 1rem;
+padding-left: 1.4rem;
+
   border-right: 1px solid #ccc;
 }
 
@@ -84,15 +89,15 @@
   HOVEDOMRÅDE – SELECTED ARTICLE OG SUMMARY
 --------------------------------------------------------------*/
 
-.main-area {
+/* .main-area {
   padding: 2rem;
-}
+} */
 
 .dashboard-cards {
   display: flex;
   flex-wrap: wrap;
   gap: 2rem;
-  margin-top: 2rem;
+  
 }
 
 .selected-article-card,
@@ -232,9 +237,9 @@
     grid-template-columns: 1fr;
   }
 
-  .main-area {
+  /* .main-area {
     padding: 1rem;
-  }
+  } */
 
  
 
@@ -252,7 +257,8 @@
 
 .main-area {
   grid-area: main;
-  padding: 2rem;
+  padding: 0.5rem 2rem 2rem;
+  
 }
 
 .ai-sidebar {
@@ -313,11 +319,17 @@
 /* tablett view  */
 
 @media screen and (min-width: 601px) and (max-width: 1024px) {
-  .article-sidebar,
-  .ai-sidebar,
   .main-area {
     width: 100%;
-    padding: 1rem;
+    padding: 0.5rem 2rem 2rem; /* lavere top-padding for justert overskrift */
+    background: white;
+    display: block;
+  }
+
+  .article-sidebar,
+  .ai-sidebar {
+    width: 100%;
+    padding: 2rem 2rem 2rem; /* beholder god luft rundt overskrift */
     background: white;
     display: block;
   }
