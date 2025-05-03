@@ -106,68 +106,84 @@ function MyDashboard() {
         </div>
       </div>
 
-      <div className="dashboard">
+      <div
+  className={`dashboard
+    ${!articleSidebarHidden && !aiSidebarHidden ? "three-columns" : ""}
+    ${articleSidebarHidden && !aiSidebarHidden ? "no-article" : ""}
+    ${!articleSidebarHidden && aiSidebarHidden ? "no-ai" : ""}
+    ${articleSidebarHidden && aiSidebarHidden ? "only-main" : ""}
+  `}
+>
         <aside className={`article-sidebar ${articleSidebarHidden ? "hidden" : ""}`}>
           <div className="nav-squish-container">
             <h3>Article list</h3>
             <nav className="article-list-menu">
             <ul>
-  <li>
-    <a href="#">
-      <h3>Measuring the Impact of eGovernment Services</h3>
-      <p><strong>Author(s):</strong> ['Berntzen, Lasse']</p>
-      
-    </a>
-  </li>
-  <li>
-    <a href="#">
-      <h3>Measuring the Impact of eGovernment Services</h3>
-      <p><strong>Author(s):</strong> ['Berntzen, Lasse']</p>
-    
-    </a>
-  </li>
-  <li>
-    <a href="#">
-      <h3>Measuring the Impact of eGovernment Services</h3>
-      <p><strong>Author(s):</strong> ['Berntzen, Lasse']</p>
-     
-    </a>
-  </li>
-  <li>
-    <a href="#">
-      <h3>Measuring the Impact of eGovernment Services</h3>
-      <p><strong>Author(s):</strong> ['Berntzen, Lasse']</p>
-      
-    </a>
-  </li>
-  <li>
-    <a href="#">
-      <h3>Measuring the Impact of eGovernment Services</h3>
-      <p><strong>Author(s):</strong> ['Berntzen, Lasse']</p>
-      
-    </a>
-  </li>
-  <li>
-    <a href="#">
-      <h3>Measuring the Impact of eGovernment Services</h3>
-      <p><strong>Author(s):</strong> ['Berntzen, Lasse']</p>
-      
-    </a>
-  </li>
-  <li>
-    <a href="#">
-      <h3>Measuring the Impact of eGovernment Services</h3>
-      <p><strong>Author(s):</strong> ['Berntzen, Lasse']</p>
-      
-    </a>
-  </li>
-  <li>
-    <a href="#">
-      <h3>Measuring the Impact of eGovernment Services</h3>
-      <p><strong>Author(s):</strong> ['Berntzen, Lasse']</p>
-      
-    </a>
-  </li>
+            <li>
+          <a href="#">
+            <div className="article-text">
+              <div className="article-title">Measuring the Impact of eGovernment Services</div>
+              <div className="article-author">Berntzen, Lasse</div>
+            </div>
+          </a>
+        </li> <li>
+          <a href="#">
+            <div className="article-text">
+              <div className="article-title">Measuring the Impact of eGovernment Services</div>
+              <div className="article-author">Berntzen, Lasse</div>
+            </div>
+          </a>
+        </li> <li>
+          <a href="#">
+            <div className="article-text">
+              <div className="article-title">Measuring the Impact of eGovernment Services</div>
+              <div className="article-author">Berntzen, Lasse</div>
+            </div>
+          </a>
+        </li> <li>
+          <a href="#">
+            <div className="article-text">
+              <div className="article-title">Measuring the Impact of eGovernment Services</div>
+              <div className="article-author">Berntzen, Lasse</div>
+            </div>
+          </a>
+        </li> <li>
+          <a href="#">
+            <div className="article-text">
+              <div className="article-title">Measuring the Impact of eGovernment Services</div>
+              <div className="article-author">Berntzen, Lasse</div>
+            </div>
+          </a>
+        </li> <li>
+          <a href="#">
+            <div className="article-text">
+              <div className="article-title">Measuring the Impact of eGovernment Services</div>
+              <div className="article-author">Berntzen, Lasse</div>
+            </div>
+          </a>
+        </li> <li>
+          <a href="#">
+            <div className="article-text">
+              <div className="article-title">Measuring the Impact of eGovernment Services</div>
+              <div className="article-author">Berntzen, Lasse</div>
+            </div>
+          </a>
+        </li> <li>
+          <a href="#">
+            <div className="article-text">
+              <div className="article-title">Measuring the Impact of eGovernment Services</div>
+              <div className="article-author">Berntzen, Lasse</div>
+            </div>
+          </a>
+        </li> <li>
+          <a href="#">
+            <div className="article-text">
+              <div className="article-title">Measuring the Impact of eGovernment Services</div>
+              <div className="article-author">Berntzen, Lasse</div>
+            </div>
+          </a>
+        </li>
+  
 </ul>
 
             </nav>

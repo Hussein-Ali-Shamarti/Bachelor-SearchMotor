@@ -1,4 +1,6 @@
 
+
+
 /* -------------------------------------------------------------
   GRID-LAYOUT: SIDEBAR – MAIN – AI
 --------------------------------------------------------------*/
@@ -10,6 +12,8 @@
   /* min-height: 80vh; */
   height: calc(100vh - 80px - 50px); /* full høyde minus header og footer */
   overflow: hidden; /* for at bare barna skroller */
+  background: white;
+  /* background: hsl(0, 0%, 90%); */
 }
 
 
@@ -61,11 +65,12 @@
 }
 
 /* -------------------------------------------------------------
-  VENSTRE SIDEBAR – ARTIKKELLISTE
+  Article-SIDEBAR OG AI-SIDEBAR
 --------------------------------------------------------------*/
 
 .article-sidebar,
 .ai-sidebar {
+  /* background: white; */
   background: hsl(0, 0%, 90%);
   padding-top: 2rem;
  
@@ -175,64 +180,6 @@ padding-left: 1.4rem;
   color: #000;
 }
 
-/* -------------------------------------------------------------
-  AI NAVIGASJONSKNAPPER
---------------------------------------------------------------*/
-
-.menu-section {
-  padding-bottom: 2em;
-  margin-bottom: 2em;
-}
-
-.menu-heading {
-  font-size: 1.2rem;
-  margin-bottom: 1rem;
-}
-
-.advanced-nav ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-
-.advanced-nav li {
-  flex: 1 0 12em;
-}
-
-.advanced-nav li a {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-  background: hsl(0, 0%, 15%);
-  padding: 1rem;
-  border-radius: 8px;
-  color: white;
-  text-decoration: none;
-  transition: background 0.2s ease;
-}
-
-.advanced-nav li a:hover {
-  background: hsl(0, 0%, 25%);
-}
-
-.advanced-nav .icon {
-  font-size: 1.8rem;
-  flex: 0 0 1.5em;
-}
-
-.advanced-nav .button-text {
-  font-size: 1.8em;
-}
-
-.advanced-nav .button-text span {
-  display: block;
-  font-size: 40%;
-  font-weight: lighter;
-  font-style: italic;
-}
 
 /* -------------------------------------------------------------
   RESPONSIVT: TABLET OG MOBIL
@@ -244,9 +191,9 @@ padding-left: 1.4rem;
     grid-template-areas: "article main";
   }
 
-  .ai-sidebar {
+  /* .ai-sidebar {
     display: none;
-  }
+  } */
 
   .article-sidebar {
     grid-area: article;
@@ -277,6 +224,12 @@ padding-left: 1.4rem;
   border-left: 1px solid #ccc;
 }
 
+/* sidebarer vises over 1024 */
+@media screen and (max-width: 599px) {
+  .ai-sidebar {
+    display: none;
+  }
+}
 
 
 /* fra 1024 pixel legger ai-sidebar seg i main-area  */
@@ -290,7 +243,7 @@ padding-left: 1.4rem;
   .ai-sidebar {
     order: 3; /* Kommer etter main-column */
     margin-top: 1rem;
-    background: #f0f0f0; /* Valgfritt: tydeligere skille */
+    
     padding: 1rem;
   }
 
@@ -317,7 +270,7 @@ padding-left: 1.4rem;
   .main-area {
     width: 100%;
     padding: 1rem;
-    background: white;
+   
     display: block;
   }
 
@@ -328,113 +281,83 @@ padding-left: 1.4rem;
   }
 }
 
-/* tablett view  */
-
-@media screen and (min-width: 601px) and (max-width: 1024px) {
-  .main-area {
-    width: 100%;
-    padding: 0.5rem 2rem 2rem; /* lavere top-padding for justert overskrift */
-    background: white;
-    display: block;
-  }
-
-  .article-sidebar,
-  .ai-sidebar {
-    width: 100%;
-    padding: 2rem 2rem 2rem; /* beholder god luft rundt overskrift */
-    background: white;
-    display: block;
-  }
-
-  .article-sidebar.hidden,
-  .ai-sidebar.hidden {
-    display: none !important;
-  }
-
-  .ai-sidebar.overlay {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 90vw;
-    max-width: 700px;
-    height: 80vh;
-    background: hsl(0, 0%, 90%);
-    z-index: 1000;
-    overflow-y: auto;
-    padding: 2rem;
-    border-radius: 1rem;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  }
-
-   /* Når article-sidebar er skjult, endre grid til én kolonne */
- .article-sidebar.hidden + .main-area {
-  grid-column: 1 / -1;
-}
-
-  /* Vi skjuler ikke main-area på tablet, fordi begge sidebars er default skjult */
-}
+/* media querry tablet view med overlay ai-sidebar tatt bort - kan legges tilbake  */
 
 
-/* -------------------------------------------------------------
-   ARTIKKELLISTE – STIL FOR SIDEBAR-MENY
---------------------------------------------------------------*/
-.article-list-menu ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
 
-.article-list-menu a {
-  display: block;
-  padding: 0.4em 0.8em;
-  color: inherit;
-  text-decoration: none;
-  background: none;
-  border-radius: 4px;
-  transition: background 0.3s ease;
-}
-
-.article-list-menu a:hover,
-.article-list-menu a:focus {
-  background: hsl(0, 0%, 20%);
-  color: white;
-}
-
-.article-list-menu h3 {
-  display: block;
-  font-size: 1.17em;
-  
-  margin-block: 1em;
-}
 
 /* -------------------------------------------------------------
   RESPONSIVE LAYOUT – SIDEBAR WIDTHS BASED ON SCREEN SIZE
   This section adjusts the left (article) and right (AI) sidebars
   by changing the dashboard grid column sizes at different breakpoints.
 -------------------------------------------------------------- */
-@media (min-width: 1024px) {
-  .dashboard {
-    grid-template-columns: 300px 1fr 340px; /* +40px på hver sidebar */
+/* endre fra 1024 til fra 600 (fjernet tablet view)  */
+@media (min-width: 600px) and (max-width: 1299px) {
+  .dashboard.three-columns {
+    grid-template-columns: 300px 1fr 340px;
+    grid-template-areas: "article main ai";
+  }
+
+  .dashboard.no-article {
+    grid-template-columns: 1fr 340px;
+    grid-template-areas: "main ai";
+  }
+
+  .dashboard.no-ai {
+    grid-template-columns: 300px 1fr;
+    grid-template-areas: "article main";
+  }
+
+  .dashboard.only-main {
+    grid-template-columns: 1fr;
+    grid-template-areas: "main";
   }
 }
 
+@media (min-width: 1300px) and (max-width: 1499px) {
+  .dashboard.three-columns {
+    grid-template-columns: 360px 1fr 360px;
+    grid-template-areas: "article main ai";
+  }
 
+  .dashboard.no-article {
+    grid-template-columns: 1fr 360px;
+    grid-template-areas: "main ai";
+  }
 
+  .dashboard.no-ai {
+    grid-template-columns: 360px 1fr;
+    grid-template-areas: "article main";
+  }
 
-@media (min-width: 1300px) {
-  .dashboard {
-    grid-template-columns: 320px 1fr 360px;
-    /* 260 + 60px og 300 + 60px */
+  .dashboard.only-main {
+    grid-template-columns: 1fr;
+    grid-template-areas: "main";
   }
 }
 
 @media (min-width: 1500px) {
-  .dashboard {
+  .dashboard.three-columns {
     grid-template-columns: 360px 1fr 420px;
-    /* Ekstra +40px per sidebar sammenlignet med 1300px */
+    grid-template-areas: "article main ai";
+  }
+
+  .dashboard.no-article {
+    grid-template-columns: 1fr 420px;
+    grid-template-areas: "main ai";
+  }
+
+  .dashboard.no-ai {
+    grid-template-columns: 360px 1fr;
+    grid-template-areas: "article main";
+  }
+
+  .dashboard.only-main {
+    grid-template-columns: 1fr;
+    grid-template-areas: "main";
   }
 }
+
 
 
 /* scrollbar article-sidebar  */
@@ -497,4 +420,91 @@ padding-left: 1.4rem;
   border-radius: 1.5rem;
   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
   margin-bottom: 1.5rem;
+}
+
+
+
+/* -------------------------------------------------------------
+   ARTIKKELLISTE – STIL FOR SIDEBAR-MENY Global stil  
+--------------------------------------------------------------*/
+.article-list-menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 1rem;
+}
+
+.article-list-menu li {
+  flex: 1 0 12em;
+  display: flex; /* gjør at <a> tar full høyde */
+}
+
+.article-list-menu a {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 8px;
+  background: white;            
+  color: black;                 /* ← svart tekst */
+  text-decoration: none;
+  transition: background 0.3s ease, color 0.3s ease;
+  width: 100%;
+}
+
+
+.article-list-menu .icon {
+  flex: 0 0 1.5em;
+  font-size: 1.8em;
+}
+
+.article-list-menu .button-text {
+  font-size: 1.2em;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.article-list-menu .button-text span {
+  font-size: 0.7em;
+  font-weight: lighter;
+  font-style: italic;
+}
+
+
+.article-title {
+  font-size: 1.05rem;
+  font-weight: 500;
+  margin-bottom: 0.2rem;
+}
+
+.article-author {
+  font-size: 0.85rem;
+  font-style: italic;
+  color: #666;
+}
+
+
+
+.nav-squish-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  max-width: 600px;
+  margin: 0 auto;
+  width: 100%;
+  
+}
+
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .nav-squish-container {
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
