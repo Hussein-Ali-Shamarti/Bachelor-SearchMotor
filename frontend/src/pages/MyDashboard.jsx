@@ -1,11 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+
 import "../assets/styles/MyDashboard.css";
-import {
-  FiList,
-  FiFileText,
-  FiMessageCircle,
-  FiArrowLeftCircle,
-} from "react-icons/fi";
 import HeaderMyDashboard from "../components/HeaderMyDashboard";
 
 function MyDashboard() {
@@ -18,21 +13,32 @@ function MyDashboard() {
     window.innerWidth > 600 && window.innerWidth <= 1024
   );
 
+  const sidebarRef = useRef(null); // ✔️ beholdt – brukes til scroll
+  const [showLoadMore, setShowLoadMore] = useState(false); // ✔️ beholdt – styrer "Last flere"-knapp
+
+  const handleSidebarScroll = () => {
+    const el = sidebarRef.current;
+    if (!el) return;
+
+    if (el.scrollTop + el.clientHeight >= el.scrollHeight - 10) {
+      setShowLoadMore(true);
+    } else {
+      setShowLoadMore(false);
+    }
+  };
+
   useEffect(() => {
     const handleResize = () => {
       const width = window.innerWidth;
       const mobile = width <= 600;
       const tablet = width > 600 && width <= 1024;
-
       setIsMobile(mobile);
       setIsTablet(tablet);
 
       if (!mobile && !tablet) {
-        // Desktop: vis alt
         setArticleSidebarHidden(false);
         setAiSidebarHidden(false);
       } else {
-        // Mobil og nettbrett: start med alt skjult
         setArticleSidebarHidden(true);
         setAiSidebarHidden(true);
       }
@@ -41,24 +47,24 @@ function MyDashboard() {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
   const toggleArticleSidebar = () => {
     if (isMobile) {
       setArticleSidebarHidden((prev) => !prev);
-      setAiSidebarHidden(true); // På mobil: fortsatt én åpen om gangen
+      setAiSidebarHidden(true);
     } else {
       setArticleSidebarHidden((prev) => !prev);
     }
   };
-  
+
   const toggleAiSidebar = () => {
     if (isMobile) {
       setAiSidebarHidden((prev) => !prev);
-      setArticleSidebarHidden(true); // På mobil: fortsatt én åpen om gangen
+      setArticleSidebarHidden(true);
     } else {
       setAiSidebarHidden((prev) => !prev);
     }
   };
-  
 
   const handleSummarize = () => {
     setShowSummary(true);
@@ -66,126 +72,49 @@ function MyDashboard() {
 
   return (
     <div className="outer-wrap">
-      <HeaderMyDashboard />
-
-      <div className="control-panel-nav">
-        <div className="sidebar-switcher-article">
-          <button
-            className="sidebar-hide-toggle"
-            onClick={toggleArticleSidebar}
-            style={{
-              transform: articleSidebarHidden ? "rotate(180deg)" : "rotate(0deg)",
-              transition: "transform 0.3s ease",
-              fontSize: "1.4rem",
-              background: "none",
-              border: "none",
-              color: "inherit",
-              cursor: "pointer",
-            }}
-          >
-            <FiArrowLeftCircle />
-          </button>
-          <span style={{ fontSize: "1rem", fontWeight: "500" }}>Article List</span>
-        </div>
-
-        <div className="sidebar-switcher-ai">
-          <span style={{ fontSize: "1rem", fontWeight: "500" }}>AI Assistent</span>
-          <button
-            className="sidebar-ai-toggle"
-            onClick={toggleAiSidebar}
-            style={{
-              fontSize: "1.4rem",
-              background: "none",
-              border: "none",
-              color: "inherit",
-              cursor: "pointer",
-            }}
-          >
-            <FiMessageCircle />
-          </button>
-        </div>
-      </div>
-
+      {/* ✅ Endret: fjernet <div ref={headerRef}> fordi vi ikke måler høyde lenger */}
+      <HeaderMyDashboard
+        articleSidebarHidden={articleSidebarHidden}
+        aiSidebarHidden={aiSidebarHidden}
+        toggleArticleSidebar={toggleArticleSidebar}
+        toggleAiSidebar={toggleAiSidebar}
+      />
+      
       <div
-  className={`dashboard
-    ${!articleSidebarHidden && !aiSidebarHidden ? "three-columns" : ""}
-    ${articleSidebarHidden && !aiSidebarHidden ? "no-article" : ""}
-    ${!articleSidebarHidden && aiSidebarHidden ? "no-ai" : ""}
-    ${articleSidebarHidden && aiSidebarHidden ? "only-main" : ""}
-  `}
->
-        <aside className={`article-sidebar ${articleSidebarHidden ? "hidden" : ""}`}>
+        className={`dashboard
+          ${!articleSidebarHidden && !aiSidebarHidden ? "three-columns" : ""}
+          ${articleSidebarHidden && !aiSidebarHidden ? "no-article" : ""}
+          ${!articleSidebarHidden && aiSidebarHidden ? "no-ai" : ""}
+          ${articleSidebarHidden && aiSidebarHidden ? "only-main" : ""}
+        `}
+      >
+        <aside
+          className={`article-sidebar ${articleSidebarHidden ? "hidden" : ""}`}
+          ref={sidebarRef}
+          onScroll={handleSidebarScroll}
+        >
           <div className="nav-squish-container">
             <h3>Article list</h3>
             <nav className="article-list-menu">
-            <ul>
-            <li>
-          <a href="#">
-            <div className="article-text">
-              <div className="article-title">Measuring the Impact of eGovernment Services</div>
-              <div className="article-author">Berntzen, Lasse</div>
-            </div>
-          </a>
-        </li> <li>
-          <a href="#">
-            <div className="article-text">
-              <div className="article-title">Measuring the Impact of eGovernment Services</div>
-              <div className="article-author">Berntzen, Lasse</div>
-            </div>
-          </a>
-        </li> <li>
-          <a href="#">
-            <div className="article-text">
-              <div className="article-title">Measuring the Impact of eGovernment Services</div>
-              <div className="article-author">Berntzen, Lasse</div>
-            </div>
-          </a>
-        </li> <li>
-          <a href="#">
-            <div className="article-text">
-              <div className="article-title">Measuring the Impact of eGovernment Services</div>
-              <div className="article-author">Berntzen, Lasse</div>
-            </div>
-          </a>
-        </li> <li>
-          <a href="#">
-            <div className="article-text">
-              <div className="article-title">Measuring the Impact of eGovernment Services</div>
-              <div className="article-author">Berntzen, Lasse</div>
-            </div>
-          </a>
-        </li> <li>
-          <a href="#">
-            <div className="article-text">
-              <div className="article-title">Measuring the Impact of eGovernment Services</div>
-              <div className="article-author">Berntzen, Lasse</div>
-            </div>
-          </a>
-        </li> <li>
-          <a href="#">
-            <div className="article-text">
-              <div className="article-title">Measuring the Impact of eGovernment Services</div>
-              <div className="article-author">Berntzen, Lasse</div>
-            </div>
-          </a>
-        </li> <li>
-          <a href="#">
-            <div className="article-text">
-              <div className="article-title">Measuring the Impact of eGovernment Services</div>
-              <div className="article-author">Berntzen, Lasse</div>
-            </div>
-          </a>
-        </li> <li>
-          <a href="#">
-            <div className="article-text">
-              <div className="article-title">Measuring the Impact of eGovernment Services</div>
-              <div className="article-author">Berntzen, Lasse</div>
-            </div>
-          </a>
-        </li>
-  
-</ul>
+              <ul>
+                {/* Eksempelartikler */}
+                {Array.from({ length: 12 }).map((_, i) => (
+                  <li key={i}>
+                    <a href="#">
+                      <div className="article-text">
+                        <div className="article-title">Measuring the Impact of eGovernment Services</div>
+                        <div className="article-author">Berntzen, Lasse</div>
+                      </div>
+                    </a>
+                  </li>
+                ))}
+              </ul>
 
+              {showLoadMore && (
+                <div className="article-sidebar-loadmore">
+                  <button>Last flere</button>
+                </div>
+              )}
             </nav>
           </div>
         </aside>
@@ -195,10 +124,7 @@ function MyDashboard() {
             <div className={`selected-article-card ${showSummary ? "half-width" : "full-width"}`}>
               <div className="card-content">
                 <h2>Selected Article</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer metus mi, porttitor id mollis auctor.</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer metus mi, porttitor id mollis auctor.</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer metus mi, porttitor id mollis auctor.</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer metus mi, porttitor id mollis auctor.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
                 <div className="button-wrapper">
                   <button className="summarize-button" onClick={handleSummarize}>
                     Summarize
@@ -214,48 +140,23 @@ function MyDashboard() {
                 </button>
                 <div className="card-content">
                   <h2>AI Summary</h2>
-                  <p>Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.</p>
-                  <p>Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.</p>
-                  <p>Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.</p>
-                  <p>Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.</p>
-                  <p>Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.</p>
-                  <p>Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.</p>
-                  <p>Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.</p>
-
-
+                  <p>Fusce pulvinar, arcu id venenatis lacinia...</p>
                 </div>
               </div>
             )}
           </section>
-
-        
         </main>
-{/* ai-sidebar for en overlay klasse for tablet view */}
 
-<aside
-  className={`ai-sidebar ${aiSidebarHidden ? "hidden" : ""} ${isTablet && !aiSidebarHidden ? "overlay" : ""}`}
->
-  <button
-    className="close-ai-button"
-    onClick={() => setAiSidebarHidden(true)}
-  >
-    &times;
-  </button>
-
-  <div className="ai-squish-container">
-    <h3>AI Tools:</h3>
-    
-
-    <input
-      type="text"
-      placeholder="Search in AI Assistant..."
-      className="ai-input"
-    />
-    <p>Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi elit posuere nunc, id blandit tellus quam vel augue.Fusce pulvinar, arcu id venenatis lacinia, nisi</p>
-  </div>
-</aside>
-
-
+        <aside className={`ai-sidebar ${aiSidebarHidden ? "hidden" : ""} ${isTablet && !aiSidebarHidden ? "overlay" : ""}`}>
+          <button className="close-ai-button" onClick={() => setAiSidebarHidden(true)}>
+            &times;
+          </button>
+          <div className="ai-squish-container">
+            <h3>AI Tools:</h3>
+            <input type="text" placeholder="Search in AI Assistant..." className="ai-input" />
+            <p>AI assistant content placeholder...</p>
+          </div>
+        </aside>
       </div>
 
       <footer className="footer-area">
