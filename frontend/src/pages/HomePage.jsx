@@ -129,11 +129,9 @@ const HomePage = () => {
         <div className="inside">
           <nav className="footer-nav">
             <ul>
+             
               <li>
-                <a href="#">Legal Notice</a>
-              </li>
-              <li>
-                <a href="#">Privacy Protection</a>
+                <a href="#">HybridSearch.ai – Bachelorprosjekt</a>
               </li>
               <li>
                 <a href="#top">Back to top</a>

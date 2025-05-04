@@ -1,22 +1,24 @@
+
 /* -------------------------------------------------------------
    LAYOUT: GLOBAL APP-CONTAINER (OUTER-WRAP)
 -------------------------------------------------------------- */
 
 .outer-wrap {
-  min-height: 100vh;        /* Strekker seg til full skjermhøyde */
   display: flex;
-  flex-direction: column;   /* Vertikal struktur: header → panel → dashboard → footer */
+  flex-direction: column;
+  min-height: 100vh;
+  padding-top: 128px; /* høyden på din fixed header + control panel */
 }
 
 /* -------------------------------------------------------------
    STRUCTURE: YTTERSTE LAYOUT-KONTAINER FOR DASHBOARD
    ------------------------------------------------------------- */
    .dashboard-layout {
-                     /* Fyll hele skjermen */
-    display: flex;
-    flex-direction: column;         /* Vertikal struktur: header + panel + grid */
-   
-  }
+    /* Fyll hele skjermen */
+display: flex;
+flex-direction: column;         /* Vertikal struktur: header + panel + grid */
+
+}
   
   /* -------------------------------------------------------------
      DASHBOARD GRID – INNHOLDSOMRÅDER (ARTICLE – MAIN – AI)
@@ -29,81 +31,17 @@
     grid-template-columns: 260px 1fr 300px;
 
      background: white;
+ 
   }
   
-  /* -------------------------------------------------------------
-     SCROLL-KONTROLL FOR HVER DEL
-     ------------------------------------------------------------- */
-  
+
+ 
    
-    
-    /* .main-area {
-      overflow-y: auto;
-    }
-    
-    .ai-sidebar {
-      overflow-y: auto;
-    } */
-    
-
-
-
-/* -------------------------------------------------------------
-  KONTROLLPANEL FOR KNAPPER MELLOM HEADER OG DASHBOARD
---------------------------------------------------------------*/
-/* panel før sticky */
-/* .control-panel-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.8rem 2rem;
-  border-bottom: 1px solid #ddd;
-  gap: 1rem;
-} */
-/* -------------------------------------------------------------
-   KONTROLLPANEL FOR KNAPPER MELLOM HEADER OG DASHBOARD (STICKY)
--------------------------------------------------------------- */
-.control-panel-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.8rem 2rem;
-  gap: 1rem;
-
+   
   
 
-  z-index: 999;
-  background: white;
-  border-bottom: 1px solid #ddd;
-}
-/* -------------------------------------------------------------
-  KNAPPER VENSTRE OG HØYRE (REBRUKT)
---------------------------------------------------------------*/
-.sidebar-back-button,
-.sidebar-switcher-ai,
-.sidebar-switcher-article {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  color: #111;
-}
-.sidebar-back-button button,
-.sidebar-switcher-ai button,
-.sidebar-switcher-article button {
-  background: none;
-  border: none;
-  font-size: 1.7rem;
-  color: #111;
-  cursor: pointer;
-  padding: 0.4rem;
-  transition: color 0.3s ease, transform 0.2s ease;
-}
-.sidebar-back-button button:hover,
-.sidebar-switcher-ai button:hover,
-.sidebar-switcher-article button:hover {
-  color: #444;
-  transform: scale(1.1);
-}
+
+
 /* -------------------------------------------------------------
   Article-SIDEBAR OG AI-SIDEBAR
 --------------------------------------------------------------*/
@@ -297,19 +235,16 @@ padding-left: 1.4rem;
     padding: 1rem;
     display: block;
   }
+  .main-area > *:first-child {
+    margin-top: 1rem;
+  }
 
   .article-sidebar {
     grid-area: article;
     /* max-height: 400px;        */
-    overflow-y: auto;
+ 
     max-height: calc(100vh - 128px); /* = 72 + 56, juster etter faktisk høyde */
-    /* må endres:display:  Hvordan finne riktig høyde (X) for calc(100vh - Xpx)?
 
-Mål site-header og control-panel-nav i DevTools → "Computed" height.
-
-Legg sammen og bruk i calc().
-
-Test i mobil og desktop for å finjustere.; */
   }
 
   .article-sidebar.hidden,
@@ -390,11 +325,11 @@ Test i mobil og desktop for å finjustere.; */
 .ai-sidebar {
   grid-area: ai;
   /* max-height: calc(100vh - 80px - 50px);  juster hvis header/footer har annen høyde  */
-  overflow-y: auto;
+
 }
 .main-area {
   grid-area: main;
-  overflow-y: auto;
+
   padding: 0.5rem 2rem 2rem;
 }
 
@@ -514,3 +449,14 @@ Test i mobil og desktop for å finjustere.; */
 }
 
 
+.site-footer {
+  background-color: #2e5278;
+  color: white;
+ padding: 1rem;
+  font-size: smaller;
+  text-align: center; /* ✅ sentrerer all tekst */
+}
+
+.footer-text {
+  font-size: 0.9rem;
+}

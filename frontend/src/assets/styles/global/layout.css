@@ -111,9 +111,10 @@ body {
 /* Grundlegende Gestaltung für den Footer */
 .site-footer {
   font-size: smaller; 
-  background-color: var(--color-nav,#00a3d2);
+  background-color: #2e5278; /* mørk blå */
   
   color: white; 
+  
  
   padding: 1rem;
 }
@@ -132,10 +133,7 @@ body {
 }
 
 
-.footer-nav li:first-child {
-  padding-right: 0.5rem; 
-  border-right: 1px solid var(--color-background-light); 
-}
+
 
 
 .footer-nav li:last-child {

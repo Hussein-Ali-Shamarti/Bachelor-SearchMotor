@@ -9,24 +9,26 @@
   right: 0;
   z-index: 1000;
   background-color: #fff;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* Optional for visuell dybde */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); 
+  height: 136px;            /* fast høyde */
+  padding: 0;               /* fjern padding – flytt det til innhold */
 }
 
-/* lag plass så mye som fixed header tar ?? */
-/* .outer-wrap 
-  padding-top: 130px; er fjernet  */
-  
 
+  
 
 
 .site-header {
               
   background-color: #fff;
   width: 100%;
-  padding: 0 1rem;                /* Fjernet vertical padding – høyde er nå kontrollert */
+  padding: 0 1rem;               
   z-index: 1000;                  /* Over alt annet */
   display: flex;
   align-items: center;
+  padding-top: 2rem;
+  padding-bottom: 1rem;
+   height: 88px;
 }
 
 /* Wrapper som sentrerer og begrenser innholdsbredde */
@@ -34,7 +36,7 @@
   width: 100%;
   max-width: 960px;
   margin: 0 auto;
-  flex: 1;
+  /* flex: 1; */
 }
 
 /* Ny struktur: Logo og søk side om side */
@@ -51,32 +53,34 @@
   align-items: center;
   gap: 0.4rem;
 }
-
+/* begrenser høyden av img  */
 .site-logo {
+  height: 48px;
   max-height: 48px;
-  height: auto;
   width: auto;
 }
 
 .site-title {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
+  line-height: 1;
   color: #2c5282;
   margin: 0;
+  white-space: nowrap;
 }
 
 /* Søkefelt-blokk */
 .search-bar-wrapper {
   flex: 1;
   display: flex;
-  justify-content: flex-end;
+  /* justify-content: flex-end; */
 }
 
 .search-input {
   width: 100%;
   max-width: 400px;
-  padding: 0.6rem 1.2rem;
   font-size: 1rem;
-  border-radius: 2rem;
+  padding: 0.5rem 1rem;
+    border-radius: 1.5rem;
   border: 1px solid #ccc;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.2s ease;
@@ -87,15 +91,98 @@
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
 }
 
+
+/* -------------------------------------------------------------
+   KONTROLLPANEL FOR KNAPPER MELLOM HEADER OG DASHBOARD (STICKY)
+-------------------------------------------------------------- */
+.control-panel-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+  gap: 1rem;
+
+  
+
+  /* z-index: 999; */
+  background: white;
+  border-bottom: 1px solid #ddd;
+  height: 48px;
+  padding: 0 1rem;
+}
+/* -------------------------------------------------------------
+  KNAPPER VENSTRE OG HØYRE (REBRUKT)
+--------------------------------------------------------------*/
+.sidebar-back-button,
+.sidebar-switcher-ai,
+.sidebar-switcher-article {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #111;
+}
+.sidebar-back-button button,
+.sidebar-switcher-ai button,
+.sidebar-switcher-article button {
+  background: none;
+  border: none;
+  font-size: 1.7rem;
+  color: #111;
+  cursor: pointer;
+  padding: 0.4rem;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+.sidebar-back-button button:hover,
+.sidebar-switcher-ai button:hover,
+.sidebar-switcher-article button:hover {
+  color: #444;
+  transform: scale(1.1);
+}
+
+/* -------------------------------------------------------------
+ Medai Queries for Responsivitet 
+-------------------------------------------------------------- */
+
+/* -------------------------------------------------------------
+   RESPONSIVT: TABLET OG DESKTOP (≥601px) – 
+-------------------------------------------------------------- */
+@media screen and (min-width: 601px) {
+  .site-header {
+    flex-direction: row;
+    align-items: center;
+  
+  }
+
+  .MyHeader-content {
+    flex-direction: row;
+    align-items: center;
+    gap: 2rem;
+    max-width: 960px;        /* <-- Legg til dette */
+    margin: 0 auto;          /* <-- Og dette */
+    /* width: 100%; */
+    justify-content: space-between; /* <-- Og dette */
+  }
+
+  .search-bar-wrapper {
+    justify-content: start;
+  }
+
+  .search-input {
+    max-width: 400px;
+  }
+}
+
+
 /* -------------------------------------------------------------
   RESPONSIVT: MOBIL (<600px)
 -------------------------------------------------------------- */
 @media screen and (max-width: 600px) {
   .site-header {
     height: auto;                       /* Tillater innhold å vokse vertikalt */
-    padding: 1rem 0.5rem;
+  
     flex-direction: column;
     align-items: flex-start;
+    padding-bottom: 0rem;
   }
 
   .MyHeader-content {
@@ -120,7 +207,7 @@
   .search-input {
     width: 90%;
     max-width: none;
-    padding: 0.5rem 1rem;
-    border-radius: 1.5rem;
+   
+    
   }
 }

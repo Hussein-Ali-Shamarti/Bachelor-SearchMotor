@@ -108,21 +108,13 @@ body {
   margin: 0; 
 }
 
-.footer-nav li {
-  margin-right: 0.5rem;
-}
 
 
-.footer-nav li:first-child {
-  padding-right: 0.5rem; 
-  border-right: 1px solid var(--color-background-light); 
-}
 
 
-.footer-nav li:last-child {
-  margin-right: 0; 
-  margin-left: auto; 
-}
+
+
+
 
 .site-footer a {
   color:white; 

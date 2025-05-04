@@ -12,6 +12,8 @@ function MyDashboard() {
   const [isTablet, setIsTablet] = useState(
     window.innerWidth > 600 && window.innerWidth <= 1024
   );
+  const [visibleCount, setVisibleCount] = useState(5);
+
 
   const sidebarRef = useRef(null); // ✔️ beholdt – brukes til scroll
   const [showLoadMore, setShowLoadMore] = useState(false); // ✔️ beholdt – styrer "Last flere"-knapp
@@ -79,6 +81,8 @@ function MyDashboard() {
         toggleArticleSidebar={toggleArticleSidebar}
         toggleAiSidebar={toggleAiSidebar}
       />
+
+      
       
       <div
         className={`dashboard
@@ -94,29 +98,29 @@ function MyDashboard() {
           onScroll={handleSidebarScroll}
         >
           <div className="nav-squish-container">
-            <h3>Article list</h3>
-            <nav className="article-list-menu">
-              <ul>
-                {/* Eksempelartikler */}
-                {Array.from({ length: 12 }).map((_, i) => (
-                  <li key={i}>
-                    <a href="#">
-                      <div className="article-text">
-                        <div className="article-title">Measuring the Impact of eGovernment Services</div>
-                        <div className="article-author">Berntzen, Lasse</div>
-                      </div>
-                    </a>
-                  </li>
-                ))}
-              </ul>
+  <h3>Article list</h3>
+  <nav className="article-list-menu">
+    <ul>
+      {Array.from({ length: visibleCount }).map((_, i) => (
+        <li key={i}>
+          <a href="#">
+            <div className="article-text">
+              <div className="article-title">Measuring the Impact of eGovernment Services</div>
+              <div className="article-author">Berntzen, Lasse</div>
+            </div>
+          </a>
+        </li>
+      ))}
+    </ul>
 
-              {showLoadMore && (
-                <div className="article-sidebar-loadmore">
-                  <button>Last flere</button>
-                </div>
-              )}
-            </nav>
-          </div>
+    {visibleCount < 12 && (
+      <div className="article-sidebar-loadmore">
+        <button onClick={() => setVisibleCount(prev => prev + 5)}>Last flere</button>
+      </div>
+    )}
+  </nav>
+</div>
+
         </aside>
 
         <main className={`main-area ${(isMobile && (!articleSidebarHidden || !aiSidebarHidden)) ? 'hidden' : ''}`}>
@@ -158,10 +162,13 @@ function MyDashboard() {
           </div>
         </aside>
       </div>
-
-      <footer className="footer-area">
-        <p>HybridSearch.ai – Bachelorprosjekt</p>
-      </footer>
+      <footer className="site-footer">
+  <div className="inside">
+    <div className="footer-text">
+      HybridSearch.ai – Bachelorprosjekt
+    </div>
+  </div>
+</footer>
     </div>
   );
 }
