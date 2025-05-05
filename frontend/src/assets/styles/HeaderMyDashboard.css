@@ -10,8 +10,8 @@
   z-index: 1000;
   background-color: #fff;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); 
-  height: 136px;            /* fast høyde */
-  padding: 0;               /* fjern padding – flytt det til innhold */
+  height: 136px;            /* høyde for desktop */
+  padding: 0;               /* ingen padding her! kun på innhold */
 }
 
 
@@ -19,12 +19,11 @@
 
 
 .site-header {
-              
+  display: flex;          
   background-color: #fff;
   width: 100%;
   padding: 0 1rem;               
   z-index: 1000;                  /* Over alt annet */
-  display: flex;
   align-items: center;
   padding-top: 2rem;
   padding-bottom: 1rem;
@@ -104,7 +103,7 @@
 
   
 
-  /* z-index: 999; */
+
   background: white;
   border-bottom: 1px solid #ddd;
   height: 48px;
@@ -139,12 +138,10 @@
   transform: scale(1.1);
 }
 
-/* -------------------------------------------------------------
- Medai Queries for Responsivitet 
--------------------------------------------------------------- */
+
 
 /* -------------------------------------------------------------
-   RESPONSIVT: TABLET OG DESKTOP (≥601px) – 
+   RESPONSIVT: TABLET OG DESKTOP 
 -------------------------------------------------------------- */
 @media screen and (min-width: 601px) {
   .site-header {
@@ -174,21 +171,27 @@
 
 
 /* -------------------------------------------------------------
-  RESPONSIVT: MOBIL (<600px)
+  RESPONSIVT: MOBIL 
 -------------------------------------------------------------- */
 @media screen and (max-width: 600px) {
-  .site-header {
-    height: auto;                       /* Tillater innhold å vokse vertikalt */
+ 
+ 
+  .header-fixed-top {
+    height: 144px;
+  }
   
+  .site-header {
     flex-direction: column;
     align-items: flex-start;
-    padding-bottom: 0rem;
+    height: 96px; 
+   
   }
 
   .MyHeader-content {
     flex-direction: column;
     align-items: center;
     gap: 0.5rem;
+   
   }
 
   .logo-container img {
@@ -207,7 +210,12 @@
   .search-input {
     width: 90%;
     max-width: none;
-   
-    
+     
   }
+  
+  .control-panel-nav {
+    height: 48px;
+  }
+  
+ 
 }

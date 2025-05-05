@@ -1,462 +1,431 @@
+/* === GLOBALT HTML, BODY, ROOT === */
+html,
+body {
+  height: 100%;
+  overflow: hidden; /* forhindrer at body scroller i Firefox */
+}
 
-/* -------------------------------------------------------------
-   LAYOUT: GLOBAL APP-CONTAINER (OUTER-WRAP)
--------------------------------------------------------------- */
-
+#root,
 .outer-wrap {
+  height: 100%;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
-  padding-top: 128px; /* høyden på din fixed header + control panel */
+}
+body {
+  background-color: var(--color-background-light);
 }
 
-/* -------------------------------------------------------------
-   STRUCTURE: YTTERSTE LAYOUT-KONTAINER FOR DASHBOARD
-   ------------------------------------------------------------- */
-   .dashboard-layout {
-    /* Fyll hele skjermen */
-display: flex;
-flex-direction: column;         /* Vertikal struktur: header + panel + grid */
 
-}
-  
-  /* -------------------------------------------------------------
-     DASHBOARD GRID – INNHOLDSOMRÅDER (ARTICLE – MAIN – AI)
-     ------------------------------------------------------------- */
-  /* gammel var uten flex:1  */
-  .dashboard {
-    flex: 1;                         /* Tar all plass som er igjen under header/panel */
-    display: grid;
-    grid-template-areas: "article main ai";
-    grid-template-columns: 260px 1fr 300px;
 
-     background: white;
- 
+
+/* =============================================================
+   GLOBAL LAYOUT OG CONTAINERE
+   ============================================================= */
+
+   .outer-wrap {
+    display: flex;
+    flex-direction: column;
+    height: 100vh; 
+    padding-top: 136px; /* Høyden på headeren standard*/
+    padding-bottom: 40px; /* Høyden på footer standard */
+    position: relative;
   }
   
-
- 
-   
-   
-  
-
-
-
-/* -------------------------------------------------------------
-  Article-SIDEBAR OG AI-SIDEBAR
---------------------------------------------------------------*/
-.article-sidebar,
-.ai-sidebar {
-  /* background: white; */
-  background: hsl(0, 0%, 90%);
-  padding-top: 2rem;
- 
-padding-right: 1.4rem;
-padding-bottom: 1rem;
-padding-left: 1.4rem;
-  border-right: 1px solid #ccc;
-}
-.article-sidebar {
-  border-right: 1px solid #ccc;
-}
-.ai-sidebar {
-  border-left: 1px solid #ccc;
-}
-/* Skjul via JS */
-.hidden {
-  display: none !important;
-}
-
-/* -------------------------------------------------------------
-  Last flere-knapp – vises når man når bunnen av sidebar
---------------------------------------------------------------*/
-.article-sidebar-loadmore {
-  text-align: center;
-  padding: 1rem 0;
-  background: white;
-  border-top: 1px solid #ddd;
-}
-
-.article-sidebar-loadmore button {
-  padding: 0.5rem 1rem;
-  background-color: #2e5278;
-  color: white;
-  border: none;
-  border-radius: 0.5rem;
-  cursor: pointer;
-}
-
-.article-sidebar-loadmore button:hover {
-  background-color: #11bfe6;
-}
-
-
-/* -------------------------------------------------------------
-  HOVEDOMRÅDE – SELECTED ARTICLE OG SUMMARY
---------------------------------------------------------------*/
-/* .main-area {
-  padding: 2rem;
-} */
-.dashboard-cards {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2rem;
-  
-}
-.selected-article-card,
-.summary-article-card {
-  background: white;
-  border: 1px solid #ddd;
-  border-radius: 0.5rem;
-  padding: 1.4rem;
-  color: black;
-  position: relative;
-}
-.full-width {
-  flex: 1 1 100%;
-  min-width: 100%;
-}
-.half-width {
-  flex: 1 1 48%;
-  min-width: 300px;
-  max-width: 100%;
-}
-.card-content h2 {
-  margin-top: 0;
-  margin-bottom: 0.5em;
-  font-weight: normal;
-  font-size: 1.8em;
-}
-.card-content p {
-  font-size: 1rem;
-}
-.button-wrapper {
-  display: flex;
-  justify-content: center;
-  margin-top: 2rem;
-}
-.summarize-button {
-  padding: 0.6em 1.2em;
-  border: none;
-  border-radius: 0.5rem;
-  background-color: hsl(0, 0%, 15%);
-  color: white;
-  font-size: 1rem;
-  cursor: pointer;
-  font-weight: 600;
-  transition: background 0.3s ease;
-}
-.summarize-button:hover {
-  background-color: hsl(0, 0%, 25%);
-}
-.close-summary {
-  position: absolute;
-  top: 10px;
-  right: 14px;
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  color: #888;
-  cursor: pointer;
-}
-.close-summary:hover {
-  color: #000;
-}
-
-/* -------------------------------------------------------------
-  RESPONSIVT: TABLET OG MOBIL
---------------------------------------------------------------*/
-@media screen and (max-width: 1024px) {
   .dashboard {
+    display: grid;
+    height: calc(100vh - 176px); /* 136 header + 40 footer */
+    
+    
+    background: white;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .dashboard.three-columns {
+    grid-template-columns: 260px 1fr 300px;
+    grid-template-areas: "article main ai";
+  }
+  
+  .dashboard.no-article {
+    grid-template-columns: 1fr 300px;
+    grid-template-areas: "main ai";
+  }
+  
+  .dashboard.no-ai {
     grid-template-columns: 260px 1fr;
     grid-template-areas: "article main";
   }
-  /* .ai-sidebar {
-    display: none;
-  } */
+  
+  .dashboard.only-main {
+    grid-template-columns: 1fr;
+    grid-template-areas: "main";
+  }
+  
+  /* =============================================================
+     GRID AREAS: ARTICLE / MAIN / AI
+     ============================================================= */
+  
   .article-sidebar {
     grid-area: article;
-  }
+    background: hsl(0, 0%, 90%);
+    padding: 2rem 1.4rem 1rem;
+    border-right: 1px solid #ccc;
  
-  .dashboard-cards {
-    flex-direction: column;
-    gap: 1rem;
+   
   }
-}
-
-
-.main-area {
-  grid-area: main;
-  padding: 0.5rem 2rem 2rem;
   
-}
-.ai-sidebar {
-  grid-area: ai;
-  border-left: 1px solid #ccc;
-}
-/* sidebarer vises over 1024 */
-@media screen and (max-width: 599px) {
   .ai-sidebar {
-    display: none;
+    grid-area: ai;
+    background: hsl(0, 0%, 90%);
+    padding: 2rem 1.4rem 1rem;
+    border-left: 1px solid #ccc;
+   
   }
-}
-
-/* fra 1024 pixel legger ai-sidebar seg i main-area  */
-@media screen and (max-width: 1024px) {
-  .dashboard-layout {
-    display: flex;
-    flex-direction: column;
-  }
-  .ai-sidebar {
-    order: 3; /* Kommer etter main-column */
-    margin-top: 1rem;
-    
-    padding: 1rem;
-  }
-  .main-column {
-    order: 2;
-  }
-  .nav-sidebar {
-    order: 1;
-  }
-}
-
-/* mobilview - sidebar vises over hele siden  */
-@media screen and (max-width: 600px) {
-  .dashboard {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .article-sidebar,
-  .ai-sidebar,
+  
   .main-area {
-    width: 100%;
+    grid-area: main;
+    padding: 0.5rem 2rem 2rem;
+   
+  }
+  
+  /* =============================================================
+     FUNKSJONELLE TILSTANDSKLASSER
+     ============================================================= */
+  
+  .is-hidden {
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+  
+  /* =============================================================
+     KOMPONENTER OG KORT
+     ============================================================= */
+  
+  .dashboard-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+  
+  .selected-article-card,
+  .summary-article-card {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 0.5rem;
+    padding: 1.4rem;
+    color: black;
+    position: relative;
+  }
+  
+  .full-width {
+    flex: 1 1 100%;
+    min-width: 100%;
+  }
+  
+  .half-width {
+    flex: 1 1 48%;
+    min-width: 300px;
+    max-width: 100%;
+  }
+  
+  .card-content h2 {
+    margin-top: 0;
+    margin-bottom: 0.5em;
+    font-weight: normal;
+    font-size: 1.8em;
+  }
+  
+  .card-content p {
+    font-size: 1rem;
+  }
+  
+  .button-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+  }
+  
+  .summarize-button {
+    padding: 0.6em 1.2em;
+    border: none;
+    border-radius: 0.5rem;
+    background-color: hsl(0, 0%, 15%);
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.3s ease;
+  }
+  
+  .summarize-button:hover {
+    background-color: hsl(0, 0%, 25%);
+  }
+  
+  .close-summary {
+    position: absolute;
+    top: 10px;
+    right: 14px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #888;
+    cursor: pointer;
+  }
+  
+  .close-summary:hover {
+    color: #000;
+  }
+  
+  .close-ai-button {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    font-size: 2rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #666;
+    box-shadow: none;
+  }
+  
+  .close-ai-button:hover {
+    color: #000;
+  }
+  
+  /* =============================================================
+     ARTIKKELLISTE-MEN
+     ============================================================= */
+  
+     .article-list-menu {
+      max-height: 750px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+  .article-list-menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 1rem;
+    overflow-y: auto;
+    flex: 1;
+    overflow: visible;
+  }
+  
+  .article-list-menu li {
+    flex: 1 0 12em;
+    display: flex;
+  }
+  
+  .article-list-menu a {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
     padding: 1rem;
-    display: block;
+    border-radius: 8px;
+    background: white;
+    color: black;
+    text-decoration: none;
+    transition: background 0.3s ease, color 0.3s ease;
+    width: 100%;
   }
-  .main-area > *:first-child {
-    margin-top: 1rem;
-  }
-
-  .article-sidebar {
-    grid-area: article;
-    /* max-height: 400px;        */
- 
-    max-height: calc(100vh - 128px); /* = 72 + 56, juster etter faktisk høyde */
-
-  }
-
-  .article-sidebar.hidden,
-  .ai-sidebar.hidden,
-  .main-area.hidden {
-    display: none !important;
-  }
-
-}
-
-
-
-
-/* -------------------------------------------------------------
-  RESPONSIVE LAYOUT – SIDEBAR WIDTHS BASED ON SCREEN SIZE
-  This section adjusts the left (article) and right (AI) sidebars
-  by changing the dashboard grid column sizes at different breakpoints.
--------------------------------------------------------------- */
-/* endre fra 1024 til fra 600 (fjernet tablet view)  */
-@media (min-width: 600px) and (max-width: 1299px) {
-  .dashboard.three-columns {
-    grid-template-columns: 300px 1fr 340px;
-    grid-template-areas: "article main ai";
-  }
-  .dashboard.no-article {
-    grid-template-columns: 1fr 340px;
-    grid-template-areas: "main ai";
-  }
-  .dashboard.no-ai {
-    grid-template-columns: 300px 1fr;
-    grid-template-areas: "article main";
-  }
-  .dashboard.only-main {
-    grid-template-columns: 1fr;
-    grid-template-areas: "main";
-  }
-}
-@media (min-width: 1300px) and (max-width: 1499px) {
-  .dashboard.three-columns {
-    grid-template-columns: 360px 1fr 360px;
-    grid-template-areas: "article main ai";
-  }
-  .dashboard.no-article {
-    grid-template-columns: 1fr 360px;
-    grid-template-areas: "main ai";
-  }
-  .dashboard.no-ai {
-    grid-template-columns: 360px 1fr;
-    grid-template-areas: "article main";
-  }
-  .dashboard.only-main {
-    grid-template-columns: 1fr;
-    grid-template-areas: "main";
-  }
-}
-@media (min-width: 1500px) {
-  .dashboard.three-columns {
-    grid-template-columns: 360px 1fr 420px;
-    grid-template-areas: "article main ai";
-  }
-  .dashboard.no-article {
-    grid-template-columns: 1fr 420px;
-    grid-template-areas: "main ai";
-  }
-  .dashboard.no-ai {
-    grid-template-columns: 360px 1fr;
-    grid-template-areas: "article main";
-  }
-  .dashboard.only-main {
-    grid-template-columns: 1fr;
-    grid-template-areas: "main";
-  }
-}
-
-
-/* bør disse fjernes? ødelegger for mobile? */
-
-.ai-sidebar {
-  grid-area: ai;
-  /* max-height: calc(100vh - 80px - 50px);  juster hvis header/footer har annen høyde  */
-
-}
-.main-area {
-  grid-area: main;
-
-  padding: 0.5rem 2rem 2rem;
-}
-
-.close-ai-button {
-  position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
-  font-size: 2rem;
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: #666;
-  box-shadow: none;
-}
-.close-ai-button:hover {
-  color: #000;
-}
-
-/* ai-squish container styling */
-.ai-squish-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;       /* sentrerer horisontalt */
-  justify-content: flex-start;
-  max-width: 600px;          /* begrenser innholdets bredde */
-  margin: 0 auto;            /* sentrerer blokken i boksen */
   
-  width: 100%;
-}
-.ai-input {
-  width: 100%;
-  max-width: 100%;
-  padding: 1rem;
-  font-size: 1rem;
+  .article-list-menu .icon {
+    flex: 0 0 1.5em;
+    font-size: 1.8em;
+  }
   
-  border: 1px solid #ccc;
-  border-radius: 1.5rem;
-  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
-  margin-bottom: 1.5rem;
-}
-
-
-/* -------------------------------------------------------------
-   ARTIKKELLISTE – STIL FOR SIDEBAR-MENY Global stil  
---------------------------------------------------------------*/
-.article-list-menu ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  gap: 1rem;
-}
-.article-list-menu li {
-  flex: 1 0 12em;
-  display: flex; /* gjør at <a> tar full høyde */
-}
-.article-list-menu a {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 1rem;
-  border-radius: 8px;
-  background: white;            
-  color: black;                 /* ← svart tekst */
-  text-decoration: none;
-  transition: background 0.3s ease, color 0.3s ease;
-  width: 100%;
-}
-
-.article-list-menu .icon {
-  flex: 0 0 1.5em;
-  font-size: 1.8em;
-}
-.article-list-menu .button-text {
-  font-size: 1.2em;
-  display: flex;
-  flex-direction: column;
-  line-height: 1.2;
-}
-.article-list-menu .button-text span {
-  font-size: 0.7em;
-  font-weight: lighter;
-  font-style: italic;
-}
-
-.article-title {
-  font-size: 1.05rem;
-  font-weight: 500;
-  margin-bottom: 0.2rem;
-}
-.article-author {
-  font-size: 0.85rem;
-  font-style: italic;
-  color: #666;
-}
-
-
-.nav-squish-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  max-width: 600px;
-  margin: 0 auto;
-  width: 100%;
+  .article-list-menu .button-text {
+    font-size: 1.2em;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+  }
   
-}
+  .article-list-menu .button-text span {
+    font-size: 0.7em;
+    font-weight: lighter;
+    font-style: italic;
+  }
+  
+  .article-title {
+    font-size: 1.05rem;
+    font-weight: 500;
+    margin-bottom: 0.2rem;
+  }
+  
+  .article-author {
+    font-size: 0.85rem;
+    font-style: italic;
+    color: #666;
+  }
 
-@media screen and (min-width: 768px) and (max-width: 1024px) {
-  .nav-squish-container {
+  .article-sidebar-loadmore {
+    position: sticky;
+    bottom: 0;
+    background: white;
+    padding: 1rem 0;
+    z-index: 1; /* sikre at den vises over cards */
+  }
+  
+  /* =============================================================
+     AI-SQUISH (INPUTBLOKK)
+     ============================================================= */
+  
+  .ai-squish-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
     max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0 auto;
+    width: 100%;
   }
+  
+  .ai-input {
+    width: 100%;
+    max-width: 100%;
+    padding: 1rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 1.5rem;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1.5rem;
+  }
+  
+  /* =============================================================
+     FOOTER
+     ============================================================= */
+  
+  .site-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 40px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    text-align: center;
+    border-top: 1px solid #ddd;
+    background: hsl(0, 0%, 75%);
+    color: white;
+  }
+  
+  .footer-text {
+    font-size: 0.9rem;
+  }
+  
+  /* =============================================================
+     MEDIA QUERIES – RESPONSIVE LAYOUT
+     ============================================================= */
+  
+  @media screen and (max-width: 1024px) {
+    .dashboard {
+      grid-template-columns: 260px 1fr;
+      grid-template-areas: "article main";
+    }
+  
+    .dashboard-cards {
+      flex-direction: column;
+      gap: 1rem;
+    }
+  
+    .ai-sidebar {
+      order: 3;
+      margin-top: 1rem;
+      padding: 1rem;
+    }
+  
+    .main-column {
+      order: 2;
+    }
+  
+    .nav-sidebar {
+      order: 1;
+    }
+  }
+  
+/* =============================================================
+ Hva er dette ???
+   ============================================================= */
+
+  /* riktig plassert ??? */
+  @media screen and (min-width: 768px) and (max-width: 1024px) {
+    .nav-squish-container {
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+
+  }
+  
+
+  /* =============================================================
+   MOBILVISNING: FULLSKJERM + SCROLL INNI BARN
+   ============================================================= */
+@media screen and (max-width: 600px) {
+  .outer-wrap {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    padding-top: 144px; /* høyde på header */
+    padding-bottom: 40px; /* høyde på footer */
+    position: relative;
+  }
+
+  .dashboard,
+  .dashboard.only-main,
+  .dashboard.no-article,
+  .dashboard.no-ai,
+  .dashboard.three-columns {
+    height: calc(100vh - 144px - 40px) !important; /* header + footer */
+    position: relative;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1fr !important;
+    grid-template-areas: "main" !important;
+  }
+
+  .main-area,
+  .article-sidebar,
+  .ai-sidebar {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  
+    overflow-y: auto;
+    padding: 1rem;
+    
+    transition: opacity 0.3s ease;
+  }
+
+  .main-area.is-hidden,
+  .article-sidebar.is-hidden,
+  .ai-sidebar.is-hidden {
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+ 
 }
 
 
-.site-footer {
-  background-color: #2e5278;
-  color: white;
- padding: 1rem;
-  font-size: smaller;
-  text-align: center; /* ✅ sentrerer all tekst */
-}
 
-.footer-text {
-  font-size: 0.9rem;
-}
+  
+  
+
+

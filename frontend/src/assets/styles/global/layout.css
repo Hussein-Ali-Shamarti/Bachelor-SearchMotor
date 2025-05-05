@@ -20,21 +20,15 @@
 /* Hintergrundfarbe für das Stammelement */ 
 html { background-color: var(--color-background-light); }
 
-/* Grundlegende Gestaltung für body */
-body {
-  /* Hintergrundfarbe und Begrenzung der Breite */ 
-  background-color: var(--color-background-light); 
-  min-width: 320px; 
-  max-width: 600px; 
+/* fjernet forrige fra body */
 
-  /* Horizontal zentrieren */ 
-  margin: 0 auto;   
 
-  /* Sticky Footer, Schritt 1/2 */
-  display: flex;
-  flex-flow: column; 
-  min-height: 100vh;    
-
+html, body, #root {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
 /* Optional: Für moderne Browser mehr Platz auch beim klassischen Layout */

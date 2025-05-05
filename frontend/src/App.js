@@ -1,5 +1,7 @@
 import React from "react";
 
+
+
 import "./assets/styles/global/basis.css";
 import "./assets/styles/global/content.css";
 import "./assets/styles/global/feedback.css";
@@ -22,15 +24,7 @@ import MyDashboard from "./pages/MyDashboard"; // Ny MyDashboard second
 function App() {
   return (
     <Router>
-      <nav className="main-nav" style={{ padding: "10px", borderBottom: "1px solid #ddd" }}>
-        <Link to="/" className="nav-link">Home</Link>
-        <Link to="/search" className="nav-link">Search</Link>
-        <Link to="/mypage" className="nav-link">My Page</Link>
-        <Link to="/login" className="nav-link">Login</Link>
-        <Link to="/register" className="nav-link">Register</Link>
-    
-        <Link to="/mydashboard" className="nav-link">MyDashboard</Link> {/* Riktig path */}
-      </nav>
+     
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/search" element={<SearchPage />} />

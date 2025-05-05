@@ -92,11 +92,12 @@ function MyDashboard() {
           ${articleSidebarHidden && aiSidebarHidden ? "only-main" : ""}
         `}
       >
-        <aside
-          className={`article-sidebar ${articleSidebarHidden ? "hidden" : ""}`}
-          ref={sidebarRef}
-          onScroll={handleSidebarScroll}
-        >
+       <aside
+  className={`article-sidebar${articleSidebarHidden ? " is-hidden" : ""}`}
+  ref={sidebarRef}
+  onScroll={handleSidebarScroll}
+>
+
           <div className="nav-squish-container">
   <h3>Article list</h3>
   <nav className="article-list-menu">
@@ -123,7 +124,7 @@ function MyDashboard() {
 
         </aside>
 
-        <main className={`main-area ${(isMobile && (!articleSidebarHidden || !aiSidebarHidden)) ? 'hidden' : ''}`}>
+        <main className={`main-area${articleSidebarHidden && aiSidebarHidden ? "" : " is-hidden"}`}>
           <section className="dashboard-cards">
             <div className={`selected-article-card ${showSummary ? "half-width" : "full-width"}`}>
               <div className="card-content">
@@ -151,7 +152,14 @@ function MyDashboard() {
           </section>
         </main>
 
-        <aside className={`ai-sidebar ${aiSidebarHidden ? "hidden" : ""} ${isTablet && !aiSidebarHidden ? "overlay" : ""}`}>
+        <aside
+ 
+ className={`ai-sidebar${aiSidebarHidden ? " is-hidden" : ""}${isTablet && !aiSidebarHidden ? " overlay" : ""}`}
+
+>
+
+  
+
           <button className="close-ai-button" onClick={() => setAiSidebarHidden(true)}>
             &times;
           </button>
