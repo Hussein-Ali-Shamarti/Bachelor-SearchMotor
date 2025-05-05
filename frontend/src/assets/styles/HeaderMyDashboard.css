@@ -141,14 +141,21 @@
 
 
 /* -------------------------------------------------------------
-   RESPONSIVT: TABLET OG DESKTOP 
+   RESPONSIVT: TABLET 
 -------------------------------------------------------------- */
-@media screen and (min-width: 601px) {
+@media screen and (min-width: 601px) and (max-width: 1024px) {
+  .header-fixed-top {
+    height: 136px;
+  }
+  
   .site-header {
     flex-direction: row;
     align-items: center;
+    height: 88px; 
   
   }
+
+
 
   .MyHeader-content {
     flex-direction: row;
@@ -166,6 +173,9 @@
 
   .search-input {
     max-width: 400px;
+  }
+  .control-panel-nav {
+    height: 48px;
   }
 }
 

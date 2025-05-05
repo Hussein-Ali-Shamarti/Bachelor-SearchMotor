@@ -124,7 +124,13 @@ function MyDashboard() {
 
         </aside>
 
-        <main className={`main-area${articleSidebarHidden && aiSidebarHidden ? "" : " is-hidden"}`}>
+        <main
+  className={`main-area${
+    isMobile && (articleSidebarHidden === false || aiSidebarHidden === false)
+      ? " is-hidden"
+      : ""
+  }`}
+>
           <section className="dashboard-cards">
             <div className={`selected-article-card ${showSummary ? "half-width" : "full-width"}`}>
               <div className="card-content">
