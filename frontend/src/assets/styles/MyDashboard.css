@@ -149,12 +149,14 @@ body {
     justify-content: center;
     margin-top: 2rem;
   }
-  
+  /* knapper svart farge eller blå som i logo?  */
   button {
     padding: 0.6em 1.2em;
     border: none;
-    border-radius: 0.5rem;
+    border-radius: 20px;
     background-color: hsl(0, 0%, 15%);
+    /* background-color: var(--color-nav); */
+  border: none;
     color: white;
     font-size: 1rem;
     cursor: pointer;

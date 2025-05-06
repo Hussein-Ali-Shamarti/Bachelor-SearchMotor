@@ -25,9 +25,10 @@
 
     padding: 0.5rem; /* Mindre padding for å matche infoboksene */
     width: 100%; /* Sørger for at den fyller bredden */
-    box-shadow: var(--color-shadow-light);
-    border-radius: 0.5rem;
-    border: var(--color-grey-border-light-thin);
+     border: 1px solid #ccc;
+     border-radius: 1.5rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+
   }
   
  
@@ -37,7 +38,7 @@
   .search-wrapper input {
     flex: 1;
     border: none;
-    padding: 2rem;
+    /* padding: 2rem; */
     font-size: 1rem;
     background: none;
     outline: none;
@@ -62,7 +63,7 @@
    .smart-search > .inside {
     display: grid;
     grid-template-columns: 1fr; /* En kolonne */
-    gap: 1rem;
+ 
     justify-content: center;
     align-items: center;
    }
@@ -73,11 +74,16 @@
     .smart-search > .inside {
       grid-template-columns: 1fr; /* Fortsatt én kolonne */
       justify-content: center;
-      grid-gap: 1rem;
+    
     }
   
     .search-wrapper {
       max-width: 100%; /* Fyller hele grid-plassen */
     }
   }
+
+  .smart-search h1 {
+    margin-bottom: 0.5rem;
+  }
+  
   

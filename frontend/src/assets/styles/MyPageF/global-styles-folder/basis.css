@@ -97,18 +97,7 @@ html {
  h5 { font-size: 1.25rem; }
  h6 { font-size: 1rem; } 
  
- @media screen and (max-width: 600px) {
-   .smart-search h1 {
-     font-size: 2rem; /* Gjør overskriften for section search mindre */
-   }
- }
- 
- @media screen and (max-width: 400px) {
-   .smart-search h1 {
-     font-size: 1.5rem; /* Gjør overskriften for section search mindre */
-   }
- }
- 
+
  
  /* Unterstreichung für Hyperlinks dünn und etwas weiter weg vom Text */ 
  a { text-decoration-thickness: 1px; text-underline-offset: 0.1875em;
