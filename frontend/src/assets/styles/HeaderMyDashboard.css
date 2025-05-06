@@ -42,7 +42,7 @@
 .MyHeader-content {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   gap: 1rem;
 }
 
@@ -69,20 +69,43 @@
 
 /* Søkefelt-blokk */
 .search-bar-wrapper {
-  flex: 1;
+  flex: 1 ;;
   display: flex;
-  /* justify-content: flex-end; */
+  justify-content: flex-end;
+  align-items: center;
+}
+.search-bar-wrapper {
+  padding: 0; /* ← fjerner padding */
+  height: 2.5rem; /* ← tving samme høyde som input hadde */
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  border: 1px solid #ccc;
+  border-radius: 1.5rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  background: white;
+  max-width: 400px;
+}
+/* IKON */
+.search-icon {
+  font-size: 1.5rem;
+  color: #555;
+  cursor: pointer;
+  padding-right: 0.5rem;
+}
+
+.search-icon:hover {
+  color: #000;
 }
 
 .search-input {
-  width: 100%;
-  max-width: 400px;
+  flex: 1;
   font-size: 1rem;
-  padding: 0.5rem 1rem;
-    border-radius: 1.5rem;
-  border: 1px solid #ccc;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.2s ease;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  background: transparent;
+  padding:0.5rem; 
 }
 
 .search-input:focus {
@@ -164,16 +187,15 @@
     max-width: 960px;        /* <-- Legg til dette */
     margin: 0 auto;          /* <-- Og dette */
     /* width: 100%; */
-    justify-content: space-between; /* <-- Og dette */
+    
   }
 
   .search-bar-wrapper {
     justify-content: start;
-  }
-
-  .search-input {
     max-width: 400px;
   }
+
+  
   .control-panel-nav {
     height: 48px;
   }
@@ -217,10 +239,9 @@
     justify-content: center;
   }
 
-  .search-input {
+  .search-bar-wrapper {
     width: 90%;
     max-width: none;
-     
   }
   
   .control-panel-nav {

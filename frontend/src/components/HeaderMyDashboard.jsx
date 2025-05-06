@@ -2,7 +2,8 @@ import React, { forwardRef } from "react";
 
 import "../assets/styles/global/header.css";
 import "../assets/styles/HeaderMyDashboard.css";
-import { FiArrowLeftCircle, FiMessageCircle } from "react-icons/fi";
+import { FiArrowLeftCircle, FiMessageCircle, FiSearch } from "react-icons/fi";
+
 
 // ✅ forwardRef krever at hele komponentfunksjonen lukkes før export
 const HeaderMyDashboard = forwardRef(({
@@ -33,6 +34,7 @@ const HeaderMyDashboard = forwardRef(({
                 placeholder="Search for articles..."
                 className="search-input"
               />
+               <FiSearch className="search-icon" aria-label="Search" />
             </div>
           </div>
         </div>
