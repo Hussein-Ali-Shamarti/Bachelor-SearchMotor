@@ -225,6 +225,7 @@ body {
   .article-list-menu li {
     flex: 1 0 12em;
     display: flex;
+    
   }
   
   .article-list-menu a {
@@ -238,6 +239,14 @@ body {
     text-decoration: none;
     transition: background 0.3s ease, color 0.3s ease;
     width: 100%;
+  }
+  .article-list-menu li a:hover {
+    background-color: hsl(0, 0%, 25%);
+    color: white;
+  }
+  
+  .article-list-menu li a:hover .article-author {
+    color: #ddd; /* eller white hvis du vil ha maks kontrast */
   }
   
   .article-list-menu .icon {

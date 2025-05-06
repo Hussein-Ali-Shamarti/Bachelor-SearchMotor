@@ -167,9 +167,7 @@ function MyDashboard() {
 
   
 
-          <button className="close-ai-button" onClick={() => setAiSidebarHidden(true)}>
-            &times;
-          </button>
+        
           <div className="ai-squish-container">
             <h3>AI Tools:</h3>
             <input type="text" placeholder="Search in AI Assistant..." className="ai-input" />
