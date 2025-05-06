@@ -151,7 +151,8 @@ function MyDashboard() {
                 </button>
                 <div className="card-content">
                   <h2>AI Summary</h2>
-                  <p>Fusce pulvinar, arcu id venenatis lacinia...</p>
+                  <p>Fusce pulvinar, arcu id venenatis lacinia, nulla risus mattis ligula, vel blandit ipsum nunc in lorem. Sed commodo ligula ut velit consequat, nec fermentum augue fringilla. Aenean non quam vitae nisl tempus faucibus. Curabitur ut sapien ac risus suscipit sagittis. Nullam a ligula et magna tincidunt imperdiet. Cras posuere, sapien at varius blandit, metus augue sollicitudin enim, nec euismod nibh justo a metus.</p>
+
                 </div>
               </div>
             )}
