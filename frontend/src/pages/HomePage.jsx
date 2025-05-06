@@ -13,7 +13,7 @@ const HomePage = () => {
       navigate(`/mypage?query=${encodeURIComponent(query)}`);
       console.log("Navigating to my page. query=" + query);
     } else {
-      navigate(`/search?query=${encodeURIComponent(query)}`);
+      navigate(`/MyDashboard?query=${encodeURIComponent(query)}`);
       console.log("Navigating to search page. query=" + query);
     }
   };
