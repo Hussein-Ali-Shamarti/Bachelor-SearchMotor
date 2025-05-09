@@ -13,7 +13,6 @@ import "./assets/styles/global/smart-search.css";
 import "./assets/styles/global/menu.css";
 
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import SearchPage from "./pages/SearchPage";
 import HomePage from "./pages/HomePage";
 import MyPage from "./pages/MyPage";
 import Login from "./pages/Login";
@@ -27,11 +26,8 @@ function App() {
      
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/search" element={<SearchPage />} />
         <Route path="/mypage" element={<MyPage />} />
-      
         <Route path="/mydashboard" element={<MyDashboard />} /> {/* Ny rute */}
-
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Registration />} />
       </Routes>
