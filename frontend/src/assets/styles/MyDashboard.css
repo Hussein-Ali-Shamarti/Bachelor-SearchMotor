@@ -133,11 +133,11 @@ body {
     max-width: 100%;
   }
   
-  .card-content h2 {
+  .card-content h3 {
     margin-top: 0;
     margin-bottom: 0.5em;
     font-weight: normal;
-    font-size: 1.8em;
+    /* font-size: 1.8em; */
   }
   
   .card-content p {
@@ -216,7 +216,8 @@ body {
     margin: 0;
     padding: 0;
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column; 
+  gap: 0.5rem; 
     justify-content: flex-start;
     gap: 1rem;
     overflow-y: auto;
@@ -225,23 +226,22 @@ body {
   }
   
   .article-list-menu li {
-    flex: 1 0 12em;
-    display: flex;
-    
+    flex: none; /* Fjernet fleksibel størrelse */
+    width: 100%; /* Brukt full bredde av containeren */
+    display: block; 
   }
   
   .article-list-menu a {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 1rem;
-    border-radius: 8px;
+    display: block;
+    padding: 0.8rem 1rem; /* Redusert padding for mindre hvit plass */
     background: white;
     color: black;
     text-decoration: none;
+    border-radius: 8px;
     transition: background 0.3s ease, color 0.3s ease;
     width: 100%;
   }
+  
   .article-list-menu li a:hover {
     background-color: hsl(0, 0%, 25%);
     color: white;
@@ -284,7 +284,7 @@ body {
   .article-sidebar-loadmore {
     position: sticky;
     bottom: 0;
-    background: white;
+   
     padding: 1rem 0;
     z-index: 1; /* sikre at den vises over cards */
     text-align: center;
@@ -302,6 +302,7 @@ body {
     max-width: 600px;
     margin: 0 auto;
     width: 100%;
+    padding-top:2rem; 
   }
   
   .ai-input {

@@ -99,7 +99,7 @@ function MyDashboard() {
 >
 
           <div className="nav-squish-container">
-  <h3>Article list</h3>
+  {/* <h3>Article list</h3> */}
   <nav className="article-list-menu">
     <ul>
       {Array.from({ length: visibleCount }).map((_, i) => (
