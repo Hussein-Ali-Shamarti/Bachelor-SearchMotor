@@ -46,11 +46,7 @@ const ArticleDetails = ({ selectedArticle, onOpenChat }) => {
               </p>
               <p>
                 <strong>Author(s):</strong>{" "}
-                {Array.isArray(selectedArticle.author)
-                  ? selectedArticle.author
-                      .map((name) => name.replace(",", "").trim())
-                      .join(", ")
-                  : selectedArticle.author || "Unknown"}
+                {(selectedArticle.author || "Unknown Author").trim()}
               </p>
               <p>
                 <strong>Publication Date:</strong>{" "}

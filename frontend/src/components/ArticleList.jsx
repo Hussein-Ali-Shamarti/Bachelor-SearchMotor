@@ -82,11 +82,7 @@ function ArticleList({ searchQuery, isMobile, isTablet, onSelectArticle }) {
                       {article.title || "No Title"}
                     </div>
                     <div className="article-author">
-                      {Array.isArray(article.author)
-                        ? article.author
-                            .map((name) => name.replace(",", "").trim())
-                            .join(", ")
-                        : article.author || "Unknown Author"}
+                      {(article.author || "Unknown Author").trim()}
                       {article.publication_date && (
                         <span> - {article.publication_date}</span>
                       )}

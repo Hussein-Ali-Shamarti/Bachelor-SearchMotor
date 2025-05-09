@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import "../assets/styles/MyDashboard.css";
 import HeaderMyDashboard from "../components/HeaderMyDashboard";
 import ArticleList from "../components/ArticleList";
@@ -19,6 +19,7 @@ function MyDashboard() {
   const queryParams = new URLSearchParams(location.search);
   const searchQuery = queryParams.get("query");
   const [chatHistory, setChatHistory] = useState([]);
+  const navigate = useNavigate();
 
 
   // Handle resizing
@@ -58,6 +59,10 @@ function MyDashboard() {
             ? (setAiSidebarHidden((prev) => !prev), setArticleSidebarHidden(true))
             : setAiSidebarHidden((prev) => !prev)
         }
+         onSearch={(query) => {
+            navigate(`?query=${encodeURIComponent(query)}`);
+            console.log("Dashboard: new search triggered with query:", query);
+        }}
       />
 
       <div

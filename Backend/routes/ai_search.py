@@ -47,6 +47,26 @@ def author_matches(stored_author, filter_author):
             return True
     return False
 
+def clean_author_field(stored_author):
+    if not stored_author or stored_author == "None":
+        return ""
+    try:
+        authors_list = ast.literal_eval(stored_author)
+        if isinstance(authors_list, list):
+            cleaned_authors = []
+            for author in authors_list:
+                if ',' in author:
+                    parts = [p.strip() for p in author.split(',', 1)]
+                    # Swap to Firstname Lastname
+                    cleaned_authors.append(f"{parts[1]} {parts[0]}")
+                else:
+                    cleaned_authors.append(author.strip())
+            return ", ".join(cleaned_authors)
+    except Exception:
+        pass
+    return stored_author
+
+
 def extract_filters_from_query(raw_query):
     filter_author = ""
     filter_topic = ""
@@ -129,7 +149,7 @@ def ai_search():
                         "id": article.id,
                         "title": article.title,
                         "abstract": article.abstract,
-                        "author": article.author,
+                        "author": clean_author_field(article.author),
                         "publication_date": article.publication_date,
                         "pdf_url": article.pdf_url,
                         "keywords": article.keywords,
@@ -183,7 +203,7 @@ def ai_search():
                         "id": article.id,
                         "title": article.title,
                         "abstract": article.abstract,
-                        "author": article.author,
+                        "author": clean_author_field(article.author),
                         "publication_date": article.publication_date,
                         "pdf_url": article.pdf_url,
                         "keywords": article.keywords,
