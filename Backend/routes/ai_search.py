@@ -45,6 +45,7 @@ def author_matches(stored_author, filter_author):
         if (all(word in author_clean for word in filter_words) or
             all(word in reversed_author for word in filter_words)):
             return True
+
     return False
 
 def clean_author_field(stored_author):
@@ -66,7 +67,6 @@ def clean_author_field(stored_author):
         pass
     return stored_author
 
-
 def extract_filters_from_query(raw_query):
     filter_author = ""
     filter_topic = ""
@@ -78,12 +78,14 @@ def extract_filters_from_query(raw_query):
         filter_year = m_year.group(0)
         raw_query = raw_query.replace(m_year.group(0), '').strip()
 
-    m_author = re.search(r'\b(by|av)\s+([a-zæøåÆØÅ\s,]+?)(\s+(from|fra)|(19|20)\d{2}|$)', raw_query)
+    m_author = re.search(
+        r'\b(by|av)\s+([a-zæøåÆØÅ\s,]+?)(\s+(from|fra)|(19|20)\d{2}|$)', raw_query)
     if m_author:
         filter_author = m_author.group(2).strip()
         raw_query = raw_query.replace(m_author.group(0), '').strip()
 
-    m_location = re.search(r'\b(from|fra)\s+([a-zæøåÆØÅ\s,]+?)(\s+(19|20)\d{2}|$)', raw_query)
+    m_location = re.search(
+        r'\b(from|fra)\s+([a-zæøåÆØÅ\s,]+?)(\s+(19|20)\d{2}|$)', raw_query)
     if m_location:
         filter_location = m_location.group(2).strip()
         raw_query = raw_query.replace(m_location.group(0), '').strip()
@@ -98,11 +100,19 @@ def extract_filters_from_query(raw_query):
     filter_topic = re.sub("|".join(filler_patterns), "", filter_topic)
     filter_topic = re.sub(r'\s+', ' ', filter_topic).strip()
 
+    # Fallback: assume 2+ words = author if no author was matched
+    if not filter_author:
+        name_match = re.match(r'^([a-zæøåæøå]+(?:\s+[a-zæøåæøå]+)+)$', raw_query.strip(), re.UNICODE | re.IGNORECASE)
+        if name_match:
+            filter_author = name_match.group(1)
+            filter_topic = ""
+
     return filter_author, filter_topic, filter_year, filter_location
 
 @ai_search_bp.route("/ai-search", methods=["POST"])
 def ai_search():
     try:
+        print("Flask: entered /ai-search route")
         data = request.get_json()
         if "embedding" not in data:
             return jsonify({"error": "Missing 'embedding' key"}), 400
@@ -130,21 +140,31 @@ def ai_search():
                     filter_topic = ""
 
         is_db_only_query = (
-            filter_author and filter_year and (not filter_topic or len(filter_topic.split()) <= 1)
+            bool(filter_author)
+            and (not filter_topic)
         )
 
         if is_db_only_query:
             results = []
             with SessionLocal() as session:
                 query = session.query(Article)
+
                 if filter_year:
                     query = query.filter(Article.publication_date.like(f"{filter_year}%"))
 
-                all_articles = query.all()
-                for article in all_articles:
-                    if filter_author and not author_matches(article.author, filter_author):
-                        continue
+                if filter_author:
+                    # Try to match by last name (safer for search)
+                    filter_author_parts = filter_author.strip().split()
+                    if len(filter_author_parts) > 1:
+                        last_name = filter_author_parts[-1]
+                    else:
+                        last_name = filter_author_parts[0]
+                    author_like = f"%{last_name}%"
+                    query = query.filter(Article.author.ilike(author_like))
 
+                matching_articles = query.all()
+                
+                for article in matching_articles:
                     result_item = {
                         "id": article.id,
                         "title": article.title,
@@ -168,6 +188,8 @@ def ai_search():
         ids = current_app.config['IDS']
         if index is None:
             return jsonify({"error": "No articles found in FAISS index"}), 404
+        print(f"Extracted filters - author: '{filter_author}', topic: '{filter_topic}', year: '{filter_year}'")
+        print(f"is_db_only_query: {is_db_only_query}")
 
         enriched_results = []
         seen_ids = set()
@@ -185,18 +207,33 @@ def ai_search():
                         continue
 
                     boost = 1.0
+                    author_match = False
+                    topic_match = False
+
                     if filter_author and author_matches(article.author, filter_author):
-                        boost *= 3.0
+                        author_match = True
+
                     if filter_topic:
                         norm_title = normalize(article.title)
                         norm_keywords = normalize(article.keywords)
                         topic_words = filter_topic.split()
-                        match_count = sum(1 for word in topic_words if word in norm_title or word in norm_keywords)
+                        match_count = sum(
+                            1 for word in topic_words if word in norm_title or word in norm_keywords
+                        )
                         if match_count >= 1:
+                            topic_match = True
                             boost *= 1 + (0.5 * match_count)
-                    if filter_year and article.publication_date and article.publication_date.startswith(filter_year):
-                        boost *= 1.1
 
+                    if filter_author and filter_topic:
+                    # Apply extra boost if BOTH author + topic match
+                        if author_match and topic_match:
+                            boost *= 3.0
+                        else:
+                            boost = 1.0
+                    elif author_match:
+                        boost *= 2.0
+                    elif topic_match:
+                        boost *= 1.5
                     adjusted_distance = float(distances[0][i]) / boost
 
                     result_item = {
