@@ -43,9 +43,8 @@ def author_matches(stored_author, filter_author):
             reversed_author = author_clean
 
         if (all(word in author_clean for word in filter_words) or
-            all(word in reversed_author for word in filter_words)):
+                all(word in reversed_author for word in filter_words)):
             return True
-
     return False
 
 def clean_author_field(stored_author):
@@ -58,7 +57,6 @@ def clean_author_field(stored_author):
             for author in authors_list:
                 if ',' in author:
                     parts = [p.strip() for p in author.split(',', 1)]
-                    # Swap to Firstname Lastname
                     cleaned_authors.append(f"{parts[1]} {parts[0]}")
                 else:
                     cleaned_authors.append(author.strip())
@@ -78,14 +76,12 @@ def extract_filters_from_query(raw_query):
         filter_year = m_year.group(0)
         raw_query = raw_query.replace(m_year.group(0), '').strip()
 
-    m_author = re.search(
-        r'\b(by|av)\s+([a-zæøåÆØÅ\s,]+?)(\s+(from|fra)|(19|20)\d{2}|$)', raw_query)
+    m_author = re.search(r'\b(by|av)\s+([a-z\u00e6\u00f8\u00e5\u00c6\u00d8\u00c5\s,]+?)(\s+(from|fra)|(19|20)\d{2}|$)', raw_query)
     if m_author:
         filter_author = m_author.group(2).strip()
         raw_query = raw_query.replace(m_author.group(0), '').strip()
 
-    m_location = re.search(
-        r'\b(from|fra)\s+([a-zæøåÆØÅ\s,]+?)(\s+(19|20)\d{2}|$)', raw_query)
+    m_location = re.search(r'\b(from|fra)\s+([a-z\u00e6\u00f8\u00e5\u00c6\u00d8\u00c5\s,]+?)(\s+(19|20)\d{2}|$)', raw_query)
     if m_location:
         filter_location = m_location.group(2).strip()
         raw_query = raw_query.replace(m_location.group(0), '').strip()
@@ -100,9 +96,8 @@ def extract_filters_from_query(raw_query):
     filter_topic = re.sub("|".join(filler_patterns), "", filter_topic)
     filter_topic = re.sub(r'\s+', ' ', filter_topic).strip()
 
-    # Fallback: assume 2+ words = author if no author was matched
     if not filter_author:
-        name_match = re.match(r'^([a-zæøåæøå]+(?:\s+[a-zæøåæøå]+)+)$', raw_query.strip(), re.UNICODE | re.IGNORECASE)
+        name_match = re.match(r'^([a-zæøåæøå]+(?:\s+[a-zæøåæøå]+){1,3})$', raw_query.strip(), re.UNICODE | re.IGNORECASE)
         if name_match:
             filter_author = name_match.group(1)
             filter_topic = ""
@@ -127,7 +122,7 @@ def ai_search():
 
         raw_query = data.get("query", "").lower().strip()
         if raw_query:
-            ex_author, ex_topic, ex_year, _, = extract_filters_from_query(raw_query)
+            ex_author, ex_topic, ex_year, _ = extract_filters_from_query(raw_query)
             if not filter_author:
                 filter_author = ex_author
             if not filter_topic:
@@ -139,10 +134,7 @@ def ai_search():
                     filter_author = filter_topic
                     filter_topic = ""
 
-        is_db_only_query = (
-            bool(filter_author)
-            and (not filter_topic)
-        )
+        is_db_only_query = bool(filter_author) and not filter_topic
 
         if is_db_only_query:
             results = []
@@ -153,19 +145,14 @@ def ai_search():
                     query = query.filter(Article.publication_date.like(f"{filter_year}%"))
 
                 if filter_author:
-                    # Try to match by last name (safer for search)
-                    filter_author_parts = filter_author.strip().split()
-                    if len(filter_author_parts) > 1:
-                        last_name = filter_author_parts[-1]
-                    else:
-                        last_name = filter_author_parts[0]
-                    author_like = f"%{last_name}%"
-                    query = query.filter(Article.author.ilike(author_like))
+                    parts = filter_author.strip().split()
+                    last_name = parts[-1] if len(parts) > 1 else parts[0]
+                    query = query.filter(Article.author.ilike(f"%{last_name}%"))
 
                 matching_articles = query.all()
-                
+
                 for article in matching_articles:
-                    result_item = {
+                    results.append({
                         "id": article.id,
                         "title": article.title,
                         "abstract": article.abstract,
@@ -176,8 +163,7 @@ def ai_search():
                         "isbn": article.isbn,
                         "distance": None,
                         "conference_location": article.location,
-                    }
-                    results.append(result_item)
+                    })
 
             if not results:
                 return jsonify({"error": "No articles found for search results"}), 404
@@ -188,11 +174,10 @@ def ai_search():
         ids = current_app.config['IDS']
         if index is None:
             return jsonify({"error": "No articles found in FAISS index"}), 404
-        print(f"Extracted filters - author: '{filter_author}', topic: '{filter_topic}', year: '{filter_year}'")
-        print(f"is_db_only_query: {is_db_only_query}")
 
         enriched_results = []
         seen_ids = set()
+        pure_semantic_query = not (filter_author or filter_topic or filter_year)
 
         initial_k, max_k, k = 50, 200, 50
         while k <= max_k:
@@ -216,27 +201,29 @@ def ai_search():
                     if filter_topic:
                         norm_title = normalize(article.title)
                         norm_keywords = normalize(article.keywords)
+                        norm_abstract = normalize(article.abstract)
                         topic_words = filter_topic.split()
-                        match_count = sum(
-                            1 for word in topic_words if word in norm_title or word in norm_keywords
-                        )
+                        match_count = sum(1 for word in topic_words if word in norm_title or word in norm_keywords)
                         if match_count >= 1:
                             topic_match = True
                             boost *= 1 + (0.5 * match_count)
+                        if any(word in norm_abstract for word in topic_words):
+                            topic_match = True
+                            boost *= 1.1
 
-                    if filter_author and filter_topic:
-                    # Apply extra boost if BOTH author + topic match
-                        if author_match and topic_match:
-                            boost *= 3.0
-                        else:
-                            boost = 1.0
-                    elif author_match:
-                        boost *= 2.0
-                    elif topic_match:
-                        boost *= 1.5
-                    adjusted_distance = float(distances[0][i]) / boost
+                    if pure_semantic_query:
+                        adjusted_distance = float(distances[0][i])
+                    else:
+                        if filter_author and filter_topic:
+                            if author_match and topic_match:
+                                boost *= 3.0
+                        elif author_match:
+                            boost *= 2.0
+                        elif topic_match:
+                            boost *= 1.5
+                        adjusted_distance = float(distances[0][i]) / boost
 
-                    result_item = {
+                    enriched_results.append({
                         "id": article.id,
                         "title": article.title,
                         "abstract": article.abstract,
@@ -247,12 +234,32 @@ def ai_search():
                         "isbn": article.isbn,
                         "distance": adjusted_distance,
                         "conference_location": article.location,
-                    }
-                    enriched_results.append(result_item)
+                    })
             k += 50
 
-        if not enriched_results:
-            return jsonify({"error": "No articles found for search results"}), 404
+        # Fallback to top unfiltered semantic results if no matches with filters
+        if not enriched_results and not is_db_only_query:
+            fallback_results = []
+            distances, indices = index.search(query_embedding, 10)
+            with SessionLocal() as session:
+                for i, idx in enumerate(indices[0]):
+                    article = session.query(Article).filter_by(id=ids[idx]).first()
+                    if not article:
+                        continue
+                    fallback_results.append({
+                        "id": article.id,
+                        "title": article.title,
+                        "abstract": article.abstract,
+                        "author": clean_author_field(article.author),
+                        "publication_date": article.publication_date,
+                        "pdf_url": article.pdf_url,
+                        "keywords": article.keywords,
+                        "isbn": article.isbn,
+                        "distance": float(distances[0][i]),
+                        "conference_location": article.location,
+                    })
+            return jsonify(fallback_results)
+
 
         enriched_results.sort(key=lambda x: x["distance"])
         return jsonify(enriched_results)
