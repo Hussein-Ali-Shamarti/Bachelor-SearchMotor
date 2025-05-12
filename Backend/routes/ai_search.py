@@ -132,13 +132,21 @@ def extract_filters_from_query(raw_query):
             if non_topic_words == len(words):
                 filter_author = candidate_text.title()
                 candidate_text = ""
+    # Normalize punctuation early
+    candidate_text = candidate_text.strip().strip(",")
+    if "," in candidate_text:
+         candidate_text = candidate_text.replace(",", " ")
 
-        # Fallback: treat as author only if it's a likely personal name (no 'of', etc.)
+    # Fallback: treat as author only if it's a likely personal name (no 'of', etc.)
     if not filter_author and not filter_topic:
-        if looks_like_person_name(candidate_text):
+        word_count = len(candidate_text.split())
+        contains_comma = "," in raw_query
+
+        if not contains_comma and word_count == 2 and looks_like_person_name(candidate_text):
             filter_author = candidate_text.title()
             candidate_text = ""
-
+        else:
+            filter_topic = candidate_text.strip()
 
     if not filter_topic and candidate_text:
         filter_topic = candidate_text.strip()
