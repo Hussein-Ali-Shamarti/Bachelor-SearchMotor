@@ -61,6 +61,7 @@ function MyDashboard() {
             : setAiSidebarHidden((prev) => !prev)
         }
          onSearch={(query) => {
+            setSelectedArticle(null);
             navigate(`?query=${encodeURIComponent(query)}`);
             console.log("Dashboard: new search triggered with query:", query);
         }}
@@ -74,6 +75,7 @@ function MyDashboard() {
           ${articleSidebarHidden && aiSidebarHidden ? "only-main" : ""}
           ${chatHistory.length > 0 && !aiSidebarHidden ? "chat-active" : ""}
           ${!selectedArticle ? "no-article-selected" : ""}
+
         `}
       >
         {!articleSidebarHidden && (

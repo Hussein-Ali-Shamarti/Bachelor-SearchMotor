@@ -10,12 +10,14 @@ const HeaderMyDashboard = forwardRef(({
   aiSidebarHidden,
   toggleArticleSidebar,
   toggleAiSidebar,
-  onSearch
+  onSearch,
+  clearSelectedArticle // ← New prop to clear article
 }, ref) => {
   const [query, setQuery] = useState("");
 
   const handleSearch = () => {
     if (onSearch && query.trim()) {
+      if (clearSelectedArticle) clearSelectedArticle(); // ← Deselect article
       onSearch(query.trim());
     }
   };
