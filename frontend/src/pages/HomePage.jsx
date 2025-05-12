@@ -46,11 +46,6 @@ const HomePage = () => {
                 Essential insights and step-by-step guidance to help you begin
                 your journey with HybridSearch.ai.
               </p>
-              <p>
-                <a href="#" className="infobox-button">
-                  Discover more
-                </a>
-              </p>
             </article>
 
             <article className="infobox">
@@ -59,11 +54,6 @@ const HomePage = () => {
                 Our intelligent algorithms provide you with the most relevant
                 information quickly.
               </p>
-              <p>
-                <a href="#" className="infobox-button">
-                  Discover more
-                </a>
-              </p>
             </article>
 
             <article className="infobox">
@@ -71,11 +61,6 @@ const HomePage = () => {
               <p>
                 It's your personal assistant for data exploration and analysis,
                 right at your fingertips.
-              </p>
-              <p>
-                <a href="#" className="infobox-button">
-                  Discover more
-                </a>
               </p>
             </article>
           </div>
