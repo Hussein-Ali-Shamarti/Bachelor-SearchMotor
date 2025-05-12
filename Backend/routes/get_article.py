@@ -2,7 +2,8 @@ from flask import Blueprint, request, jsonify
 from database import SessionLocal
 from models import Article
 import gzip
-from utils.summarization import summarize_with_openai
+import asyncio
+from utils.summarization import summarize_full_text
 
 article_bp = Blueprint('article', __name__)
 
@@ -50,7 +51,7 @@ def get_article_summary(article_id):
 
             summary = ""
             if generate_summary:
-                summary = summarize_with_openai(full_text, abstract_length)
+                summary = asyncio.run(summarize_full_text(full_text))
                 if not summary or summary.strip() == "":
                     return jsonify({"error": "Failed to generate summary"}), 500
 
