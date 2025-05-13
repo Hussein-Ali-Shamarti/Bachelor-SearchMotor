@@ -37,8 +37,7 @@ def chat():
 
         context = f"Selected Article Full Text:\n{selected_article_text}"
         max_context_tokens = 3000
-        encoding = tiktoken.encoding_for_model("gpt-4")
-        truncated_context = truncate_text(context, max_context_tokens, encoding)
+        truncated_context = truncate_text(context, max_context_tokens, model="gpt-4")
 
         messages = [
             {
@@ -57,7 +56,7 @@ def chat():
         ]
 
         response = openai.chat.completions.create(
-            model="gpt-4",
+            model="gpt-3.5-turbo",
             messages=messages,
             temperature=0.2,
             max_tokens=300
@@ -67,4 +66,5 @@ def chat():
         return jsonify({"answer": answer})
 
     except Exception as e:
-        return jsonify({"error": "Internal server error", "details": str(e)}), 500
+        print("OpenAI API error:", e)
+        return jsonify({"error": "OpenAI API call failed", "details": str(e)}), 500

@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
+import EnterIcon from "../assets/images/Eenter.svg";
+
 
 function ChatSection({ selectedArticle, chatHistory, setChatHistory }) {
   const [chatMessage, setChatMessage] = useState("");
@@ -79,27 +81,26 @@ function ChatSection({ selectedArticle, chatHistory, setChatHistory }) {
                 </div>
               ))}
             </div>
-            <div className="chat-input-container">
+            <div className="search-wrapper">
               <input
                 type="text"
                 value={chatMessage}
                 onChange={(e) => setChatMessage(e.target.value)}
-                onKeyDown={handleKeyDown} // 👈 Added here
+                onKeyDown={handleKeyDown}
                 placeholder="Ask about the article..."
-                className="ai-input"
+                className="search-input"
                 disabled={!selectedArticle}
               />
               <button
+                type="button"
                 onClick={sendChatMessage}
-                className="send-chat-button"
-                disabled={
-                  !selectedArticle || chatLoading || !chatMessage.trim()
-                }
+                className="Enter-icon"
+                disabled={!selectedArticle || chatLoading || !chatMessage.trim()}
               >
-                {chatLoading ? <span>Sending...</span> : "Send"}
+                <img src={EnterIcon} alt="Send" />
               </button>
             </div>
-          </div>
+            </div>
         )}
       </div>
     </aside>

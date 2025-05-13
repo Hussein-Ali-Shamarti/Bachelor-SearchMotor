@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 const ArticleDetails = ({ selectedArticle, onOpenChat }) => {
@@ -6,6 +6,12 @@ const ArticleDetails = ({ selectedArticle, onOpenChat }) => {
   const [summary, setSummary] = useState("");
   const [summaryLoading, setSummaryLoading] = useState(false);
 
+  useEffect(() => {
+    setShowSummary(false);
+    setSummary("");
+    setSummaryLoading(false);
+  }, [selectedArticle]);
+  
   const handleSummarize = async () => {
     if (!selectedArticle) return;
     setShowSummary(true);

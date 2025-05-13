@@ -352,6 +352,86 @@ body {
     font-size: 0.9rem;
   }
   
+  /* =======================
+    CHAT MESSAGES STYLES
+======================== */
+.chat-message {
+  display: inline-block;
+  padding: 10px 15px;
+  border-radius: 15px;
+  max-width: 80%;
+  word-wrap: break-word;
+  margin-bottom: 10px; /* 👈 This creates spacing between messages */
+}
+
+/* Add spacing around each entry (e.g., user + bot) */
+.chat-history {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem; /* 👈 This adds nice space between user and bot entries */
+  padding: 1rem;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.user-message {
+  background-color: #d1e7dd;
+  color: #0f5132;
+  align-self: flex-end;
+  border-radius: 15px;
+  font-weight: 500;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.bot-message {
+  background-color: #f8f9fa;
+  color: #212529;
+  align-self: flex-start;
+  border-radius: 15px;
+  font-weight: 500;
+  border: 1px solid #ced4da;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.chat-message strong {
+  font-weight: 600;
+  margin-right: 5px;
+}
+
+.search-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.search-input {
+  width: 100%;
+  padding: 1rem 3rem 1rem 1rem; /* space on right for the icon */
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 1.5rem;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
+}
+
+.enter-icon-button {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.enter-icon-button img {
+  width: 20px;
+  height: 20px;
+}
+
+
 /* =============================================================
    Desktop VIEW (fra 1024px og opp)
    Full height layout with fixed header (136px) and footer (40px)

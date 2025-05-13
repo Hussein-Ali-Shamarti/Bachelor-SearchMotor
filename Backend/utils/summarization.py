@@ -3,7 +3,7 @@ import asyncio
 from concurrent.futures import ThreadPoolExecutor
 from utils.text_utils import token_count, split_text_into_chunks
 
-MODEL_NAME = "gpt-4-turbo"
+MODEL_NAME = "gpt-3.5-turbo"
 MAX_TOKENS_PER_SUMMARY = 600
 MAX_WORKERS = 10
 executor = ThreadPoolExecutor(max_workers=MAX_WORKERS)
