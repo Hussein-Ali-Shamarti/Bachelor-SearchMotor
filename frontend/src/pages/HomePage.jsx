@@ -25,10 +25,10 @@ const HomePage = () => {
       <main className="site-content" id="content">
         <section className="content-intro">
           <div className="inside">
-            <h2>AI-powered search engine</h2>
+            <h2>Smarter Search Starts Here</h2>
             <p>
-              AI-powered tool designed to revolutionize the way you discover
-              and engage with information.
+              HybridSearch uses AI to understand your meaning and combines it with smart filter
+              to bring you the most relevant results, even for complex or conversational queries
             </p>
           </div>
         </section>
