@@ -20,14 +20,6 @@ const Header = () => {
                         </a>
                         <h1>HybridSearch.ai</h1>
                     </div>
-                    <div className="auth-buttons">
-                        <button onClick={() => navigate("/login")} className="auth-button">
-                            Login
-                        </button>
-                        <button onClick={() => navigate("/register")} className="auth-button">
-                            Registration
-                        </button>
-                    </div>
                 </div>
             </div>
         </header>

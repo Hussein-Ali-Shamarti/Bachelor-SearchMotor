@@ -14,11 +14,7 @@ import "./assets/styles/global/menu.css";
 
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import HomePage from "./pages/HomePage";
-import MyPage from "./pages/MyPage";
-import Login from "./pages/Login";
-import Registration from "./pages/Registration";
-
-import MyDashboard from "./pages/MyDashboard"; // Ny MyDashboard second 
+import MyDashboard from "./pages/MyDashboard";
 
 function App() {
   return (
@@ -26,10 +22,7 @@ function App() {
      
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/mypage" element={<MyPage />} />
-        <Route path="/mydashboard" element={<MyDashboard />} /> {/* Ny rute */}
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Registration />} />
+        <Route path="/mydashboard" element={<MyDashboard />} />
       </Routes>
     </Router>
   );
