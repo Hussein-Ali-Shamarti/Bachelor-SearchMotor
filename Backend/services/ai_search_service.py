@@ -22,27 +22,29 @@ def handle_ai_search(request):
     filter_author_input = data.get("author", "").strip()
     filter_topic_input = data.get("topic", "").strip()
     filter_year_input = data.get("year", "").strip()
-
+    filter_location = data.get("location", "").strip()
     filter_author, filter_topic, filter_year = "", "", ""
 
     if raw_query:
-        ex_author, ex_topic, ex_year, _ = extract_filters_from_query(raw_query)
+        ex_author, ex_topic, ex_year, ex_location = extract_filters_from_query(raw_query)
         filter_author = ex_author or filter_author_input
         filter_topic = ex_topic or filter_topic_input
         filter_year = filter_year_input or ex_year
+        filter_location = ex_location or filter_location
+        
     else:
         filter_author = filter_author_input
         filter_topic = filter_topic_input
         filter_year = filter_year_input
 
-    is_db_only_query = (filter_author and not filter_topic)
-
+    is_db_only_query = bool(filter_author or filter_year or filter_location) and not filter_topic
+    
     if is_db_only_query:
-        return _handle_author_only_query(filter_author, filter_year)
+        return handle_db_query(filter_author, filter_year, filter_location)
 
-    return get_faiss_results(query_embedding, filter_author, filter_topic, filter_year)
+    return get_faiss_results(query_embedding, filter_author, filter_topic, filter_year, filter_location)
 
-def _handle_author_only_query(filter_author, filter_year):
+def handle_db_query(filter_author, filter_year, filter_location):
     results = []
     with SessionLocal() as session:
         query = session.query(Article)
@@ -54,6 +56,9 @@ def _handle_author_only_query(filter_author, filter_year):
             parts = norm_author.split(",") if "," in norm_author else norm_author.split()
             last_name = parts[0] if "," in norm_author else parts[-1]
             query = query.filter(Article.author.ilike(f"%{last_name}%"))
+
+        if filter_location:
+            query = query.filter(Article.location.ilike(f"%{filter_location}%"))
 
         matching_articles = query.all()
 

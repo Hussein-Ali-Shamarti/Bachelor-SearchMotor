@@ -80,11 +80,6 @@ def extract_filters_from_query(raw_query):
     original_query = raw_query.strip()
     raw_query_lower = raw_query.lower()
 
-    m_year = re.search(r'\b(19|20)\d{2}\b', raw_query_lower)
-    if m_year:
-        filter_year = m_year.group(0)
-        original_query = original_query.replace(filter_year, '').strip()
-
     m_author = re.search(
         r'\b(by|av)\s+([A-ZÆØÅ][a-zæøå]+(?:\s+[A-ZÆØÅ][a-zæøå]+){0,3})\b',
         raw_query,
@@ -95,13 +90,18 @@ def extract_filters_from_query(raw_query):
         original_query = original_query.replace(m_author.group(0), '').strip()
 
     m_location = re.search(
-        r'\b(from|fra)\s+([a-zA-ZæøåÆØÅ\s,]+?)($|\s+(19|20)\d{2})',
+        r'\b(from|fra)\s+([a-zA-ZæøåÆØÅ\s,]+?)(?=\s+(19|20)\d{2}|$)',
         raw_query,
         re.IGNORECASE
     )
     if m_location:
         filter_location = m_location.group(2).strip()
         original_query = original_query.replace(m_location.group(0), '').strip()
+
+    m_year = re.search(r'\b(19|20)\d{2}\b', raw_query_lower)
+    if m_year:
+        filter_year = m_year.group(0)
+        original_query = original_query.replace(filter_year, '').strip()
 
     candidate_text = original_query.strip()
     filler_patterns = [
@@ -143,5 +143,5 @@ def extract_filters_from_query(raw_query):
     elif not filter_topic and candidate_text:
         filter_topic = candidate_text.strip()
 
-    print(f"[Parsed Query] Raw: '{raw_query}' → Author: '{filter_author}', Topic: '{filter_topic}', Year: '{filter_year}'")
+    print(f"[Parsed Query] Raw: '{raw_query}' → Author: '{filter_author}', Location: '{filter_location}', Topic: '{filter_topic}', Year: '{filter_year}'")
     return filter_author, filter_topic, filter_year, filter_location

@@ -7,7 +7,7 @@ from database import SessionLocal
 from models import Article
 from utils.query_utils import normalize, author_matches, clean_author_field
 
-def get_faiss_results(query_embedding, filter_author, filter_topic, filter_year):
+def get_faiss_results(query_embedding, filter_author, filter_topic, filter_year, filter_location):
     index = current_app.config['INDEX']
     ids = current_app.config['IDS']
     if index is None:
@@ -28,6 +28,12 @@ def get_faiss_results(query_embedding, filter_author, filter_topic, filter_year)
                 article = session.query(Article).filter_by(id=ids[idx]).first()
                 if not article:
                     continue
+
+                if filter_location:
+                    norm_article_loc = normalize(article.location or "")
+                    norm_filter_loc = normalize(filter_location)
+                    if norm_filter_loc not in norm_article_loc:
+                        continue
 
                 boost = 1.0
                 author_match = author_matches(article.author, filter_author) if filter_author else False
@@ -98,7 +104,21 @@ def get_faiss_results(query_embedding, filter_author, filter_topic, filter_year)
                     "distance": float(distances[0][i]),
                     "conference_location": article.location,
                 })
-        return jsonify(fallback_results)
+        if fallback_results:
+            return jsonify(fallback_results)
+        else:
+            # 🔥 Her endrer du feilmeldingen
+            error_msg = "No articles found matching your query"
+            if filter_location:
+                error_msg += f" (location: '{filter_location}')"
+            if filter_year:
+                error_msg += f" (year: {filter_year})"
+            if filter_author:
+                error_msg += f" (author: '{filter_author}')"
+            if filter_topic:
+                error_msg += f" (topic: '{filter_topic}')"
 
+            return jsonify({"error": error_msg}), 404
+        
     enriched_results.sort(key=lambda x: x["distance"])
     return jsonify(enriched_results)

@@ -430,6 +430,17 @@ body {
   width: 20px;
   height: 20px;
 }
+/* =======================
+    ERROR MESSAGES STYLES
+======================== */
+.error {
+  color: #b00020;
+  font-weight: 500;
+  padding: 8px;
+  background: #ffe5e5;
+  border-radius: 6px;
+  margin: 8px 0;
+}
 
 
 /* =============================================================
