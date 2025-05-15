@@ -25,8 +25,8 @@ class TestQueryParsing(unittest.TestCase):
 
     def test_topic_and_location_comma(self):
         author, topic, year, location = extract_filters_from_query("modeling, luxembourg")
-        self.assertTrue("oslo" in normalize(location) or "oslo" in normalize(author))
-        self.assertIn("big data", normalize(topic))
+        self.assertTrue("luxembourg" in normalize(location) or "luxembourg" in normalize(author))
+        self.assertIn("modeling", normalize(topic))
 
     def test_natural_question(self):
         author, topic, year, location = extract_filters_from_query("Can I see some articles about digital twins?")
@@ -53,12 +53,12 @@ class TestQueryParsing(unittest.TestCase):
     def test_norwegian_location_topic(self):
         author, topic, year, location = extract_filters_from_query("fra luxembourg om modeling")
         self.assertEqual(location.lower(), "luxembourg")
-        self.assertIn("tingenes internett", normalize(topic))
+        self.assertIn("modeling", normalize(topic))
 
     def test_norwegian_author_tech(self):
-        author, topic, year, location = extract_filters_from_query("skrevet av l. berntzen om helseteknologi")
+        author, topic, year, location = extract_filters_from_query("skrevet av l. berntzen om blockchain")
         self.assertIn("berntzen", normalize(author))
-        self.assertIn("helseteknologi", normalize(topic))
+        self.assertIn("blockchain", normalize(topic))
 
 if __name__ == '__main__':
     unittest.main()
