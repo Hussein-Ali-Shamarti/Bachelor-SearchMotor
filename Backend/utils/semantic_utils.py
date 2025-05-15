@@ -29,15 +29,9 @@ def get_faiss_results(query_embedding, filter_author, filter_topic, filter_year,
                 if not article:
                     continue
 
-                if filter_location:
-                    norm_article_loc = normalize(article.location or "")
-                    norm_filter_loc = normalize(filter_location)
-                    if norm_filter_loc not in norm_article_loc:
-                        continue
-
-                boost = 1.0
                 author_match = author_matches(article.author, filter_author) if filter_author else False
                 topic_match = False
+                boost = 1.0
 
                 if filter_topic:
                     topic_phrase = normalize(filter_topic)
@@ -47,19 +41,30 @@ def get_faiss_results(query_embedding, filter_author, filter_topic, filter_year,
 
                     if topic_phrase in norm_title or topic_phrase in norm_keywords or topic_phrase in norm_abstract:
                         topic_match = True
-                        boost *= 2.0
+                        boost = 2.0
                     else:
                         topic_words = topic_phrase.split()
                         match_count = sum(1 for word in topic_words if word in norm_title or word in norm_keywords)
                         if match_count >= 1:
                             topic_match = True
-                            boost *= 1 + 0.3 * match_count
+                            boost = 1 + 0.3 * match_count
                         if any(word in norm_abstract for word in topic_words):
                             topic_match = True
                             boost *= 1.1
 
-                if not pure_semantic_query and not topic_match and not author_match:
+                if filter_author and not author_match:
                     continue
+                if filter_topic and not topic_match:
+                    continue
+                if filter_location:
+                    norm_article_loc = normalize(article.location or "")
+                    norm_filter_loc = normalize(filter_location)
+                    if norm_filter_loc not in norm_article_loc:
+                        continue
+                if filter_year:
+                    if not article.publication_date or not article.publication_date.startswith(str(filter_year)):
+                        continue
+
 
                 if author_match and topic_match:
                     boost *= 5.0
@@ -107,7 +112,6 @@ def get_faiss_results(query_embedding, filter_author, filter_topic, filter_year,
         if fallback_results:
             return jsonify(fallback_results)
         else:
-            # 🔥 Her endrer du feilmeldingen
             error_msg = "No articles found matching your query"
             if filter_location:
                 error_msg += f" (location: '{filter_location}')"
@@ -119,6 +123,6 @@ def get_faiss_results(query_embedding, filter_author, filter_topic, filter_year,
                 error_msg += f" (topic: '{filter_topic}')"
 
             return jsonify({"error": error_msg}), 404
-        
+
     enriched_results.sort(key=lambda x: x["distance"])
     return jsonify(enriched_results)

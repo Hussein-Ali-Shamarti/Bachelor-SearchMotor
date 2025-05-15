@@ -58,7 +58,7 @@ def handle_db_query(filter_author, filter_year, filter_location, raw_query):
     results = []
     with SessionLocal() as session:
         query = session.query(Article)
-        
+
         if filter_year:
             query = query.filter(Article.publication_date.like(f"{filter_year}%"))
 
@@ -86,9 +86,11 @@ def handle_db_query(filter_author, filter_year, filter_location, raw_query):
                 "distance": None,
                 "conference_location": article.location,
             })
-
+            
     if not results:
-        error_msg = f"No articles found for search: {raw_query}"
-    
-    return jsonify({"error": error_msg}), 404
+        error_msg = f"No articles found for search: '{raw_query}'"
+        return jsonify({"error": error_msg}), 404
+
+    return jsonify(results)
+
 
