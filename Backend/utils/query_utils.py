@@ -15,6 +15,7 @@ def normalize(text):
     translator = str.maketrans("", "", string.punctuation)
     return text.lower().translate(translator).strip()
 
+
 def author_matches(stored_author, filter_author):
     if not stored_author or stored_author == "None":
         return False
@@ -65,11 +66,33 @@ def clean_author_field(stored_author):
     return stored_author
 
 def looks_like_person_name(text):
-    disallowed_words = {"data", "things", "internet", "science", "model", "learning", "of", "the"}
+    disallowed_words = {
+    "data", "things", "internet", "science", "model", "learning",
+    "of", "the", "articles", "papers", "studies", "find", "finn", "gi", "hent", "søk"
+}
+
     words = text.strip().split()
     if not (1 < len(words) <= 3):
         return False
     return all(w.lower() not in disallowed_words for w in words)
+
+def translate_norwegian(text):
+    replacements = {
+        r"\bfinn artikler\b": "find articles",
+        r"\bfinn\b": "find",
+        r"\bskrevet av\b": "written by",
+        r"\bav\b": "by",
+        r"\bom\b": "about",
+        r"\bfra\b": "from",
+        r"\bartikler\b": "articles"
+    }
+
+    for pattern, replacement in replacements.items():
+        text = re.sub(pattern, replacement, text, flags=re.IGNORECASE)
+
+    return text.strip()
+
+
 
 def extract_filters_from_query(raw_query):
     filter_author = ""
@@ -77,9 +100,11 @@ def extract_filters_from_query(raw_query):
     filter_year = ""
     filter_location = ""
 
-    original_query = raw_query.strip()
+    raw_query = translate_norwegian(raw_query.strip())
+    original_query = raw_query
     raw_query_lower = raw_query.lower()
 
+    # -- 1. Eksplicit author: "by Ola Nordmann"
     m_author = re.search(
         r'\b(by|av)\s+([A-ZÆØÅ][a-zæøå]+(?:\s+[A-ZÆØÅ][a-zæøå]+){0,3})\b',
         raw_query,
@@ -89,6 +114,7 @@ def extract_filters_from_query(raw_query):
         filter_author = m_author.group(2).strip()
         original_query = original_query.replace(m_author.group(0), '').strip()
 
+    # -- 2. Eksplicit location: "from Paris"
     m_location = re.search(
         r'\b(from|fra)\s+([a-zA-ZæøåÆØÅ\s,]+?)(?=\s+(19|20)\d{2}|$)',
         raw_query,
@@ -98,11 +124,13 @@ def extract_filters_from_query(raw_query):
         filter_location = m_location.group(2).strip()
         original_query = original_query.replace(m_location.group(0), '').strip()
 
+    # -- 3. Eksplicit år
     m_year = re.search(r'\b(19|20)\d{2}\b', raw_query_lower)
     if m_year:
         filter_year = m_year.group(0)
         original_query = original_query.replace(filter_year, '').strip()
 
+    # -- 4. Rens tekst
     candidate_text = original_query.strip()
     filler_patterns = [
         r'\bgive me\b', r'\bshow me\b', r'\bfind\b', r'\bsearch\b', r'\bfetch\b',
@@ -113,35 +141,64 @@ def extract_filters_from_query(raw_query):
     candidate_text = re.sub("|".join(filler_patterns), "", candidate_text, flags=re.IGNORECASE)
     candidate_text = re.sub(r'\s+', ' ', candidate_text).strip()
 
+    # -- 5. Analyser kommadelt input (f.eks. "barcelona, machine learning")
+    fragments = [frag.strip() for frag in candidate_text.split(",") if frag.strip()]
+
+    with SessionLocal() as session:
+        authors = session.query(Article.author).distinct().all()
+
+        for frag in fragments:
+            norm_frag = normalize(frag)
+
+            # Prøv som author via author_matches
+            if not filter_author:
+                for stored_author in authors:
+                    if stored_author and author_matches(stored_author[0], frag):
+                        filter_author = frag.title()
+                        print(f"[Multi-part fallback] Matched author → '{filter_author}'")
+                        break
+                if filter_author:
+                    continue
+
+            # Prøv som location
+            if not filter_location:
+                location_match = session.query(Article).filter(Article.location.ilike(f"%{norm_frag}%")).first()
+                if location_match:
+                    filter_location = frag.title()
+                    print(f"[Multi-part fallback] Found location → '{filter_location}'")
+                    continue
+
+            # Hvis ingen match, behandle som topic
+            if not filter_topic:
+                filter_topic = frag
+                print(f"[Multi-part fallback] Treating as topic → '{filter_topic}'")
+
+    # -- 6. Ekstra fallback hvis det fortsatt er ingenting
     words = candidate_text.split()
-    common_topic_words = {
-        "data", "science", "learning", "analyse", "modell", "forskning", "helse", "teknologi"
-    }
-
-    if not filter_author and filter_year:
-        if 1 < len(words) <= 3 and all(w.lower() not in common_topic_words for w in words):
-            filter_author = candidate_text.title()
-            candidate_text = ""
-
-    if not filter_author and not filter_topic:
+    if not (filter_author or filter_topic or filter_location):
         if len(words) == 1 and words[0].isalpha():
             norm_word = words[0].lower()
             with SessionLocal() as session:
-                match = session.query(Article).filter(Article.author.ilike(f"%{norm_word}%")).first()
-            if match:
-                filter_author = words[0].title()
-                print(f"FINAL FALLBACK: Found author match in DB → '{filter_author}'")
-            else:
-                filter_topic = words[0]
-                print(f"FINAL FALLBACK: No author match, treating as topic → '{filter_topic}'")
+                authors = session.query(Article.author).distinct().all()
+                for stored_author in authors:
+                    if stored_author and author_matches(stored_author[0], norm_word):
+                        filter_author = words[0].title()
+                        print(f"FINAL FALLBACK: Matched author by initials → '{filter_author}'")
+                        break
+                else:
+                    location_match = session.query(Article).filter(Article.location.ilike(f"%{norm_word}%")).first()
+                    if location_match:
+                        filter_location = words[0].title()
+                        print(f"FINAL FALLBACK: Found location match in DB → '{filter_location}'")
+                    else:
+                        filter_topic = words[0]
+                        print(f"FINAL FALLBACK: No author or location match, treating as topic → '{filter_topic}'")
         elif 1 < len(words) <= 3 and looks_like_person_name(candidate_text):
             filter_author = candidate_text.title()
             print(f"FINAL FALLBACK: Name-like phrase treated as author → '{filter_author}'")
         else:
             filter_topic = candidate_text
             print(f"FINAL FALLBACK: Treated as topic → '{filter_topic}'")
-    elif not filter_topic and candidate_text:
-        filter_topic = candidate_text.strip()
 
     print(f"[Parsed Query] Raw: '{raw_query}' → Author: '{filter_author}', Location: '{filter_location}', Topic: '{filter_topic}', Year: '{filter_year}'")
     return filter_author, filter_topic, filter_year, filter_location

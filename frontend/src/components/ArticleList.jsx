@@ -12,47 +12,48 @@ function ArticleList({ searchQuery, isMobile, isTablet, onSelectArticle }) {
     if (!searchQuery) return;
 
     const fetchArticles = async () => {
-  setLoading(true);
-  setError(null);
+      setLoading(true);
+      setError(null);
 
-  try {
-    const embeddingResponse = await axios.post(
-      "http://127.0.0.1:5001/generate-embedding",
-      { text: searchQuery }
-    );
+      try {
+        const embeddingResponse = await axios.post(
+          "http://127.0.0.1:5001/generate-embedding",
+          { text: searchQuery }
+        );
 
-    const embedding = embeddingResponse.data.embedding;
+        const embedding = embeddingResponse.data.embedding;
 
-    const searchResponse = await axios.post(
-      "http://127.0.0.1:5001/ai-search",
-      {
-        query: searchQuery,
-        embedding: embedding,
-        k: 50,
+        const searchResponse = await axios.post(
+          "http://127.0.0.1:5001/ai-search",
+          {
+            query: searchQuery,
+            embedding: embedding,
+            k: 50,
+          }
+        );
+
+        if (Array.isArray(searchResponse.data) && searchResponse.data.length > 0) {
+          setArticles(searchResponse.data);
+        } else {
+          setArticles([]);
+          setError("No articles found.");
+        }
+
+        setLoading(false);
+      } catch (err) {
+        console.error(err);
+        setArticles([]);
+
+        if (err.response && err.response.data && err.response.data.error) {
+          setError(err.response.data.error);
+        } else {
+          setError("Failed to fetch articles.");
+        }
+
+        setLoading(false);
       }
-    );
+    };
 
-    if (Array.isArray(searchResponse.data) && searchResponse.data.length > 0) {
-      setArticles(searchResponse.data);
-    } else {
-      setArticles([]);
-      setError("No articles found.");
-    }
-
-    setLoading(false);
-  } catch (err) {
-    console.error(err);
-    setArticles([]); 
-
-    if (err.response && err.response.data && err.response.data.error) {
-      setError(err.response.data.error);
-    } else {
-      setError("Failed to fetch articles.");
-    }
-
-    setLoading(false);
-  }
-};
     fetchArticles();
   }, [searchQuery]);
 
@@ -75,6 +76,11 @@ function ArticleList({ searchQuery, isMobile, isTablet, onSelectArticle }) {
         <nav className="article-list-menu">
           {loading && <p>Loading articles...</p>}
           {error && <p className="error">{error}</p>}
+          {!loading && !error && searchQuery && (
+            <div className="query-summary">
+              <em>Showing results for:</em> {searchQuery}
+            </div>
+          )}
           <ul>
             {articles.slice(0, visibleCount).map((article) => (
               <li key={article.id}>

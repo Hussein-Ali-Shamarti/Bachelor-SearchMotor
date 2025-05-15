@@ -1,6 +1,3 @@
-## Denne filen kombinerer all høy level logikken i søkesystemet, den fungerer som et service lag.
-## Den jobber som en bro mellom query_utils.py, semantic_utils.py og business logikken til "DB Only"
-
 from flask import jsonify, current_app
 import numpy as np
 from database import SessionLocal
@@ -22,32 +19,46 @@ def handle_ai_search(request):
     filter_author_input = data.get("author", "").strip()
     filter_topic_input = data.get("topic", "").strip()
     filter_year_input = data.get("year", "").strip()
-    filter_location = data.get("location", "").strip()
-    filter_author, filter_topic, filter_year = "", "", ""
+    filter_location_input = data.get("location", "").strip()
+
+    filter_author = ""
+    filter_topic = ""
+    filter_year = ""
+    filter_location = ""
 
     if raw_query:
         ex_author, ex_topic, ex_year, ex_location = extract_filters_from_query(raw_query)
         filter_author = ex_author or filter_author_input
         filter_topic = ex_topic or filter_topic_input
         filter_year = filter_year_input or ex_year
-        filter_location = ex_location or filter_location
-        
+        filter_location = ex_location or filter_location_input
     else:
         filter_author = filter_author_input
         filter_topic = filter_topic_input
         filter_year = filter_year_input
+        filter_location = filter_location_input
 
-    is_db_only_query = bool(filter_author or filter_year or filter_location) and not filter_topic
-    
+    is_author_topic_same = (
+        filter_author and filter_topic and 
+        normalize(filter_author) == normalize(filter_topic)
+    )
+
+
+    is_db_only_query = (
+        (filter_author or filter_year or filter_location)
+        and (not filter_topic or is_author_topic_same)
+    )
+
     if is_db_only_query:
-        return handle_db_query(filter_author, filter_year, filter_location)
+        return handle_db_query(filter_author, filter_year, filter_location, raw_query)
 
-    return get_faiss_results(query_embedding, filter_author, filter_topic, filter_year, filter_location)
+    return get_faiss_results(query_embedding, filter_author, filter_topic, filter_year, filter_location,)
 
-def handle_db_query(filter_author, filter_year, filter_location):
+def handle_db_query(filter_author, filter_year, filter_location, raw_query):
     results = []
     with SessionLocal() as session:
         query = session.query(Article)
+        
         if filter_year:
             query = query.filter(Article.publication_date.like(f"{filter_year}%"))
 
@@ -77,6 +88,7 @@ def handle_db_query(filter_author, filter_year, filter_location):
             })
 
     if not results:
-        return jsonify({"error": "No articles found for search results"}), 404
+        error_msg = f"No articles found for search: {raw_query}"
+    
+    return jsonify({"error": error_msg}), 404
 
-    return jsonify(results)
