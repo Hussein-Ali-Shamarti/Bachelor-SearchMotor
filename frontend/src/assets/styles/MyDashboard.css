@@ -85,10 +85,11 @@ body {
   }
   
   .main-area {
-    grid-area: main; 
-    /* padding: 0.5rem 2rem 2rem; */
-    overflow-y: auto;
-  }
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow-y: auto;
+}
   
   /* =============================================================
      FUNKSJONELLE TILSTANDSKLASSER
@@ -155,8 +156,7 @@ body {
     padding: 0.6em 1.2em;
     border: none;
     border-radius: 20px;
-    background-color: hsl(0, 0%, 15%);
-    /* background-color: var(--color-nav); */
+    background-color: #2e5278;
   border: none;
     color: white;
     font-size: 1rem;
@@ -171,7 +171,7 @@ body {
 
   
   button:hover {
-    background-color: hsl(0, 0%, 25%);
+    background-color: #7e2f95;
   }
   
   .close-summary {
@@ -248,12 +248,12 @@ body {
   }
   
   .article-list-menu li a:hover {
-    background-color: hsl(0, 0%, 25%);
+    background-color: #2e5278;
     color: white;
   }
   
   .article-list-menu li a:hover .article-author {
-    color: #ddd; /* eller white hvis du vil ha maks kontrast */
+    color: #ffff; /* eller white hvis du vil ha maks kontrast */
   }
   
   .article-list-menu .icon {
@@ -310,6 +310,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
+    flex-shrink: 0;
     max-width: 600px;
     margin: 0 auto;
     width: 100%;
@@ -359,7 +360,7 @@ body {
   display: inline-block;
   padding: 10px 15px;
   border-radius: 15px;
-  max-width: 80%;
+  max-width: 100%;
   word-wrap: break-word;
   margin-bottom: 10px; /* 👈 This creates spacing between messages */
 }
@@ -368,15 +369,14 @@ body {
 .chat-history {
   display: flex;
   flex-direction: column;
-  gap: 0.8rem; /* 👈 This adds nice space between user and bot entries */
+  flex: 0 1 auto;
+  gap: 0.5rem; /* 👈 This adds nice space between user and bot entries */
   padding: 1rem;
-  max-height: 400px;
-  overflow-y: auto;
 }
 
 .user-message {
-  background-color: #d1e7dd;
-  color: #0f5132;
+  background-color: #7e2f95;
+  color: #ffff;
   align-self: flex-end;
   border-radius: 15px;
   font-weight: 500;
@@ -547,6 +547,7 @@ body {
         display: grid;
         grid-template-columns: 1fr !important;
         grid-template-areas: "main" !important;
+        
     }
 
     .main-area,
