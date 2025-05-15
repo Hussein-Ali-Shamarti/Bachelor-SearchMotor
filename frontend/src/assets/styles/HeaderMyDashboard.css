@@ -8,7 +8,7 @@
   left: 0;
   right: 0;
   z-index: 1000;
-  background-color: #fff;
+  background-color: var(--color-background-light);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); 
   height: 136px;            /* høyde for desktop */
   padding: 0;               /* ingen padding her! kun på innhold */
@@ -20,7 +20,7 @@
 
 .site-header {
   display: flex;          
-  background-color: #fff;
+ background-color: var(--color-background-light);
   width: 100%;
   padding: 0 1rem;               
   z-index: 1000;                  /* Over alt annet */
@@ -142,6 +142,12 @@
   align-items: center;
   gap: 0.5rem;
   color: #111;
+  font-weight: 900;
+}
+
+.sidebar-switcher-ai {
+ color:#7e2f95;
+ font-weight: 900;
 }
 .sidebar-back-button button,
 .sidebar-switcher-ai button,

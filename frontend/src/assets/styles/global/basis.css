@@ -19,7 +19,9 @@ html {
      --color-nav:  #2e5278; 
      --color-nav-darker:#6EC1E4 ; 
      /* darker er den lysere fargen ved hover!!  */
- 
+
+     /* farge logo og overskrifter (samme som color-nav) */
+ --color-titles: #2e5278;
  
  
      --color-shadow: 4px 8px  8px rgba(0, 0, 0, 0.2);  
