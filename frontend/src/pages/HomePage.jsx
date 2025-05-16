@@ -57,26 +57,23 @@ const HomePage = () => {
             <h2 className="visually-hidden">Features Overview</h2>
 
             <article className="infobox">
-              <h3>Getting Started</h3>
+              <h3>Hybrid Search</h3>
               <p>
-                Essential insights and step-by-step guidance to help you begin
-                your journey with HybridSearch.ai.
+                 Search academic literature using natural language and advanced AI to find exactly what you need.
               </p>
             </article>
 
             <article className="infobox">
-              <h3>Efficient Search</h3>
+              <h3>Summaries</h3>
               <p>
-                Our intelligent algorithms provide you with the most relevant
-                information quickly.
+                Get concise and accurate summaries of research articles. No need to read entire papers.
               </p>
             </article>
 
             <article className="infobox">
-              <h3>AI Chat</h3>
+              <h3>AI Assistant</h3>
               <p>
-                It's your personal assistant for data exploration and analysis,
-                right at your fingertips.
+               Ask detailed questions and receive clear explanations instantly with our AI assistant.
               </p>
             </article>
           </div>
@@ -128,20 +125,10 @@ const HomePage = () => {
 </main>
       
 
-      {/* Footer */}
-      <footer className="site-footer">
+     
+         <footer className="site-footer">
         <div className="inside">
-          <nav className="footer-nav">
-            <ul>
-             
-              <li>
-                <a href="#">HybridSearch.ai – Bachelorprosjekt</a>
-              </li>
-              <li>
-                <a href="#top">Back to top</a>
-              </li>
-            </ul>
-          </nav>
+          <div className="footer-text">HybridSearch.ai – Bachelorprosjekt</div>
         </div>
       </footer>
     </div>

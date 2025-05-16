@@ -234,6 +234,7 @@ body {
     overflow-y: auto;
     flex: 1;
     overflow: visible;
+  
   }
   
   .article-list-menu li {
@@ -352,8 +353,9 @@ body {
     font-size: 0.9rem;
     text-align: center;
     border-top: 1px solid #ddd;
-    background: hsl(0, 0%, 75%);
-    color: white;
+    /* background: hsl(0, 0%, 75%); */
+    background-color: #dedede;
+    color: var(--color-font, #120800 );
   }
   
   .footer-text {
