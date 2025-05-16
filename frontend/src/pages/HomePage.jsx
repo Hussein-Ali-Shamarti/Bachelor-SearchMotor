@@ -20,9 +20,25 @@ const HomePage = () => {
 
   return (
     <div className="home">
-      <Header />
+      <div className="header-fixed-top">
+  <header className="site-header">
+    <div className="inside">
+      <div className="logo-container">
+        <a href="/">
+          <img 
+            src="/images/logo.HybridSearch.svg" 
+            alt="HybridSearch Logo" 
+            className="site-logo" 
+          />
+        </a>
+        <h1 className="site-title">HybridSearch.ai</h1>
+      </div>
+    </div>
+  </header>
+</div>
 
-      <main className="site-content" id="content">
+<main className="home-scroll">
+ <div className="site-content" id="content">
         <section className="content-intro">
           <div className="inside">
             <h2>Smarter Search Starts Here</h2>
@@ -107,7 +123,10 @@ const HomePage = () => {
             </figure>
           </div>
         </section>
-      </main>
+      </div>
+
+</main>
+      
 
       {/* Footer */}
       <footer className="site-footer">

@@ -42,3 +42,18 @@
 .infobox .button:hover {
   background-color: var(--color-nav-darker);
 }
+
+/* endringer for scroll på home */
+.home {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.home-scroll {
+  flex: 1;
+  margin-top: 88px; /* Header høyde */
+  margin-bottom: 40px; /* Footer høyde */
+  overflow-y: auto;
+}
