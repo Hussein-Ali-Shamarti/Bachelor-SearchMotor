@@ -33,7 +33,7 @@ const SearchInput = ({ initialQuery, onSearch }) => {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder="Enter search query..."
+            placeholder="Search for articles..."
             className="search-input"
           />
           <button type="button" onClick={handleSearch} className="Enter-icon">
