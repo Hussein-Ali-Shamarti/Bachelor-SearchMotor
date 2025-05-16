@@ -13,7 +13,7 @@ It consists of a Flask backend and a React frontend.
 ## Installation
 1. **Clone the repository**
 
-git clone https://github.com/yourusername/Bachelor-SearchMotor.git
+git clone https://github.com/Hussein-Ali-Shamarti/Bachelor-SearchMotor
 cd Bachelor-SearchMotor
 
 2. **Setting up the backend environment**
@@ -27,7 +27,7 @@ python -m venv venv
 
 ## Activate the environment
 **For Windows**
-venv\Scripts\activate
+venv/Scripts/activate
 **For macOS/Linux**
 source venv/bin/activate
 
@@ -46,6 +46,7 @@ pip install -r requirements.txt
     Add the following line:
 
 OPENAI_API_KEY="your-openai-api-key-here"
+
 Replace "your-openai-api-key-here" with your actual OpenAI API key.
 
 5. **Starting the backend server**
