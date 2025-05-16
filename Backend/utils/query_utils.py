@@ -15,6 +15,28 @@ def normalize(text):
     translator = str.maketrans("", "", string.punctuation)
     return text.lower().translate(translator).strip()
 
+def normalize_keywords(raw_keywords):
+    if not raw_keywords:
+        return []
+
+    try:
+        keywords = ast.literal_eval(raw_keywords) if isinstance(raw_keywords, str) else raw_keywords
+    except Exception:
+        keywords = raw_keywords
+
+    if not isinstance(keywords, list):
+        keywords = [keywords]
+
+    split_keywords = []
+    for kw in keywords:
+        if isinstance(kw, str):
+            split_keywords.extend([k.strip() for k in kw.split(",") if k.strip()])
+        elif isinstance(kw, list):
+            split_keywords.extend([str(k).strip() for k in kw if str(k).strip()])
+
+    return split_keywords
+
+
 def author_matches(stored_author, filter_author):
     if not stored_author or stored_author == "None":
         return False
@@ -149,6 +171,7 @@ def extract_filters_from_query(raw_query):
     fragments = [frag.strip() for frag in fragments if frag.strip()]
 
     stopwords = {"all", "some", "any"}
+
 
     with SessionLocal() as session:
         authors = session.query(Article.author).distinct().all()

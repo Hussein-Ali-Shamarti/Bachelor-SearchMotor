@@ -2,7 +2,7 @@ from flask import jsonify, current_app
 import numpy as np
 from database import SessionLocal
 from models import Article
-from utils.query_utils import extract_filters_from_query, author_matches, clean_author_field, normalize
+from utils.query_utils import extract_filters_from_query, author_matches, clean_author_field, normalize, normalize_keywords
 from utils.semantic_utils import get_faiss_results
 
 def handle_ai_search(request):
@@ -73,7 +73,7 @@ def handle_db_query(filter_author, filter_year, filter_location, raw_query):
 
         matching_articles = query.all()
 
-        for article in matching_articles:
+        for article in matching_articles:            
             results.append({
                 "id": article.id,
                 "title": article.title,
@@ -81,12 +81,13 @@ def handle_db_query(filter_author, filter_year, filter_location, raw_query):
                 "author": clean_author_field(article.author),
                 "publication_date": article.publication_date,
                 "pdf_url": article.pdf_url,
-                "keywords": article.keywords,
+                "keywords": normalize_keywords(article.keywords),
                 "isbn": article.isbn,
                 "distance": None,
                 "conference_location": article.location,
+                
             })
-            
+
     if not results:
         error_msg = f"No articles found for search: '{raw_query}'"
         return jsonify({"error": error_msg}), 404

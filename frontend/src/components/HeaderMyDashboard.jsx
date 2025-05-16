@@ -11,9 +11,11 @@ const HeaderMyDashboard = forwardRef(({
   toggleArticleSidebar,
   toggleAiSidebar,
   onSearch,
-  clearSelectedArticle // ← New prop to clear article
+  clearSelectedArticle,
+  queryText,
+  setQueryText
 }, ref) => {
-  const [query, setQuery] = useState("");
+  const query = queryText;
 
   const handleSearch = () => {
     if (onSearch && query.trim()) {
@@ -44,7 +46,7 @@ const HeaderMyDashboard = forwardRef(({
                 placeholder="Search for articles..."
                 className="search-input"
                 value={query}
-                onChange={(e) => setQuery(e.target.value)}
+                onChange={(e) => setQueryText(e.target.value)}
                 onKeyDown={(e) => {
                   if (e.key === "Enter") {
                     handleSearch();

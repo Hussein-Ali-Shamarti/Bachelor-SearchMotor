@@ -20,52 +20,73 @@ function MyDashboard() {
   const queryParams = new URLSearchParams(location.search);
   const searchQuery = queryParams.get("query");
   const [chatHistory, setChatHistory] = useState([]);
+  const [userOpenedChat, setUserOpenedChat] = useState(false);
+
   const navigate = useNavigate();
+  // Clears selected article
+  const clearArticle = () => setSelectedArticle(null);
+  const [queryText, setQueryText] = useState("");
+
+  // Handles search query (used by header + ArticleDetails)
+  const handleSearch = (query) => {
+    clearArticle();
+    navigate(`?query=${encodeURIComponent(query)}`);
+    console.log("Dashboard: new search triggered with query:", query);
+  };
 
 
   // Handle resizing
   useEffect(() => {
-    const handleResize = () => {
-      const width = window.innerWidth;
-      const mobile = width <= 600;
-      const tablet = width > 600 && width <= 1024;
-      setIsMobile(mobile);
-      setIsTablet(tablet);
+  const handleResize = () => {
+    const width = window.innerWidth;
+    const mobile = width <= 600;
+    const tablet = width > 600 && width <= 1024;
+    setIsMobile(mobile);
+    setIsTablet(tablet);
+    // On desktop, DO NOTHING — keep current sidebar state
+  };
 
-      if (!mobile && !tablet) {
-        setArticleSidebarHidden(false);
-        setAiSidebarHidden(false);
-      } else {
-        setArticleSidebarHidden(true);
-        setAiSidebarHidden(true);
-      }
-    };
+  window.addEventListener("resize", handleResize);
+  return () => window.removeEventListener("resize", handleResize);
+}, []);
 
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+useEffect(() => {
+  const width = window.innerWidth;
+  const isDesktop = width > 1024;
+
+  if (isDesktop && !userOpenedChat) {
+    setAiSidebarHidden(true); // Force hide unless user clicked Chat
+  }
+}, []);
+
+
 
   return (
     <div className="outer-wrap">
       <HeaderMyDashboard
-        articleSidebarHidden={articleSidebarHidden}
-        aiSidebarHidden={aiSidebarHidden}
-        toggleArticleSidebar={() =>
-          isMobile
-            ? (setArticleSidebarHidden((prev) => !prev), setAiSidebarHidden(true))
-            : setArticleSidebarHidden((prev) => !prev)
-        }
-        toggleAiSidebar={() =>
-          isMobile
-            ? (setAiSidebarHidden((prev) => !prev), setArticleSidebarHidden(true))
-            : setAiSidebarHidden((prev) => !prev)
-        }
-         onSearch={(query) => {
-            setSelectedArticle(null);
-            navigate(`?query=${encodeURIComponent(query)}`);
-            console.log("Dashboard: new search triggered with query:", query);
-        }}
-      />
+      articleSidebarHidden={articleSidebarHidden}
+      aiSidebarHidden={aiSidebarHidden}
+      toggleArticleSidebar={() =>
+        isMobile
+          ? (setArticleSidebarHidden((prev) => !prev), setAiSidebarHidden(true))
+          : setArticleSidebarHidden((prev) => !prev)
+      }
+      toggleAiSidebar={() =>
+        isMobile
+          ? (setAiSidebarHidden((prev) => !prev), setArticleSidebarHidden(true))
+          : setAiSidebarHidden((prev) => !prev)
+      }
+      clearSelectedArticle={clearArticle}
+      queryText={queryText}                             
+      setQueryText={setQueryText}                       
+      onSearch={(query) => {
+        clearArticle();
+        setQueryText(query);                            
+        navigate(`?query=${encodeURIComponent(query)}`);
+        console.log("Dashboard: new search triggered with query:", query);
+      }}
+    />
+
 
       <div
         className={`dashboard
@@ -103,13 +124,18 @@ function MyDashboard() {
           <ArticleDetails 
           selectedArticle={selectedArticle}
           onOpenChat={() => {
+            setUserOpenedChat(true);
             if (isMobile) {
               setAiSidebarHidden(false);
               setArticleSidebarHidden(true);
             } else {
               setAiSidebarHidden(false);
             }
-          }} />
+          }}
+          onSearch={handleSearch}
+          clearSelectedArticle={clearArticle} 
+          setQueryText={setQueryText}
+          />
         </main>
 
         {!aiSidebarHidden && (

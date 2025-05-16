@@ -5,7 +5,7 @@
 from flask import jsonify, current_app
 from database import SessionLocal
 from models import Article
-from utils.query_utils import normalize, author_matches, clean_author_field
+from utils.query_utils import normalize, author_matches, clean_author_field, normalize_keywords
 
 def get_faiss_results(query_embedding, filter_author, filter_topic, filter_year, filter_location):
     index = current_app.config['INDEX']
@@ -82,7 +82,7 @@ def get_faiss_results(query_embedding, filter_author, filter_topic, filter_year,
                     "author": clean_author_field(article.author),
                     "publication_date": article.publication_date,
                     "pdf_url": article.pdf_url,
-                    "keywords": article.keywords,
+                    "keywords": normalize_keywords(article.keywords),
                     "isbn": article.isbn,
                     "distance": adjusted_distance,
                     "conference_location": article.location,
@@ -104,7 +104,7 @@ def get_faiss_results(query_embedding, filter_author, filter_topic, filter_year,
                     "author": clean_author_field(article.author),
                     "publication_date": article.publication_date,
                     "pdf_url": article.pdf_url,
-                    "keywords": article.keywords,
+                    "keywords": normalize_keywords(article.keywords),
                     "isbn": article.isbn,
                     "distance": float(distances[0][i]),
                     "conference_location": article.location,

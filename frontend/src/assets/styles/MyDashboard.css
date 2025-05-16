@@ -85,7 +85,6 @@ body {
     border-left: 1px solid #ccc;
    
   }
-  --color-grey-border:#728188; 
   .main-area {
   display: flex;
   flex-direction: column;
@@ -140,23 +139,189 @@ body {
     max-width: 100%;
   }
   
+  .card-content h2 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+
   .card-content h3 {
-    margin-top: 0;
-    margin-bottom: 0.5em;
-    font-weight: normal;
-    /* font-size: 1.8em; */
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: #333;
   }
-  
+
   .card-content p {
-    font-size: 1rem;
+    margin: 0.4rem 0;
+    line-height: 1.5;
   }
-  
+  .card-content a {
+    color: #2e5278;
+    font-weight: 600;
+    text-decoration: underline;
+  }
+  .article-metadata {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.8rem 2rem;
+  }
+  .article-metadata,
+  .article-conference,
+  .article-keywords,
+  .article-abstract {
+    margin-bottom: 1.2rem;
+  }
+  .article-meta-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start; /* TOP align! */
+  gap: 1rem;
+  margin: 1.5rem 0;
+  text-align: center;
+}
+
+.meta-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  min-width: 120px;
+  max-width: 200px;
+  word-break: break-word;
+  min-height: 2rem;
+}
+
+.meta-item img {
+  width: 1.5rem;   /* or 24px, or any consistent value */
+  height: 1.5rem;
+  display: block;
+  margin-bottom: 0.4rem;
+}
+
+.meta-item span {
+  text-align: center;
+  display: block;
+  font-size: 0.95rem;
+}
+
+  .author-wrap {
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 500px;
+}
+
+.authors-text {
+  max-width: 100%;
+  white-space: normal;
+  word-break: break-word;
+  line-height: 1.4;
+}
+
+
+.section-divider {
+  margin-top: 2rem;
+  border-top: 1px solid #ddd;
+  width: 100%;
+}
+  .author-list {
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 600px;
+}
+
+.authors-text {
+  display: inline-block;
+  margin-top: 0.2rem;
+  word-break: break-word;
+  line-height: 1.4;
+}
+
+   .icon-medium {
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-right: 0.4rem;
+    color:#2e5278;
+  }
+
+.icon-authors {
+  transform: scale(1.2);
+}
+  .icon-large {
+    width: 2rem;
+    height: 2rem;
+    vertical-align: middle;
+    margin-right: 0.4rem;
+  }
+  .pdf-icon-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 1rem 0;
+    font-weight: 600;
+    color: #2e5278;
+    text-decoration: underline;
+    transition: color 0.3s ease;
+  }
+
+  .pdf-icon-link:hover {
+    color: #7e2f95;
+  }
+
+  .keywords-tag {
+  background: #eef2ff;
+  color: #4338ca;
+  padding: 0.4rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  margin: 0.25rem 0.4rem 0.25rem 0;
+  display: inline-block;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.keywords-tag:hover {
+  background: #e0e7ff;
+}
+
+  .section-heading {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 1.2rem 0 0.5rem;
+    color: #111827;
+  }
+
+  .article-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e5e7eb;
+    margin-top: 2rem;
+  }
+
+  .keywords-tag {
+    display: inline-block;
+    background: #eef2ff;
+    color: #4338ca;
+    padding: 0.3rem 0.6rem;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    margin: 0.25rem 0.3rem 0 0;
+  }
+
+
   .button-wrapper {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
     margin-top: 2rem;
-    margin-left: 2rem;
   }
+
   /* knapper svart farge eller blå som i logo?  */
   button {
     padding: 0.6em 1.2em;
