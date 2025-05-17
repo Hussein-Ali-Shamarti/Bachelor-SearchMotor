@@ -26,6 +26,12 @@ function MyDashboard() {
   // Clears selected article
   const clearArticle = () => setSelectedArticle(null);
   const [queryText, setQueryText] = useState("");
+  
+  useEffect(() => {
+  if (searchQuery) {
+    setQueryText(searchQuery);  
+  }
+}, [searchQuery]);
 
   // Handles search query (used by header + ArticleDetails)
   const handleSearch = (query) => {

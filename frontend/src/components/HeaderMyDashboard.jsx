@@ -4,7 +4,6 @@ import "../assets/styles/global/header.css";
 import "../assets/styles/HeaderMyDashboard.css";
 import { FiArrowLeftCircle, FiMessageCircle, FiSearch } from "react-icons/fi";
 
-// ✅ forwardRef krever at hele komponentfunksjonen lukkes før export
 const HeaderMyDashboard = forwardRef(({
   articleSidebarHidden,
   aiSidebarHidden,
@@ -17,12 +16,16 @@ const HeaderMyDashboard = forwardRef(({
 }, ref) => {
   const query = queryText;
 
-  const handleSearch = () => {
-    if (onSearch && query.trim()) {
-      if (clearSelectedArticle) clearSelectedArticle(); // ← Deselect article
+const handleSearch = () => {
+  if (onSearch && query.trim()) {
+    if (clearSelectedArticle) clearSelectedArticle();
+
+    const currentSearch = new URLSearchParams(window.location.search).get("query");
+    if (currentSearch !== query.trim()) {
       onSearch(query.trim());
     }
-  };
+  }
+};
 
   return (
     <div className="header-fixed-top" ref={ref}>
@@ -103,6 +106,6 @@ const HeaderMyDashboard = forwardRef(({
       </div>
     </div>
   );
-}); // ✅ ← Correct closing of forwardRef function
+});
 
 export default HeaderMyDashboard;

@@ -1,18 +1,15 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import EnterIcon from "../assets/images/Eenter.svg";
 
-const SearchInput = ({ initialQuery, onSearch }) => {
-  const [query, setQuery] = useState(initialQuery || "");
+const SearchInput = () => {
+  const [query, setQuery] = useState("");
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    if (initialQuery) {
-      handleSearch();
+  const handleSearch = () => {
+    if (query.trim()) {
+      navigate(`/MyDashboard?query=${encodeURIComponent(query.trim())}`);
     }
-  }, [initialQuery]);
-
-  const handleSearch = async () => {
-    if(onSearch && query)
-      onSearch(query)
   };
 
   // Function to handle pressing Enter key

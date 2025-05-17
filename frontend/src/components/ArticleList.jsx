@@ -8,54 +8,56 @@ function ArticleList({ searchQuery, isMobile, isTablet, onSelectArticle }) {
   const [error, setError] = useState(null);
   const sidebarRef = useRef(null);
 
-  useEffect(() => {
-    if (!searchQuery) return;
+  const lastQueryRef = useRef(null);
 
-    const fetchArticles = async () => {
-      setLoading(true);
-      setError(null);
+useEffect(() => {
+  if (!searchQuery || searchQuery === lastQueryRef.current) return;
+  lastQueryRef.current = searchQuery;
 
-      try {
-        const embeddingResponse = await axios.post(
-          "http://127.0.0.1:5001/generate-embedding",
-          { text: searchQuery }
-        );
+  const fetchArticles = async () => {
+    setLoading(true);
+    setError(null);
 
-        const embedding = embeddingResponse.data.embedding;
+    try {
+      const embeddingResponse = await axios.post(
+        "http://127.0.0.1:5001/generate-embedding",
+        { text: searchQuery }
+      );
 
-        const searchResponse = await axios.post(
-          "http://127.0.0.1:5001/ai-search",
-          {
-            query: searchQuery,
-            embedding: embedding,
-            k: 50,
-          }
-        );
+      const embedding = embeddingResponse.data.embedding;
 
-        if (Array.isArray(searchResponse.data) && searchResponse.data.length > 0) {
-          setArticles(searchResponse.data);
-        } else {
-          setArticles([]);
-          setError("No articles found.");
+      const searchResponse = await axios.post(
+        "http://127.0.0.1:5001/ai-search",
+        {
+          query: searchQuery,
+          embedding: embedding,
+          k: 50,
         }
+      );
 
-        setLoading(false);
-      } catch (err) {
-        console.error(err);
+      if (Array.isArray(searchResponse.data) && searchResponse.data.length > 0) {
+        setArticles(searchResponse.data);
+      } else {
         setArticles([]);
-
-        if (err.response && err.response.data && err.response.data.error) {
-          setError(err.response.data.error);
-        } else {
-          setError("Failed to fetch articles.");
-        }
-
-        setLoading(false);
+        setError("No articles found.");
       }
-    };
+    } catch (err) {
+      console.error(err);
+      setArticles([]);
 
-    fetchArticles();
-  }, [searchQuery]);
+      if (err.response?.data?.error) {
+        setError(err.response.data.error);
+      } else {
+        setError("Failed to fetch articles.");
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchArticles();
+}, [searchQuery]);
+
 
   const handleSidebarScroll = () => {
     const el = sidebarRef.current;

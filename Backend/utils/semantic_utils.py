@@ -7,7 +7,7 @@ from database import SessionLocal
 from models import Article
 from utils.query_utils import normalize, author_matches, clean_author_field, normalize_keywords
 
-def get_faiss_results(query_embedding, filter_author, filter_topic, filter_year, filter_location):
+def get_faiss_results(query_embedding, filter_author, filter_topics, filter_year, filter_location):
     index = current_app.config['INDEX']
     ids = current_app.config['IDS']
     if index is None:
@@ -15,7 +15,7 @@ def get_faiss_results(query_embedding, filter_author, filter_topic, filter_year,
 
     enriched_results = []
     seen_ids = set()
-    pure_semantic_query = not (filter_author or filter_topic or filter_year)
+    pure_semantic_query = not (filter_author or filter_topics or filter_year)
 
     initial_k, max_k, k = 50, 200, 50
     while k <= max_k:
@@ -33,28 +33,28 @@ def get_faiss_results(query_embedding, filter_author, filter_topic, filter_year,
                 topic_match = False
                 boost = 1.0
 
-                if filter_topic:
-                    topic_phrase = normalize(filter_topic)
-                    norm_title = normalize(article.title)
-                    norm_keywords = normalize(" ".join(article.keywords) if isinstance(article.keywords, list) else article.keywords)
-                    norm_abstract = normalize(article.abstract)
+                if filter_topics:
+                    for topic in filter_topics:
+                        topic_phrase = normalize(topic)
+                        norm_title = normalize(article.title)
+                        norm_keywords = normalize(" ".join(article.keywords) if isinstance(article.keywords, list) else article.keywords)
+                        norm_abstract = normalize(article.abstract)
 
-                    if topic_phrase in norm_title or topic_phrase in norm_keywords or topic_phrase in norm_abstract:
-                        topic_match = True
-                        boost = 2.0
-                    else:
-                        topic_words = topic_phrase.split()
-                        match_count = sum(1 for word in topic_words if word in norm_title or word in norm_keywords)
-                        if match_count >= 1:
+                        if topic_phrase in norm_title or topic_phrase in norm_keywords or topic_phrase in norm_abstract:
                             topic_match = True
-                            boost = 1 + 0.3 * match_count
-                        if any(word in norm_abstract for word in topic_words):
-                            topic_match = True
-                            boost *= 1.1
-
+                            boost = max(boost, 2.0)
+                        else:
+                            topic_words = topic_phrase.split()
+                            match_count = sum(1 for word in topic_words if word in norm_title or word in norm_keywords)
+                            if match_count >= 1:
+                                topic_match = True
+                                boost = max(boost, 1 + 0.3 * match_count)
+                            if any(word in norm_abstract for word in topic_words):
+                                topic_match = True
+                                boost *= 1.1
                 if filter_author and not author_match:
                     continue
-                if filter_topic and not topic_match:
+                if filter_topics and not topic_match:
                     continue
                 if filter_location:
                     norm_article_loc = normalize(article.location or "")
@@ -119,8 +119,8 @@ def get_faiss_results(query_embedding, filter_author, filter_topic, filter_year,
                 error_msg += f" (year: {filter_year})"
             if filter_author:
                 error_msg += f" (author: '{filter_author}')"
-            if filter_topic:
-                error_msg += f" (topic: '{filter_topic}')"
+            if filter_topics:
+                error_msg += f" (topic: '{filter_topics}')"
 
             return jsonify({"error": error_msg}), 404
 

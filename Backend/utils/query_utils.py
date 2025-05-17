@@ -7,6 +7,7 @@ import ast
 from database import SessionLocal
 from models import Article
 
+
 def normalize(text):
     if not text:
         return ""
@@ -111,7 +112,7 @@ def translate_norwegian(text):
     return text.strip()
 
 def split_query_phrases(query):
-    pattern = r'\b(written\s+by|about|by|from|in|on|om|av|fra)\b'
+    pattern = r'\b(written\s+by|about|by|from|in|on|is|om|av|fra)\b'
     matches = list(re.finditer(pattern, query, flags=re.IGNORECASE))
 
     phrases = []
@@ -126,7 +127,7 @@ def split_query_phrases(query):
 
 def extract_filters_from_query(raw_query):
     filter_author = ""
-    filter_topic = ""
+    filter_topics = []
     filter_year = ""
     filter_location = ""
 
@@ -142,8 +143,11 @@ def extract_filters_from_query(raw_query):
 
     for prep, phrase in phrases:
         norm = normalize(phrase)
-        if prep in {"about", "om", "on"} and not filter_topic:
-            filter_topic = phrase
+        if prep in {"about", "om", "on"}:
+            filter_topics.extend([
+                topic.strip() for topic in re.split(r",| og | and ", phrase, flags=re.IGNORECASE)
+                if topic.strip()
+            ])
         elif prep in {"by", "written by", "av"} and not filter_author:
             filter_author = phrase
         elif prep in {"from", "fra"} and not filter_location:
@@ -164,14 +168,40 @@ def extract_filters_from_query(raw_query):
                 filter_author = potential_author
                 raw_query = raw_query.replace(f"{author_re.group(1)} {author_re.group(2)}", '').strip()
 
-    # Fallback: ekstra fragmentanalyse
-    candidate_text = re.sub(r'\b(give me|show me|find|search|fetch|articles?|papers?|studies?|written|by|from|about|om|av|fra|og|all|some|any)\b', '', raw_query, flags=re.IGNORECASE)
+    # Remove filler and stop phrases from the raw query before extracting topics
+    filler_phrases = [
+        r"\bi\s*(?:am|'?m)?\s*(?:looking\s+for|searching\s+for|interested\s+in)?",
+        r"\bcan\s*i\s*(?:see|find|have|get)?",
+        r"\bgive me\b",
+        r"\bshow me\b",
+        r"\bplease\b",
+        r"\bi want\b",
+        r"\bfinn\b",
+        r"\bsøk\b",
+        r"\bin\b",
+    ]
+    
+    for pattern in filler_phrases:
+        raw_query = re.sub(pattern, '', raw_query, flags=re.IGNORECASE)
+    
+    # Remove common search-related filler tokens
+    raw_query = re.sub(
+        r'\b(find|search|fetch|articles?|papers?|studies?|written|by|in|from|about|om|av|fra|all|some|any)\b',
+        '',
+        raw_query,
+        flags=re.IGNORECASE
+    )
+    raw_query = re.sub(r"\bn\b", "in", raw_query)
+
+    # Prepare cleaned candidate text
+    candidate_text = raw_query
+    candidate_text = re.sub(r"[^\w\s,']", '', candidate_text)
     candidate_text = re.sub(r'\s+', ' ', candidate_text).strip()
-    fragments = re.split(r",| og ", candidate_text, flags=re.IGNORECASE)
+    
+    fragments = re.split(r",|\s+og\s+|\s+and\s+", candidate_text, flags=re.IGNORECASE)
     fragments = [frag.strip() for frag in fragments if frag.strip()]
 
     stopwords = {"all", "some", "any"}
-
 
     with SessionLocal() as session:
         authors = session.query(Article.author).distinct().all()
@@ -197,10 +227,11 @@ def extract_filters_from_query(raw_query):
                     print(f"[Multi-part fallback] Found location '{filter_location}'")
                     continue
 
-            if not filter_topic and normalize(frag) != normalize(filter_location):
-                filter_topic = frag
-                print(f"[Multi-part fallback] Treating as topic '{filter_topic}'")
+            if normalize(frag) != normalize(filter_location):
+                filter_topics.append(frag)
+                print(f"[Multi-part fallback] Adding topic: {frag}")
+    
+    filter_topics = list(dict.fromkeys(filter_topics))
+    print(f"[Parsed Query] Raw: '{raw_query}' Author: '{filter_author}', Location: '{filter_location}', Topics: '{filter_topics}', Year: '{filter_year}'")
+    return filter_author, filter_topics, filter_year, filter_location
 
-
-    print(f"[Parsed Query] Raw: '{raw_query}' Author: '{filter_author}', Location: '{filter_location}', Topic: '{filter_topic}', Year: '{filter_year}'")
-    return filter_author, filter_topic, filter_year, filter_location
