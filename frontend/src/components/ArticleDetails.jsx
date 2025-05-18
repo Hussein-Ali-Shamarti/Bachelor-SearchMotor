@@ -47,6 +47,7 @@ const ArticleDetails = ({ selectedArticle, onOpenChat, onSearch, clearSelectedAr
     }
   };
 
+
   const handleKeywordClick = (keyword) => {
   if (typeof clearSelectedArticle === "function") clearSelectedArticle();
   if (typeof setQueryText === "function") setQueryText(keyword);
@@ -56,8 +57,8 @@ const ArticleDetails = ({ selectedArticle, onOpenChat, onSearch, clearSelectedAr
   return (
     <section className="dashboard-cards">
       <div
-        className={`selected-article-card ${
-          showSummary ? "half-width" : "full-width"
+        className={`selected-article-card full-width ${
+          showSummary ? "" : "full-width"
         }`}
       >
         <div className="card-content">
@@ -141,8 +142,10 @@ const ArticleDetails = ({ selectedArticle, onOpenChat, onSearch, clearSelectedAr
                 <p>{selectedArticle.abstract || "No abstract available."}</p>
               </div>
 
-              <div className="article-actions">
-                <button onClick={handleSummarize}>Summarize</button>
+              <div className="button-wrapper">
+                <button
+                className="summarize-button" 
+                onClick={handleSummarize}>Summarize</button>
                 {onOpenChat && (
                   <button className="chat-button" onClick={onOpenChat}>
                     Chat about this article
@@ -160,7 +163,7 @@ const ArticleDetails = ({ selectedArticle, onOpenChat, onSearch, clearSelectedAr
       </div>
 
       {showSummary && (
-        <div className="summary-article-card half-width">
+        <div className="summary-article-card full-width">
           <button className="close-summary" onClick={() => setShowSummary(false)}>
             &times;
           </button>
@@ -169,7 +172,7 @@ const ArticleDetails = ({ selectedArticle, onOpenChat, onSearch, clearSelectedAr
             {summaryLoading ? (
               <p>Loading summary...</p>
             ) : (
-              <p>{summary}</p>
+              <p>{summary || "No summary available."}</p>
             )}
           </div>
         </div>
