@@ -5,6 +5,7 @@ from models import Article
 from utils.query_utils import extract_filters_from_query, author_matches, clean_author_field, normalize, normalize_keywords
 from utils.semantic_utils import get_faiss_results
 
+
 def handle_ai_search(request):
     data = request.get_json()
 
@@ -38,15 +39,19 @@ def handle_ai_search(request):
         filter_year = filter_year_input
         filter_location = filter_location_input
 
+    weak_topics = {"studies", "papers", "research"}
+    filtered_topics = [t for t in filter_topics if normalize(t) not in weak_topics]
+    
     is_author_topic_same = (
-        filter_author and filter_topics and
-        normalize(filter_author) in [normalize(t) for t in filter_topics]
+        filter_author and filtered_topics and
+        normalize(filter_author) in [normalize(t) for t in filtered_topics]
     )
-
+    
     is_db_only_query = (
         (filter_author or filter_year or filter_location)
-        and (not filter_topics or is_author_topic_same)
+        and (not filtered_topics or is_author_topic_same)
     )
+    
 
     if is_db_only_query:
         return handle_db_query(filter_author, filter_year, filter_location, raw_query)
@@ -61,30 +66,27 @@ def handle_db_query(filter_author, filter_year, filter_location, raw_query):
         if filter_year:
             query = query.filter(Article.publication_date.like(f"{filter_year}%"))
 
-        if filter_author:
-            norm_author = normalize(filter_author)
-            parts = norm_author.split(",") if "," in norm_author else norm_author.split()
-            last_name = parts[0] if "," in norm_author else parts[-1]
-            query = query.filter(Article.author.ilike(f"%{last_name}%"))
-
         if filter_location:
             query = query.filter(Article.location.ilike(f"%{filter_location}%"))
 
-        matching_articles = query.all()
+        # Load all relevant articles
+        candidate_articles = query.all()
 
-        for article in matching_articles:            
+        for article in candidate_articles:
+            if filter_author and not author_matches(article.author, filter_author):
+                continue  # Skip non-matching authors
+
             results.append({
                 "id": article.id,
                 "title": article.title,
                 "abstract": article.abstract,
-                "author": clean_author_field(article.author),
+                "author": clean_author_field(article.author), 
                 "publication_date": article.publication_date,
                 "pdf_url": article.pdf_url,
                 "keywords": normalize_keywords(article.keywords),
                 "isbn": article.isbn,
                 "distance": None,
                 "conference_location": article.location,
-                
             })
 
     if not results:
@@ -92,5 +94,6 @@ def handle_db_query(filter_author, filter_year, filter_location, raw_query):
         return jsonify({"error": error_msg}), 404
 
     return jsonify(results)
+
 
 
