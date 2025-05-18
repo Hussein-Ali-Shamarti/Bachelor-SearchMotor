@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { FiCalendar, FiMapPin, FiUser, FiUsers  } from "react-icons/fi";
+
 import { FaFilePdf } from "react-icons/fa";
 
 
@@ -66,58 +66,49 @@ const ArticleDetails = ({ selectedArticle, onOpenChat, onSearch, clearSelectedAr
             <>
              
 
-             <h1 
-  className="section-heading title-one-line" 
-  title={selectedArticle.title}
->
+  <h1 className="article-title">
   {selectedArticle.title}
 </h1>
-              <div><strong>ISBN:</strong> {selectedArticle.isbn}</div>
-              <hr className="section-divider" />
-              <div className="article-meta-row">
-              <div className="meta-item">
-                {selectedArticle.publication_date && (
-                  <>
-                    <FiCalendar className="icon-medium" />
-                    <span>{selectedArticle.publication_date || "—"}</span>
-                  </>
-                )}
-              </div>             
-              <div className="meta-item author-wrap">
-                {isMultipleAuthors ? (
-                  <FiUsers className="icon-medium icon-authors" />
-                ) : (
-                  <FiUser className="icon-medium icon-authors" />
-                )}
-                <span className="authors-text">
-                  {authorList.map((author, index) => (
-                    <button
-                      key={index}
-                      className="keywords-tag"
-                      onClick={() => handleKeywordClick(author)}
-                    >
-                      {author}
-                    </button>
-                  ))}
-                </span>
-              </div>
-              <div className="meta-item">
-                {selectedArticle.conference_location && (
-                  <>
-                    <FiMapPin className="icon-medium" />
-                    <span>{selectedArticle.conference_location || "—"}</span>
-                  </>
-                )}
-              </div>
-            </div>
-           {selectedArticle.conference_name && (
+             
+
+              <div className="article-authors">
+  <strong>Authors:</strong>
+  <div className="authors-list">
+    {authorList.map((author, index) => (
+      <button
+        key={index}
+        className="keywords-tag"
+        onClick={() => handleKeywordClick(author)}
+      >
+        {author}
+      </button>
+    ))}
+  </div>
+</div>
+
+<div className="article-meta-block">
+ 
+  <div className="article-date">Publication Date: {selectedArticle.publication_date}</div>
+  <div className="article-location">Conference Location: {selectedArticle.conference_location}</div>
+   <div className="article-isbn">ISBN: {selectedArticle.isbn}</div>
+ {selectedArticle.conference_name && (
                 <div className="article-conference">
                   <strong>Conference:</strong> {selectedArticle.conference_name}
                 </div>
               )}
+
+</div>
+
+
+
+
+    
+
+
               <hr className="section-divider" />
 
-              {selectedArticle.pdf_url && (
+
+               {selectedArticle.pdf_url && (
                 <a
                   href={selectedArticle.pdf_url}
                   download
@@ -151,6 +142,14 @@ const ArticleDetails = ({ selectedArticle, onOpenChat, onSearch, clearSelectedAr
                     ))}
                 </div>
               )}
+          
+
+
+
+
+              <hr className="section-divider" />
+
+             
 
               <div className="article-abstract">
                 <h3 className="section-heading">Abstract</h3>

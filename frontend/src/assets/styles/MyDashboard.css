@@ -146,7 +146,7 @@ body {
     font-weight: 600;
     margin-top: 1.5rem;
     margin-bottom: 0.5rem;
-    color: #333;
+    /* color: #333; */
   }
 
   .card-content p {
@@ -218,11 +218,11 @@ body {
 
 
 .section-divider {
- margin: 1.5rem auto;
+/* margin: 0 0 1rem 0; */
   border-top: 1px solid var(--color-grey-border-light, #DCE1E8);
 
   width: 100%;
-}git 
+} 
 /* global color for section devider */
 
 
@@ -260,7 +260,7 @@ body {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    margin: 1rem 0;
+    margin: 1rem 0 2rem 0; /* Endret til mer luft under (1.5rem) */
     font-weight: 600;
     color: #2e5278;
     text-decoration: underline;
@@ -280,7 +280,7 @@ body {
     font-size: 1.2rem;
     font-weight: 600;
     margin: 1.2rem 0 0.5rem;
-    color: #111827;
+    /* color: #111827; */
   }
 
   .article-actions {
@@ -295,7 +295,7 @@ body {
   .keywords-tag {
     display: inline-block;
     background: #eef2ff;
-    color: #2e5278;
+      color: var(--color-font, #120800);
     padding: 0.3rem 0.6rem;
     border-radius: 999px;
     font-size: 0.85rem;
@@ -441,6 +441,8 @@ body {
     font-weight: 500;
     margin-bottom: 0.2rem;
   }
+
+  
   
   .article-author {
     font-size: 0.85rem;
@@ -462,23 +464,77 @@ body {
     border-radius: 12px;
 }
 
+
+
 /* Style article details section  */
-  .main-area .title-one-line {
-  white-space: nowrap;             /* Hindre linjeskift */
-  overflow: hidden;                /* Skjule alt som går utenfor */
-  text-overflow: ellipsis;         /* Legg til "..." */
-  cursor: pointer;                 /* Indikerer at det er interaktivt (for tooltip) */
-  max-width: 100%;                 /* Hindrer at den blir for bred */
+
+.main-area .article-title {
+   font-size: clamp(1.6rem, 2.5vw, 2rem); /* Ned fra 1.8rem–2.2rem til 1.6rem–2rem */
+  font-weight: 600;
+  color: var(--color-nav, #2e5278);
+  margin-top: 1.5rem;
+  margin-bottom: 2.5rem;
+  line-height: 1.3;
+  word-break: break-word;
 }
 
-.main-area h1.section-heading {
-  font-size: clamp(1.2rem, 4vw, 2rem); /* Minimum 1.2rem, dynamisk opp til maks 2rem */
+.article-authors {
+  margin-bottom: 1rem;
+}
 
-    padding-right: 2rem;
-  margin-top: 1.5rem;
-  margin-bottom: 2rem;
-  line-height: 1.3;
-      color: var(--color-font, #120800);
+.article-authors strong {
+  /* display: block; */
+  display:inline; 
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: var(--color-font, #120800);
+}
+.article-authors strong {
+  font-weight: bold;
+}
+.authors-list {
+  display: inline;
+}
+
+.article-isbn {
+  /* margin-bottom: 1.5rem; */
+}
+
+/* Authors: Mellomstor, gir dem litt mer fokus */
+.card-content .article-authors strong {
+  font-size: 1rem; /* Økt fra normal tekst */
+  font-weight: 700; /* Gjør Authors bold */
+  color: var(--color-font, #120800);
+  margin-right: 0.5rem;
+  
+  
+}
+
+.main-area .authors-list {
+    margin-bottom: 1.5rem; /* Juster til ønsket avstand */
+}
+
+.article-authors .keywords-tag {
+    background: #f0f0f0; /* Lysere grå bakgrunn */
+      color: var(--color-font); /* Global font-farge */
+}
+
+
+/* ISBN: Mindre og mindre fremtredende */
+.card-content .article-isbn {
+  font-size: 0.85rem;
+  color: #666; /* Lysere for mindre fokus */
+  margin-top: 0.5rem;
+  font-weight: 400; /* Ikke bold for ISBN */
+}
+.card-content .article-meta-block {
+  margin: 2rem 0; /* Gir luft over og under blokken */
+}
+
+.card-content .article-meta-block > div {
+  font-size: 0.95rem; /* Samme som ISBN */
+  color: var(--color-font, #120800); /* Samme farge som ISBN */
+  margin: 0.3rem 0; /* Jevn luft mellom linjene */
 }
 
   /* =============================================================
@@ -567,7 +623,7 @@ body {
 .bot-message {
   /* background-color: #f8f9fa; */
   background-color: var(--color-background-light);
-  color: #212529;
+    color: var(--color-font, #120800);
   align-self: flex-start;
   border-radius: 15px;
   font-weight: 500;
