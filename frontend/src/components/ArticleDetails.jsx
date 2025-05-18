@@ -64,9 +64,14 @@ const ArticleDetails = ({ selectedArticle, onOpenChat, onSearch, clearSelectedAr
         <div className="card-content">
           {selectedArticle ? (
             <>
-              <h2>Article Details</h2>
+             
 
-              <h3 className="section-heading">{selectedArticle.title}</h3>
+             <h1 
+  className="section-heading title-one-line" 
+  title={selectedArticle.title}
+>
+  {selectedArticle.title}
+</h1>
               <div><strong>ISBN:</strong> {selectedArticle.isbn}</div>
               <hr className="section-divider" />
               <div className="article-meta-row">

@@ -96,6 +96,10 @@ html {
  h6 { font-size: 1rem; } 
  
 
+h1 {
+  font-size: clamp(1.5rem, 5vw, 2.5rem); 
+  font-weight: 500;
+}
  
  
 /* Hyperlinks: Thin underline and offset improve readability (UX: Clarity) */
