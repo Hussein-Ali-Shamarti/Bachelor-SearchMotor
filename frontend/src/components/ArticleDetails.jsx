@@ -89,7 +89,17 @@ const ArticleDetails = ({ selectedArticle, onOpenChat, onSearch, clearSelectedAr
                 ) : (
                   <FiUser className="icon-medium icon-authors" />
                 )}
-                <span className="authors-text">{selectedArticle.author || "—"}</span>
+                <span className="authors-text">
+                  {authorList.map((author, index) => (
+                    <button
+                      key={index}
+                      className="keywords-tag"
+                      onClick={() => handleKeywordClick(author)}
+                    >
+                      {author}
+                    </button>
+                  ))}
+                </span>
               </div>
               <div className="meta-item">
                 {selectedArticle.conference_location && (
