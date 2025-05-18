@@ -125,7 +125,7 @@
   overflow: auto; 
   transition: max-height 0.5s ease;
 }
-/* tatt ut denne i react:  */
+
 /* Change Hamburger to X when menu is shown */
 .js .menubutton.showmenu::before {
   content: url("../../images/menuclose.svg");

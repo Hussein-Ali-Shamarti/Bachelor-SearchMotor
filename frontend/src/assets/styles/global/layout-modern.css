@@ -1,12 +1,11 @@
-/*  ==========================================
+/* =============================
+   layout-modern.css
+   ============================= */
 
-/* Layout modern.css */
-    
 /* Stylesheet for structuring layout sections
-   - Multiple colored sections spanning the entire page width  
-   - The body extends from the leftmost to the rightmost edge 
-   - Width constraints are applied using div.inside 
-
+   - Multiple colored sections spanning the entire page width
+   - The body extends from left to right edge
+   - Width constraints applied using div.inside */
   
 /* Styling the root element and body - overrides declarations from layout.css */
 
@@ -14,30 +13,30 @@
 html { 
   background-color: transparent; 
 }
-
+/* Body element resets default margins and padding for a full-width layout */
 body { 
   max-width: none; 
   padding: 0; 
   margin: 0; 
 }
 
-/* Layoutbereiche (mit dem div.inside) in der Breite begrenzen und zentrieren */
+/* .inside container centers content and limits width (UX: Improves readability) */
 .inside {
   max-width: 600px; 
   padding: 0 1rem; 
   margin: 0 auto; 
 }
 
-/* Modernes Layout: Nur für moderne Browser, die display grid versthen -  mehr Platz für mehrspaltige Layouts */
+/* Modern layout adjustments for browsers supporting CSS Grid (UX: Better multi-column layouts on larger screens) */
 @supports (display: grid) {
   
   .inside { max-width: 960px; }
 
-} /* Ende @supports */ 
+} /* End @supports */ 
 
 
 
-/* Die in content.css definierten Abstände korrigieren - zusätzliche Klasse erhöht die Spezifität */ 
+/* Corrects spacing defined in content.css by removing side paddings and margins */
 
 .site-content .content-intro { 
 padding-right: 0; 
@@ -72,7 +71,7 @@ padding-left: 0;
 margin-right: 0; 
 margin-left: 0; 
 }
-/* Layoutbereiche - horizontale Innenabstände entfernen */
+/* Removes horizontal padding for main layout sections (UX: Cleaner edge-to-edge layout) */
 .site-header, 
 .site-nav, 
 .site-content, 
@@ -82,6 +81,6 @@ padding-right: 0;
 }
 
 
-/** 
-* Ende layout-modern.css 
-*/ 
+/* =============================
+   End of layout-modern.css
+   ============================= */

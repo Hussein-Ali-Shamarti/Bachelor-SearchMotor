@@ -1,6 +1,7 @@
 /* HomePage.css */
 
 /* Main container styling */
+/* Centers content and applies background color for a clean visual appearance (UX: Visual hierarchy) */
 .home {
   text-align: center;
   background-color: var(--color-background-light);
@@ -9,6 +10,7 @@
 
 
 /* Search input styling */
+/* Provides large clickable area and rounded corners for easier interaction (UX: Touch-friendly, Visibility) */
 .search-input {
   padding: 10px;
   border: var(--color-grey-border-light-thin);
@@ -17,6 +19,7 @@
 }
 
 /* Infobox styles */
+/* Highlights key features with clear visual separation using shadow and spacing (UX: Visibility, Consistency) */
 .infobox {
   background-color: var(--color-background-light);
   border-radius: 10px;
@@ -24,33 +27,34 @@
   margin: 10px;
   box-shadow: var(--color-shadow);
 }
-
+/* Infobox headings - Uses theme color for clear visual grouping (UX: Consistency) */
 .infobox h3 {
   color: var(--color-nav);
 }
-
+/* Infobox button styling - Clear call-to-action buttons with high contrast and hover effect (UX: Feedback, Visibility) */
 .infobox .button {
   background-color: var(--color-nav);
-  color: #fff;
+  color: #fff;/* High contrast text for accessibility (Accessibility: WCAG AA) */
   border: none;
   border-radius: 5px;
   padding: 5px 15px;
-  cursor: pointer;
-  transition: background-color 0.3s;
+  cursor: pointer; /* UX: Pointer cursor signals interactivity */
+  transition: background-color 0.3s;/* UX: Smooth feedback on hover */
 }
 
+/* Hover state improves interactivity feedback (UX: Feedback) */
 .infobox .button:hover {
   background-color: var(--color-nav-darker);
 }
 
-/* endringer for scroll på home */
+/* Allows content to scroll between header and footer (UX: Keeps key elements visible) */
 .home {
   display: flex;
   flex-direction: column;
   height: 100vh;
   overflow: hidden;
 }
-
+/* Home-scroll area - Enables vertical scrolling for overflowing content (UX: Accessibility for long content) */
 .home-scroll {
   flex: 1;
   margin-top: 88px; /* Header høyde */

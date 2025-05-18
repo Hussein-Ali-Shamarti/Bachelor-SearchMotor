@@ -1,13 +1,9 @@
 
+/* =============================
+   site-content Section Styling
+   ============================= */
 
-/* site-content: 
-- Content-Intro
-- Search section se i search-section.css
-- Infoboxen 
-- Reviews
-
-/* hvor hører icon til  */
-
+/* .icon class for SVG icons (UX: Ensures consistent icon sizing) */
 .icon img[src$="svg"] {
   width: 4rem;
   height: auto; 
@@ -15,57 +11,56 @@
 
 
 
-/* Linkzustände für den Inhaltsbereich */
-/* .site-content a:link { color: var(--color-nav,#00a3d2); } 
-.site-content a:visited { color: var(--color-nav,#00a3d2); } 
-.site-content a:hover, .site-content a:focus { color: var(--color-nav-darker,#007293); } 
-.site-content a:active { color: var(--color-nav-darker,#007293); } */
+/* .content-intro Section (UX: Strong visual introduction area) */
 
 
 .content-intro{
-  padding: 4rem; 
+  padding: 4rem; /* UX: Provides generous spacing for better readability */
   
   margin-bottom: 1rem; 
   /* background-color: #f5f5f5; */
-  background: linear-gradient(45deg, #7e2f95 30%, #2e5278 60%, #f5f5f5 100%); 
+  background: linear-gradient(45deg, #7e2f95 30%, #2e5278 60%, #f5f5f5 100%); /* UX: Visually appealing background gradient */
 
 }
+
+/* Text inside content-intro area */
 .content-intro .inside {
 
-  /* background: linear-gradient(45deg, #7e2f95, #2e5278); /* Gradient mellom lilla og blå * */
+
    
-    color: white;
+    color: white;/* Accessibility: High contrast text on gradient background */
    
   
 }
-
+/* Headings in content-intro (UX: Clear and prominent headings) */
 .content-intro h2 {
-  font-size: 2rem; /* Øk størrelsen på h2 (kan justeres etter ønske) */
-  margin-bottom: 1rem; /* Gir litt plass under h2 */
+  font-size: 2rem; 
+  margin-bottom: 1rem; 
 }
 
-  /* --------------------- */
-/* Infoboxen Section Styling */
-/* --------------------- */
+/* =============================
+   Infobox Section Styling
+   ============================= */
          
-/*1.  Hele seksjonen */
+/* Infobox container (UX: Provides structured content presentation) */
 .infoboxen {
-  background-color: var(--color-background-dark,#e9e9e9 ); 
+  background-color: var(--color-background-dark,#e9e9e9 ); /* Accessibility: Background color for content grouping */
   padding: 2rem; 
   margin-bottom: 1rem; 
 }
 
+/* Deleted Info box button  */
 .infobox .button {
   display: inline-block;
   padding: 8px 18px;
-  background-color: #2e5278; /* Standard farge */
-  color: white !important; /* Sørger for at teksten ALLTID er hvit *
+  background-color: #2e5278; 
+  color: white !important; 
   text-decoration: none;
   border-radius: 5px;
   /* font-weight: bold; */
   text-align: center;
-  border: none; /* Fjern standard kantlinje */
-  cursor: pointer; /* Gir musepekeren en "klikkbar" effekt */
+  border: none; 
+  cursor: pointer; 
   border-radius: 0.5rem;
 }
 
@@ -75,7 +70,7 @@
 }
 
 
-/* 2. Flex oppsett for infobox */
+/* Infobox layout using Flexbox (UX: Centers content and provides consistent spacing) */
 .infobox {
 display: flex;
 flex-flow: column;
@@ -84,19 +79,20 @@ align-items: center;
 text-align: center;
 
 background-color: var(--color-background-light);
-color: var(--color-font);  
+color: var(--color-font); /* Accessibility: Maintains readable text color */ 
 
 padding: 1rem; 
 margin: 1rem; 
-box-shadow: var(--color-shadow); 
-border-radius: 0.5rem;
+box-shadow: var(--color-shadow); /* UX: Adds visual separation from background */
+border-radius: 0.5rem; /* UX: Rounded corners for better aesthetics */
 }
 
+/* Ensures the last element in the infobox aligns at the bottom (UX: Consistent card layout) */
 .infobox > *:nth-child(3) {
   margin-top: auto;
 }
 
-/* das letzte Element in jeder Infobox: */
+
 .infobox :last-child {
 margin-top: auto;
 }
@@ -109,10 +105,7 @@ color:#2e5278;
   width: 4rem;
   height: auto; 
 }
-/* 5. Grid-oppsett for infoboxen - inside*/
-
-/* 6. Responsiv tilpasning */
- /* ab 600 pixel: */
+/* Responsive grid layout for infoboxes (UX: Optimized layout for wider screens) */
 @media screen and (min-width: 600px) {
 
   .infoboxen > .inside {
@@ -123,31 +116,30 @@ color:#2e5278;
   }
 
 
-/* _End content.css */
-
-  /* ------------------------------------------------------------------ */
-/* Tilpasninger for React-applikasjonen
-
-Justerer spacing mellom elementer for at boksene skal få jevn høyde*/
-/* --------------------------------------------------------------------- */
+/* =============================
+   Adjustments for React Application
+   Ensures even height of boxes by adjusting spacing between elements (UX: Consistent Layout)
+   ============================= */
 
 
 .infobox h3 {
-  margin-bottom: 10px; /* Avstand mellom overskrift og paragraf */
+  margin-bottom: 10px; /*  Adds space between heading and paragraph */
 }
 
 .infobox p {
-  margin-bottom: 15px; /* Avstand mellom avsnittene */
+  margin-bottom: 15px; 
 }
 
 .infobox .button {
-  margin-top: 20px; /* Holder knappen nede */
+  margin-top: 20px; /*  Keeps the button pinned at the bottom of the box */
 }
 
  
 
 
-
+/* =============================
+   End of content.css
+   ============================= */
 
 
 

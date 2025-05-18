@@ -1,26 +1,13 @@
-/*  
-    layout.css  (Do not delete!)  
 
-    Imported into style.css using @import  
-
-    Stylesheet for structuring layout sections:  
-    1. Classic page layout (fixed width, centered, preparing for a sticky footer)  
-    2. Header section (including content)  
-    3. Main content area (content styled in a separate stylesheet, sticky footer with flex:1)  
-    4. Site footer (including content)  
-
-    The styling for site navigation is handled in a separate stylesheet.  
-*/
-
-/**  
-  * 1. Classic Page Layout (fixed width, centered)  
-  */  
+/* =============================
+   layout.css 
+   ============================= */  
 
 
-/* Hintergrundfarbe für das Stammelement */ 
+/* 1. Classic Page Layout (fixed width, centered) */
 html { background-color: var(--color-background-light); }
 
-/* fjernet forrige fra body */
+
 
 
 html, body, #root {
@@ -31,7 +18,7 @@ html, body, #root {
   box-sizing: border-box;
 }
 
-/* Optional: Für moderne Browser mehr Platz auch beim klassischen Layout */
+/* Optional: Provide more space for modern browsers (UX: Better layout scaling) */
 @supports (display: grid) {
   
   body {
@@ -66,46 +53,38 @@ html, body, #root {
 
 /* nav - se navi-flex.css */
 
-/** 
-  * 2. Kopfbereich (inklusive Inhalte)  
-  */ 
+/* 2. Header Section (including content) */
 
-/* Innen- und Außenabstände */
+/* Padding and margin for header area (Proper spacing and alignment) */
 .site-header { 
   padding: 1rem 1rem 0 1rem; 
   margin-bottom: 1rem; 
 } 
 
-/* Fine-Tuning: Die Abstände um Logo und Slogan anpassen */ 
+/* Adjust spacing around logo and slogan (UX: Clean header appearance) */
 .site-header h1 { margin-bottom: 0; }
 .site-header p { margin-top: 0; }
  
 
 
-/** 
-  * 3. Inhaltsbereich (Inhalte in content.css)  
-  */ 
-
-/* Innen- und Außenabstände */
+/* 3. Main Content Area */
+/* Main content area padding and margin (UX: Improves content readability) */
 .site-content { 
   line-height: 1.5; 
   padding: 0 1rem; 
   margin-bottom: 2rem; 
 
-  /* Sticky Footer, Schritt 2/2 */
+  /* Sticky Footer - changed to fixed*/
   flex: 1; 
 } 
  
 
 
-
-/** 
-  * 4. Fußbereich (inklusive Inhalte)  
-  */ 
-/* Grundlegende Gestaltung für den Footer */
+/* 4. Footer Section (including content) */
+/* Basic styling for the footer  */
 .site-footer {
   font-size: smaller; 
-  background-color: #2e5278; /* mørk blå */
+  background-color: #2e5278; 
   
   color: white; 
   
@@ -113,7 +92,7 @@ html, body, #root {
   padding: 1rem;
 }
 
-/* Die Navigation im Fußbereich */   
+/* Footer navigation layout (Horizontal layout for navigation links in future) */  
 .footer-nav ul {
   display: flex;
   list-style: none; 
@@ -151,24 +130,19 @@ html, body, #root {
   background: var(--color-nav-darker); 
   color:white; 
 }
-/** 
-  * End layout.css 
-  */ 
-  /* ------------------------------------------------------------------ */
-  /* Tilpasning: I React må man bruke display: flex; på den ytterste containeren for at footeren skal fungere riktig. */
-/* --------------------------------------------------------------------- */
+/* React-specific Adjustments */
 
-  /*  */
-
-  /* Ensure footer stays at the bottom */
- /* Sørger for at footeren alltid er nederst */
+/* Ensures footer stays at the bottom (UX: Sticky footer implementation) */
 .home {
   display: flex;
   flex-direction: column;
-  min-height: 100vh; /* Sørger for at siden alltid fyller skjermen */
+  min-height: 100vh; /* UX: Ensures full screen height coverage */
 }
 
-/* Gjør at main tar opp all ledig plass og dytter footeren ned */
+/* Main content takes available space, pushes footer to bottom (UX: Consistent page structure) */
 .site-content {
   flex: 1;
 }
+/* =============================
+   End of layout.css
+   ============================= */

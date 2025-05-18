@@ -12,15 +12,15 @@
 /* 1. Global CSS Variables */
 
 html {
-  /* farger endret 01.03.2025 - kan endres senere og legge felles farger i variabler her */
+  
      --color-background-light: #ffffff; 
      --color-background-dark: #f5f5f5; 
      --color-font: #54595F; 
      --color-nav:  #2e5278; 
-     --color-nav-darker:#6EC1E4 ; 
-     /* darker er den lysere fargen ved hover!!  */
+     --color-nav-darker:#6EC1E4 ; /* Hover state (UX: Feedback on interaction) */
+     
 
-     /* farge logo og overskrifter (samme som color-nav) */
+
  --color-titles: #2e5278;
  
  
@@ -35,62 +35,58 @@ html {
  
  
  
- /* Link states for navigation and buttons */
+ /* Link states for navigation and buttons (UX: Clear active state) */
  .site-content a:link { color: var(--color-nav,#2e5278); } 
  .site-content a:visited { color: var(--color-nav,#00a3d2); } 
- /* darker er den lysere fargen!!  */
+ /* darker er den lysere fargen!  */
  .site-content a:hover, .site-content a:focus { color: var(--color-nav-darker,#11bfe6); } 
  .site-content a:active { color: var(--color-nav-darker,#007293); }
  
  }
  
- /* linkzustände får navigation mangler?  */
+ 
     
  /* 2. Global Default Styles */
  
- /* border-box aktivieren */ 
+/* Unify box model */
  *, *::before, *::after { box-sizing: border-box; }
  
- /* Sanftes Scrollen aktivieren */ 
+/* Enable smooth scrolling (UX: Smooth user experience) */
  html { scroll-behavior: smooth; }
  
- /* Collapsing Margins vermeiden */ 
+/* Avoid margin collapsing */ 
  h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote { margin-top: 0; }
  
- /* Bilder und Videos mit flexibler Breite einbinden */ 
+/* Responsive images and videos (UX: Mobile-friendly) */
  img, video { max-width: 100%; height: auto; }
  
- /* figure ohne horizontale Außenabstände */
+/* Remove horizontal margins for figure elements */
  figure { margin-left: 0; margin-right: 0; } 
  
- /*  for bilde i intro */
- 
- /**  
- * 3. Grundlegende Gestaltung für Schrift und Text  
- */ 
+/* 3. Basic Typography and Text Styling */
  
  body {
- /* Systemschriftart auf dem Gerät des Benutzers; »Best Practice« kann sich ändern */
+ /* System fonts for better readability (UX: Readability) */
  font-family: system-ui, -apple-system, "Segoe UI", Roboto, 
             "Helvetica Neue", Arial, sans-serif; 
  
- /* Definition der Standardschriftgröße (optional)  */
+  /* Standard font size */
  font-size: 1rem; 
  max-width: 600px;
- line-height: 1.5; 
+ line-height: 1.5; /* UX: Comfortable line height for better readability */
  padding:1rem; 
  margin: 0 auto; 
- color:var(--color-font,   #120800 ); 
+ color:var(--color-font,   #120800 ); /* Accessibility: High contrast for readability */
  }  
  @media screen and (min-width: 768px) {
      html{ font-size: 1.125rem;}
  }
  @media screen and (min-width: 1280px) {
-   html{ font-size: 1.25rem;}
+   html{ font-size: 1.25rem;} /* UX: Larger font size for better readability on larger screens */
  }
  
  
- /* Überschriften - Schriftgröße und Strichstärke */ 
+/* Headings - Font size and weight (UX: Clear visual hierarchy) */
  h1 { font-size: 2.5rem; font-weight: 500;
   } 
  h2 { font-size: 2rem; font-weight: 500; } 
@@ -102,7 +98,7 @@ html {
 
  
  
- /* Unterstreichung für Hyperlinks dünn und etwas weiter weg vom Text */ 
+/* Hyperlinks: Thin underline and offset improve readability (UX: Clarity) */
  a { text-decoration-thickness: 1px; text-underline-offset: 0.1875em;
    text-decoration: none; }
  
@@ -111,11 +107,9 @@ html {
  
  
  
- /**  
- * 4. Nützliche, allgemeine Klassen 
- */ 
+ /* 4. Useful General Classes */ 
  
- /* Boxen am Bildschirm ausblenden */
+/* Invisible content for screen readers only (Accessibility: WCAG compliant) */
  .visually-hidden {
    position: absolute !important;
    clip: rect(0, 0, 0, 0) !important; 
@@ -129,25 +123,25 @@ html {
    margin: -1px !important; 
  }
  
- /* Klassen zum Floaten und Clearen */
+/* Float classes for layout adjustments */
  .float-links { float: left; margin: 0 1rem 1rem 0; }
  .float-rechts { float: right; margin: 0 0 1rem 1rem; }
  
  .float-stoppen { clear: both; }
  
- /* Bildbeschriftung bei gefloateten Bildern zentrieren */
+
  figure[class~="float-rechts"], 
  figure[class~="float-links"] {
    text-align: center;
  }
  
- /* Floats umschliessen */ 
+
  .float-umschliessen { overflow: hidden; }
  
  @supports (display:flow-root) {
  
    .float-umschliessen {
-     display: flow-root; 
+     display: flow-root; /* Modern layout for floats (UX: More stable layout) */
      overflow: initial;       
    }
  
@@ -155,5 +149,5 @@ html {
  
  
  /** 
- * Ende basis.css 
+ * End basis.css 
  */ 

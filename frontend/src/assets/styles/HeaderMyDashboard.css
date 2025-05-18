@@ -10,8 +10,8 @@
   z-index: 1000;
   background-color: var(--color-background-light);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); 
-  height: 136px;            /* høyde for desktop */
-  padding: 0;               /* ingen padding her! kun på innhold */
+  height: 136px;           /* Height for desktop */
+  padding: 0;                /* No padding here, only on content */
 }
 
 
@@ -23,14 +23,14 @@
  background-color: var(--color-background-light);
   width: 100%;
   padding: 0 1rem;               
-  z-index: 1000;                  /* Over alt annet */
+  z-index: 1000;                   /* Above all other elements */
   align-items: center;
   padding-top: 2rem;
   padding-bottom: 1rem;
    height: 88px;
 }
 
-/* Wrapper som sentrerer og begrenser innholdsbredde */
+/* Wrapper that centers and limits content width */
 .inside {
   width: 100%;
   max-width: 960px;
@@ -38,7 +38,7 @@
   /* flex: 1; */
 }
 
-/* Ny struktur: Logo og søk side om side */
+/* New structure: Logo and search side by side */
 .MyHeader-content {
   display: flex;
   align-items: center;
@@ -46,13 +46,13 @@
   gap: 1rem;
 }
 
-/* Logo-blokk */
+/* Logo block */
 .logo-container {
   display: flex;
   align-items: center;
   gap: 0.4rem;
 }
-/* begrenser høyden av img  */
+/* Limits height of logo image */
 .site-logo {
   height: 48px;
   max-height: 48px;
@@ -67,7 +67,7 @@
   white-space: nowrap;
 }
 
-/* Søkefelt-blokk */
+/* Search field block */
 .search-bar-wrapper {
   flex: 1 ;;
   display: flex;
@@ -75,8 +75,8 @@
   align-items: center;
 }
 .search-bar-wrapper {
-  padding: 0; /* ← fjerner padding */
-  height: 2.5rem; /* ← tving samme høyde som input hadde */
+  padding: 0; 
+  height: 2.5rem; 
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -86,7 +86,7 @@
   background: white;
   max-width: 400px;
 }
-/* IKON */
+/* Search icon */
 .search-icon {
   font-size: 1.5rem;
   color: #555;
@@ -115,7 +115,7 @@
 
 
 /* -------------------------------------------------------------
-   KONTROLLPANEL FOR KNAPPER MELLOM HEADER OG DASHBOARD (STICKY)
+   CONTROL PANEL NAVIGATION (STICKY BETWEEN HEADER AND DASHBOARD)
 -------------------------------------------------------------- */
 .control-panel-nav {
   display: flex;
@@ -132,9 +132,7 @@
   height: 48px;
   padding: 0 1rem;
 }
-/* -------------------------------------------------------------
-  KNAPPER VENSTRE OG HØYRE (REBRUKT)
---------------------------------------------------------------*/
+/* BUTTON STYLES (REUSED LEFT AND RIGHT) */
 .sidebar-back-button,
 .sidebar-switcher-ai,
 .sidebar-switcher-article {
@@ -170,7 +168,7 @@
 
 
 /* -------------------------------------------------------------
-   RESPONSIVT: TABLET 
+   RESPONSIVE: TABLET
 -------------------------------------------------------------- */
 @media screen and (min-width: 601px) and (max-width: 1024px) {
   .header-fixed-top {
@@ -190,9 +188,9 @@
     flex-direction: row;
     align-items: center;
     gap: 2rem;
-    max-width: 960px;        /* <-- Legg til dette */
-    margin: 0 auto;          /* <-- Og dette */
-    /* width: 100%; */
+    max-width: 960px;        
+    margin: 0 auto;         
+  
     
   }
 
@@ -209,7 +207,7 @@
 
 
 /* -------------------------------------------------------------
-  RESPONSIVT: MOBIL 
+   RESPONSIVE: MOBILE
 -------------------------------------------------------------- */
 @media screen and (max-width: 600px) {
  
