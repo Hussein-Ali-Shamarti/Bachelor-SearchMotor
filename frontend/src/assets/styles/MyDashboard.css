@@ -365,6 +365,7 @@ body {
   .close-ai-button:hover {
     color: #000;
   }
+
   
   /* =============================================================
      ARTIKKELLISTE-MEN
@@ -612,8 +613,8 @@ body {
 }
 
 .user-message {
-  background-color: #7e2f95;
-  color: #ffff;
+  background-color: #d4d4d4;
+  
   align-self: flex-end;
   border-radius: 15px;
   font-weight: 500;
@@ -656,6 +657,7 @@ body {
   top: 50%;
   transform: translateY(-50%);
   background: none;
+
   border: none;
   cursor: pointer;
   padding: 0;
@@ -905,7 +907,8 @@ body {
   max-height: none; /* ← Fjern begrensningen */
 }
 
-  
-  
+ 
+
+
 
 
