@@ -85,12 +85,13 @@ body {
     border-left: 1px solid #ccc;
    
   }
-  .main-area {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  overflow-y: auto;
-}
+
+
+  .ai-sidebar h3  {
+   color:#7e2f95;
+  }  
+  
+
   
   /* =============================================================
      FUNKSJONELLE TILSTANDSKLASSER
@@ -615,6 +616,7 @@ body {
 .user-message {
   background-color: #d4d4d4;
   
+  color: var(--color-font); 
   align-self: flex-end;
   border-radius: 15px;
   font-weight: 500;
