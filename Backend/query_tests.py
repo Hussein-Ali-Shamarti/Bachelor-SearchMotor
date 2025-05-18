@@ -14,8 +14,8 @@ class TestQueryParsing(unittest.TestCase):
 
     def test_initials_and_topic(self):
         author, topic, year, location = extract_filters_from_query("privacy research by L. Berntzen")
-        self.assertIn("privacy", normalize(topic))
-        self.assertIn("berntzen", normalize(topic))
+        self.assertIn("privacy research", normalize(topic))
+        self.assertIn("berntzen", normalize(author))
 
 
     def test_compound_topic(self):
