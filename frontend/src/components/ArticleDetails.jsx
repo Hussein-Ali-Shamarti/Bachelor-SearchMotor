@@ -71,7 +71,7 @@ const ArticleDetails = ({ selectedArticle, onOpenChat, onSearch, clearSelectedAr
 </h1>
              
 
-              <div className="article-authors">
+<div className="article-authors">
   <strong>Authors:</strong>
   <div className="authors-list">
     {authorList.map((author, index) => (
@@ -86,110 +86,90 @@ const ArticleDetails = ({ selectedArticle, onOpenChat, onSearch, clearSelectedAr
   </div>
 </div>
 
-<div className="article-meta-block">
- 
-  <div className="article-date">Publication Date: {selectedArticle.publication_date}</div>
-  <div className="article-location">Conference Location: {selectedArticle.conference_location}</div>
-   <div className="article-isbn">ISBN: {selectedArticle.isbn}</div>
- {selectedArticle.conference_name && (
-                <div className="article-conference">
-                  <strong>Conference:</strong> {selectedArticle.conference_name}
-                </div>
-              )}
-
-</div>
-
-
-
-
-    
-
-
-              <hr className="section-divider" />
-
-
-               {selectedArticle.pdf_url && (
-                <a
-                  href={selectedArticle.pdf_url}
-                  download
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="pdf-icon-link"
-                  title="Download PDF"
-                >
-                  <FaFilePdf className="icon-large" style={{ color: "#d32f2f" }} />
-                  <span> View PDF</span>
-                </a>
-              )}
-
-              {selectedArticle.keywords && (
-                <div className="article-keywords">
-                  <strong>Keywords:</strong>{" "}
-                  {(Array.isArray(selectedArticle.keywords)
-                    ? selectedArticle.keywords
-                    : selectedArticle.keywords.split(",")
-                  )
-                    .map((kw) => kw.trim())
-                    .filter(Boolean)
-                    .map((kw, i) => (
-                      <button
-                        key={i}
-                        className="keywords-tag"
-                        onClick={() => handleKeywordClick(kw)}
-                      >
-                        {kw}
-                      </button>
-                    ))}
-                </div>
-              )}
-          
-
-
-
-
-              <hr className="section-divider" />
-
-             
-
-              <div className="article-abstract">
-                <h3 className="section-heading">Abstract</h3>
-                <p>{selectedArticle.abstract || "No abstract available."}</p>
-              </div>
-
-              <div className="button-wrapper">
-                <button
-                className="summarize-button" 
-                onClick={handleSummarize}>Summarize</button>
-                {onOpenChat && (
-                  <button className="chat-button" onClick={onOpenChat}>
-                    Chat about this article
-                  </button>
+  <div className="article-meta-block">
+     {selectedArticle.conference_name && (
+                  <div className="article-conference">
+                    Conference: {selectedArticle.conference_name}
+                  </div>
                 )}
-              </div>
-            </>
-          ) : (
-            <>
-              <h2>No article selected</h2>
-              <p>Please select an article from the list.</p>
-            </>
-          )}
-        </div>
+    <div className="article-location">Conference Location: {selectedArticle.conference_location}</div>
+    <div className="article-date">Publication Date: {selectedArticle.publication_date}</div>
+    <div className="article-isbn">ISBN: {selectedArticle.isbn}</div>
+     </div>
+                <hr className="section-divider" />
+     {selectedArticle.pdf_url && (
+      <a
+        href={selectedArticle.pdf_url}
+        download
+        target="_blank"
+        rel="noopener noreferrer"
+        className="pdf-icon-link"
+        title="Download PDF"
+      >
+        <FaFilePdf className="icon-large" style={{ color: "#d32f2f" }} />
+        <span> View PDF</span>
+      </a>
+    )}
+    {selectedArticle.keywords && (
+      <div className="article-keywords">
+        <strong>Keywords:</strong>{" "}
+        {(Array.isArray(selectedArticle.keywords)
+          ? selectedArticle.keywords
+          : selectedArticle.keywords.split(",")
+        )
+          .map((kw) => kw.trim())
+          .filter(Boolean)
+          .map((kw, i) => (
+            <button
+              key={i}
+              className="keywords-tag"
+              onClick={() => handleKeywordClick(kw)}
+            >
+              {kw}
+            </button>
+          ))}
       </div>
+    )}
 
-      {showSummary && (
-        <div className="summary-article-card full-width">
-          <button className="close-summary" onClick={() => setShowSummary(false)}>
-            &times;
-          </button>
-          <div className="card-content">
-            <h2>AI Summary</h2>
-            {summaryLoading ? (
-              <p>Loading summary...</p>
-            ) : (
-              <p>{summary || "No summary available."}</p>
-            )}
-          </div>
-        </div>
+    <hr className="section-divider" />
+   
+    <div className="article-abstract">
+      <h3 className="section-heading">Abstract</h3>
+      <p>{selectedArticle.abstract || "No abstract available."}</p>
+    </div>
+    <div className="button-wrapper">
+      <button
+      className="summarize-button" 
+      onClick={handleSummarize}>Summarize</button>
+      {onOpenChat && (
+        <button className="chat-button" onClick={onOpenChat}>
+          Chat about this article
+        </button>
+      )}
+    </div>
+  </>
+    ) : (
+      <>
+        <h2>No article selected</h2>
+        <p>Please select an article from the list.</p>
+      </>
+    )}
+  </div>
+</div>
+{showSummary && (
+  <div className="summary-article-card full-width">
+    <button className="close-summary" onClick={() => setShowSummary(false)}>
+      &times;
+    </button>
+    <div className="card-content">
+      <h2>AI Summary</h2>
+      {summaryLoading ? (
+        <p>Loading summary...</p>
+      ) : (
+        <p>{summary || "No summary available."}</p>
+      )}
+    </div>
+  </div>
       )}
     </section>
   );

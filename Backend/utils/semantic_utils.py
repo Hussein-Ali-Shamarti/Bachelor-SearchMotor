@@ -4,7 +4,7 @@
 
 from flask import jsonify, current_app
 from database import SessionLocal
-from models import Article
+from models import Article, Conference
 from utils.query_utils import normalize, author_matches, clean_author_field, normalize_keywords
 
 def get_faiss_results(query_embedding, filter_author, filter_topics, filter_year, filter_location):
@@ -74,7 +74,8 @@ def get_faiss_results(query_embedding, filter_author, filter_topics, filter_year
                     boost *= 2.0
 
                 adjusted_distance = float(distances[0][i]) if pure_semantic_query else float(distances[0][i]) / boost
-
+                conference = session.query(Conference).filter_by(id=article.conference_id).first()
+                conference_name = conference.name if conference else None
                 enriched_results.append({
                     "id": article.id,
                     "title": article.title,
@@ -86,6 +87,7 @@ def get_faiss_results(query_embedding, filter_author, filter_topics, filter_year
                     "isbn": article.isbn,
                     "distance": adjusted_distance,
                     "conference_location": article.location,
+                    "conference_name": conference_name
                 })
         k += 50
 

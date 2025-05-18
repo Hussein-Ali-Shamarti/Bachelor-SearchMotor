@@ -1,7 +1,7 @@
 from flask import jsonify, current_app
 import numpy as np
 from database import SessionLocal
-from models import Article
+from models import Article, Conference
 from utils.query_utils import extract_filters_from_query, author_matches, clean_author_field, normalize, normalize_keywords
 from utils.semantic_utils import get_faiss_results
 
@@ -75,7 +75,9 @@ def handle_db_query(filter_author, filter_year, filter_location, raw_query):
         for article in candidate_articles:
             if filter_author and not author_matches(article.author, filter_author):
                 continue  # Skip non-matching authors
-
+            conference = session.query(Conference).filter_by(id=article.conference_id).first()
+            conference_name = conference.name if conference else None
+       
             results.append({
                 "id": article.id,
                 "title": article.title,
@@ -87,6 +89,7 @@ def handle_db_query(filter_author, filter_year, filter_location, raw_query):
                 "isbn": article.isbn,
                 "distance": None,
                 "conference_location": article.location,
+                "conference_name": conference_name
             })
 
     if not results:

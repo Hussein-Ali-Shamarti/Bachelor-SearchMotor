@@ -274,6 +274,7 @@ body {
 
 .keywords-tag:hover {
   background: #e0e7ff;
+  color: #2e5278;  
 }
 
   .section-heading {
@@ -514,9 +515,8 @@ body {
     margin-bottom: 1.5rem; /* Juster til ønsket avstand */
 }
 
-.article-authors .keywords-tag {
-    background: #f0f0f0; /* Lysere grå bakgrunn */
-      color: var(--color-font); /* Global font-farge */
+.article-authors .keywords-tag:hover {
+  background: #d1d9ff;
 }
 
 
