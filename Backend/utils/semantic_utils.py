@@ -1,5 +1,6 @@
-## Denne filen håndterer semantisk søk i FAISS indexen.
-## Den tar embedding og filters og gjennomfører semantic matching og legger til boosting av resultater som har best match opp mot filterene.
+# Denne filen håndterer semantisk søk i FAISS-indeksen.
+# Den bruker embedding og eventuelle metadatafiltre (som forfatter, emne, år og sted) 
+# til å hente og booste relevante artikler basert på semantisk likhet og filtreringskriterier.
 
 
 from flask import jsonify, current_app

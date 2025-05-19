@@ -1,8 +1,17 @@
-import React, { forwardRef, useState } from "react";
+// Denne komponenten er toppbaren på dashboardet. Den viser logo, søkefelt og knapper
+// for å vise/skjule sidepanelene for artikkelliste og AI-assistent.
+// Søket kan utføres med Enter eller ved å klikke på søkeikonet.
 
+
+import React, { forwardRef } from "react";
 import "../assets/styles/global/header.css";
 import "../assets/styles/HeaderMyDashboard.css";
-import { FiArrowLeftCircle, FiMessageCircle, FiSearch } from "react-icons/fi";
+
+import {
+  FiArrowLeftCircle,
+  FiMessageCircle,
+  FiSearch
+} from "react-icons/fi";
 
 const HeaderMyDashboard = forwardRef(({
   articleSidebarHidden,
@@ -16,16 +25,16 @@ const HeaderMyDashboard = forwardRef(({
 }, ref) => {
   const query = queryText;
 
-const handleSearch = () => {
-  if (onSearch && query.trim()) {
-    if (clearSelectedArticle) clearSelectedArticle();
+  const handleSearch = () => {
+    if (onSearch && query.trim()) {
+      if (clearSelectedArticle) clearSelectedArticle();
 
-    const currentSearch = new URLSearchParams(window.location.search).get("query");
-    if (currentSearch !== query.trim()) {
-      onSearch(query.trim());
+      const currentSearch = new URLSearchParams(window.location.search).get("query");
+      if (currentSearch !== query.trim()) {
+        onSearch(query.trim());
+      }
     }
-  }
-};
+  };
 
   return (
     <div className="header-fixed-top" ref={ref}>
@@ -43,6 +52,7 @@ const handleSearch = () => {
               </a>
               <h1 className="site-title">HybridSearch.ai</h1>
             </div>
+
             <div className="search-bar-wrapper">
               <input
                 type="text"

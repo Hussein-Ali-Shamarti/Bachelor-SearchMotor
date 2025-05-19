@@ -1,4 +1,9 @@
-import React, { useEffect, useState } from "react";
+// Denne komponenten viser et enkelt søkefelt på startsiden. 
+// Når brukeren skriver inn en spørring og trykker Enter eller klikker på knappen, 
+// blir de navigert til dashboardet med søket lagt ved som query-parameter.
+
+
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import EnterIcon from "../assets/images/Eenter.svg";
 
@@ -12,9 +17,8 @@ const SearchInput = () => {
     }
   };
 
-  // Function to handle pressing Enter key
   const handleKeyDown = (event) => {
-    if (event.key === 'Enter') {
+    if (event.key === "Enter") {
       handleSearch();
     }
   };
@@ -33,8 +37,13 @@ const SearchInput = () => {
             placeholder="Search for articles..."
             className="search-input"
           />
-          <button type="button" onClick={handleSearch} className="Enter-icon">
-          <img src={EnterIcon} alt="Enter Icon" />
+          <button
+            type="button"
+            onClick={handleSearch}
+            className="Enter-icon"
+            disabled={!query.trim()}
+          >
+            <img src={EnterIcon} alt="Enter Icon" />
           </button>
         </div>
       </div>
@@ -43,3 +52,4 @@ const SearchInput = () => {
 };
 
 export default SearchInput;
+

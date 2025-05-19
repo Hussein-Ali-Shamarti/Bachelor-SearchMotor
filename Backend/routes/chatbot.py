@@ -1,3 +1,7 @@
+# Dette Flask-endepunktet lar brukeren chatte med en språkmodell basert på innholdet i en valgt artikkel. 
+# Det henter, dekomprimerer og trunkerer PDF-teksten, og bruker den som kontekst i et OpenAI-chatkall.
+
+
 from flask import Blueprint, request, jsonify
 from database import SessionLocal
 from models import Article
@@ -10,14 +14,6 @@ chat_bp = Blueprint('chat', __name__)
 
 @chat_bp.route("/chat", methods=["POST"])
 def chat():
-    """
-    Chat with a chatbot using only the full text of the selected article.
-    The context is tokenized and truncated to ensure it does not exceed
-    the maximum token limit.
-    Expects JSON with keys:
-      - article_id: the ID of the article whose full text will be fetched
-      - message: the user's chat message
-    """
     try:
         data = request.get_json()
         selected_article_id = data.get("article_id")

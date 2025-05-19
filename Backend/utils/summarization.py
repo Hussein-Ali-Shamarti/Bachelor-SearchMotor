@@ -1,3 +1,9 @@
+
+# Dette skriptet genererer akademiske sammendrag av tekster ved hjelp av OpenAI's GPT-modell. 
+# Det håndterer både korte og lange tekster ved å bruke enten heltekst- eller chunk-basert tilnærming, 
+# og kjører forespørsler asynkront for bedre ytelse.
+
+
 import openai
 import asyncio
 from concurrent.futures import ThreadPoolExecutor

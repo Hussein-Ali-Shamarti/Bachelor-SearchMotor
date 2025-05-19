@@ -1,10 +1,15 @@
+
+# Dette skriptet komprimerer alle .txt-filer i en angitt katalog til .gz-format ved hjelp av gzip, 
+# og sletter de originale .txt-filene etter vellykket komprimering.
+
+
 import os
 import glob
 import gzip
 import shutil
 
 # Define the directory where your processed text files are stored
-directory = r'C:\My Web Sites\backup\textbackup\pdftexts'
+directory = r'C:\My Web Sites\data\pdftexts'
 txt_files = glob.glob(os.path.join(directory, '*.txt'))
 
 if not txt_files:

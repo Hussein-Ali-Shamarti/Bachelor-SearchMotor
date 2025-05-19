@@ -1,3 +1,8 @@
+# Dette testskriptet validerer funksjonaliteten til spørringsparseren i `query_utils.py`, 
+# inkludert korrekt identifisering av forfatter, emne, år og sted fra både naturlige og strukturerte forespørsler 
+# på norsk og engelsk.
+
+
 import unittest
 from utils.query_utils import extract_filters_from_query, normalize
 

@@ -1,3 +1,8 @@
+# Dette er hovedfilen for Flask-applikasjonen. Den laster miljøvariabler, 
+# initialiserer embed-modellen og FAISS-indeksen, registrerer ruter via blueprints, 
+# og starter serveren med CORS-støtte aktivert.
+
+
 from flask import Flask
 from flask_cors import CORS
 from dotenv import load_dotenv

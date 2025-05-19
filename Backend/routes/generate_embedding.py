@@ -1,3 +1,7 @@
+# Dette Flask-endepunktet genererer en embedding-vektor basert på innholdet i en tekst, 
+# kombinert med metadata som forfatter, år, sted og konferansenavn, ved bruk av en SentenceTransformer-modell.
+
+
 from flask import Blueprint, request, jsonify, current_app
 
 generate_embedding_bp = Blueprint('generate_embedding', __name__)

@@ -1,3 +1,8 @@
+# Dette skriptet definerer databasemodellene for artikler og konferanser ved hjelp av SQLAlchemy ORM. 
+# Det inkluderer relasjoner mellom Conference og Article, samt felt for metadata, PDF-tekst, embeddings og nøkkelord.
+# Fremmednøkler er aktivert eksplisitt for SQLite.
+
+
 from sqlalchemy import Column, Integer, String, ForeignKey, TEXT, BLOB, JSON, event
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base

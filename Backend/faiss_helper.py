@@ -1,3 +1,7 @@
+# Dette skriptet bygger og laster en FAISS-indeks basert på artiklers embeddings lagret i databasen. 
+# Det håndterer normalisering, validering av dimensjoner, og lagring/gjenbruk av indeksen og ID-mapping.
+# Indeksen oppdateres automatisk dersom nye eller endrede artikler oppdages.
+
 import faiss as faiss_cpu
 import numpy as np
 import os

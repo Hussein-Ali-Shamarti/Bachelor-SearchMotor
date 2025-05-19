@@ -1,7 +1,11 @@
+// Denne komponenten lar brukeren chatte med en AI-assistent om en valgt artikkel.
+// Den viser tidligere meldinger og håndterer sending av spørsmål via API-kall.
+// Meldinger kan sendes med Enter-tasten eller via en knapp.
+
+
 import React, { useState } from "react";
 import axios from "axios";
 import EnterIcon from "../assets/images/Eenter.svg";
-
 
 function ChatSection({ selectedArticle, chatHistory, setChatHistory }) {
   const [chatMessage, setChatMessage] = useState("");
@@ -46,10 +50,9 @@ function ChatSection({ selectedArticle, chatHistory, setChatHistory }) {
     }
   };
 
-  // 💡 Listen for Enter key
   const handleKeyDown = (e) => {
     if (e.key === "Enter" && !chatLoading && chatMessage.trim()) {
-      e.preventDefault(); // prevent new line if multiline (just in case)
+      e.preventDefault();
       sendChatMessage();
     }
   };
@@ -74,13 +77,12 @@ function ChatSection({ selectedArticle, chatHistory, setChatHistory }) {
                     entry.sender === "user" ? "user-message" : "bot-message"
                   }`}
                 >
-                  <strong>
-                    {entry.sender === "user" ? "You:" : "Bot:"}
-                  </strong>{" "}
+                  <strong>{entry.sender === "user" ? "You:" : "Bot:"}</strong>{" "}
                   {entry.message}
                 </div>
               ))}
             </div>
+
             <div className="search-wrapper">
               <input
                 type="text"
@@ -100,7 +102,7 @@ function ChatSection({ selectedArticle, chatHistory, setChatHistory }) {
                 <img src={EnterIcon} alt="Send" />
               </button>
             </div>
-            </div>
+          </div>
         )}
       </div>
     </aside>

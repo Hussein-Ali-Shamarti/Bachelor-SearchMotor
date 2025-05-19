@@ -1,3 +1,9 @@
+
+# Dette skriptet håndterer AI-drevne søk basert på tekstembeddings og metadatafiltre. 
+# Det bruker FAISS for semantisk søk når det er relevant, og faller tilbake på databassøk 
+# dersom søket kun inneholder enkle filtre som forfatter, år eller sted.
+
+
 from flask import jsonify, current_app
 import numpy as np
 from database import SessionLocal

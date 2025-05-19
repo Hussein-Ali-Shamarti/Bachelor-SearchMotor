@@ -1,3 +1,8 @@
+# Dette skriptet oppdaterer embedding-data i en SQLite-database for artikler, 
+# ved å lese .npy-filer fra en mappe og matche dem med artikler basert på PDF-filnavn i URL-feltet. 
+# Embeddings lagres som byte-strømmer i databasen.
+
+
 import time
 import numpy as np
 import os
@@ -6,13 +11,12 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from tqdm import tqdm
 
-# Make sure your models.py is accessible
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 from models import Article
 
 sys.stdout.reconfigure(encoding='utf-8')
 
-# Set the DATABASE_URL to point to your SQLite DB in the Backend folder
+# Set the DATABASE_URL
 DATABASE_URL = "sqlite:///./Backend/database.db"
 
 # Connect to SQLite
@@ -22,7 +26,7 @@ def connect_to_sqlite():
     return Session()
 
 # Base path to the embedded folder
-EMBEDDED_FOLDER = r"C:\My Web Sites\backup\debug1 – Kopi\embedded"
+EMBEDDED_FOLDER = r"C:\My Web Sites\data\embedded"
 
 def update_article_embedding_by_filename(base_name, session):
     """Updates the embedding for an existing article matched by filename in the PDF URL."""

@@ -1,3 +1,8 @@
+# Dette skriptet importerer artikkel- og konferansedata fra .txt-filer til en SQLite-database. 
+# Det leser metadata, komprimerte PDF-tekster og embedding-vektorer, kobler artikler til konferanser der det er mulig, 
+# og lagrer alt i databasen. Konferanser legges bare inn hvis de ikke allerede finnes.
+
+
 import time
 import numpy as np
 import os
@@ -42,7 +47,7 @@ def get_article_data_from_txt(file_path):
         "author": [],
         "publication_date": "",
         "pdf_url": "",
-        "pdf_texts": None,  # Will hold binary (compressed) data
+        "pdf_texts": None, 
         "embeddings": None,
         "start_date": "Unknown",
         "end_date": "Unknown",

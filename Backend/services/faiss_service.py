@@ -1,3 +1,7 @@
+# Dette skriptet initialiserer FAISS-indeksen ved å laste den fra disk eller bygge den på nytt 
+# basert på embeddings lagret i databasen. Returnerer selve indeksen og tilhørende artikkel-IDer.
+
+
 from faiss_helper import load_or_rebuild_faiss_index
 
 def init_faiss_index():

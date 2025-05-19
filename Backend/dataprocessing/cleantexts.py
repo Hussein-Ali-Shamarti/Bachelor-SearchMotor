@@ -1,3 +1,8 @@
+# Dette skriptet søker etter alle .txt-filer i en angitt katalog, 
+# fjerner overflødig mellomrom, tomme linjer og ikke-ASCII-tegn, 
+# og overskriver filene med den rensede teksten. Tomme eller ugyldige filer blir hoppet over.
+
+
 import os
 import re
 import glob
@@ -21,12 +26,10 @@ for txt_file in txt_files:
 
         print(f"Processing file: {txt_file} (Original length: {len(content)} chars)")
 
-        # Clean up extra spaces and non-printable characters while preserving punctuation and line breaks
-        # Replace multiple spaces/tabs with a single space
         cleaned_content = re.sub(r'[ \t]+', ' ', content)
-        # Replace multiple newlines with a single newline
+
         cleaned_content = re.sub(r'\n+', '\n', cleaned_content)
-        # Optionally, remove non-printable characters (but leave common punctuation and formatting)
+        
         cleaned_content = re.sub(r'[^\x20-\x7E\n]', '', cleaned_content)
 
         if not cleaned_content.strip():

@@ -1,5 +1,7 @@
-## Denne file håndterer parsing og tolkning av brukerens spørring. 
-## Den prøver å lage en strukturert filter liste som author, topic, location og year fra spørringen.
+# Denne filen håndterer parsing og tolkning av brukerens spørring.
+# Den prøver å lage en strukturert filterliste bestående av forfatter, emne, sted og år
+# ved å analysere både eksplisitte og implisitte signaler i spørringsteksten – inkludert norsk og engelsk språkbruk.
+
 
 import re
 import string

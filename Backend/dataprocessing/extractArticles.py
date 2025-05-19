@@ -1,14 +1,10 @@
-"""
-This script extracts metadata and specific content from HTML files stored in a source folder and saves the extracted 
-information as text files in a destination folder. The script processes each HTML file to extract meta tags (e.g., 
-title, authors, ISBN, publication date, conference title, PDF URL) and additional main content if available. 
-Files without a required "citation_title" meta tag are skipped. 
+# Dette skriptet går gjennom HTML-filer i en katalogstruktur, henter ut artikkelinformasjon fra meta-tags 
+# og hovedinnhold, og lagrer metadataen som .txt-filer i en speilstruktur. HTML-filer uten nødvendig info hoppes over.
 
-The progress of the extraction is displayed using a progress bar, and a message is printed when a file is skipped.
-"""
+
 import os
 from bs4 import BeautifulSoup
-from tqdm import tqdm  # Progress bar library
+from tqdm import tqdm
 
 def article_info(html_file):
     try:
@@ -91,7 +87,7 @@ with tqdm(total=len(html_files), desc="Processing HTML files") as pbar:
             continue
 
         article_data = article_info(source_file)
-        if article_data is None:  # Skip if article_data is None
+        if article_data is None:
             pbar.update(1)
             continue
 

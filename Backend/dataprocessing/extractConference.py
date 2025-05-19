@@ -1,8 +1,6 @@
-"""
-This script extracts conference information (e.g., conference name, articles, etc.) from HTML files 
-in a source folder and writes the extracted information to text files in the destination folder. 
-Processed files are skipped to avoid duplication.
-"""
+# Dette skriptet leser HTML-filer for konferanser, henter ut konferansenavn og tilhørende artikler, 
+# og lagrer denne informasjonen som .txt-filer. Det bruker BeautifulSoup for parsing og tqdm for fremdriftsvisning.
+
 
 import os
 from bs4 import BeautifulSoup

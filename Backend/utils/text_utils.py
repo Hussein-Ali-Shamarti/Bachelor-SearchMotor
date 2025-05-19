@@ -1,3 +1,8 @@
+# Dette skriptet tilbyr verktøy for å håndtere tekst i henhold til tokenbegrensninger 
+# for GPT-modeller. Det inkluderer funksjoner for å telle tokens, trunkere tekst og 
+# dele opp lange tekster i tokensikre tekstbolker.
+
+
 import tiktoken
 
 def token_count(text, model="gpt-4-turbo"):

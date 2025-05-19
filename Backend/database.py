@@ -1,3 +1,8 @@
+# Dette skriptet setter opp SQLite-databasen ved å definere databasebanen, 
+# opprette en SQLAlchemy-motor og en session-factory, samt sørge for at alle 
+# tabeller definert i models.py blir opprettet.
+
+
 import os
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session

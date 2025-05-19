@@ -1,3 +1,8 @@
+# Dette Flask-endepunktet gir tilgang til fulltekst og sammendrag av artikler lagret i databasen. 
+# Det kan hente dekomprimert artikkeltekst basert på ID og generere sammendrag på forespørsel.
+
+
+
 from flask import Blueprint, request, jsonify
 from database import SessionLocal
 from models import Article
