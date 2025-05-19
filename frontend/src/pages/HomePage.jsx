@@ -9,17 +9,11 @@ import "../assets/styles/HomePage.css";
 
 const HomePage = () => {
   const navigate = useNavigate();
-  const userisloggedIn = false; // TODO: Update this logic
 
   const handleSearch = (query) => {
     const encoded = encodeURIComponent(query);
-    if (userisloggedIn) {
-      navigate(`/mypage?query=${encoded}`);
-      console.log("Navigating to my page. query=" + query);
-    } else {
       navigate(`/MyDashboard?query=${encoded}`);
       console.log("Navigating to search page. query=" + query);
-    }
   };
 
   return (
