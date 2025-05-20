@@ -174,7 +174,7 @@ def extract_filters_from_query(raw_query):
                 pattern = re.compile(re.escape(author_re.group(0)), re.IGNORECASE)
                 raw_query = pattern.sub('', raw_query).strip()
 
-    # 🧹 NEW: Remove filler and search-related tokens *after* primary filter parsing
+    # Remove filler and search-related tokens *after* primary filter parsing
     raw_query = re.sub(
         r'\b(find|search|fetch|articles?|papers?|studies?|written|by|in|from|about|om|av|fra|all|some|any)\b',
         '',
