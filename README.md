@@ -53,7 +53,8 @@ Replace "your-openai-api-key-here" with your actual OpenAI API key.
 
 After installing the dependencies and setting up the .env file, start the Flask server:
 
-python app.py
+
+
 
 6. **Setting up the frontend**
 
